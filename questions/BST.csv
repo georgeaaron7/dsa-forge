@@ -1,5 +1,5 @@
-TOPIC,PROBLEM LINK,SOLUTION
-Binary Search Trees,Fina a value in a BST,"1. Problem Summary: The task is to determine if a specific value exists within a Binary Search Tree (BST). A BST is a binary tree where each node has at most two children, and for any node, all values in its left subtree are less, and all values in its right subtree are greater than the node's value.
+TOPIC,PROBLEM NAME,URL,SOLUTION
+Binary Search Trees,Fina a value in a BST,https://www.geeksforgeeks.org/binary-search-tree-set-1-search-and-insertion/,"1. Problem Summary: The task is to determine if a specific value exists within a Binary Search Tree (BST). A BST is a binary tree where each node has at most two children, and for any node, all values in its left subtree are less, and all values in its right subtree are greater than the node's value.
 
 2. Approach: Start by comparing the target value with the value of the root node. If they match, the search is successful. If the target value is less than the current node's value, recursively search the left subtree; if greater, search the right subtree. This divide-and-conquer strategy leverages the ordered nature of BSTs, efficiently narrowing down the possible locations of the target value. This method is intuitive as it mimics the decision-making process of eliminating half of the remaining possibilities at each step, similar to binary search in a sorted array.
 
@@ -19,7 +19,7 @@ bool findInBST(TreeNode* root, int val) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(h) where h is the height of the tree, and the space complexity is O(h) due to the recursion stack, which in the worst case (a skewed tree) is proportional to the height of the tree."
-Binary Search Trees,Deletion of a node in a BST,"1. Problem Summary:
+Binary Search Trees,Deletion of a node in a BST,https://leetcode.com/problems/delete-node-in-a-bst/,"1. Problem Summary:
    Deleting a node from a Binary Search Tree (BST) involves removing the node while maintaining the BST properties such that for any given node, the left subtree contains only nodes with values less than the node’s value, and the right subtree only nodes with values greater than the node’s value.
 
 2. Approach:
@@ -68,7 +68,7 @@ Node* minValueNode(Node* node) {
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(h) where h is the height of the tree, and the space complexity is O(h) due to the recursion stack, in the worst case (unbalanced tree)."
-Binary Search Trees,Find min and max value in a BST,"1. Problem Summary: The task is to find the minimum and maximum values stored in a Binary Search Tree (BST). In a BST, each node contains a key greater than all the keys in its left subtree and less than all the keys in its right subtree.
+Binary Search Trees,Find min and max value in a BST,https://practice.geeksforgeeks.org/problems/minimum-element-in-bst/1,"1. Problem Summary: The task is to find the minimum and maximum values stored in a Binary Search Tree (BST). In a BST, each node contains a key greater than all the keys in its left subtree and less than all the keys in its right subtree.
 
 2. Approach: To find the minimum value in a BST, continuously traverse the left child of each node starting from the root until a node with no left child is found; this node contains the minimum value. Similarly, to find the maximum value, traverse the right child of each node starting from the root until a node with no right child is found; this node contains the maximum value. These operations leverage the inherent properties of BSTs, making the search efficient and intuitive by following the left-most and right-most paths respectively.
 
@@ -100,7 +100,7 @@ int findMax(Node* root) {
 ```
 
 4. Time Complexity and Space Complexity: Both finding min and max operations have a time complexity of O(h), where h is the height of the tree. The space complexity is O(1) since no additional space is used beyond pointers."
-Binary Search Trees,Find inorder successor and inorder predecessor in a BST,"1. Problem Summary: In a Binary Search Tree (BST), the task is to find the inorder predecessor and inorder successor of a given node. The inorder predecessor is the previous node in the inorder traversal of the BST, and the inorder successor is the next node in the inorder traversal.
+Binary Search Trees,Find inorder successor and inorder predecessor in a BST,https://practice.geeksforgeeks.org/problems/predecessor-and-successor/1,"1. Problem Summary: In a Binary Search Tree (BST), the task is to find the inorder predecessor and inorder successor of a given node. The inorder predecessor is the previous node in the inorder traversal of the BST, and the inorder successor is the next node in the inorder traversal.
 
 2. Approach: To find the inorder successor and predecessor, we utilize the properties of BST. For the successor, if the node has a right subtree, the successor is the leftmost node in that subtree. If there's no right subtree, the successor is the lowest ancestor for which the given node lies in its left subtree. The predecessor is found similarly: if the node has a left subtree, the predecessor is the rightmost node in that subtree; otherwise, it's the lowest ancestor for which the given node lies in its right subtree. This approach leverages BST properties to efficiently navigate to the required nodes.
 
@@ -162,7 +162,7 @@ Node* findInorderPredecessor(Node* root, Node* x) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(h) where h is the height of the tree, which can be O(log n) in a balanced BST and O(n) in the worst case. The space complexity is O(1) as no additional space is used apart from temporary variables."
-Binary Search Trees,Check if a tree is a BST or not ,"1. Problem Summary: The task is to determine whether a given binary tree is a Binary Search Tree (BST). A BST is defined as a tree where each node has a value greater than all the values in its left subtree and less than all the values in its right subtree.
+Binary Search Trees,Check if a tree is a BST or not ,https://practice.geeksforgeeks.org/problems/check-for-bst/1,"1. Problem Summary: The task is to determine whether a given binary tree is a Binary Search Tree (BST). A BST is defined as a tree where each node has a value greater than all the values in its left subtree and less than all the values in its right subtree.
 
 2. Approach: The optimal way to check if a binary tree is a BST is by using a recursive function that tracks the permissible range of values for each node. Starting with the root, the allowable range begins with negative infinity to positive infinity. As we traverse left, the maximum permissible value becomes the parent node's value; traversing right, the minimum permissible value becomes the parent node's value. This ensures that each node's value complies with the BST properties relative to its position in the tree.
 
@@ -189,7 +189,7 @@ bool isBST(TreeNode* root) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n), where n is the number of nodes in the tree, since we visit each node once. The space complexity is O(h), where h is the height of the tree, due to the recursion stack."
-Binary Search Trees,Populate Inorder successor of all nodes,"1. Problem Summary: The task is to populate each node in a binary search tree (BST) with its inorder successor. The inorder successor of a node is the next node in the inorder traversal of the BST.
+Binary Search Trees,Populate Inorder successor of all nodes,https://practice.geeksforgeeks.org/problems/populate-inorder-successor-for-all-nodes/1,"1. Problem Summary: The task is to populate each node in a binary search tree (BST) with its inorder successor. The inorder successor of a node is the next node in the inorder traversal of the BST.
 
 2. Approach: The optimal way to solve this problem is by using a reverse inorder traversal (right, root, left). Start from the rightmost node, which is the last node in an inorder sequence, and move to the leftmost node. Keep track of the previously visited node. As you traverse, set the current node's inorder successor to this previously visited node, then update the previously visited node to the current node. This way, each node directly links to its inorder successor without the need for additional data structures. This approach effectively links all nodes with their successors in a single pass.
 
@@ -226,7 +226,7 @@ void populateNext(Node* root) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) as each node is visited once. The space complexity is O(h), where h is the height of the tree, due to the recursion stack during the traversal."
-Binary Search Trees,Find LCA  of 2 nodes in a BST,"1. Problem Summary:
+Binary Search Trees,Find LCA  of 2 nodes in a BST,https://practice.geeksforgeeks.org/problems/lowest-common-ancestor-in-a-bst/1,"1. Problem Summary:
    In a Binary Search Tree (BST), the Lowest Common Ancestor (LCA) of two nodes is the deepest node that is an ancestor to both nodes. The problem is to find this LCA given two node values.
 
 2. Approach:
@@ -258,7 +258,7 @@ TreeNode* findLCA(TreeNode* root, int n1, int n2) {
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(h) where h is the height of the tree, and the space complexity is O(1) as no extra space is used."
-Binary Search Trees,Construct BST from preorder traversal,"1. Problem Summary: 
+Binary Search Trees,Construct BST from preorder traversal,https://www.geeksforgeeks.org/construct-bst-from-given-preorder-traversa/,"1. Problem Summary: 
    The problem requires constructing a Binary Search Tree (BST) from a given preorder traversal array. In a BST, the left subtree of a node contains only nodes with keys less than the node's key, and the right subtree only nodes with keys greater than the node's key.
 
 2. Approach: 
@@ -294,7 +294,7 @@ TreeNode* bstFromPreorder(vector<int>& preorder) {
 
 4. Time Complexity and Space Complexity: 
    The time complexity is O(n) where n is the number of nodes, as each node is processed once. The space complexity is O(h) where h is the height of the tree, which is used by the recursion stack."
-Binary Search Trees,Convert Binary tree into BST,"1. Problem Summary: The problem is to convert a given binary tree into a binary search tree (BST) while maintaining the original structure of the binary tree. The new BST should have the same set of nodes as the original tree but rearranged to satisfy the BST properties.
+Binary Search Trees,Convert Binary tree into BST,https://practice.geeksforgeeks.org/problems/binary-tree-to-bst/1,"1. Problem Summary: The problem is to convert a given binary tree into a binary search tree (BST) while maintaining the original structure of the binary tree. The new BST should have the same set of nodes as the original tree but rearranged to satisfy the BST properties.
 
 2. Approach: The optimal approach involves three main steps: traversing the binary tree to collect all the values in an array, sorting the array, and then re-inserting these values back into the tree in the same structure. First, perform an in-order traversal of the binary tree to gather all node values into a list. This captures the node values which can then be sorted to align with BST properties. After sorting, perform another in-order traversal and replace each node's value with the corresponding value from the sorted list. This method ensures that the tree structure remains unchanged while the node values are rearranged to form a BST.
 
@@ -334,7 +334,7 @@ void binaryTreeToBST(Node* root) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n log n) due to the sorting step, and the space complexity is O(n) for storing the node values and recursive stack space."
-Binary Search Trees,Convert a normal BST into a Balanced BST,"1. Problem Summary: The task is to convert an unbalanced binary search tree (BST) into a balanced BST to ensure optimal operations like search, insert, and delete, which ideally should have a time complexity of O(log n).
+Binary Search Trees,Convert a normal BST into a Balanced BST,https://www.geeksforgeeks.org/convert-normal-bst-balanced-bst/,"1. Problem Summary: The task is to convert an unbalanced binary search tree (BST) into a balanced BST to ensure optimal operations like search, insert, and delete, which ideally should have a time complexity of O(log n).
 
 2. Approach: The most efficient method to balance a BST involves first converting the BST into a sorted array (in-order traversal ensures sorted order for BSTs). Then, the array can be used to construct a balanced BST by recursively selecting the middle element as the root, which ensures minimal height. This method leverages the properties of the BST and the nature of a sorted array to efficiently construct a balanced tree. The process of in-order traversal followed by array-to-BST conversion helps intuitively understand the transformation from a linear, sorted structure to a hierarchical, balanced structure.
 
@@ -377,7 +377,7 @@ Node* buildBalancedBST(Node* root) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) because each node is processed once, and the space complexity is also O(n) due to the storage of tree nodes in the array."
-Binary Search Trees,Merge two BST [ V.V.V>IMP ],"1. Problem Summary: The task is to merge two Binary Search Trees (BSTs) into a single BST that maintains all the properties of a BST. The resulting tree should contain all elements from both trees without any duplicates.
+Binary Search Trees,Merge two BST [ V.V.V>IMP ],https://www.geeksforgeeks.org/merge-two-balanced-binary-search-trees/,"1. Problem Summary: The task is to merge two Binary Search Trees (BSTs) into a single BST that maintains all the properties of a BST. The resulting tree should contain all elements from both trees without any duplicates.
 
 2. Approach: The optimal way to merge two BSTs involves first converting each BST into a sorted list using an in-order traversal, then merging these two sorted lists into one, and finally constructing a balanced BST from the merged list. The in-order traversal ensures that elements are accessed in a sorted manner. Merging two sorted lists is straightforward and efficient. Constructing a balanced BST from a sorted list can be done recursively by choosing the middle element as the root, which ensures minimal height for the BST.
 
@@ -428,7 +428,7 @@ TreeNode* mergeBSTs(TreeNode* root1, TreeNode* root2) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n + m) where n and m are the sizes of the two BSTs, mainly due to the traversal and merging process. The space complexity is also O(n + m) due to the storage needed for the lists and the recursive stack for tree construction."
-Binary Search Trees,Find Kth largest element in a BST,"1. Problem Summary:
+Binary Search Trees,Find Kth largest element in a BST,https://practice.geeksforgeeks.org/problems/kth-largest-element-in-bst/1,"1. Problem Summary:
    The task is to find the kth largest element in a Binary Search Tree (BST). In a BST, elements are stored such that for any given node, the values in the left subtree are less than the node's value, and values in the right subtree are greater.
 
 2. Approach:
@@ -467,7 +467,7 @@ Binary Search Trees,Find Kth largest element in a BST,"1. Problem Summary:
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(n) in the worst case and O(h + k) in the average case, where n is the number of nodes and h is the height of the tree. The space complexity is O(h) due to recursion stack, which is the tree's height."
-Binary Search Trees,Find Kth smallest element in a BST,"1. Problem Summary: The task is to find the kth smallest element in a Binary Search Tree (BST). A BST is a tree data structure where each node has at most two children, and for any given node, the left subtree has values less than the node, and the right subtree has values greater than the node.
+Binary Search Trees,Find Kth smallest element in a BST,https://practice.geeksforgeeks.org/problems/find-k-th-smallest-element-in-bst/1,"1. Problem Summary: The task is to find the kth smallest element in a Binary Search Tree (BST). A BST is a tree data structure where each node has at most two children, and for any given node, the left subtree has values less than the node, and the right subtree has values greater than the node.
 
 2. Approach: The optimal method leverages the in-order traversal of the BST, which visits the nodes in ascending order. By performing an in-order traversal, we can count nodes until we reach the kth smallest. This can be achieved either iteratively or recursively. The iterative approach is often preferred in interviews as it avoids potential stack overflow issues with recursion on large trees and explicitly illustrates the traversal process. We use a stack to manage the nodes during the traversal, pushing all left children onto the stack, then processing nodes while decrementing our count k until it reaches zero, indicating we've found our kth smallest element.
 
@@ -500,7 +500,7 @@ int kthSmallest(TreeNode* root, int k) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(H + k), where H is the height of the tree, since in the worst case we might have to go down to the deepest node. The space complexity is O(H) due to the stack used for the iterative traversal."
-Binary Search Trees,"Count pairs from 2 BST whose sum is equal to given value ""X""","1. Problem Summary: 
+Binary Search Trees,"Count pairs from 2 BST whose sum is equal to given value ""X""",https://practice.geeksforgeeks.org/problems/brothers-from-different-root/1,"1. Problem Summary: 
    The problem involves finding the number of pairs (one element from each tree) from two Binary Search Trees (BSTs) such that their sum equals a given value ""X"". Each tree contains unique values.
 
 2. Approach: 
@@ -549,7 +549,7 @@ int countPairs(TreeNode* root1, TreeNode* root2, int X) {
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(n + m) where n and m are the number of nodes in the two BSTs respectively, due to the traversal and pair counting steps. The space complexity is O(n + m) for storing the traversal results."
-Binary Search Trees,Find the median of BST in O(n) time and O(1) space,"1. Problem Summary: The task is to find the median of the values in a Binary Search Tree (BST) given that the tree's values are sorted in an in-order traversal. The challenge is to achieve this in O(n) time complexity while using O(1) space complexity.
+Binary Search Trees,Find the median of BST in O(n) time and O(1) space,https://www.geeksforgeeks.org/find-median-bst-time-o1-space/,"1. Problem Summary: The task is to find the median of the values in a Binary Search Tree (BST) given that the tree's values are sorted in an in-order traversal. The challenge is to achieve this in O(n) time complexity while using O(1) space complexity.
 
 2. Approach: The solution involves performing an in-order traversal of the BST, which inherently accesses the nodes in a sorted order. To find the median, we need to count the total number of nodes (n) first by a simple in-order traversal. Then, perform another in-order traversal to locate the middle element(s). If n is odd, the median is the middle element; if even, it's the average of the two middle elements. We can achieve this with two pointers, one slow and one fast, where the fast pointer moves twice as fast as the slow, effectively finding the middle of the list in a single pass after knowing the count.
 
@@ -593,7 +593,7 @@ double getMedian(Node* root) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) as each node is visited exactly twice (once for counting and once for finding the median), and the space complexity is O(1) excluding the stack space used for recursion."
-Binary Search Trees,Count BST ndoes that lie in a given range,"1. Problem Summary: The problem requires counting the number of nodes in a Binary Search Tree (BST) that lie within a specified range [L, R]. Each node in the BST has an integer value, and the BST properties must be maintained.
+Binary Search Trees,Count BST ndoes that lie in a given range,https://practice.geeksforgeeks.org/problems/count-bst-nodes-that-lie-in-a-given-range/1,"1. Problem Summary: The problem requires counting the number of nodes in a Binary Search Tree (BST) that lie within a specified range [L, R]. Each node in the BST has an integer value, and the BST properties must be maintained.
 
 2. Approach: Utilize the properties of the BST, where left children are less than the node value and right children are greater. Start from the root and recursively check each node. If the node's value is within the range [L, R], include it in the count. If the value is greater than L, explore the left subtree; if it is less than R, explore the right subtree. This method avoids unnecessary traversal of nodes that cannot possibly fall within the specified range, optimizing the search process.
 
@@ -627,7 +627,7 @@ int countBSTNodesInRange(Node* node, int L, int R) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) in the worst case and O(h + k) in the average case, where n is the number of nodes, h is the height of the tree, and k is the number of nodes within the range. The space complexity is O(h) due to recursion stack, where h is the height of the tree."
-Binary Search Trees,Replace every element with the least greater element on its right,"1. Problem Summary: The task is to replace each element in an array with the smallest element greater than it, located to its right side. If no such element exists, replace it with -1. This must be done for all elements in the array.
+Binary Search Trees,Replace every element with the least greater element on its right,https://www.geeksforgeeks.org/replace-every-element-with-the-least-greater-element-on-its-right/,"1. Problem Summary: The task is to replace each element in an array with the smallest element greater than it, located to its right side. If no such element exists, replace it with -1. This must be done for all elements in the array.
 
 2. Approach: The optimal way to solve this problem is by using a Binary Search Tree (BST) while iterating the array from right to left. For each element, we insert it into the BST and simultaneously search for the smallest element in the BST that is greater than the current element. This can be efficiently found using the successor in BST logic. By processing from right to left, we ensure that the BST always contains elements that are to the right of the current element in the array, allowing us to find the least greater element on the right efficiently.
 
@@ -668,7 +668,7 @@ vector<int> replaceWithLeastGreater(vector<int>& arr) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n log n) on average, where n is the number of elements in the array, assuming the BST is balanced. The space complexity is O(n) due to the storage of n elements in the BST."
-Binary Search Trees,"Given ""n"" appointments, find the conflicting appointments","1. Problem Summary: 
+Binary Search Trees,"Given ""n"" appointments, find the conflicting appointments",https://www.geeksforgeeks.org/given-n-appointments-find-conflicting-appointments/,"1. Problem Summary: 
    The challenge is to identify overlapping appointments from a list of ""n"" appointments. Each appointment has a start time and an end time, and an appointment conflicts with another if their time intervals overlap.
 
 2. Approach: 
@@ -735,7 +735,7 @@ int main() {
 
 4. Time Complexity and Space Complexity: 
    The time complexity is O(n log n) due to sorting and BST operations, and space complexity is O(n) for storing the BST nodes."
-Binary Search Trees,Check preorder is valid or not,"1. Problem Summary: 
+Binary Search Trees,Check preorder is valid or not,https://practice.geeksforgeeks.org/problems/preorder-to-postorder/0,"1. Problem Summary: 
 The problem is to determine if a given array can represent the preorder traversal of a binary search tree (BST). Each element in the array should satisfy the constraints of BST properties when attempted to be reconstructed into a tree.
 
 2. Approach: 
@@ -766,7 +766,7 @@ bool isValidPreorder(vector<int>& preorder) {
 
 4. Time Complexity and Space Complexity:
 The time complexity is O(n) due to the single pass through the array, and the space complexity is O(n) in the worst case, where n is the number of elements in the array."
-Binary Search Trees,Check whether BST contains Dead end,"1. Problem Summary: The task is to determine if a given Binary Search Tree (BST) contains any dead end, where a dead end is defined as a situation where a node value has no possible future values to be inserted in the tree.
+Binary Search Trees,Check whether BST contains Dead end,https://practice.geeksforgeeks.org/problems/check-whether-bst-contains-dead-end/1,"1. Problem Summary: The task is to determine if a given Binary Search Tree (BST) contains any dead end, where a dead end is defined as a situation where a node value has no possible future values to be inserted in the tree.
 
 2. Approach: The solution involves doing an in-order traversal of the BST and collecting all node values in a set for quick lookup. Additionally, while traversing, check if any node value `x` has both its immediate predecessor and successor values (`x-1` and `x+1`) in the set, indicating no further values can be inserted between them, thus forming a dead end. To handle edge cases such as the smallest and largest values in the BST, consider the range of values [1, INT_MAX] for possible node values in a BST. Start by checking if the smallest value minus one or the largest value plus one exists, which can't happen, hence might suggest a potential dead end.
 
@@ -813,7 +813,7 @@ bool checkDeadEnd(Node* root) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) due to the in-order traversal, and the space complexity is also O(n) for storing node values and leaves in sets."
-Binary Search Trees,Largest BST in a Binary Tree [ V.V.V.V.V IMP ],"1. Problem Summary: The task is to find the largest Binary Search Tree (BST) within a given binary tree. The largest BST is determined by the number of nodes it contains.
+Binary Search Trees,Largest BST in a Binary Tree [ V.V.V.V.V IMP ],https://practice.geeksforgeeks.org/problems/largest-bst/1,"1. Problem Summary: The task is to find the largest Binary Search Tree (BST) within a given binary tree. The largest BST is determined by the number of nodes it contains.
 
 2. Approach: The solution involves a bottom-up traversal of the binary tree, using a post-order traversal. For each node, we need to determine if it can form a BST with its children. We keep track of the minimum and maximum values, the size of the largest BST, and whether the current subtree is a BST. At each node, check if the left child's maximum is less than the current node's value and the right child's minimum is greater than the current node's value to decide if the subtree can be a BST. Update the largest BST size accordingly. This method consolidates checks and updates in a single pass through the tree.
 
@@ -864,7 +864,7 @@ int largestBST(Node* root) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the number of nodes in the tree, as we visit each node exactly once. The space complexity is O(h) due to recursion stack, where h is the height of the tree."
-Binary Search Trees,Flatten BST to sorted list,"1. Problem Summary: The task is to flatten a Binary Search Tree (BST) into a sorted list. This involves rearranging the nodes of the BST so that it becomes a singly linked list, where all nodes only have a right child, sorted in non-decreasing order.
+Binary Search Trees,Flatten BST to sorted list,https://www.geeksforgeeks.org/flatten-bst-to-sorted-list-increasing-order/,"1. Problem Summary: The task is to flatten a Binary Search Tree (BST) into a sorted list. This involves rearranging the nodes of the BST so that it becomes a singly linked list, where all nodes only have a right child, sorted in non-decreasing order.
 
 2. Approach: The optimal way to flatten a BST to a sorted list is to utilize the in-order traversal, which naturally accesses the nodes of a BST in sorted order. We can perform a modified in-order traversal where instead of printing node values, we rewire the `right` pointers to follow the in-order sequence and nullify the `left` pointers. We maintain a `previous` pointer to keep track of the last node visited during the traversal, and update its `right` pointer to the current node. Start by initializing the `previous` pointer as `nullptr`. As you traverse, set `previous->right` to the current node and `previous` to the current node.
 

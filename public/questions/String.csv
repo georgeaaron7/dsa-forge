@@ -1,5 +1,5 @@
-TOPIC,PROBLEM LINK,SOLUTION
-String,Reverse a String,"1. Problem Summary: The problem requires reversing the given string such that the characters in the string are in the opposite order from their original positions.
+TOPIC,PROBLEM NAME,URL,SOLUTION
+String,Reverse a String,https://leetcode.com/problems/reverse-string/,"1. Problem Summary: The problem requires reversing the given string such that the characters in the string are in the opposite order from their original positions.
 
 2. Approach: The optimal way to reverse a string is to use two pointers, one at the beginning and one at the end of the string. Swap the characters at these pointers and then move them towards each other - the start pointer moving forward and the end pointer moving backward. This process is repeated until the two pointers meet or cross each other. This approach directly manipulates the string in place, making it intuitive as you visually see characters swapping places, which helps in easy remembrance and replication in coding interviews.
 
@@ -20,7 +20,7 @@ void reverseString(string &s) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n), where n is the length of the string, and the space complexity is O(1) as it modifies the string in place."
-String,Check whether a String is Palindrome or not,"1. Problem Summary: The task is to determine if a given string is a palindrome. A palindrome is a string that reads the same forward and backward, ignoring case, spaces, and punctuation.
+String,Check whether a String is Palindrome or not,https://practice.geeksforgeeks.org/problems/palindrome-string0817/1,"1. Problem Summary: The task is to determine if a given string is a palindrome. A palindrome is a string that reads the same forward and backward, ignoring case, spaces, and punctuation.
 
 2. Approach: The optimal way to check for a palindrome is to use two pointers: one starting at the beginning of the string and the other at the end. Move both pointers toward the center, comparing the characters they point to at each step. If all corresponding characters are the same, then the string is a palindrome. This method is intuitive as it mirrors the definition of a palindrome by checking symmetry directly from the outside in, which is easy to remember and implement.
 
@@ -43,7 +43,7 @@ bool isPalindrome(string s) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n), where n is the length of the string, as we potentially check each character once. The space complexity is O(1), as no additional space proportional to the input size is used."
-String,Find Duplicate characters in a string,"1. Problem Summary: The task is to identify and return all characters that appear more than once in a given string. This helps in understanding character frequency and repetition in text processing.
+String,Find Duplicate characters in a string,https://www.geeksforgeeks.org/print-all-the-duplicates-in-the-input-string/,"1. Problem Summary: The task is to identify and return all characters that appear more than once in a given string. This helps in understanding character frequency and repetition in text processing.
 
 2. Approach: Utilize a hash map to count occurrences of each character as you iterate through the string. This method leverages the hash map's O(1) average time complexity for insertions and lookups, making it efficient for counting. After populating the hash map, iterate through the map to collect characters that have a count greater than one. This approach ensures that each character is processed in constant time and the results are gathered efficiently.
 
@@ -73,7 +73,7 @@ vector<char> findDuplicateCharacters(string s) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the length of the string, due to a single pass through the string and another through the map. Space complexity is O(k), where k is the number of unique characters in the string."
-String,Why strings are immutable in Java?,"1. Problem Summary: 
+String,Why strings are immutable in Java?,,"1. Problem Summary: 
    The question explores why strings in Java are designed to be immutable, meaning once a string object is created, its value cannot be changed.
 
 2. Approach: 
@@ -86,7 +86,7 @@ String,Why strings are immutable in Java?,"1. Problem Summary:
 
 4. Time Complexity and Space Complexity: 
    Not applicable as this is a theoretical discussion on the nature of string immutability in Java."
-String,Write a Code to check whether one string is a rotation of another,"1. Problem Summary: The problem involves determining if one string is a rotation of another string. For instance, if you rotate the string ""waterbottle"" at a certain point, it can produce ""erbottlewat"".
+String,Write a Code to check whether one string is a rotation of another,https://www.geeksforgeeks.org/a-program-to-check-if-strings-are-rotations-of-each-other/,"1. Problem Summary: The problem involves determining if one string is a rotation of another string. For instance, if you rotate the string ""waterbottle"" at a certain point, it can produce ""erbottlewat"".
 
 2. Approach: The key insight is to check if the second string (s2) is a substring of the first string (s1) concatenated with itself. This is because any rotation of s1 will appear as a substring in s1+s1. For example, ""waterbottlewaterbottle"" contains ""erbottlewat"". To implement this, concatenate s1 with itself and then use a substring search function (like the one provided by the string class in C++) to check if s2 is a substring of the concatenated result. This approach is intuitive and easy to remember, leveraging the properties of string rotation and substring search.
 
@@ -103,7 +103,7 @@ bool isRotation(string s1, string s2) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the length of the string, and the space complexity is O(n) due to the storage of the concatenated string."
-String,Write a Program to check whether a string is a valid shuffle of two strings or not,"1. Problem Summary: 
+String,Write a Program to check whether a string is a valid shuffle of two strings or not,https://www.programiz.com/java-programming/examples/check-valid-shuffle-of-strings,"1. Problem Summary: 
    The problem requires checking if a given string `result` can be formed by interleaving the characters of two other strings `s1` and `s2` without changing the relative order of characters within `s1` and `s2`.
 
 2. Approach: 
@@ -136,7 +136,7 @@ bool isValidShuffle(string s1, string s2, string result) {
 
 4. Time Complexity and Space Complexity: 
    The time complexity is O(m*n) and the space complexity is also O(m*n), where m and n are the lengths of strings `s1` and `s2`, respectively."
-String,Count and Say problem,"1. Problem Summary:
+String,Count and Say problem,https://leetcode.com/problems/count-and-say/,"1. Problem Summary:
    The ""Count and Say"" problem involves generating a sequence where each term is read off from the digits of the previous term, counting the number of digits in groups of the same digit.
 
 2. Approach:
@@ -172,7 +172,7 @@ string countAndSay(int n) {
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(n * m) and the space complexity is O(m), where n is the input number and m is the maximum length of the term generated."
-String,Write a program to find the longest Palindrome in a string.[ Longest palindromic Substring],"1. Problem Summary: The problem is to find the longest palindromic substring within a given string. A palindrome reads the same backward as forward, and the goal is to identify the longest contiguous sequence that satisfies this property.
+String,Write a program to find the longest Palindrome in a string.[ Longest palindromic Substring],https://practice.geeksforgeeks.org/problems/longest-palindrome-in-a-string/0,"1. Problem Summary: The problem is to find the longest palindromic substring within a given string. A palindrome reads the same backward as forward, and the goal is to identify the longest contiguous sequence that satisfies this property.
 
 2. Approach: The optimal approach to solve this problem uses the ""expand around center"" technique. This method involves expanding from every possible center of the palindrome, which could be a single character (for odd-length palindromes) or a pair of consecutive characters (for even-length palindromes). For each center, expand outwards and compare characters until the characters are not the same, effectively checking for the longest palindrome centered at that point. This technique avoids the need for additional space required by dynamic programming solutions and is straightforward to implement during an interview.
 
@@ -207,7 +207,7 @@ string longestPalindrome(string s) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n^2), where n is the length of the string, due to the potential expansion around each index. The space complexity is O(1) as only a few variables are used."
-String,Find Longest Recurring Subsequence in String,"1. Problem Summary: The task is to find the length of the longest subsequence in a given string that appears at least twice. The characters in the subsequence do not need to be consecutive, but their order must be maintained.
+String,Find Longest Recurring Subsequence in String,https://practice.geeksforgeeks.org/problems/longest-repeating-subsequence/0,"1. Problem Summary: The task is to find the length of the longest subsequence in a given string that appears at least twice. The characters in the subsequence do not need to be consecutive, but their order must be maintained.
 
 2. Approach: The problem can be solved using a dynamic programming approach similar to the Longest Common Subsequence (LCS) problem, but with a twist. Instead of comparing two different strings, we compare the string with itself while ensuring that we do not consider the same character twice unless they are at different positions. We create a 2D DP table where `dp[i][j]` represents the length of the longest recurring subsequence between substrings ending at index `i-1` and `j-1`. If characters at these positions are the same and `i` is not equal to `j`, we consider it part of the recurring subsequence. Otherwise, we take the maximum value from either excluding the current character from the first substring or the second substring.
 
@@ -233,7 +233,7 @@ int longestRecurringSubseq(string s) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n^2) and the space complexity is also O(n^2), where n is the length of the string."
-String,Print all Subsequences of a string.,"1. Problem Summary:
+String,Print all Subsequences of a string.,https://www.geeksforgeeks.org/print-subsequences-string/,"1. Problem Summary:
    Subsequences of a string are derived by deleting some or no characters without changing the order of the remaining characters. The task is to print all possible subsequences of a given string.
 
 2. Approach:
@@ -265,7 +265,7 @@ int main() {
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(2^n) due to the binary decision at each of the n characters, and the space complexity is O(n) for the recursion stack depth."
-String,Print all the permutations of the given string,"1. Problem Summary: The task is to generate all possible permutations of a given string. Each permutation is a rearrangement of the characters in the string, where each character must appear exactly as many times as it does in the input string.
+String,Print all the permutations of the given string,https://practice.geeksforgeeks.org/problems/permutations-of-a-given-string/0,"1. Problem Summary: The task is to generate all possible permutations of a given string. Each permutation is a rearrangement of the characters in the string, where each character must appear exactly as many times as it does in the input string.
 
 2. Approach: The optimal way to approach this problem is by using backtracking. Start by fixing one character at a time and recursively fixing the next characters. Swap each character with itself and with every character that comes after it, then proceed to find permutations of the substring excluding the fixed character. After each recursive call, swap the characters back to restore the original string configuration before the next iteration. This swapping ensures all characters are considered as the starting character of the substring in subsequent recursive calls.
 
@@ -292,7 +292,7 @@ void printAllPermutations(string s) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n*n!) where n is the length of the string, due to generating n! permutations and taking O(n) time for each. The space complexity is O(n) due to the depth of the recursion stack."
-String,Split the Binary string into two substring with equal 0’s and 1’s,"1. Problem Summary: Given a binary string, the task is to find the maximum number of splits such that each substring contains an equal number of 0's and 1's. The string only consists of characters '0' and '1'.
+String,Split the Binary string into two substring with equal 0’s and 1’s,https://www.geeksforgeeks.org/split-the-binary-string-into-substrings-with-equal-number-of-0s-and-1s/,"1. Problem Summary: Given a binary string, the task is to find the maximum number of splits such that each substring contains an equal number of 0's and 1's. The string only consists of characters '0' and '1'.
 
 2. Approach: Start by iterating through the string while counting the occurrences of '0's and '1's. Whenever the counts of both '0's and '1's are equal at any point in the string, increment a counter. This counter essentially represents a valid split point where the substrings on either side of this point have equal numbers of '0's and '1's. Reset the counts after finding each valid split to look for the next potential split. The approach leverages the idea that balanced substrings can be identified by matching counts of '0's and '1's as we traverse the string.
 
@@ -313,7 +313,7 @@ int maxSplits(string s) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n), where n is the length of the string, as we traverse the string once. The space complexity is O(1) since we use a constant amount of extra space."
-String,Word Wrap Problem [VERY IMP].,"1. Problem Summary:  
+String,Word Wrap Problem [VERY IMP].,https://practice.geeksforgeeks.org/problems/word-wrap/0,"1. Problem Summary:  
    The Word Wrap Problem involves arranging a sequence of words in such a way that they fit within a fixed width per line, minimizing the total cost of the extra spaces left at the end of each line, except the last one.
 
 2. Approach:  
@@ -348,7 +348,7 @@ int solveWordWrap(vector<int>& words, int maxWidth) {
 
 4. Time Complexity and Space Complexity:  
    The time complexity is O(n^2) due to the nested loops for calculating cost, and space complexity is O(n) for storing the dp and cost arrays."
-String,EDIT Distance [Very Imp],"1. Problem Summary:
+String,EDIT Distance [Very Imp],https://practice.geeksforgeeks.org/problems/edit-distance3702/1,"1. Problem Summary:
    The Edit Distance problem, also known as Levenshtein distance, involves finding the minimum number of operations (insertions, deletions, or substitutions) required to transform one string into another. 
 
 2. Approach:
@@ -383,7 +383,7 @@ int editDistance(string s1, string s2) {
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(m*n) and the space complexity is O(m*n), where m and n are the lengths of the two input strings."
-String,Find next greater number with same set of digits. [Very Very IMP],"1. Problem Summary:  
+String,Find next greater number with same set of digits. [Very Very IMP],https://practice.geeksforgeeks.org/problems/next-permutation/0,"1. Problem Summary:  
    The problem involves finding the next greater permutation of numbers formed by the digits of a given number. If no greater permutation is possible, return the smallest permutation.
 
 2. Approach:  
@@ -417,7 +417,7 @@ string nextGreaterElement(string digits) {
 
 4. Time Complexity and Space Complexity:  
    The time complexity is O(n) due to the linear scans and the reversal operation, and the space complexity is O(1) as we are modifying the string in place."
-String,Balanced Parenthesis problem.[Imp],"1. Problem Summary: The Balanced Parenthesis problem requires checking if the given string of parentheses is correctly balanced. A string is balanced if all opening parentheses have a corresponding closing parenthesis in the correct order.
+String,Balanced Parenthesis problem.[Imp],https://practice.geeksforgeeks.org/problems/parenthesis-checker/0,"1. Problem Summary: The Balanced Parenthesis problem requires checking if the given string of parentheses is correctly balanced. A string is balanced if all opening parentheses have a corresponding closing parenthesis in the correct order.
 
 2. Approach: To solve this problem, a stack data structure is used to track opening parentheses. As you iterate through the string, push each opening parenthesis ('(') onto the stack. For each closing parenthesis (')'), check if the stack is not empty and the top of the stack is an opening parenthesis; if so, pop the stack. If these conditions are not met, the string is unbalanced. After processing all characters, if the stack is empty, then the string is balanced; otherwise, it is not. This approach intuitively mimics the nesting of valid parentheses, making it easier to visualize and remember.
 
@@ -443,7 +443,7 @@ bool isBalanced(string s) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n), where n is the length of the string, as we traverse the string once. The space complexity is O(n) in the worst case, when all characters are opening parentheses."
-String,Word break Problem[ Very Imp],"1. Problem Summary:  
+String,Word break Problem[ Very Imp],https://practice.geeksforgeeks.org/problems/word-break/0,"1. Problem Summary:  
 The Word Break Problem involves determining whether a given string can be segmented into one or more dictionary words. The dictionary is provided as a set of words.
 
 2. Approach:  
@@ -474,7 +474,7 @@ bool wordBreak(string s, vector<string>& wordDict) {
 
 4. Time Complexity and Space Complexity:  
 The time complexity is O(n^2 * m), where `n` is the length of the string and `m` is the average length of the words in the dictionary. The space complexity is O(n) due to the DP array."
-String,Rabin Karp Algo,"1. Problem Summary: The Rabin-Karp Algorithm is used for string matching, efficiently finding all occurrences of a pattern string within a text string by using hashing.
+String,Rabin Karp Algo,https://www.geeksforgeeks.org/rabin-karp-algorithm-for-pattern-searching/,"1. Problem Summary: The Rabin-Karp Algorithm is used for string matching, efficiently finding all occurrences of a pattern string within a text string by using hashing.
 
 2. Approach: The Rabin-Karp algorithm uses a rolling hash function to hash the pattern and subtexts of the main text of the same length as the pattern. It starts by calculating the hash of the pattern and the first subtext. For each subsequent step, it recalculates the hash in constant time by removing the hash contribution of the old character that is no longer in the window and adding the hash contribution of the new character that enters the window. If the hash of a subtext matches the hash of the pattern, a direct comparison is made to verify the match to avoid false positives due to hash collisions.
 
@@ -523,7 +523,7 @@ void rabinKarp(string text, string pattern) {
 ```
 
 4. Time Complexity and Space Complexity: The average and best-case time complexity is O(n+m), while the worst-case time complexity is O(n*m), where n is the length of the text and m is the length of the pattern. The space complexity is O(1)."
-String,KMP Algo,"1. Problem Summary:  
+String,KMP Algo,https://practice.geeksforgeeks.org/problems/longest-prefix-suffix2527/1,"1. Problem Summary:  
    The KMP (Knuth-Morris-Pratt) Algorithm is used for searching a substring within a string efficiently. It leverages the information from previous character matches to avoid unnecessary comparisons, thus optimizing the search process.
 
 2. Approach:  
@@ -583,7 +583,7 @@ String,KMP Algo,"1. Problem Summary:
 
 4. Time Complexity and Space Complexity:  
    The time complexity of the KMP algorithm is O(N+M), and the space complexity is O(M), where N is the length of the text and M is the length of the pattern."
-String,Convert a Sentence into its equivalent mobile numeric keypad sequence.,"1. Problem Summary: 
+String,Convert a Sentence into its equivalent mobile numeric keypad sequence.,https://www.geeksforgeeks.org/convert-sentence-equivalent-mobile-numeric-keypad-sequence/,"1. Problem Summary: 
    The task is to convert a given sentence into its corresponding sequence of key presses on a traditional mobile numeric keypad. Each letter on the keypad is associated with a number and may require multiple presses to type a specific letter.
 
 2. Approach:
@@ -617,7 +617,7 @@ string convertSentenceToKeypadSequence(string sentence) {
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(n), where n is the length of the input string, as each character is processed once. The space complexity is O(1), assuming the space for the map and output string are not counted towards additional space since they scale with input size or are fixed."
-String,Minimum number of bracket reversals needed to make an expression balanced.,"1. Problem Summary:  
+String,Minimum number of bracket reversals needed to make an expression balanced.,https://practice.geeksforgeeks.org/problems/count-the-reversals/0,"1. Problem Summary:  
    The problem requires finding the minimum number of reversals to make a string of brackets balanced. A string of brackets is balanced if every opening bracket has a corresponding closing bracket in the correct order.
 
 2. Approach:  
@@ -658,7 +658,7 @@ int minReversals(string expr) {
 
 4. Time Complexity and Space Complexity:  
    The time complexity is O(n) where n is the length of the string, as we traverse the string once and process each character. The space complexity is O(n) in the worst case when all characters are of the same type and get pushed onto the stack."
-String,Count All Palindromic Subsequence in a given String.,"1. Problem Summary: The problem requires counting all distinct palindromic subsequences in a given string. A subsequence is a sequence that can be derived from another sequence by deleting some or no elements without changing the order of the remaining elements.
+String,Count All Palindromic Subsequence in a given String.,https://practice.geeksforgeeks.org/problems/count-palindromic-subsequences/1,"1. Problem Summary: The problem requires counting all distinct palindromic subsequences in a given string. A subsequence is a sequence that can be derived from another sequence by deleting some or no elements without changing the order of the remaining elements.
 
 2. Approach: The optimal solution involves dynamic programming. We use a 2D table `dp` where `dp[i][j]` represents the count of palindromic subsequences in the substring from index `i` to `j`. If the characters at `i` and `j` are the same, `dp[i][j]` includes all palindromic subsequences between `i+1` and `j-1`, plus the new palindromes formed by the matching characters. If they aren't the same, we combine subsequences from `i+1` to `j` and `i` to `j-1`, subtracting those counted twice (from `i+1` to `j-1`). This approach cleverly builds up the solution by expanding around potential centers of palindromes and using previously computed values for smaller substrings.
 
@@ -691,7 +691,7 @@ int countPalindromicSubsequences(string s) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n^2) and the space complexity is also O(n^2), where n is the length of the string. This is due to the use of a 2D dp array and nested loops iterating over substring lengths and start indices."
-String,Count of number of given string in 2D character array,"1. Problem Summary: The problem involves finding the count of occurrences of a given string in a 2D character array. The string can be matched horizontally, vertically, and diagonally in all eight possible directions.
+String,Count of number of given string in 2D character array,https://www.geeksforgeeks.org/find-count-number-given-string-present-2d-character-array/,"1. Problem Summary: The problem involves finding the count of occurrences of a given string in a 2D character array. The string can be matched horizontally, vertically, and diagonally in all eight possible directions.
 
 2. Approach: The optimal algorithm involves traversing each cell of the 2D array and using it as a starting point to search for the target string in all eight directions. For each cell, check if the first character matches the first character of the string. If it does, proceed to check in each direction using a helper function that compares characters of the string with the characters in the matrix, moving step by step in the chosen direction. This helper function will return true if the entire string is found starting from the current position in the current direction. Count these successful matches and sum them up for the final answer.
 
@@ -733,7 +733,7 @@ int countStrings(vector<vector<char>>& grid, string word) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(N*M*L*8), where N and M are the dimensions of the grid and L is the length of the string, due to checking each direction for each starting point. The space complexity is O(1), not including the input grid and string."
-String,Search a Word in a 2D Grid of characters.,"1. Problem Summary: The problem involves finding whether a given word exists in a 2D grid of letters. The word can be matched in the grid horizontally, vertically, diagonally, or in the reverse direction of any of these orientations.
+String,Search a Word in a 2D Grid of characters.,https://practice.geeksforgeeks.org/problems/find-the-string-in-grid/0,"1. Problem Summary: The problem involves finding whether a given word exists in a 2D grid of letters. The word can be matched in the grid horizontally, vertically, diagonally, or in the reverse direction of any of these orientations.
 
 2. Approach: The optimal approach uses a Depth First Search (DFS) starting from each cell that matches the first letter of the word. For each starting cell, explore in all 8 possible directions (right, left, up, down, and the four diagonals). Use a recursive function to handle the DFS, checking bounds and ensuring that each character matches the corresponding character in the word. To avoid revisiting the same cell within the same path, mark the cell as visited by modifying the grid temporarily and then restore it back. This approach intuitively mimics how one would manually search for a word in a puzzle by exploring all possible directions from a starting letter.
 
@@ -774,7 +774,7 @@ bool exist(vector<vector<char>>& grid, string word) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(N*M*8^L) where N and M are the dimensions of the grid and L is the length of the word, due to the 8 possible directions to search for each character. The space complexity is O(L) due to the recursion stack depth which can go up to the length of the word."
-String,Boyer Moore Algorithm for Pattern Searching.,"1. Problem Summary: The Boyer-Moore algorithm is used for pattern searching in strings, primarily focusing on efficiently skipping sections of the text that cannot possibly match the pattern. It combines information about how the pattern aligns with mismatches and the character information in the text to improve search speed.
+String,Boyer Moore Algorithm for Pattern Searching.,https://www.geeksforgeeks.org/boyer-moore-algorithm-for-pattern-searching/,"1. Problem Summary: The Boyer-Moore algorithm is used for pattern searching in strings, primarily focusing on efficiently skipping sections of the text that cannot possibly match the pattern. It combines information about how the pattern aligns with mismatches and the character information in the text to improve search speed.
 
 2. Approach: The Boyer-Moore algorithm uses two heuristics: the Bad Character Rule and the Good Suffix Rule, to skip unnecessary comparisons in the search process. The Bad Character Rule shifts the pattern more than one position by looking at the character in the text that caused the mismatch. If this character is not part of the pattern, the pattern is shifted completely past this character. If it is in the pattern, the pattern is shifted to align this character with its last occurrence in the pattern. The Good Suffix Rule deals with how to shift the pattern when a suffix of the pattern matches but a mismatch occurs just before this suffix. Both rules are used to calculate the maximum shift for each mismatch, and the pattern is shifted by the maximum of these values. This strategic skipping of comparisons drastically speeds up the search.
 
@@ -811,7 +811,7 @@ void search(string txt, string pat) {
 ```
 
 4. Time Complexity and Space Complexity: The worst-case time complexity is O(n*m), but in practice, it performs much better, especially for large alphabets. The space complexity is O(1) for the bad character table."
-String,Converting Roman Numerals to Decimal,"1. Problem Summary: The task is to convert a string representing a Roman numeral into its corresponding decimal (integer) value. Roman numerals are constructed using combinations of letters such as I, V, X, L, C, D, and M, each representing specific integer values.
+String,Converting Roman Numerals to Decimal,https://practice.geeksforgeeks.org/problems/roman-number-to-integer/0,"1. Problem Summary: The task is to convert a string representing a Roman numeral into its corresponding decimal (integer) value. Roman numerals are constructed using combinations of letters such as I, V, X, L, C, D, and M, each representing specific integer values.
 
 2. Approach: The conversion is based on the principle that if a smaller numeral appears before a larger numeral, it should be subtracted from the larger numeral; otherwise, the values are summed. Start by mapping each Roman numeral symbol to its respective integer value. Traverse the string from right to left, adding the integer value of the symbol to a running total whenever the current symbol represents a value greater than or equal to the previous symbol. If the current symbol's value is less than the previous one, subtract its value from the total instead. This approach ensures that all the necessary additions and subtractions are handled correctly as per the rules of Roman numerals.
 
@@ -842,7 +842,7 @@ int romanToInt(string s) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n), where n is the length of the string, and the space complexity is O(1), not counting the space used to store the input and the map of Roman numeral values."
-String,Longest Common Prefix,"1. Problem Summary: The ""Longest Common Prefix"" problem requires finding the longest prefix string that is common across all strings in a given array. The prefix must be a starting substring for each string in the array.
+String,Longest Common Prefix,https://leetcode.com/problems/longest-common-prefix/,"1. Problem Summary: The ""Longest Common Prefix"" problem requires finding the longest prefix string that is common across all strings in a given array. The prefix must be a starting substring for each string in the array.
 
 2. Approach: The optimal way to solve this problem is by using the horizontal scanning method. Start by assuming the first string in the array is the longest common prefix. Then, iterate through each string in the array and update the prefix by comparing it with the current string. For each string, iterate character by character and reduce the length of the assumed prefix until the characters do not match. This process is repeated for every string, and the prefix is shortened as necessary until all strings have been processed or the prefix becomes empty.
 
@@ -865,7 +865,7 @@ string longestCommonPrefix(vector<string>& strs) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(S), where S is the sum of all characters in all strings, and the space complexity is O(1), assuming no extra space is used beyond the input."
-String,Number of flips to make binary string alternate,"1. Problem Summary: The problem is to determine the minimum number of flips required to make a given binary string alternate between '0' and '1' or '1' and '0'.
+String,Number of flips to make binary string alternate,https://practice.geeksforgeeks.org/problems/min-number-of-flips/0,"1. Problem Summary: The problem is to determine the minimum number of flips required to make a given binary string alternate between '0' and '1' or '1' and '0'.
 
 2. Approach: The key to solving this problem lies in recognizing that there are only two valid alternating patterns for a binary string: starting with '0' or starting with '1'. For each character in the string, compare it against both patterns and count the number of discrepancies. For the pattern starting with '0', even indices should have '0' and odd indices should have '1', and vice versa for the pattern starting with '1'. After iterating through the string and counting discrepancies for both patterns, the result will be the minimum of the two counts. This approach efficiently determines the minimal flips by leveraging the predictable structure of alternating patterns.
 
@@ -894,7 +894,7 @@ int minFlips(string s) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the length of the string, and the space complexity is O(1) as only a constant amount of extra space is used."
-String,Find the first repeated word in string.,"1. Problem Summary: The task is to identify the first word in a given string that appears more than once. The string will consist of words separated by spaces.
+String,Find the first repeated word in string.,https://practice.geeksforgeeks.org/problems/second-most-repeated-string-in-a-sequence/0,"1. Problem Summary: The task is to identify the first word in a given string that appears more than once. The string will consist of words separated by spaces.
 
 2. Approach: The optimal way to solve this problem is by using a hash set to track words that have been encountered as we iterate through the string. Begin by splitting the string into words. For each word, check if it already exists in the hash set. If it does, this word is the first repeated word, and we can return it. If it doesn't exist in the set, add the word to the set and continue to the next word. This approach ensures that each word is processed only once and in the order they appear.
 
@@ -918,7 +918,7 @@ string findFirstRepeatedWord(const string &s) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n), where n is the number of words in the string, and the space complexity is O(m), where m is the number of unique words in the string."
-String,Minimum number of swaps for bracket balancing.,"1. Problem Summary:  
+String,Minimum number of swaps for bracket balancing.,https://practice.geeksforgeeks.org/problems/minimum-swaps-for-bracket-balancing/0,"1. Problem Summary:  
 The problem is to find the minimum number of swaps needed to balance a string of brackets. A string is considered balanced if each opening bracket has a corresponding closing bracket in the correct order.
 
 2. Approach:  
@@ -949,7 +949,7 @@ int minSwapsForBalancing(string s) {
 
 4. Time Complexity and Space Complexity:  
 The time complexity is O(n) where n is the length of the string, and the space complexity is O(1), as we are using a fixed amount of extra space."
-String,Find the longest common subsequence between two strings.,"1. Problem Summary: The problem is to find the longest common subsequence (LCS) between two strings. A subsequence is a sequence that appears in the same relative order, but not necessarily contiguous.
+String,Find the longest common subsequence between two strings.,https://practice.geeksforgeeks.org/problems/longest-common-subsequence/0,"1. Problem Summary: The problem is to find the longest common subsequence (LCS) between two strings. A subsequence is a sequence that appears in the same relative order, but not necessarily contiguous.
 
 2. Approach: The optimal algorithm to solve the LCS problem is Dynamic Programming. We create a 2D table (dp) where dp[i][j] represents the length of LCS of the first i characters of the first string and the first j characters of the second string. If the characters at position i-1 of the first string and j-1 of the second string are the same, then dp[i][j] = dp[i-1][j-1] + 1; otherwise, dp[i][j] = max(dp[i-1][j], dp[i][j-1]). This approach builds up the solution by solving smaller subproblems and using these solutions to construct solutions to bigger subproblems.
 
@@ -976,7 +976,7 @@ int longestCommonSubsequence(string text1, string text2) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(m*n) and the space complexity is O(m*n), where m and n are the lengths of the two input strings."
-String,Program to generate all possible valid IP addresses from given  string.,"1. Problem Summary: 
+String,Program to generate all possible valid IP addresses from given  string.,https://www.geeksforgeeks.org/program-generate-possible-valid-ip-addresses-given-string/,"1. Problem Summary: 
    The problem requires generating all possible valid IPv4 addresses from a given string. A valid IP address consists of four decimal numbers separated by dots, each ranging from 0 to 255, and cannot have leading zeros unless the number itself is zero.
 
 2. Approach: 
@@ -1022,7 +1022,7 @@ int main() {
 
 4. Time Complexity and Space Complexity: 
    The time complexity is O(1) since the input length is fixed and we only explore a constant number of possible splits. Space complexity is also O(1) for the same reason, disregarding the space needed for the output."
-String,Write a program tofind the smallest window that contains all characters of string itself.,"1. Problem Summary: The goal is to find the smallest substring in a given string that contains all the unique characters of the string itself. It's a variation of the minimum window substring problem focusing on the characters of the string.
+String,Write a program tofind the smallest window that contains all characters of string itself.,https://practice.geeksforgeeks.org/problems/smallest-distant-window/0,"1. Problem Summary: The goal is to find the smallest substring in a given string that contains all the unique characters of the string itself. It's a variation of the minimum window substring problem focusing on the characters of the string.
 
 2. Approach: Use the sliding window technique along with a hash map to track the frequency of characters. First, identify all unique characters in the string and store their counts. Use two pointers, `start` and `end`, to represent the current window. Expand the `end` pointer to include new characters until the window has all unique characters. Then, contract the window from the `start` pointer to minimize its size while still containing all unique characters. Update the minimum window size whenever a valid window is found. This approach efficiently finds the smallest window by expanding and contracting the window size dynamically.
 
@@ -1064,7 +1064,7 @@ string smallestWindow(string s) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(N) where N is the length of the string, as each character is processed at most twice. The space complexity is O(1) since the character set is fixed (typically ASCII)."
-String,Rearrange characters in a string such that no two adjacent are same,"1. Problem Summary: The task is to rearrange the characters in a given string so that no two adjacent characters are the same. If it is not possible to rearrange the string to meet this criterion, the function should indicate so.
+String,Rearrange characters in a string such that no two adjacent are same,https://practice.geeksforgeeks.org/problems/rearrange-characters/0,"1. Problem Summary: The task is to rearrange the characters in a given string so that no two adjacent characters are the same. If it is not possible to rearrange the string to meet this criterion, the function should indicate so.
 
 2. Approach: The optimal approach uses a max-heap (priority queue) to ensure the most frequent characters are placed first, separated by less frequent ones to avoid adjacency. First, count the frequency of each character and store these in a max-heap sorted by frequency. Then, pull the most frequent character from the heap, append it to the result string, and decrease its count. To ensure no two adjacent characters are the same, store the previous character used temporarily until the next character is appended. If at any point the heap is empty but there is still a character left to append, it indicates that it's not possible to rearrange the string as required.
 
@@ -1104,7 +1104,7 @@ string rearrangeString(string s) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n log n) due to the operations on the max-heap, where n is the length of the string. The space complexity is O(n) for storing the count and result."
-String,Minimum characters to be added at front to make string palindrome,"1. Problem Summary: 
+String,Minimum characters to be added at front to make string palindrome,https://www.geeksforgeeks.org/minimum-characters-added-front-make-string-palindrome/,"1. Problem Summary: 
    The task is to determine the minimum number of characters that need to be added to the front of a given string to make it a palindrome. A palindrome reads the same backward as forward.
 
 2. Approach: 
@@ -1139,7 +1139,7 @@ int minCharsToAddToMakePalindrome(string s) {
 
 4. Time Complexity and Space Complexity: 
    The time complexity is O(n) where n is the length of the string, due to the linear scan for computing the LPS array. The space complexity is also O(n) for storing the LPS array."
-String,"Given a sequence of words, print all anagrams together","1. Problem Summary: The task requires grouping and printing all words that are anagrams of each other from a given list. Anagrams are words that are formed by rearranging the letters of another word.
+String,"Given a sequence of words, print all anagrams together",https://practice.geeksforgeeks.org/problems/k-anagrams-1/0,"1. Problem Summary: The task requires grouping and printing all words that are anagrams of each other from a given list. Anagrams are words that are formed by rearranging the letters of another word.
 
 2. Approach: The optimal way to solve this problem is by using a hash map where each key is a sorted version of the word, and the value is a list of words that match this sorted key. By sorting each word in the list, you can determine if it's an anagram of another word already processed. This method leverages the property that all anagrams will have the same character sequence when sorted. Once the hash map is populated, each list in the map's values will contain a group of anagrams.
 
@@ -1165,7 +1165,7 @@ void printAnagramsTogether(vector<string>& words) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n * k log k), where n is the number of words and k is the maximum length of a word, due to sorting each word. The space complexity is O(n * k), accounting for the storage of all words in the hash map."
-String,Find the smallest window in a string containing all characters of another string,"1. Problem Summary: The task is to find the smallest substring within a given string `s` that contains all the characters of another string `t`. This substring must include every character in `t` including duplicates.
+String,Find the smallest window in a string containing all characters of another string,https://practice.geeksforgeeks.org/problems/smallest-window-in-a-string-containing-all-the-characters-of-another-string/0,"1. Problem Summary: The task is to find the smallest substring within a given string `s` that contains all the characters of another string `t`. This substring must include every character in `t` including duplicates.
 
 2. Approach: The problem can be efficiently solved using the sliding window technique combined with a hashmap. Start by mapping each character of `t` to its frequency in a hashmap. Use two pointers to represent a window in `s`. Expand the right pointer to include characters until the window has all characters of `t`. Then, contract the window from the left to attempt to minimize its size while still containing all characters of `t`. Update the result whenever a valid smaller window is found. This method ensures that each character of `s` is processed in a linear progression, adjusting the window size dynamically to always check for the smallest valid substring.
 
@@ -1209,7 +1209,7 @@ string smallestWindow(string s, string t) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n + m), where n is the length of string `s` and m is the length of string `t`. The space complexity is O(1), as the extra space used does not depend on the input size but only on the character set size (which is constant)."
-String,Recursively remove all adjacent duplicates,"1. Problem Summary: The problem involves removing all consecutive duplicate characters from a string recursively. Each time duplicates are removed, the process needs to be reapplied to the new string until no more adjacent duplicates can be removed.
+String,Recursively remove all adjacent duplicates,https://practice.geeksforgeeks.org/problems/consecutive-elements/0,"1. Problem Summary: The problem involves removing all consecutive duplicate characters from a string recursively. Each time duplicates are removed, the process needs to be reapplied to the new string until no more adjacent duplicates can be removed.
 
 2. Approach: The optimal approach is to use recursion combined with iteration. Start by iterating through the string and building a new string. If a character is found that is the same as the next character, skip all consecutive duplicates. After the first pass, compare the newly formed string with the original string. If they are different, apply the recursion on the new string. This ensures that any new duplicates formed by the removal process are also eliminated. The use of recursion helps in breaking down the problem into smaller subproblems, making it easier to handle and understand the elimination process.
 
@@ -1241,7 +1241,7 @@ string removeDuplicates(string s) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n^2) in the worst case, where n is the length of the string, due to potentially rescanning the string multiple times. The space complexity is O(n) due to the space used for recursive calls and temporary strings."
-String,String matching where one string contains wildcard characters,"1. Problem Summary: The problem involves matching two strings where the first string (pattern) may include wildcard characters. Typically, '?' matches any single character, and '*' matches any sequence of characters (including an empty sequence).
+String,String matching where one string contains wildcard characters,https://practice.geeksforgeeks.org/problems/wildcard-string-matching/0,"1. Problem Summary: The problem involves matching two strings where the first string (pattern) may include wildcard characters. Typically, '?' matches any single character, and '*' matches any sequence of characters (including an empty sequence).
 
 2. Approach: The optimal algorithm to solve this uses dynamic programming. We create a 2D boolean DP table where `dp[i][j]` indicates whether the first `i` characters of the pattern match the first `j` characters of the string. Initialization starts by setting `dp[0][0]` to true (empty pattern matches empty string) and handling the cases where the pattern starts with multiple '*'s. For each character match or '?' wildcard in the pattern, propagate the truth value from `dp[i-1][j-1]`. For '*' in the pattern, the value is true if the pattern matched up to this point or any previous matches extended by the '*' have been true. This approach incrementally builds up to the solution by considering each substring of the pattern and string.
 
@@ -1273,7 +1273,7 @@ bool isMatch(string s, string p) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n*m) and the space complexity is O(n*m), where n is the length of the pattern and m is the length of the string."
-String,Function to find Number of customers who could not get a computer,"1. Problem Summary:  
+String,Function to find Number of customers who could not get a computer,https://www.geeksforgeeks.org/function-to-find-number-of-customers-who-could-not-get-a-computer/,"1. Problem Summary:  
    The problem involves determining how many customers could not be allocated a computer in a cafe due to all computers being occupied. Each customer is represented by a unique character, and their arrival and departure are denoted by the appearance and re-appearance of the character in a string sequence.
 
 2. Approach:  
@@ -1307,7 +1307,7 @@ int countCustomersWithoutComputer(string seq, int n) {
 
 4. Time Complexity and Space Complexity:  
    The time complexity is O(k), where k is the length of the sequence, and the space complexity is O(c), where c is the number of unique customers."
-String,Transform One String to Another using Minimum Number of Given Operation,"1. Problem Summary:
+String,Transform One String to Another using Minimum Number of Given Operation,https://www.geeksforgeeks.org/transform-one-string-to-another-using-minimum-number-of-given-operation/,"1. Problem Summary:
    The problem involves transforming one string into another using a specified minimum number of operations, where each operation consists of moving a character from one position to another within the string.
 
 2. Approach:
@@ -1339,7 +1339,7 @@ int minOperations(string s1, string s2) {
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(m*n) and the space complexity is O(m*n), where m and n are the lengths of the two strings respectively."
-String,Check if two given strings are isomorphic to each other,"1. Problem Summary: The problem is to determine if two strings, `s1` and `s2`, are isomorphic. Two strings are isomorphic if the characters in `s1` can be replaced to get `s2` while preserving the character order.
+String,Check if two given strings are isomorphic to each other,https://practice.geeksforgeeks.org/problems/isomorphic-strings/0,"1. Problem Summary: The problem is to determine if two strings, `s1` and `s2`, are isomorphic. Two strings are isomorphic if the characters in `s1` can be replaced to get `s2` while preserving the character order.
 
 2. Approach: To solve this problem, we can use two hash maps to track the character mappings from `s1` to `s2` and vice versa. For each character in `s1`, check if there exists a corresponding mapped character in `s2`. If a mapping exists, it should match the current character of `s2`. Similarly, check the reverse mapping from `s2` to `s1`. If at any point the mappings contradict or a character is already mapped differently, the strings are not isomorphic. This approach ensures that each character in one string maps to exactly one character in the other string and vice versa.
 
@@ -1375,7 +1375,7 @@ bool areIsomorphic(string s1, string s2) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the length of the strings, and the space complexity is O(1) since the size of the hash maps is bounded by the size of the character set (fixed size, typically 256 for extended ASCII characters)."
-String,Recursively print all sentences that can be formed from list of word lists,"1. Problem Summary:
+String,Recursively print all sentences that can be formed from list of word lists,https://www.geeksforgeeks.org/recursively-print-all-sentences-that-can-be-formed-from-list-of-word-lists/,"1. Problem Summary:
    The problem involves generating all possible sentences by choosing one word from each list in a given list of word lists. Each list contains multiple word choices, and the lists are arranged such that each position in the sentence corresponds to a list of possible words.
 
 2. Approach:

@@ -1,5 +1,5 @@
-TOPIC,PROBLEM LINK,SOLUTION
-Trie,Construct a trie from scratch,"1. Problem Summary:  
+TOPIC,PROBLEM NAME,URL,SOLUTION
+Trie,Construct a trie from scratch,https://www.geeksforgeeks.org/trie-insert-and-search/,"1. Problem Summary:  
    The task involves constructing a trie (prefix tree) for efficiently storing and searching strings. The trie should support operations like insert, search, and startsWith (to check if any word in the trie starts with a given prefix).
 
 2. Approach:  
@@ -59,7 +59,7 @@ public:
 
 4. Time Complexity and Space Complexity:  
    The time complexity for insert, search, and startsWith operations is O(L), where L is the length of the word or prefix. The space complexity is O(N * L), where N is the number of keys in trie, as each node might contain a map with entries for each character of the alphabet."
-Trie,Find shortest unique prefix for every word in a given list,"1. Problem Summary:
+Trie,Find shortest unique prefix for every word in a given list,https://www.geeksforgeeks.org/find-all-shortest-unique-prefixes-to-represent-each-word-in-a-given-list/,"1. Problem Summary:
    The problem is to find the shortest unique prefix for every word in a given list of words, ensuring that no prefix is a prefix of another word from the list.
 
 2. Approach:
@@ -116,7 +116,7 @@ vector<string> shortestUniquePrefixes(vector<string>& words) {
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(N*L) and the space complexity is O(N*L), where N is the number of words and L is the average length of the words, assuming a fixed alphabet size."
-Trie,Word Break Problem | (Trie solution),"1. Problem Summary: The Word Break Problem involves determining if a given string can be segmented into space-separated words from a dictionary. A trie is used to store the dictionary for efficient querying.
+Trie,Word Break Problem | (Trie solution),https://www.geeksforgeeks.org/word-break-problem-trie-solution/,"1. Problem Summary: The Word Break Problem involves determining if a given string can be segmented into space-separated words from a dictionary. A trie is used to store the dictionary for efficient querying.
 
 2. Approach: The solution involves constructing a trie data structure to store all words from the dictionary for efficient prefix matching. Start by inserting all dictionary words into the trie. Then, use dynamic programming to check each substring of the input string. For each position in the string, use the trie to check if the substring starting from this position to any other position forms a valid word in the dictionary. If a valid word is found, mark the end of this word in a boolean array (dp) indicating that the string up to this point can be segmented. The final answer will be determined by the value in dp at the end of the string.
 
@@ -172,7 +172,7 @@ bool wordBreak(string s, vector<string>& wordDict) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n^2) in the worst case scenario, where n is the length of the input string. The space complexity is O(m*k + n), where m is the total number of words in the dictionary and k is the average length of these words, plus n for the dp array."
-Trie,"Given a sequence of words, print all anagrams together","1. Problem Summary: The problem involves grouping all anagrams from a given list of words. Anagrams are words that can be formed by rearranging the letters of another word.
+Trie,"Given a sequence of words, print all anagrams together",https://practice.geeksforgeeks.org/problems/k-anagrams-1/0,"1. Problem Summary: The problem involves grouping all anagrams from a given list of words. Anagrams are words that can be formed by rearranging the letters of another word.
 
 2. Approach: The optimal way to solve this problem is by using a hash map where each key is a sorted version of the word, and the value is a list of words that are anagrams of each other. Start by iterating over each word in the list, sort the characters of the word to form a key, and then append the original word to the corresponding list in the hash map. Finally, iterate over the hash map to output all groups of anagrams. This approach is intuitive as sorting brings all anagrams under the same key, making it easier to group them.
 
@@ -198,7 +198,7 @@ void printAnagramsTogether(const vector<string>& words) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n * k log k), where n is the number of words and k is the maximum length of a word. Space complexity is O(n * k), accounting for the storage of the words in the hash map."
-Trie,Implement a Phone Directory,"1. Problem Summary: Implement a phone directory that supports efficient insertion and search of contact names. The directory should be able to return suggestions based on a prefix of a contact name.
+Trie,Implement a Phone Directory,https://practice.geeksforgeeks.org/problems/phone-directory/0,"1. Problem Summary: Implement a phone directory that supports efficient insertion and search of contact names. The directory should be able to return suggestions based on a prefix of a contact name.
 
 2. Approach: Use a Trie (prefix tree) to store the contact names, which provides efficient storage and retrieval capabilities. Each node in the Trie represents a character of the contact name and has links to other nodes for the next characters. Insertion involves traversing the Trie from the root, following the path of the contact name's characters, and creating new nodes when necessary. For searching or suggesting contacts based on a prefix, traverse the Trie according to the prefix and then perform a depth-first search (DFS) from the end of the prefix to gather all names that share the same prefix. This approach leverages the hierarchical structure of the Trie to quickly zero in on the relevant subtree and collect suggestions.
 
@@ -260,7 +260,7 @@ public:
 ```
 
 4. Time Complexity and Space Complexity: Time complexity for insertion and search operations is O(L), where L is the length of the word or query. Space complexity is O(N * K), where N is the number of contacts and K is the average length of a contact name."
-Trie,Print unique rows in a given boolean matrix,"1. Problem Summary: The problem is to identify and print all unique rows from a given boolean matrix. Each row in the matrix can be treated as a binary string.
+Trie,Print unique rows in a given boolean matrix,https://practice.geeksforgeeks.org/problems/unique-rows-in-boolean-matrix/1,"1. Problem Summary: The problem is to identify and print all unique rows from a given boolean matrix. Each row in the matrix can be treated as a binary string.
 
 2. Approach: A Trie (prefix tree) data structure is well-suited for this task due to its efficient prefix checking capabilities. Begin by initializing an empty Trie. For each row in the matrix, attempt to insert the row into the Trie. If the row is already present, it's a duplicate and can be skipped; otherwise, insert the row into the Trie and print it. This ensures that each unique row is printed exactly once. The Trie nodes can be structured to have two children (representing binary 0 and 1), and a boolean flag that indicates whether a node corresponds to the end of a row in the matrix.
 

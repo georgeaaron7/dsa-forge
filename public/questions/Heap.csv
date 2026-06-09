@@ -1,5 +1,5 @@
-TOPIC,PROBLEM LINK,SOLUTION
-Heap,Implement a Maxheap/MinHeap using arrays and recursion.,"1. Problem Summary:  
+TOPIC,PROBLEM NAME,URL,SOLUTION
+Heap,Implement a Maxheap/MinHeap using arrays and recursion.,https://www.geeksforgeeks.org/building-heap-from-array/,"1. Problem Summary:  
    The task is to implement a MaxHeap or MinHeap using an array. The heap should support insertion, deletion, and retrieval of the maximum or minimum element efficiently.
 
 2. Approach:  
@@ -58,7 +58,7 @@ int getRoot(vector<int>& heap) {
 
 4. Time Complexity and Space Complexity:  
    Insertion and deletion operations have a time complexity of O(log n) due to the bubble up and bubble down processes. Space complexity is O(n) for storing the heap elements in the array."
-Heap,Sort an Array using heap. (HeapSort),"1. Problem Summary:
+Heap,Sort an Array using heap. (HeapSort),https://www.geeksforgeeks.org/heap-sort/,"1. Problem Summary:
    HeapSort is a comparison-based sorting technique based on a Binary Heap data structure. It is similar to selection sort where we first find the maximum element and place the maximum element at the end.
 
 2. Approach:
@@ -119,7 +119,7 @@ Heap,Sort an Array using heap. (HeapSort),"1. Problem Summary:
 
 4. Time Complexity and Space Complexity:
    The time complexity of HeapSort is O(n log n) for all cases. Space complexity is O(1) as it is an in-place sorting algorithm."
-Heap,Maximum of all subarrays of size k.,"1. Problem Summary: Given an array and an integer k, find the maximum element for each subarray of consecutive elements of size k. This problem is a sliding window problem where the window of size k moves one element at a time.
+Heap,Maximum of all subarrays of size k.,https://www.geeksforgeeks.org/sliding-window-maximum-maximum-of-all-subarrays-of-size-k/,"1. Problem Summary: Given an array and an integer k, find the maximum element for each subarray of consecutive elements of size k. This problem is a sliding window problem where the window of size k moves one element at a time.
 
 2. Approach: The optimal approach uses a deque (double-ended queue) to maintain the indices of useful elements for each window of size k. As we iterate over the array, we ensure that the deque always contains potential candidates for the maximum of the current window. We do this by removing indices from the deque if they are out of the current window's bounds or if the element at those indices is less than the current element being considered. This ensures that the front of the deque always contains the index of the maximum element for the current window. The use of deque allows efficient addition and removal of elements.
 
@@ -152,7 +152,7 @@ vector<int> maxSlidingWindow(vector<int>& nums, int k) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the number of elements in the array, as each element is processed at most twice. The space complexity is O(k) due to the storage of indices in the deque."
-Heap,“k” largest element in an array,"1. Problem Summary: The problem is to find the ""k"" largest elements in an unsorted array. The challenge is to efficiently extract these elements without fully sorting the array.
+Heap,“k” largest element in an array,https://practice.geeksforgeeks.org/problems/k-largest-elements4206/1,"1. Problem Summary: The problem is to find the ""k"" largest elements in an unsorted array. The challenge is to efficiently extract these elements without fully sorting the array.
 
 2. Approach: An optimal way to solve this problem is by using a min-heap of size k. First, populate the heap with the first k elements of the array. For each subsequent element in the array, compare it with the smallest element in the heap (the root of the heap). If the current element is larger, remove the root from the heap and insert the current element. This ensures that the heap always contains the k largest elements seen so far. By the end of the traversal, the heap contains the k largest elements of the entire array. This approach leverages the heap's property of constant time minimum element retrieval and logarithmic time insertion and deletion.
 
@@ -181,7 +181,7 @@ vector<int> findKLargestElements(vector<int>& nums, int k) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n log k) where n is the number of elements in the array, and the space complexity is O(k) for storing the heap."
-Heap,Kth smallest and largest element in an unsorted array,"1. Problem Summary: The task is to find the kth smallest and kth largest elements in an unsorted array. The challenge is to do this efficiently without sorting the entire array.
+Heap,Kth smallest and largest element in an unsorted array,https://www.geeksforgeeks.org/kth-smallestlargest-element-unsorted-array/,"1. Problem Summary: The task is to find the kth smallest and kth largest elements in an unsorted array. The challenge is to do this efficiently without sorting the entire array.
 
 2. Approach: The optimal approach uses a min-heap for finding the kth largest element and a max-heap for the kth smallest element. For the kth smallest, build a max-heap of the first k elements. For each subsequent element, if it's smaller than the root, replace the root with this element and heapify. The root of the heap will be the kth smallest element after processing all elements. Similarly, use a min-heap for the kth largest by keeping only the largest k elements in the heap. This approach leverages the heap's property of always having the largest (or smallest) element at the root, allowing efficient pruning of the data.
 
@@ -220,7 +220,7 @@ int findKthLargest(vector<int>& nums, int k) {
 ```
 
 4. Time Complexity and Space Complexity: Both operations have a time complexity of O(n log k) and a space complexity of O(k), where n is the number of elements in the array."
-Heap,Merge “K” sorted arrays. [ IMP ],"1. Problem Summary:
+Heap,Merge “K” sorted arrays. [ IMP ],https://practice.geeksforgeeks.org/problems/merge-k-sorted-arrays/1,"1. Problem Summary:
    The problem involves merging ""K"" sorted arrays into a single sorted array. Each of the K arrays can have different lengths.
 
 2. Approach:
@@ -258,7 +258,7 @@ vector<int> mergeKSortedArrays(vector<vector<int>>& arrays) {
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(N log K), where N is the total number of elements across all arrays and K is the number of arrays. The space complexity is O(K) due to the storage requirements of the min-heap."
-Heap,Merge 2 Binary Max Heaps,"1. Problem Summary: The task is to merge two binary max heaps into a single binary max heap. A binary max heap is a complete binary tree where the value of each node is greater than or equal to the values of its children.
+Heap,Merge 2 Binary Max Heaps,https://practice.geeksforgeeks.org/problems/merge-two-binary-max-heap/0,"1. Problem Summary: The task is to merge two binary max heaps into a single binary max heap. A binary max heap is a complete binary tree where the value of each node is greater than or equal to the values of its children.
 
 2. Approach: The most straightforward method to merge two max heaps is to combine the elements of both heaps into a single array and then build a new max heap from this array. Start by inserting all elements from both heaps into a single array. Then, apply the heapify process from the last non-leaf node down to the root node to ensure all heap properties are maintained. This approach leverages the fact that building a heap from an unsorted array is more efficient than inserting elements one by one.
 
@@ -297,7 +297,7 @@ vector<int> mergeHeaps(vector<int>& heap1, vector<int>& heap2) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the total number of elements in the merged heap, and the space complexity is also O(n) due to the storage of the merged heap elements."
-Heap,Kth largest sum continuous subarrays,"1. Problem Summary: The problem requires finding the kth largest sum of continuous subarrays from a given array. The task is to determine the sum of elements in every possible subarray and then find the kth largest among these sums.
+Heap,Kth largest sum continuous subarrays,https://www.geeksforgeeks.org/k-th-largest-sum-contiguous-subarray/,"1. Problem Summary: The problem requires finding the kth largest sum of continuous subarrays from a given array. The task is to determine the sum of elements in every possible subarray and then find the kth largest among these sums.
 
 2. Approach: An optimal approach involves using a min-heap to keep track of the top k largest sums without needing to sort all possible subarray sums, which would be inefficient. First, compute the sum of all possible subarrays by iterating over the array with two nested loops, where the outer loop fixes the starting point and the inner loop fixes the ending point of the subarray. For each subarray sum calculated, if the size of the heap is less than k, push the sum into the heap. If the size is k and the current sum is greater than the minimum element in the heap, replace the minimum element with the current sum. This ensures that the heap always contains the k largest sums. At the end of the process, the root of the heap will be the kth largest sum.
 
@@ -327,7 +327,7 @@ int kthLargestSum(int arr[], int n, int k) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n^2 log k) due to the nested loops over the array and operations on the heap, and the space complexity is O(k) for storing the heap."
-Heap,Leetcode- reorganize strings,"1. Problem Summary: The task is to rearrange the characters of a given string so that no two adjacent characters are the same. If it is possible, return the rearranged string; otherwise, return an empty string.
+Heap,Leetcode- reorganize strings,https://leetcode.com/problems/reorganize-string/,"1. Problem Summary: The task is to rearrange the characters of a given string so that no two adjacent characters are the same. If it is possible, return the rearranged string; otherwise, return an empty string.
 
 2. Approach: The optimal approach utilizes a max-heap (priority queue) to ensure the most frequent characters are placed first, reducing the chance of adjacent duplicates. First, count the frequency of each character in the string. Use a priority queue to sort characters by their frequency in descending order. Then, extract the two most frequent characters from the heap (if possible), append them to the result, and reinsert them into the heap with decreased frequencies. This ensures that we try to alternate between the most frequent characters, thus preventing any two identical characters from being adjacent.
 
@@ -369,7 +369,7 @@ string reorganizeString(string S) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(N log N) due to the heap operations, and the space complexity is O(N), where N is the length of the input string."
-Heap,Merge “K” Sorted Linked Lists [V.IMP],"1. Problem Summary:
+Heap,Merge “K” Sorted Linked Lists [V.IMP],https://practice.geeksforgeeks.org/problems/merge-k-sorted-linked-lists/1,"1. Problem Summary:
    The problem is to merge 'K' sorted linked lists into a single sorted linked list. The lists may have different lengths.
 
 2. Approach:
@@ -415,7 +415,7 @@ Heap,Merge “K” Sorted Linked Lists [V.IMP],"1. Problem Summary:
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(N log K), where N is the total number of nodes and K is the number of lists, due to the heap operations. The space complexity is O(K), which is required for the heap."
-Heap,Smallest range in “K” Lists,"1. Problem Summary:
+Heap,Smallest range in “K” Lists,https://practice.geeksforgeeks.org/problems/find-smallest-range-containing-elements-from-k-lists/1,"1. Problem Summary:
    The ""Smallest Range in 'K' Lists"" problem involves finding the smallest range that includes at least one number from each of the 'K' sorted lists.
 
 2. Approach:
@@ -462,7 +462,7 @@ pair<int, int> smallestRange(vector<vector<int>>& lists) {
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(N log K), where N is the total number of elements across all lists, and K is the number of lists. The space complexity is O(K), which is required for the heap and auxiliary data structures."
-Heap,Median in a stream of Integers,"1. Problem Summary: 
+Heap,Median in a stream of Integers,https://practice.geeksforgeeks.org/problems/find-median-in-a-stream/0,"1. Problem Summary: 
    The problem involves finding the median of a stream of integers as each new number is added. The stream is continuous, and the median needs to be updated in real-time after the insertion of each new element.
 
 2. Approach: 
@@ -503,7 +503,7 @@ Heap,Median in a stream of Integers,"1. Problem Summary:
 
 4. Time Complexity and Space Complexity: 
    The time complexity for adding a number is O(log n) due to the heap operations, and finding the median is O(1). The space complexity is O(n), where n is the number of elements processed."
-Heap,Check if a Binary Tree is Heap,"1. Problem Summary: 
+Heap,Check if a Binary Tree is Heap,https://practice.geeksforgeeks.org/problems/is-binary-tree-heap/1,"1. Problem Summary: 
 The problem is to determine whether a given binary tree is a binary heap. A binary heap must satisfy two properties: it should be a complete tree, and each node's value should be greater than or equal to the values of its children (for a max heap).
 
 2. Approach: 
@@ -553,7 +553,7 @@ bool isHeap(Node* root) {
 
 4. Time Complexity and Space Complexity:
 The time complexity is O(n) as each node is visited once, and the space complexity is O(n) due to the use of a queue for level-order traversal."
-Heap,Connect “n” ropes with minimum cost,"1. Problem Summary: The problem involves finding the minimum cost to connect 'n' ropes into one rope. The cost to connect two ropes is equal to the sum of their lengths. The goal is to minimize the total cost of connecting all ropes.
+Heap,Connect “n” ropes with minimum cost,https://practice.geeksforgeeks.org/problems/minimum-cost-of-ropes/0,"1. Problem Summary: The problem involves finding the minimum cost to connect 'n' ropes into one rope. The cost to connect two ropes is equal to the sum of their lengths. The goal is to minimize the total cost of connecting all ropes.
 
 2. Approach: The optimal approach to solve this problem is to use a min-heap (or priority queue). By always connecting the two smallest ropes first, we ensure that the resultant larger ropes contribute the least to future sums, thus minimizing the overall cost. Initialize by pushing all rope lengths into the min-heap. Then repeatedly extract the two smallest elements, sum them, add the result back to the heap, and keep track of the sum. Continue this process until only one rope remains in the heap, which means all ropes have been connected.
 
@@ -579,7 +579,7 @@ int minCost(vector<int>& ropes) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n log n) due to the operations on the min-heap, and the space complexity is O(n) for storing the ropes in the heap."
-Heap,Convert BST to Min Heap,"1. Problem Summary: The task is to convert a given Binary Search Tree (BST) into a Min Heap with the condition that the structure of the tree remains a binary tree. The properties of the Min Heap should be such that every parent node is smaller than its child nodes.
+Heap,Convert BST to Min Heap,https://www.geeksforgeeks.org/convert-bst-min-heap/,"1. Problem Summary: The task is to convert a given Binary Search Tree (BST) into a Min Heap with the condition that the structure of the tree remains a binary tree. The properties of the Min Heap should be such that every parent node is smaller than its child nodes.
 
 2. Approach: The optimal solution involves a two-step process. First, perform an in-order traversal of the BST to capture the elements in sorted order since in-order traversal of a BST yields elements in non-decreasing order. Store these elements in an array. Second, use this array to reconstruct the tree by assigning elements from the array to the tree nodes via a level-order traversal, ensuring the min-heap property (parent nodes are smaller than child nodes). This approach leverages the sorted properties of BST and the structural properties of binary trees.
 
@@ -611,7 +611,7 @@ void BSTToMinHeap(TreeNode* root) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n), where n is the number of nodes in the BST, as it involves traversing each node exactly once. The space complexity is also O(n) due to the storage of node values and the recursion stack during in-order traversal."
-Heap,Convert min heap to max heap,"1. Problem Summary: The task is to convert a given Min Heap into a Max Heap. A Min Heap is a complete binary tree where the value of each node is less than or equal to its children, while in a Max Heap, each node is greater than or equal to its children.
+Heap,Convert min heap to max heap,https://www.geeksforgeeks.org/convert-min-heap-to-max-heap/,"1. Problem Summary: The task is to convert a given Min Heap into a Max Heap. A Min Heap is a complete binary tree where the value of each node is less than or equal to its children, while in a Max Heap, each node is greater than or equal to its children.
 
 2. Approach: The optimal way to convert a Min Heap to a Max Heap is not to rebuild the heap from scratch but to utilize the existing heap structure. Since the tree is already a complete binary tree, we only need to rearrange the elements to satisfy the Max Heap property. This can be efficiently done by starting from the last non-leaf node and moving upwards to the root, applying the Max Heapify process at each node. Max Heapify ensures that the subtree rooted at any node obeys the Max Heap properties by swapping root with its largest child (if necessary) and recursively heapifying the affected subtree.
 
@@ -645,7 +645,7 @@ void convertMinHeapToMaxHeap(vector<int>& arr) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the number of elements in the heap, as each call to maxHeapify is O(log n) and we call it for roughly half the nodes. The space complexity is O(log n) due to the recursion stack during heapify."
-Heap,Rearrange characters in a string such that no two adjacent are same.,"1. Problem Summary: 
+Heap,Rearrange characters in a string such that no two adjacent are same.,https://practice.geeksforgeeks.org/problems/rearrange-characters/0,"1. Problem Summary: 
 The task is to rearrange the characters in a given string so that no two adjacent characters are the same. If it's possible to rearrange, return the rearranged string; otherwise, return an empty string or a special value indicating it's not possible.
 
 2. Approach: 
@@ -692,7 +692,7 @@ string rearrangeString(string s) {
 
 4. Time Complexity and Space Complexity:
 The time complexity is O(n log k) where n is the length of the string and k is the number of distinct characters, and the space complexity is O(k) for storing the characters in the heap and map."
-Heap,Minimum sum of two numbers formed from digits of an array,"1. Problem Summary: The problem involves forming two minimum possible numbers from the digits of a given array and then calculating their sum. The digits from the array can be used only once.
+Heap,Minimum sum of two numbers formed from digits of an array,https://practice.geeksforgeeks.org/problems/minimum-sum4058/1,"1. Problem Summary: The problem involves forming two minimum possible numbers from the digits of a given array and then calculating their sum. The digits from the array can be used only once.
 
 2. Approach: To solve this problem, first, sort the array of digits in ascending order to ensure the smallest numbers are formed. Then, distribute these digits alternatively into two different numbers to balance their magnitudes and keep them minimal. This can be done by appending even-indexed digits to one number and odd-indexed digits to another. Finally, convert these sequences of digits back to numbers and calculate their sum. This method ensures that both numbers remain as small as possible, utilizing the positional value of digits effectively.
 

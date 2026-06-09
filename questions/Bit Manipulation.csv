@@ -1,5 +1,5 @@
-TOPIC,PROBLEM LINK,SOLUTION
-Bit Manipulation,Count set bits in an integer,"1. Problem Summary: 
+TOPIC,PROBLEM NAME,URL,SOLUTION
+Bit Manipulation,Count set bits in an integer,https://practice.geeksforgeeks.org/problems/set-bits0143/1,"1. Problem Summary: 
    The problem requires counting the number of 1s (set bits) in the binary representation of a given integer. This is a fundamental task in bit manipulation, used often to determine the binary weight or Hamming weight of a number.
 
 2. Approach: 
@@ -22,7 +22,7 @@ Bit Manipulation,Count set bits in an integer,"1. Problem Summary:
 
 4. Time Complexity and Space Complexity: 
    The time complexity is O(k), where k is the number of set bits in `n`, and the space complexity is O(1)."
-Bit Manipulation,Find the two non-repeating elements in an array of repeating elements,"1. Problem Summary: In a given array where every element appears twice except for two elements which appear only once, the task is to identify these two unique elements.
+Bit Manipulation,Find the two non-repeating elements in an array of repeating elements,https://practice.geeksforgeeks.org/problems/finding-the-numbers0215/1,"1. Problem Summary: In a given array where every element appears twice except for two elements which appear only once, the task is to identify these two unique elements.
 
 2. Approach: The optimal way to solve this problem uses bit manipulation, specifically XOR. First, XOR all the elements of the array. The result will be the XOR of the two unique numbers since identical numbers cancel each other out. The next step is to find any bit in the XOR result that is set (i.e., 1), which can be used to distinguish between the two unique numbers. Divide the original array elements into two groups based on this bit — one group where this bit is set and another where it's not. XOR elements within each group separately to get the two unique numbers, as similar numbers will cancel out.
 
@@ -52,7 +52,7 @@ pair<int, int> findTwoUniqueNumbers(vector<int>& nums) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n), where n is the number of elements in the array, and the space complexity is O(1)."
-Bit Manipulation,Count number of bits to be flipped to convert A to B,"1. Problem Summary:  
+Bit Manipulation,Count number of bits to be flipped to convert A to B,https://practice.geeksforgeeks.org/problems/bit-difference/0,"1. Problem Summary:  
    The problem involves counting the number of bits that need to be flipped to convert integer A to integer B. This is commonly used to determine the difference in the binary representation of two numbers.
 
 2. Approach:  
@@ -76,7 +76,7 @@ int countFlippedBits(int A, int B) {
 
 4. Time Complexity and Space Complexity:  
    The time complexity is O(log C), where C is the maximum possible value of A or B, as it depends on the number of bits in the numbers. The space complexity is O(1), using only a constant amount of extra space."
-Bit Manipulation,Count total set bits in all numbers from 1 to n,"1. Problem Summary:
+Bit Manipulation,Count total set bits in all numbers from 1 to n,https://practice.geeksforgeeks.org/problems/count-total-set-bits/0,"1. Problem Summary:
    The problem requires counting the total number of set bits (1s) in the binary representation of all numbers from 1 to n.
 
 2. Approach:
@@ -108,7 +108,7 @@ int countTotalSetBits(int n) {
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(log n) since we iterate through the bit positions, and the space complexity is O(1), using only a few auxiliary variables."
-Bit Manipulation,Program to find whether a no is power of two,"1. Problem Summary: The problem is to determine whether a given integer is a power of two. This involves checking if the number can be expressed as 2 raised to an integer power.
+Bit Manipulation,Program to find whether a no is power of two,https://practice.geeksforgeeks.org/problems/power-of-2/0,"1. Problem Summary: The problem is to determine whether a given integer is a power of two. This involves checking if the number can be expressed as 2 raised to an integer power.
 
 2. Approach: A number that is a power of two has exactly one bit set in its binary representation. For instance, 2 (10 in binary), 4 (100 in binary), and so on, each have just one bit set. Utilizing bit manipulation, we can solve this by using the property that for a number `n` that is a power of two, `n & (n - 1)` will be 0. This happens because `n` will have its lowest set bit at some position, and `n - 1` will have all bits below that position set to 1 and the bit at that position set to 0, resulting in a bitwise AND of 0. Additionally, we need to check that `n` is not zero because zero is not a power of two but would also satisfy the `n & (n - 1) == 0` condition.
 
@@ -124,7 +124,7 @@ bool isPowerOfTwo(int n) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(1) as the solution involves a constant number of operations, and the space complexity is also O(1) as no additional storage is required."
-Bit Manipulation,Find position of the only set bit,"1. Problem Summary: The problem requires finding the position of the only set bit (bit with value 1) in a given integer. The integer is guaranteed to have exactly one bit set.
+Bit Manipulation,Find position of the only set bit,https://practice.geeksforgeeks.org/problems/find-position-of-set-bit3706/1,"1. Problem Summary: The problem requires finding the position of the only set bit (bit with value 1) in a given integer. The integer is guaranteed to have exactly one bit set.
 
 2. Approach: To solve this problem, leverage the properties of binary numbers where only one bit is set. Such numbers are always powers of 2. First, check if the number is a power of 2 using the expression `n & (n - 1)`, which should be 0 for powers of 2. If true, find the position of the set bit by repeatedly right-shifting the number until it becomes 1, keeping track of the number of shifts. This count will directly give the position of the set bit.
 
@@ -147,7 +147,7 @@ int findSetBitPosition(int n) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(log n) due to the bit-shifting operation, and the space complexity is O(1), as no additional space is required beyond the input and temporary variables."
-Bit Manipulation,Copy set bits in a range,"1. Problem Summary: The problem involves copying set bits (bits that are 1) from one integer to another, but only within a specified range of bit positions. Given two integers `x` and `y`, and two positions `l` and `r`, the task is to modify `x` by setting its bits that correspond to set bits in `y` within the range from `l` to `r`.
+Bit Manipulation,Copy set bits in a range,https://www.geeksforgeeks.org/copy-set-bits-in-a-range/,"1. Problem Summary: The problem involves copying set bits (bits that are 1) from one integer to another, but only within a specified range of bit positions. Given two integers `x` and `y`, and two positions `l` and `r`, the task is to modify `x` by setting its bits that correspond to set bits in `y` within the range from `l` to `r`.
 
 2. Approach: Start by generating a mask that has set bits only in the range `[l, r]`. This can be done by shifting `1` left `r` times, subtracting one, and then subtracting from it the result of shifting `1` left `l-1` times and subtracting one. This results in a mask where only the bits from `l` to `r` are set. Apply this mask to `y` using the bitwise AND operation to isolate the set bits in the specified range. Finally, use the bitwise OR operation to set these bits in `x`. This method efficiently modifies `x` without affecting bits outside the specified range.
 
@@ -167,7 +167,7 @@ int copySetBitsInRange(int x, int y, int l, int r) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(1) as the operations are constant time bit manipulations; space complexity is also O(1) since no additional space is used beyond the input and temporary variables."
-Bit Manipulation,"Divide two integers without using multiplication, division and mod operator","1. Problem Summary: The task is to divide two integers without using multiplication, division, or modulus operators. The challenge is to efficiently compute the quotient using only addition, subtraction, and bit manipulation techniques.
+Bit Manipulation,"Divide two integers without using multiplication, division and mod operator",https://www.geeksforgeeks.org/divide-two-integers-without-using-multiplication-division-mod-operator/,"1. Problem Summary: The task is to divide two integers without using multiplication, division, or modulus operators. The challenge is to efficiently compute the quotient using only addition, subtraction, and bit manipulation techniques.
 
 2. Approach: The optimal approach involves using bit shifts to perform the division. Conceptually, this mimics the process of long division. We start by determining how many times the divisor can be doubled (using left shifts which is equivalent to multiplying by powers of 2) before it surpasses the dividend. This is done for the largest chunk first and then for progressively smaller chunks. Each successful doubling corresponds to a power of two, which is recorded. The process is repeated by subtracting the identified multiples of the divisor from the dividend until the dividend is smaller than the divisor. Care must be taken with negative numbers to maintain correct signs, which can be handled by initially converting numbers to their absolute values and adjusting the sign of the result at the end.
 
@@ -196,7 +196,7 @@ int divide(int dividend, int divisor) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(log(dividend) - log(divisor)), and the space complexity is O(1). This reflects the iterative doubling process and constant space usage."
-Bit Manipulation,"Calculate square of a number without using *, / and pow()","1. Problem Summary:  
+Bit Manipulation,"Calculate square of a number without using *, / and pow()","https://www.geeksforgeeks.org/calculate-square-of-a-number-without-using-and-pow/#:~:text=Given%20an%20integer%20n%2C%20calculate,*%2C%20%2F%20and%20pow().&text=A%20Simple%20Solution%20is%20to%20repeatedly%20add%20n%20to%20result.","1. Problem Summary:  
    The task is to calculate the square of a given integer without using multiplication (*), division (/), or power functions (pow()). This involves finding a way to compute the result using only addition, subtraction, and bitwise operations.
 
 2. Approach:  
@@ -225,7 +225,7 @@ int square(int n) {
 
 4. Time Complexity and Space Complexity:  
    The time complexity is O(log n) where n is the number of bits in the integer, as we need to process each bit of the number. The space complexity is O(1) as we are using a fixed amount of space regardless of the input size."
-Bit Manipulation,Power Set,"1. Problem Summary: The ""Power Set"" problem requires generating all possible subsets of a given set of numbers. Each subset is a combination of some or all elements of the original set, including the empty set.
+Bit Manipulation,Power Set,https://practice.geeksforgeeks.org/problems/power-set4302/1,"1. Problem Summary: The ""Power Set"" problem requires generating all possible subsets of a given set of numbers. Each subset is a combination of some or all elements of the original set, including the empty set.
 
 2. Approach: The optimal way to solve the ""Power Set"" problem is by using bit manipulation. Each subset can be represented by a binary number, where each bit position indicates whether the corresponding element in the set is included (1) or excluded (0). For a set of size `n`, iterate from `0` to `2^n - 1` and for each number, determine which elements are included in the subset by checking each bit position. This method directly maps the binary representation of numbers to the indices of elements in the set, making it intuitive and easy to remember and implement during coding interviews.
 

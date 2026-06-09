@@ -1,5 +1,5 @@
-TOPIC,PROBLEM LINK,SOLUTION
-Greedy,Activity Selection Problem,"1. Problem Summary: The Activity Selection Problem involves selecting the maximum number of activities that don't overlap in time from a given set of activities. Each activity has a start time and an end time.
+TOPIC,PROBLEM NAME,URL,SOLUTION
+Greedy,Activity Selection Problem,https://practice.geeksforgeeks.org/problems/n-meetings-in-one-room/0,"1. Problem Summary: The Activity Selection Problem involves selecting the maximum number of activities that don't overlap in time from a given set of activities. Each activity has a start time and an end time.
 
 2. Approach: The optimal solution for the Activity Selection Problem is a greedy algorithm. First, sort all the activities based on their end times. Start by selecting the activity that ends first, and then select the next activity that starts after the last selected activity ends. Continue this process until no more activities can be selected. This method ensures that we maximize the number of non-overlapping activities by always choosing the activity that leaves the most room for subsequent activities.
 
@@ -31,7 +31,7 @@ vector<int> selectActivities(vector<pair<int,int>> activities) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n log n) due to the sorting step, and the space complexity is O(1) if we ignore the input and output storage."
-Greedy,Job SequencingProblem,"1. Problem Summary: The Job Sequencing Problem requires scheduling a set of jobs, each with a deadline and profit, such that the total profit from jobs completed before their deadlines is maximized. Each job takes a single unit of time to complete.
+Greedy,Job SequencingProblem,https://practice.geeksforgeeks.org/problems/job-sequencing-problem/0,"1. Problem Summary: The Job Sequencing Problem requires scheduling a set of jobs, each with a deadline and profit, such that the total profit from jobs completed before their deadlines is maximized. Each job takes a single unit of time to complete.
 
 2. Approach: The optimal approach to solve this problem is to use a greedy algorithm. First, sort all the jobs based on their profit in descending order. Initialize an array or a time slot tracker to mark which time slots are free (up to the maximum deadline encountered). For each job in the sorted list, find the latest slot before the job's deadline that is still free, and schedule the job there. This way, you maximize the profit for each slot filled and ensure jobs with higher profits are given preference.
 
@@ -74,7 +74,7 @@ vector<int> JobScheduling(Job arr[], int n) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n log n) due to the sorting operation, followed by O(n*m) for scheduling where m is the maximum deadline. The space complexity is O(m) for the slot array."
-Greedy,Huffman Coding,"1. Problem Summary: Huffman Coding is a compression technique used to reduce the size of data by encoding frequently occurring characters with shorter codes and less frequent characters with longer codes. It uses a binary tree where each leaf node represents a character, and the path from the root to the leaf represents the character's binary code.
+Greedy,Huffman Coding,https://practice.geeksforgeeks.org/problems/huffman-encoding/0,"1. Problem Summary: Huffman Coding is a compression technique used to reduce the size of data by encoding frequently occurring characters with shorter codes and less frequent characters with longer codes. It uses a binary tree where each leaf node represents a character, and the path from the root to the leaf represents the character's binary code.
 
 2. Approach: Huffman Coding utilizes a greedy algorithm to build an optimal binary tree, where the goal is to minimize the weighted path length. First, each character is treated as a node and is associated with its frequency. These nodes are inserted into a priority queue (min-heap). The algorithm repeatedly extracts the two nodes with the smallest frequencies, creates a new node with these two as children and a frequency equal to the sum of the two, and inserts this new node back into the priority queue. This process continues until only one node remains, which becomes the root of the Huffman tree. The paths from the root to each leaf determine the Huffman codes.
 
@@ -137,7 +137,7 @@ int main() {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity of Huffman Coding is O(n log n), where n is the number of unique characters, due to the operations on the priority queue. The space complexity is O(n), as it requires storing the tree nodes and the priority queue."
-Greedy,Water Connection Problem,"1. Problem Summary:
+Greedy,Water Connection Problem,https://practice.geeksforgeeks.org/problems/water-connection-problem/0,"1. Problem Summary:
    The Water Connection Problem involves finding the number of water distribution systems in a network of pipes and houses, each system characterized by its diameter. Each house can either receive water from one pipe, send water through another, or both.
 
 2. Approach:
@@ -183,7 +183,7 @@ Greedy,Water Connection Problem,"1. Problem Summary:
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(N + P) and the space complexity is O(N + P), where N is the number of houses and P is the number of pipes. This accounts for building the graph and traversing it."
-Greedy,Fractional Knapsack Problem,"1. Problem Summary:
+Greedy,Fractional Knapsack Problem,https://practice.geeksforgeeks.org/problems/fractional-knapsack/0,"1. Problem Summary:
    The Fractional Knapsack Problem involves selecting items with given weights and values to maximize the total value in a knapsack with a weight capacity limit. Unlike the 0/1 knapsack, items can be broken into smaller pieces.
 
 2. Approach:
@@ -226,7 +226,7 @@ double fractionalKnapsack(int W, Item arr[], int n) {
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(n log n) due to the sorting step, and the space complexity is O(1) beyond the input storage."
-Greedy,Greedy Algorithm to find Minimum number of Coins,"1. Problem Summary: The problem requires determining the minimum number of coins needed to make a specific amount of money using the highest denomination coins available first. The denominations have unlimited supply.
+Greedy,Greedy Algorithm to find Minimum number of Coins,https://practice.geeksforgeeks.org/problems/coin-piles/0,"1. Problem Summary: The problem requires determining the minimum number of coins needed to make a specific amount of money using the highest denomination coins available first. The denominations have unlimited supply.
 
 2. Approach: To solve this, a greedy algorithm is used which always selects the largest denomination that does not exceed the remaining amount of money. Start by sorting the coin denominations in descending order. Then, iteratively subtract the largest denomination from the amount until the amount is reduced to zero, counting the number of coins used. This method works efficiently given that the coin denominations are standard (like in most currencies where larger denominations are multiples or combinations of smaller ones).
 
@@ -248,7 +248,7 @@ int findMinimumCoins(int amount, vector<int>& coins) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n log n) due to sorting, where n is the number of coin denominations. The space complexity is O(1), assuming the sorting is done in-place."
-Greedy,Maximum trains for which stoppage can be provided,"1. Problem Summary: The problem requires scheduling the maximum number of trains that can stop at a station given their arrival and departure times, ensuring no two trains occupy the platform at the same time.
+Greedy,Maximum trains for which stoppage can be provided,https://www.geeksforgeeks.org/maximum-trains-stoppage-can-provided/,"1. Problem Summary: The problem requires scheduling the maximum number of trains that can stop at a station given their arrival and departure times, ensuring no two trains occupy the platform at the same time.
 
 2. Approach: The core idea is to use a greedy algorithm to select the maximum number of non-overlapping intervals (trains). First, sort the trains based on their departure times. Then, iteratively select trains that start after or when the last selected train departs. This method ensures that the maximum number of trains is selected without any overlap in their schedules. The sorting step helps in quickly finding the next available train that can be accommodated after the current train leaves.
 
@@ -280,7 +280,7 @@ int maxTrains(vector<Train>& trains) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n log n) due to the sorting step, and the space complexity is O(1) if we ignore the input storage."
-Greedy,Minimum Platforms Problem,"1. Problem Summary:
+Greedy,Minimum Platforms Problem,https://practice.geeksforgeeks.org/problems/minimum-platforms/0,"1. Problem Summary:
    The Minimum Platforms Problem involves finding the minimum number of railway platforms required at a station so that no train is kept waiting due to a lack of available platforms. Given the arrival and departure times of all trains, one must ensure that at no point do trains overlap on the same platform without available space.
 
 2. Approach:
@@ -315,7 +315,7 @@ Greedy,Minimum Platforms Problem,"1. Problem Summary:
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(N log N) due to sorting, where N is the number of trains. The space complexity is O(1) as no additional space proportional to input size is used beyond variables for iteration and counting."
-Greedy,Buy Maximum Stocks if i stocks can be bought on i-th day,"1. Problem Summary:
+Greedy,Buy Maximum Stocks if i stocks can be bought on i-th day,https://www.geeksforgeeks.org/buy-maximum-stocks-stocks-can-bought-th-day/,"1. Problem Summary:
    In this problem, you are given the price of stocks on different days and you can buy up to 'i' stocks on the 'i-th' day. The objective is to maximize the number of stocks bought with a given amount of money.
 
 2. Approach:
@@ -347,7 +347,7 @@ int buyMaximumProducts(int n, int k, vector<int> price) {
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(n log n) due to sorting, and the space complexity is O(n) for storing the day and price pairs."
-Greedy,Find the minimum and maximum amount to buy all N candies,"1. Problem Summary: The problem involves finding the minimum and maximum amount required to buy all N candies, where the price of each candy is given in an array. The buying strategy allows purchasing one candy at its listed price and getting another candy for free, if available.
+Greedy,Find the minimum and maximum amount to buy all N candies,https://practice.geeksforgeeks.org/problems/shop-in-candy-store/0,"1. Problem Summary: The problem involves finding the minimum and maximum amount required to buy all N candies, where the price of each candy is given in an array. The buying strategy allows purchasing one candy at its listed price and getting another candy for free, if available.
 
 2. Approach: To solve this problem, we should first sort the array of candy prices. For finding the minimum amount, start buying the candies from the cheapest, and for each candy bought, skip the next one (as it's free). For the maximum amount, start buying the candies from the most expensive and apply the same skipping strategy. This greedy approach ensures that for the minimum cost, cheaper candies are paired for offers, and for maximum cost, the expensive candies are utilized effectively before the cheaper ones.
 
@@ -378,7 +378,7 @@ int maxCost(vector<int> &prices) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(N log N) due to the sorting of the array, and the space complexity is O(1), assuming the sort is done in-place."
-Greedy,Minimize Cash Flow among a given set of friends who have borrowed money from each other,"1. Problem Summary: The problem is to minimize the number of transactions required to settle debts among a group of friends. Each friend can either owe money to or be owed money from other friends, represented in a matrix of debts.
+Greedy,Minimize Cash Flow among a given set of friends who have borrowed money from each other,https://www.geeksforgeeks.org/minimize-cash-flow-among-given-set-friends-borrowed-money/,"1. Problem Summary: The problem is to minimize the number of transactions required to settle debts among a group of friends. Each friend can either owe money to or be owed money from other friends, represented in a matrix of debts.
 
 2. Approach: The optimal approach is to use a greedy algorithm. First, calculate the net amount each friend needs to pay or receive by summing up all debts for each friend. Then, recursively settle debts by selecting the maximum creditor (who needs to receive the most) and the maximum debtor (who needs to pay the most), and make the transaction between them. Adjust their balances accordingly and repeat the process until all debts are settled. This method minimizes transactions by always settling the largest debts first, which efficiently reduces the number of outstanding balances.
 
@@ -424,7 +424,7 @@ int main() {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(N^2) where N is the number of friends, due to the matrix traversal and recursive debt settling. The space complexity is O(N) for storing net balances."
-Greedy,Minimum Cost to cut a board into squares,"1. Problem Summary:  
+Greedy,Minimum Cost to cut a board into squares,https://www.geeksforgeeks.org/minimum-cost-cut-board-squares/,"1. Problem Summary:  
 The problem is to find the minimum cost to cut a given board into squares. The board can be cut along certain horizontal and vertical lines, each having a specific cost associated with it. The goal is to minimize the total cutting cost.
 
 2. Approach:  
@@ -472,7 +472,7 @@ int minCostCut(vector<int>& horizontalCuts, vector<int>& verticalCuts) {
 
 4. Time Complexity and Space Complexity:  
 The time complexity is O(N log N + M log M), where N and M are the number of horizontal and vertical cuts respectively. The space complexity is O(1), not considering the input storage."
-Greedy,Check if it is possible to survive on Island,"1. Problem Summary: The problem is to determine if a person can survive on an island by buying food from a shop that opens only on specific days. Given the days the person needs to survive (`S`), the maximum food units the person can buy per day (`M`), and the food units required per day (`N`), the task is to check if the person can survive the given number of days.
+Greedy,Check if it is possible to survive on Island,https://www.geeksforgeeks.org/survival/,"1. Problem Summary: The problem is to determine if a person can survive on an island by buying food from a shop that opens only on specific days. Given the days the person needs to survive (`S`), the maximum food units the person can buy per day (`M`), and the food units required per day (`N`), the task is to check if the person can survive the given number of days.
 
 2. Approach: The solution involves calculating the minimum food units needed (`S * N`) and comparing it with the maximum food units that can be bought over the period. First, determine the number of days the shop is open by calculating the number of weeks (`S / 7`) and the remaining days (`S % 7`). Multiply the full weeks by the number of days the shop is open in a week (`6`, assuming the shop is closed one day a week) and add the minimum of remaining days and the days the shop is open in the last partial week. If the total food units that can be bought (`days shop is open * M`) is greater than or equal to the food units needed, survival is possible. Otherwise, it's not.
 
@@ -493,7 +493,7 @@ bool canSurvive(int S, int N, int M) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(1) and the space complexity is O(1), as the calculations involve only a few arithmetic operations and use no additional space."
-Greedy,Find maximum meetings in one room,"1. Problem Summary: The problem is to find the maximum number of non-overlapping meetings that can be held in one room. Each meeting has a start time and an end time.
+Greedy,Find maximum meetings in one room,https://www.geeksforgeeks.org/find-maximum-meetings-in-one-room/,"1. Problem Summary: The problem is to find the maximum number of non-overlapping meetings that can be held in one room. Each meeting has a start time and an end time.
 
 2. Approach: The optimal way to solve this problem is by using a greedy algorithm. First, sort all meetings based on their ending times. This sorting helps in selecting meetings that finish earliest, allowing room for possibly more meetings to follow. Initialize a counter and a variable to track the end time of the last selected meeting. Iterate through the sorted meetings and for each meeting, if its start time is greater than or equal to the end time of the last selected meeting, increment the counter and update the end time to this meeting's end time. This approach ensures that we choose the maximum number of non-overlapping meetings.
 
@@ -527,7 +527,7 @@ int maxMeetings(vector<Meeting>& meetings) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n log n) due to the sorting step, and the space complexity is O(1) if we ignore the input size."
-Greedy,Maximum product subset of an array,"1. Problem Summary: The task is to find the maximum product that can be obtained by multiplying a subset of numbers from a given array. The array can contain both positive and negative integers, as well as zeros.
+Greedy,Maximum product subset of an array,https://www.geeksforgeeks.org/maximum-product-subset-array/,"1. Problem Summary: The task is to find the maximum product that can be obtained by multiplying a subset of numbers from a given array. The array can contain both positive and negative integers, as well as zeros.
 
 2. Approach: The optimal solution leverages a greedy algorithm. First, count the number of zeros and negative numbers. If there's only one negative number and all other elements are zero, return zero, as multiplying the negative number would yield a negative product. If the number of negative numbers is odd, exclude the smallest absolute value negative number to maximize the product. Multiply all positive numbers and the remaining negative numbers. If all numbers are zero, the result is zero. This approach efficiently determines the product by systematically choosing numbers that maximize the result.
 
@@ -566,7 +566,7 @@ int maxProductSubset(vector<int>& arr) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n), where n is the number of elements in the array, as it involves a single traversal of the array. The space complexity is O(1), as only a constant amount of extra space is used."
-Greedy,Maximize array sum after K negations,"1. Problem Summary: Given an array of integers and an integer K, the task is to maximize the sum of the array after negating any of the elements up to K times. Each element can be negated multiple times.
+Greedy,Maximize array sum after K negations,https://practice.geeksforgeeks.org/problems/maximize-sum-after-k-negations/0,"1. Problem Summary: Given an array of integers and an integer K, the task is to maximize the sum of the array after negating any of the elements up to K times. Each element can be negated multiple times.
 
 2. Approach: The optimal solution uses a greedy approach to maximize the array sum. Start by sorting the array to prioritize the smallest elements (including negatives) for negation, as flipping the smallest values will have the most significant positive impact on the total sum. Iterate through the sorted array, and for each element, if it is negative and we still have negations left (K > 0), negate it. After iterating through the array, if there are any remaining negations (K > 0 and K is odd), negate the smallest absolute value in the array (which could be a previously negated negative or the smallest positive number) to ensure the maximum sum. This is because flipping the smallest absolute value minimally impacts the sum.
 
@@ -599,7 +599,7 @@ int maximizeSum(vector<int>& arr, int K) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n log n) due to sorting, and the space complexity is O(1) if we ignore the input storage."
-Greedy,Maximize the sum of arr[i]*i,"1. Problem Summary:  
+Greedy,Maximize the sum of arr[i]*i,https://practice.geeksforgeeks.org/problems/maximize-arrii-of-an-array/0,"1. Problem Summary:  
 The problem is to maximize the sum of the product of each element of an array with its index. Given an array, the task is to reorder the array elements in such a way that when multiplied by their respective indices, the sum of these products is maximized.
 
 2. Approach:  
@@ -622,7 +622,7 @@ int maximizeSum(vector<int>& arr) {
 
 4. Time Complexity and Space Complexity:  
 The time complexity is O(n log n) due to the sorting step, and the space complexity is O(1) if we ignore the input space."
-Greedy,Maximum sum of absolute difference of an array,"1. Problem Summary: The task is to reorder elements of an array to maximize the sum of absolute differences of consecutive elements, including the difference between the first and last elements in the reordered array.
+Greedy,Maximum sum of absolute difference of an array,https://www.geeksforgeeks.org/maximum-sum-absolute-difference-array/,"1. Problem Summary: The task is to reorder elements of an array to maximize the sum of absolute differences of consecutive elements, including the difference between the first and last elements in the reordered array.
 
 2. Approach: The optimal way to achieve the maximum sum of absolute differences is to sort the array and then rearrange the sorted elements in a specific pattern. Start by placing the smallest and largest elements as the first two elements of the result array, then continue placing the next smallest and next largest from the remaining elements alternately. This creates pairs of elements with the maximum possible difference, which is the key to maximizing the sum. This pattern leverages the property that large differences between adjacent numbers yield a higher sum, especially when the sequence wraps around from the last to the first element.
 
@@ -652,7 +652,7 @@ int maxSumOfAbsDifferences(vector<int>& arr) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n log n) due to sorting, and the space complexity is O(n) for storing the reordered array."
-Greedy,Maximize sum of consecutive differences in a circular array,"1. Problem Summary:  
+Greedy,Maximize sum of consecutive differences in a circular array,https://practice.geeksforgeeks.org/problems/swap-and-maximize/0,"1. Problem Summary:  
    The problem entails finding the maximum sum of consecutive differences in a circular array. In a circular array, the element after the last element is considered to be connected back to the first element.
 
 2. Approach:  
@@ -690,7 +690,7 @@ Greedy,Maximize sum of consecutive differences in a circular array,"1. Problem S
 
 4. Time Complexity and Space Complexity:  
    The time complexity is O(n log n) due to sorting, and the space complexity is O(n) for storing the temporary array."
-Greedy,Minimum sum of absolute difference of pairs of two arrays,"1. Problem Summary: The problem involves finding the minimum sum of absolute differences between pairs from two arrays of equal size. Each element from one array must be paired exactly once with an element from the other array to calculate the absolute difference.
+Greedy,Minimum sum of absolute difference of pairs of two arrays,"https://www.geeksforgeeks.org/minimum-sum-absolute-difference-pairs-two-arrays/#:~:text=It%20consists%20of%20two%20steps,result%20to%20the%20sum%20S.","1. Problem Summary: The problem involves finding the minimum sum of absolute differences between pairs from two arrays of equal size. Each element from one array must be paired exactly once with an element from the other array to calculate the absolute difference.
 
 2. Approach: The optimal approach to solve this problem is to sort both arrays and then pair corresponding elements from each array. By sorting both arrays, we ensure that each element from one array is paired with the closest possible value from the other array, minimizing the absolute difference. This method leverages the idea that pairing elements in increasing order yields the smallest possible differences, thereby minimizing the overall sum of these differences. This intuitive pairing approach is easy to remember as it simply involves sorting both arrays and summing up the differences of corresponding elements.
 
@@ -711,7 +711,7 @@ int minSumOfAbsoluteDifferences(vector<int>& A, vector<int>& B) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n log n) due to the sorting of the arrays, where n is the size of the arrays. The space complexity is O(1) if we ignore the space used by the sorting algorithm or O(n) if extra space is used depending on the sorting algorithm implementation."
-Greedy,Program for Shortest Job First (or SJF) CPU Scheduling,"1. Problem Summary: Shortest Job First (SJF) is a CPU scheduling algorithm that selects the process with the smallest execution time to execute next. This approach minimizes the average waiting time for all processes in the queue.
+Greedy,Program for Shortest Job First (or SJF) CPU Scheduling,https://www.geeksforgeeks.org/program-for-shortest-job-first-or-sjf-cpu-scheduling-set-1-non-preemptive/,"1. Problem Summary: Shortest Job First (SJF) is a CPU scheduling algorithm that selects the process with the smallest execution time to execute next. This approach minimizes the average waiting time for all processes in the queue.
 
 2. Approach: The algorithm starts by sorting all processes based on their burst times. It then executes each process sequentially from the shortest to the longest burst time. To implement SJF, you can use a simple sorting mechanism to organize the processes before execution. This visual arrangement helps in intuitively understanding that shorter tasks are prioritized, thus reducing the total waiting time. As processes complete their execution, they are removed from the queue, and the cycle continues until all processes are executed.
 
@@ -751,7 +751,7 @@ void shortestJobFirst(vector<Process>& processes) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n log n) due to the sorting step, and the space complexity is O(1) beyond the input storage."
-Greedy,Program for Least Recently Used (LRU) Page Replacement algorithm,"1. Problem Summary: The Least Recently Used (LRU) Page Replacement algorithm is used to manage a fixed-size memory and replace the least recently used pages when new pages are loaded and the memory is full. This ensures efficient use of limited memory resources in environments like operating systems.
+Greedy,Program for Least Recently Used (LRU) Page Replacement algorithm,https://practice.geeksforgeeks.org/problems/page-faults-in-lru/0,"1. Problem Summary: The Least Recently Used (LRU) Page Replacement algorithm is used to manage a fixed-size memory and replace the least recently used pages when new pages are loaded and the memory is full. This ensures efficient use of limited memory resources in environments like operating systems.
 
 2. Approach: The LRU algorithm can be efficiently implemented using a combination of a hash map and a doubly linked list. The hash map stores keys and pointers to the nodes of the doubly linked list which contains the actual pages. When a page is accessed, it is moved to the front of the list if it exists, or added to the front if it does not. If the cache is full, the page at the end of the list (the least recently used one) is removed. This approach ensures that the most recently used pages are always at the front and the least recently used are at the end.
 
@@ -791,7 +791,7 @@ public:
 ```
 
 4. Time Complexity and Space Complexity: The time complexity for both get and put operations is O(1). The space complexity is O(capacity) due to the storage of the pages and the pointers in the list and hash map."
-Greedy,Smallest subset with sum greater than all other elements,"1. Problem Summary: 
+Greedy,Smallest subset with sum greater than all other elements,https://www.geeksforgeeks.org/smallest-subset-sum-greater-elements/,"1. Problem Summary: 
    The task is to find the smallest subset of a given array such that the sum of the elements in this subset is greater than the sum of all other elements not included in the subset.
 
 2. Approach: 
@@ -819,7 +819,7 @@ int smallestSubset(vector<int>& arr) {
 
 4. Time Complexity and Space Complexity: 
    The time complexity is O(n log n) due to sorting, and the space complexity is O(1), not counting the space used by the input array."
-Greedy,Chocolate Distribution Problem,"1. Problem Summary: The Chocolate Distribution Problem involves finding the minimum difference between the maximum and minimum chocolates given to any student when distributing a list of packets of chocolates among students. Each packet can only be given to one student.
+Greedy,Chocolate Distribution Problem,https://practice.geeksforgeeks.org/problems/chocolate-distribution-problem/0,"1. Problem Summary: The Chocolate Distribution Problem involves finding the minimum difference between the maximum and minimum chocolates given to any student when distributing a list of packets of chocolates among students. Each packet can only be given to one student.
 
 2. Approach: The problem is efficiently solved using a greedy algorithm. First, sort the array of chocolate packets. Once sorted, iterate through the array and find the minimum difference between the maximum and minimum chocolates in every possible group of 'm' students where 'm' is the number of students. This is done by checking the difference between the first and last chocolate packet in every contiguous subarray of size 'm'. The smallest difference found in these subarrays is the answer. Sorting ensures that we always consider the smallest possible range for each group of students.
 
@@ -845,7 +845,7 @@ int findMinDiff(vector<int> arr, int n, int m) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n log n) due to the sorting step, and the space complexity is O(1) if we ignore the space required for sorting."
-Greedy,DEFKIN -Defense of a Kingdom,"1. Problem Summary: In ""DEFKIN - Defense of a Kingdom"", the task is to find the maximum unprotected area on a grid after positioning towers at given coordinates. The grid dimensions and tower positions are provided as input.
+Greedy,DEFKIN -Defense of a Kingdom,https://www.spoj.com/problems/DEFKIN/,"1. Problem Summary: In ""DEFKIN - Defense of a Kingdom"", the task is to find the maximum unprotected area on a grid after positioning towers at given coordinates. The grid dimensions and tower positions are provided as input.
 
 2. Approach: The problem can be solved using a greedy approach by focusing on the largest gaps between consecutive towers and between the towers and the grid boundaries. First, sort the tower coordinates separately for x and y. Calculate the maximum gaps between consecutive x-coordinates and y-coordinates of the towers, and also consider the gaps from the grid boundaries to the nearest tower in both directions. The maximum unprotected area will be the product of the largest gap found in the x-direction and the largest gap found in the y-direction.
 
@@ -887,7 +887,7 @@ int main() {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n log n) due to sorting, and the space complexity is O(n) for storing tower coordinates."
-Greedy,DIEHARD -DIE HARD,"1. Problem Summary: In the ""DIE HARD"" problem, the goal is to maximize the survival time of the protagonist, Amr, in a hostile environment by choosing between different activities that affect his health and armor in various ways. Each activity can be performed multiple times, but each affects Amr's health and armor differently.
+Greedy,DIEHARD -DIE HARD,https://www.spoj.com/problems/DIEHARD/,"1. Problem Summary: In the ""DIE HARD"" problem, the goal is to maximize the survival time of the protagonist, Amr, in a hostile environment by choosing between different activities that affect his health and armor in various ways. Each activity can be performed multiple times, but each affects Amr's health and armor differently.
 
 2. Approach: The problem can be approached using a greedy algorithm combined with dynamic programming. We simulate the game by repeatedly choosing the activity that provides the best immediate benefit in terms of extending Amr's survival time. We can use a memoization technique to store the results of subproblems, which are defined by the current state of health and armor. We recursively choose the best option (Air, Water, or Fire) unless both health and armor drop below or equal to zero. The recursion terminates when no valid moves (activities) can be made, and we use memoization to avoid recalculating results for the same health and armor states.
 
@@ -922,7 +922,7 @@ int dieHard(int initial_health, int initial_armor) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n * m * k) where n is the maximum health, m is the maximum armor, and k is the number of activities (3 in this case). The space complexity is O(n * m) due to the memoization array."
-Greedy,GERGOVIA -Wine trading in Gergovia,"1. Problem Summary:
+Greedy,GERGOVIA -Wine trading in Gergovia,https://www.spoj.com/problems/GERGOVIA/,"1. Problem Summary:
    In the ""GERGOVIA - Wine trading in Gergovia"" problem, individuals either need or have an excess of wine bottles. The goal is to balance the wine demand and supply across all houses while minimizing the total amount of wine moved between houses. Each house can either demand or supply wine, and the solution must find the minimum total distance wine needs to be moved.
 
 2. Approach:
@@ -957,7 +957,7 @@ Greedy,GERGOVIA -Wine trading in Gergovia,"1. Problem Summary:
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(n) as it processes each house once, and the space complexity is O(1), not counting the input storage, as it only uses a few additional variables."
-Greedy,Picking Up Chicks,"1. Problem Summary:  
+Greedy,Picking Up Chicks,https://www.spoj.com/problems/GCJ101BB/,"1. Problem Summary:  
 In the ""Picking Up Chicks"" problem, the goal is to determine the minimum number of swaps needed to ensure that at least `K` chicks out of `N` reach the barn located at position `B` within a given time `T`. Each chick starts at a certain position and has a maximum speed.
 
 2. Approach:  
@@ -995,7 +995,7 @@ int minimumSwaps(vector<int>& positions, vector<int>& speeds, int N, int K, int 
 
 4. Time Complexity and Space Complexity:  
 The time complexity is O(N log N) due to sorting, and the space complexity is O(N) for storing chick data."
-Greedy,CHOCOLA –Chocolate,"1. Problem Summary:
+Greedy,CHOCOLA –Chocolate,https://www.spoj.com/problems/CHOCOLA/,"1. Problem Summary:
    The ""CHOCOLA –Chocolate"" problem involves dividing a chocolate bar into 1x1 pieces in a way that minimizes the total cost of cuts. The bar can be cut horizontally or vertically, and each cut has a specific cost.
 
 2. Approach:
@@ -1042,7 +1042,7 @@ int minCost(int M, int N, vector<int> &X, vector<int> &Y) {
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(M log M + N log N) due to sorting, and the space complexity is O(1) as only a few additional variables are used."
-Greedy,ARRANGE -Arranging Amplifiers,"1. Problem Summary: 
+Greedy,ARRANGE -Arranging Amplifiers,https://www.spoj.com/problems/ARRANGE/,"1. Problem Summary: 
    The ""ARRANGE - Arranging Amplifiers"" problem requires arranging a given list of integers (representing amplifiers' strengths) in a sequence to maximize the resultant multiplication value when each number is raised to the power of the next one in sequence.
 
 2. Approach: 
@@ -1092,7 +1092,7 @@ vector<int> arrangeAmplifiers(vector<int> amps) {
 
 4. Time Complexity and Space Complexity: 
    The time complexity is O(n log n) due to the sorting operation, and the space complexity is O(n) for storing the separated elements and the result."
-Greedy,K Centers Problem,"1. Problem Summary:  
+Greedy,K Centers Problem,https://www.geeksforgeeks.org/k-centers-problem-set-1-greedy-approximate-algorithm/,"1. Problem Summary:  
    The K Centers Problem involves choosing k locations (centers) from a set of n locations in such a way that the maximum distance from any location to its nearest center is minimized. It's a well-known NP-hard problem in combinatorial optimization and facility location.
 
 2. Approach:  
@@ -1136,7 +1136,7 @@ vector<int> kCenters(vector<vector<int>>& distances, int k) {
 
 4. Time Complexity and Space Complexity:  
    The time complexity is O(n^2 * k) due to the nested loops over n points for k centers, and the space complexity is O(n) for storing centers and the chosen status of each point."
-Greedy,Minimum Cost of ropes,"1. Problem Summary: The ""Minimum Cost of ropes"" problem involves connecting multiple ropes into one rope. The cost to connect two ropes is equal to the sum of their lengths. The goal is to connect all the ropes with the minimum total cost.
+Greedy,Minimum Cost of ropes,https://practice.geeksforgeeks.org/problems/minimum-cost-of-ropes/0,"1. Problem Summary: The ""Minimum Cost of ropes"" problem involves connecting multiple ropes into one rope. The cost to connect two ropes is equal to the sum of their lengths. The goal is to connect all the ropes with the minimum total cost.
 
 2. Approach: The optimal way to solve this problem is by using a greedy algorithm with a min-heap (priority queue). Start by pushing all rope lengths into the min-heap. Then, repeatedly extract the two smallest ropes, connect them, and push the resulting rope's length back into the heap. The cost of each connection (sum of the two smallest ropes) is added to the total cost. Continue this process until only one rope remains in the heap. This method ensures that the smallest ropes are combined first, minimizing the overall cost.
 
@@ -1165,7 +1165,7 @@ int minCost(vector<int>& ropes) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n log n), where n is the number of ropes, due to the heap operations. The space complexity is O(n) for storing the ropes in the heap."
-Greedy,Find smallest number with given number of digits and sum of digits,"1. Problem Summary:  
+Greedy,Find smallest number with given number of digits and sum of digits,https://practice.geeksforgeeks.org/problems/smallest-number5829/1,"1. Problem Summary:  
 The task is to find the smallest number that can be formed with a given number of digits (d) and a specific sum of its digits (s). The number should not have leading zeros unless it is zero itself.
 
 2. Approach:  
@@ -1203,7 +1203,7 @@ string findSmallestNumber(int d, int s) {
 
 4. Time Complexity and Space Complexity:  
 The time complexity is O(d), where d is the number of digits, as we iterate through each digit at most once. The space complexity is O(d) due to storing the result string."
-Greedy,Rearrange characters in a string such that no two adjacent are same,"1. Problem Summary:
+Greedy,Rearrange characters in a string such that no two adjacent are same,https://practice.geeksforgeeks.org/problems/rearrange-characters/0,"1. Problem Summary:
    The problem requires rearranging the characters in a given string so that no two adjacent characters are the same. If it's possible, the rearranged string should be returned; otherwise, indicate that it's not possible.
 
 2. Approach:
@@ -1245,7 +1245,7 @@ string rearrangeString(string s) {
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(n log k) where n is the length of the string and k is the number of distinct characters (at most 26), and the space complexity is O(k) for storing the characters in the heap and count array."
-Greedy,Find maximum sum possible equal sum of three stacks,"1. Problem Summary: The problem involves finding the maximum sum that can be obtained by popping elements from the tops of three stacks such that the sum of the heights (values) of the three stacks is equal. 
+Greedy,Find maximum sum possible equal sum of three stacks,https://www.geeksforgeeks.org/find-maximum-sum-possible-equal-sum-three-stacks/,"1. Problem Summary: The problem involves finding the maximum sum that can be obtained by popping elements from the tops of three stacks such that the sum of the heights (values) of the three stacks is equal. 
 
 2. Approach: The optimal solution uses a greedy approach by iteratively reducing the stack with the highest current sum until all three stacks have the same sum. Start by calculating the initial sums of all three stacks. Then, in a loop, identify the stack with the highest sum and pop the top element from it, updating the sum of that stack accordingly. Repeat this process until all three stack sums are equal or any stack becomes empty. This approach ensures that we are always working towards equalizing the sums by reducing the largest discrepancy.
 

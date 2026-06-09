@@ -10,6 +10,7 @@ import {
   BookmarkCheck,
   Clock,
   ArrowLeft,
+  ExternalLink,
 } from 'lucide-react';
 import type { Problem, MasteryRecord, RecallRating, StudyMode, ViewName } from '../types';
 import { getProblem, getMastery, putMastery, putReview, getStats, putStats, getDueProblems, getWeakProblems, getProblemsByTopic, getAllProblems } from '../lib/db';
@@ -321,7 +322,20 @@ export default function ReviewPlayer({
       {/* Problem Card */}
       <div className="glass-card review-card slide-in" key={problem.id}>
         <div className="review-card-topic">{problem.topic}</div>
-        <h2 className="review-card-title">{problem.title}</h2>
+        <h2 className="review-card-title" style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-sm)' }}>
+          {problem.title}
+          {problem.link && (
+            <a
+              href={problem.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: 'var(--accent-primary)', display: 'inline-flex' }}
+              title="Open problem link"
+            >
+              <ExternalLink size={20} />
+            </a>
+          )}
+        </h2>
 
         <div className="review-card-meta">
           {mastery && (

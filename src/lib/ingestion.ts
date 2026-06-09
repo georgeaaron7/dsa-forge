@@ -16,8 +16,8 @@ const CSV_FILES = [
   'Heap.csv',
   'LL.csv',
   'Matrix.csv',
-  'Search-Sort.csv',
-  'Stacks-Queues.csv',
+  'Search_Sort.csv',
+  'Stacks_Queues.csv',
   'String.csv',
   'Trie.csv',
 ];
@@ -35,8 +35,8 @@ function toTopicId(filename: string): string {
 
 function toTopicName(filename: string): string {
   const base = filename.replace('.csv', '');
-  if (base === 'Search-Sort') return 'Search & Sort';
-  if (base === 'Stacks-Queues') return 'Stacks & Queues';
+  if (base === 'Search_Sort') return 'Search & Sort';
+  if (base === 'Stacks_Queues') return 'Stacks & Queues';
   return base;
 }
 
@@ -110,7 +110,9 @@ async function fetchCSV(filename: string): Promise<string> {
 
 interface CSVRow {
   TOPIC: string;
-  'PROBLEM LINK': string;
+  'PROBLEM LINK'?: string;
+  'PROBLEM NAME'?: string;
+  URL?: string;
   SOLUTION: string;
 }
 
@@ -153,7 +155,7 @@ export async function ingestAllCSVs(): Promise<{ problems: number; topics: numbe
       allTopics.push(topic);
 
       rows.forEach((row, idx) => {
-        const title = (row['PROBLEM LINK'] || '').trim();
+        const title = (row['PROBLEM NAME'] || row['PROBLEM LINK'] || '').trim();
         if (!title) return;
 
         const parsed = parseSolution(row.SOLUTION || '');
@@ -163,7 +165,7 @@ export async function ingestAllCSVs(): Promise<{ problems: number; topics: numbe
           topicId,
           topic: topicName,
           title,
-          link: '', // CSV doesn't have separate link column, title is the problem reference
+          link: (row.URL || '').trim(),
           solution: (row.SOLUTION || '').trim(),
           summary: parsed.summary,
           approach: parsed.approach,

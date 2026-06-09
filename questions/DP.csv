@@ -1,5 +1,5 @@
-TOPIC,PROBLEM LINK,SOLUTION
-Dynamic Programming,Coin ChangeProblem,"1. Problem Summary:
+TOPIC,PROBLEM NAME,URL,SOLUTION
+Dynamic Programming,Coin ChangeProblem,https://practice.geeksforgeeks.org/problems/coin-change2448/1,"1. Problem Summary:
    The Coin Change Problem involves finding the number of ways to make a certain amount (target) using a given set of denominations of coins. The coins can be used unlimited times.
 
 2. Approach:
@@ -25,7 +25,7 @@ int countWaysToMakeChange(vector<int>& coins, int amount) {
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(n*m) and the space complexity is O(m), where n is the number of coins and m is the target amount."
-Dynamic Programming,Knapsack Problem,"1. Problem Summary: The Knapsack Problem involves selecting a subset of items, each with a weight and a value, to maximize the total value without exceeding a given weight capacity. It's a fundamental problem in combinatorial optimization.
+Dynamic Programming,Knapsack Problem,https://practice.geeksforgeeks.org/problems/0-1-knapsack-problem/0,"1. Problem Summary: The Knapsack Problem involves selecting a subset of items, each with a weight and a value, to maximize the total value without exceeding a given weight capacity. It's a fundamental problem in combinatorial optimization.
 
 2. Approach: The optimal algorithm for the 0/1 Knapsack Problem uses dynamic programming. We create a 2D array `dp` where `dp[i][w]` represents the maximum value achievable with the first `i` items and a maximum weight limit of `w`. We iterate through each item and for each weight capacity from 0 to `W` (total capacity), we decide whether to include the current item or not. If including the item yields a higher value (considering the weight it adds doesn't exceed the current capacity), we update our `dp` table accordingly. This approach builds up the solution by considering smaller subproblems (smaller sets of items and capacities) and using their solutions to construct the solution for larger problems.
 
@@ -51,7 +51,7 @@ int knapsack(vector<int>& values, vector<int>& weights, int W) {
 ```
 
 4. Time Complexity and Space Complexity: The time and space complexity of the solution is O(nW), where `n` is the number of items and `W` is the maximum weight capacity."
-Dynamic Programming,Binomial CoefficientProblem,"1. Problem Summary: The Binomial Coefficient Problem involves calculating the number of ways to choose \( k \) items from \( n \) items without regard to the order, denoted as \( C(n, k) \). The formula for this is \( C(n, k) = \frac{n!}{k!(n-k)!} \).
+Dynamic Programming,Binomial CoefficientProblem,https://practice.geeksforgeeks.org/problems/ncr1019/1,"1. Problem Summary: The Binomial Coefficient Problem involves calculating the number of ways to choose \( k \) items from \( n \) items without regard to the order, denoted as \( C(n, k) \). The formula for this is \( C(n, k) = \frac{n!}{k!(n-k)!} \).
 
 2. Approach: A direct computation using factorials can be inefficient and prone to overflow for large \( n \). Instead, we use dynamic programming to build a table \( C \) where \( C[i][j] \) represents \( C(i, j) \). This approach exploits the recursive property \( C(n, k) = C(n-1, k-1) + C(n-1, k) \), with base cases \( C(i, 0) = 1 \) and \( C(i, i) = 1 \). We iteratively fill up the table using these relations, which avoids redundant calculations and manages large numbers efficiently by computing only required values.
 
@@ -76,7 +76,7 @@ int binomialCoeff(int n, int k) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is \( O(n \times k) \) and the space complexity is also \( O(n \times k) \), where \( n \) is the total number of items and \( k \) is the number of items to choose."
-Dynamic Programming,Permutation CoefficientProblem,"1. Problem Summary: The Permutation Coefficient Problem involves calculating the number of ways to arrange `k` objects out of `n` available objects. This is mathematically represented as `P(n, k) = n! / (n-k)!`.
+Dynamic Programming,Permutation CoefficientProblem,https://www.geeksforgeeks.org/permutation-coefficient/,"1. Problem Summary: The Permutation Coefficient Problem involves calculating the number of ways to arrange `k` objects out of `n` available objects. This is mathematically represented as `P(n, k) = n! / (n-k)!`.
 
 2. Approach: To solve this problem using dynamic programming, we can create a two-dimensional table `dp` where `dp[i][j]` represents `P(i, j)`. Start by initializing the values where `j == 0` (since `P(i, 0) = 1` for any `i`) and `i == j` (since `P(i, i) = i!`). For other values, use the relation `P(n, k) = P(n-1, k) + k * P(n-1, k-1)` to fill up the table, which leverages previously computed values to find the current permutation value. This approach avoids recalculating factorials repeatedly and utilizes prior computations effectively.
 
@@ -101,7 +101,7 @@ int permutationCoeff(int n, int k) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n*k) and the space complexity is O(n*k) as well, due to the storage of a 2D array."
-Dynamic Programming,Program for nth Catalan Number,"1. Problem Summary:  
+Dynamic Programming,Program for nth Catalan Number,https://www.geeksforgeeks.org/program-nth-catalan-number/,"1. Problem Summary:  
    The Catalan numbers form a sequence of natural numbers with significant applications in combinatorial mathematics. The nth Catalan number is used in various counting problems, such as counting the number of expressions containing n pairs of correctly matched parentheses.
 
 2. Approach:  
@@ -127,7 +127,7 @@ int catalanNumber(int n) {
 
 4. Time Complexity and Space Complexity:  
    The time complexity is O(n^2) due to the nested loops for calculating each Catalan number, and the space complexity is O(n) to store the Catalan numbers up to nth."
-Dynamic Programming,Matrix Chain Multiplication ,"1. Problem Summary: Matrix Chain Multiplication involves finding the most efficient way to multiply a given sequence of matrices. The goal is to determine the order of multiplications that minimizes the total number of scalar multiplications.
+Dynamic Programming,Matrix Chain Multiplication ,https://www.geeksforgeeks.org/matrix-chain-multiplication-dp-8/,"1. Problem Summary: Matrix Chain Multiplication involves finding the most efficient way to multiply a given sequence of matrices. The goal is to determine the order of multiplications that minimizes the total number of scalar multiplications.
 
 2. Approach: The problem is approached using dynamic programming by breaking it down into smaller subproblems. Each subproblem calculates the minimum cost of multiplying a subchain of matrices. We use a 2D table `dp` where `dp[i][j]` represents the minimum number of multiplications needed to multiply matrices from index `i` to `j`. The main idea is to try every possible place to split the product into two parts, recursively solving for each part, and then combine their results with the cost of multiplying the resulting two matrices. This approach ensures that all possible matrix splits are considered to find the optimal solution.
 
@@ -154,7 +154,7 @@ int MatrixChainOrder(int p[], int n) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n^3) and space complexity is O(n^2), where n is the number of matrices."
-Dynamic Programming,Edit Distance,"1. Problem Summary: 
+Dynamic Programming,Edit Distance,https://practice.geeksforgeeks.org/problems/edit-distance3702/1,"1. Problem Summary: 
 The Edit Distance problem, also known as the Levenshtein distance, measures the minimum number of operations required to transform one string into another. The operations allowed are insertion, deletion, or substitution of a single character.
 
 2. Approach: 
@@ -185,7 +185,7 @@ int editDistance(string s, string t) {
 
 4. Time Complexity and Space Complexity: 
 The time complexity is O(m*n) and the space complexity is also O(m*n), where m and n are the lengths of the two input strings."
-Dynamic Programming,Subset Sum Problem,"1. Problem Summary: The Subset Sum Problem is a decision problem where given a set of non-negative integers and a target sum, one must determine whether there is a subset of the numbers in the set that adds up to exactly the target sum.
+Dynamic Programming,Subset Sum Problem,https://practice.geeksforgeeks.org/problems/subset-sum-problem2014/1,"1. Problem Summary: The Subset Sum Problem is a decision problem where given a set of non-negative integers and a target sum, one must determine whether there is a subset of the numbers in the set that adds up to exactly the target sum.
 
 2. Approach: The optimal solution utilizes dynamic programming. We construct a boolean DP table where `dp[i][j]` represents whether there is a subset with sum `j` using the first `i` items. Initialize `dp[0][0]` to `true` (empty subset sums to zero) and `dp[0][j]` for all `j>0` to `false`. For each item and each target sum, update the table based on whether excluding or including the current item allows reaching the desired sum. The solution to the problem is found at `dp[n][sum]`, where `n` is the number of items.
 
@@ -212,7 +212,7 @@ bool subsetSum(vector<int>& nums, int sum) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n*sum) and the space complexity is O(n*sum), where `n` is the number of elements and `sum` is the target sum."
-Dynamic Programming,Friends Pairing Problem,"1. Problem Summary:
+Dynamic Programming,Friends Pairing Problem,https://practice.geeksforgeeks.org/problems/friends-pairing-problem5425/1,"1. Problem Summary:
    The Friends Pairing Problem involves finding the number of ways to pair up friends uniquely or leave them single, given `n` friends. Each friend can either pair up with another friend or remain single.
 
 2. Approach:
@@ -237,7 +237,7 @@ Dynamic Programming,Friends Pairing Problem,"1. Problem Summary:
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(n) due to the single loop up to `n`, and the space complexity is also O(n) due to the storage needed for the dynamic programming array `dp`."
-Dynamic Programming,Gold Mine Problem,"1. Problem Summary: In the Gold Mine Problem, given a grid of gold mines where each cell contains a certain amount of gold, the goal is to collect the maximum amount of gold starting from any column in the first row and moving to one of the three possible cells in the next row (right-up, right, or right-down) until the miner reaches the last row.
+Dynamic Programming,Gold Mine Problem,https://www.geeksforgeeks.org/gold-mine-problem/,"1. Problem Summary: In the Gold Mine Problem, given a grid of gold mines where each cell contains a certain amount of gold, the goal is to collect the maximum amount of gold starting from any column in the first row and moving to one of the three possible cells in the next row (right-up, right, or right-down) until the miner reaches the last row.
 
 2. Approach: The problem can be efficiently solved using dynamic programming. Create a 2D array `dp` where `dp[i][j]` stores the maximum gold that can be collected from the first row to cell `(i, j)`. Start by copying the first row of the gold grid into the first row of the `dp` array. For each subsequent row, calculate `dp[i][j]` by considering the maximum gold collected from the three possible preceding cells (from the row above) and adding the current cell's gold. After filling up the `dp` table, the answer will be the maximum value in the last row of the `dp` array. This approach ensures that all possible paths are considered without redundant calculations, making it optimal for this problem.
 
@@ -276,7 +276,7 @@ int getMaxGold(vector<vector<int>>& gold) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(m*n) and the space complexity is O(m*n), where m is the number of rows and n is the number of columns in the grid."
-Dynamic Programming,Assembly Line SchedulingProblem,"1. Problem Summary: The Assembly Line Scheduling problem involves finding the minimum time required to assemble a product using two parallel assembly lines, where each line has its own set of stations and transfer times between the lines at certain stations.
+Dynamic Programming,Assembly Line SchedulingProblem,https://www.geeksforgeeks.org/assembly-line-scheduling-dp-34/,"1. Problem Summary: The Assembly Line Scheduling problem involves finding the minimum time required to assemble a product using two parallel assembly lines, where each line has its own set of stations and transfer times between the lines at certain stations.
 
 2. Approach: Dynamic programming is utilized to solve this problem by breaking it down into smaller subproblems. Each subproblem represents the minimum time to reach a particular station on a particular line. We start by initializing the time required to enter the first station of both lines. For each subsequent station, we compute the minimum cost considering whether we continue on the same line or switch from the other line, adding the respective processing and transfer times. This approach builds up the minimum time required to reach the last station on each line, and the minimum of these gives the overall minimum time.
 
@@ -305,7 +305,7 @@ int assemblyLineScheduling(vector<vector<int>>& a, vector<vector<int>>& t, vecto
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n), and the space complexity is O(n), where n is the number of stations."
-Dynamic Programming,Painting the Fenceproblem,"1. Problem Summary: Given a fence with `n` posts and `k` colors, find the number of ways to paint the fence such that at most two adjacent posts have the same color.
+Dynamic Programming,Painting the Fenceproblem,https://practice.geeksforgeeks.org/problems/painting-the-fence3727/1,"1. Problem Summary: Given a fence with `n` posts and `k` colors, find the number of ways to paint the fence such that at most two adjacent posts have the same color.
 
 2. Approach: This problem can be approached using dynamic programming. We define two states: `same[i]` which represents the number of ways to paint up to the i-th post where the i-th post has the same color as the (i-1)-th post, and `diff[i]` which represents the number of ways to paint up to the i-th post where the i-th post has a different color than the (i-1)-th post. The transitions are: `same[i] = diff[i-1]`, because to have the last two posts the same, the previous post must have been different from its predecessor. `diff[i] = (same[i-1] + diff[i-1]) * (k-1)`, because you can choose any of the remaining `k-1` colors. Initialize with `same[2] = k` and `diff[2] = k * (k-1)` for the first two posts.
 
@@ -330,7 +330,7 @@ int countWays(int n, int k) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) and the space complexity is also O(n) due to the storage of the `same` and `diff` arrays."
-Dynamic Programming,Maximize The Cut Segments,"1. Problem Summary: The ""Maximize The Cut Segments"" problem involves finding the maximum number of segments of given lengths that can be cut from a rod of length `n`. The segment lengths are given as three integers `x`, `y`, and `z`.
+Dynamic Programming,Maximize The Cut Segments,https://practice.geeksforgeeks.org/problems/cutted-segments/0,"1. Problem Summary: The ""Maximize The Cut Segments"" problem involves finding the maximum number of segments of given lengths that can be cut from a rod of length `n`. The segment lengths are given as three integers `x`, `y`, and `z`.
 
 2. Approach: The problem can be approached using dynamic programming by building a solution for each length from `1` to `n` based on the maximum segments that can be obtained using the lengths `x`, `y`, and `z`. Start by initializing a DP array where `dp[i]` represents the maximum number of segments that can be obtained with a rod of length `i`. Set `dp[0]` to 0 as no segments can be cut from a rod of length 0. For each length `i` from `1` to `n`, compute `dp[i]` by considering the maximum value after cutting a segment of length `x`, `y`, or `z` (if possible), ensuring to only consider valid cuts where `i` is greater than or equal to the segment length. This approach ensures that by the time you compute `dp[n]`, you have considered all possible segment combinations.
 
@@ -362,7 +362,7 @@ int main() {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n), as we compute the value for each length up to `n` once, and the space complexity is O(n) due to the storage required for the DP array."
-Dynamic Programming,Longest Common Subsequence,"1. Problem Summary: The Longest Common Subsequence (LCS) problem involves finding the longest subsequence that is common to two sequences (not necessarily contiguous). The subsequence must appear in the same order in both sequences but not necessarily consecutively.
+Dynamic Programming,Longest Common Subsequence,https://practice.geeksforgeeks.org/problems/longest-common-subsequence/0,"1. Problem Summary: The Longest Common Subsequence (LCS) problem involves finding the longest subsequence that is common to two sequences (not necessarily contiguous). The subsequence must appear in the same order in both sequences but not necessarily consecutively.
 
 2. Approach: The optimal approach to find the LCS is using dynamic programming. Create a 2D array `dp` where `dp[i][j]` represents the length of the LCS of the first `i` characters of string `s1` and the first `j` characters of string `s2`. If the characters `s1[i-1]` and `s2[j-1]` are the same, then `dp[i][j]` will be `dp[i-1][j-1] + 1`. Otherwise, it will be the maximum of `dp[i-1][j]` and `dp[i][j-1]`, indicating we either skip a character from `s1` or `s2`. Start filling the table from `dp[0][0]` to `dp[m][n]`, where `m` and `n` are the lengths of `s1` and `s2`, respectively. This approach builds the solution incrementally and uses previously computed results for optimal substructure.
 
@@ -388,7 +388,7 @@ int longestCommonSubsequence(string s1, string s2) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(m*n) and the space complexity is also O(m*n), where m and n are the lengths of the two input strings."
-Dynamic Programming,Longest Repeated Subsequence,"1. Problem Summary: The Longest Repeated Subsequence (LRS) problem involves finding the longest subsequence of a string that appears at least twice without overlapping. The characters in the subsequence are not required to be consecutive but must maintain their order.
+Dynamic Programming,Longest Repeated Subsequence,https://practice.geeksforgeeks.org/problems/longest-repeating-subsequence/0,"1. Problem Summary: The Longest Repeated Subsequence (LRS) problem involves finding the longest subsequence of a string that appears at least twice without overlapping. The characters in the subsequence are not required to be consecutive but must maintain their order.
 
 2. Approach: The optimal approach to solve the LRS problem is by using dynamic programming, similar to the Longest Common Subsequence (LCS) problem but with a twist. We construct a 2D array `dp` where `dp[i][j]` represents the length of the longest repeated subsequence for substrings ending at `i-1` in the original string and `j-1` in the same string. The difference here is, while filling the `dp` table, we only consider characters that match (`str[i-1] == str[j-1]`) and are not at the same position (`i != j`). This condition ensures that we do not consider the same character twice (no overlap). After populating the table, `dp[n][n]` gives the length of the LRS, where `n` is the length of the input string.
 
@@ -414,7 +414,7 @@ int longestRepeatedSubsequence(string str) {
 ```
 
 4. Time Complexity and Space Complexity: The time and space complexity of this algorithm are both O(n^2), where n is the length of the input string."
-Dynamic Programming,Longest Increasing Subsequence,"1. Problem Summary: The Longest Increasing Subsequence (LIS) problem involves finding the length of the longest subsequence of a given sequence such that all elements of the subsequence are sorted in increasing order. The elements in the subsequence are not required to be contiguous in the original sequence.
+Dynamic Programming,Longest Increasing Subsequence,https://practice.geeksforgeeks.org/problems/longest-increasing-subsequence/0,"1. Problem Summary: The Longest Increasing Subsequence (LIS) problem involves finding the length of the longest subsequence of a given sequence such that all elements of the subsequence are sorted in increasing order. The elements in the subsequence are not required to be contiguous in the original sequence.
 
 2. Approach: The optimal approach to solve the LIS problem uses dynamic programming with a binary search for efficiency. We maintain an array `dp` where `dp[i]` represents the smallest possible ending element of an increasing subsequence of length `i+1`. For each element in the input array, we use binary search on the `dp` array to find the position where this element can extend the subsequence or replace an element to potentially start a new subsequence. This approach ensures that while we iterate through the input, we are dynamically updating the potential subsequences optimally.
 
@@ -438,7 +438,7 @@ int lengthOfLIS(vector<int>& nums) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n log n) due to the binary search for each element, and the space complexity is O(n), where n is the number of elements in the input array."
-Dynamic Programming,Space Optimized Solution of LCS,"1. Problem Summary: The Longest Common Subsequence (LCS) problem involves finding the maximum length subsequence present in both sequences. The space-optimized solution reduces the memory usage compared to the traditional dynamic programming approach.
+Dynamic Programming,Space Optimized Solution of LCS,https://www.geeksforgeeks.org/space-optimized-solution-lcs/,"1. Problem Summary: The Longest Common Subsequence (LCS) problem involves finding the maximum length subsequence present in both sequences. The space-optimized solution reduces the memory usage compared to the traditional dynamic programming approach.
 
 2. Approach: The traditional LCS problem uses a 2D table to store results of subproblems, which can be space-intensive. The space-optimized solution uses two 1D arrays that alternate row by row, reflecting the fact that to compute the LCS length at any point, you only need values from the current and previous rows. Start by initializing two arrays of length equal to the number of columns (length of the second string). Iterate through each character of the first string, updating the current row array based on comparisons with each character of the second string. Use the previous row's values for calculations and then swap the current and previous rows at the end of each iteration.
 
@@ -465,7 +465,7 @@ int lcsSpaceOptimized(string s1, string s2) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(m*n) and the space complexity is O(n), where m and n are the lengths of the two input strings."
-Dynamic Programming,LCS (Longest Common Subsequence) of three strings,"1. Problem Summary: The problem is to find the length of the longest common subsequence (LCS) among three given strings. A subsequence is a sequence that can be derived from another sequence by deleting some elements without changing the order of the remaining elements.
+Dynamic Programming,LCS (Longest Common Subsequence) of three strings,https://practice.geeksforgeeks.org/problems/lcs-of-three-strings/0,"1. Problem Summary: The problem is to find the length of the longest common subsequence (LCS) among three given strings. A subsequence is a sequence that can be derived from another sequence by deleting some elements without changing the order of the remaining elements.
 
 2. Approach: The LCS of three strings can be solved using a 3D dynamic programming approach. We create a 3D table `dp` where `dp[i][j][k]` represents the length of LCS of the substrings `A[0..i-1]`, `B[0..j-1]`, and `C[0..k-1]`. If the characters `A[i-1]`, `B[j-1]`, and `C[k-1]` are the same, then `dp[i][j][k] = dp[i-1][j-1][k-1] + 1`. If they are not the same, the value is the maximum of the results obtained by ignoring one of the strings at a time, i.e., `dp[i][j][k] = max(dp[i-1][j][k], dp[i][j-1][k], dp[i][j][k-1])`. Start by initializing the base cases where any dimension is zero, meaning the LCS length is zero. This builds intuition on reducing the problem size by handling one character mismatch or match at a time.
 
@@ -494,7 +494,7 @@ int LCSof3(string A, string B, string C) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(xyz) and the space complexity is O(xyz), where x, y, and z are the lengths of the three input strings."
-Dynamic Programming,Maximum Sum Increasing Subsequence,"1. Problem Summary: The ""Maximum Sum Increasing Subsequence"" problem involves finding the maximum sum of a subsequence in an array such that the subsequence's elements are in strictly increasing order. The subsequence does not need to be contiguous.
+Dynamic Programming,Maximum Sum Increasing Subsequence,https://practice.geeksforgeeks.org/problems/maximum-sum-increasing-subsequence4749/1,"1. Problem Summary: The ""Maximum Sum Increasing Subsequence"" problem involves finding the maximum sum of a subsequence in an array such that the subsequence's elements are in strictly increasing order. The subsequence does not need to be contiguous.
 
 2. Approach: To solve this, we use dynamic programming. We maintain an array `dp` where `dp[i]` represents the maximum sum of an increasing subsequence ending at index `i`. Initialize each `dp[i]` with `arr[i]` because the minimum sum for any single element sequence is the element itself. For each element in the array, compare it with all previous elements. If an element `arr[j]` (where `j < i`) is less than `arr[i]`, then check if this pair can form a part of the increasing subsequence leading to a higher sum (`dp[j] + arr[i]`). Update `dp[i]` if this sum is greater than the current `dp[i]`. Finally, the answer will be the maximum value in the `dp` array.
 
@@ -527,7 +527,7 @@ int maxSumIS(vector<int>& arr) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n^2) due to the nested loops, and the space complexity is O(n) for storing the dp array."
-Dynamic Programming,Count all subsequences having product less than K,"1. Problem Summary: 
+Dynamic Programming,Count all subsequences having product less than K,https://www.geeksforgeeks.org/count-subsequences-product-less-k/,"1. Problem Summary: 
    The problem is to count all subsequences of a given array whose product of elements is less than a specified integer K. The array elements and K are positive integers.
 
 2. Approach: 
@@ -561,7 +561,7 @@ Dynamic Programming,Count all subsequences having product less than K,"1. Proble
 
 4. Time Complexity and Space Complexity: 
    The time complexity is O(n * K) and the space complexity is O(n * K) where n is the number of elements in the array and K is the product threshold."
-Dynamic Programming,Longest subsequence such that difference between adjacent is one,"1. Problem Summary: The problem is to find the length of the longest subsequence in an array where the absolute difference between adjacent elements in the subsequence is one. The array's elements are not necessarily sorted.
+Dynamic Programming,Longest subsequence such that difference between adjacent is one,https://practice.geeksforgeeks.org/problems/longest-subsequence-such-that-difference-between-adjacents-is-one4724/1,"1. Problem Summary: The problem is to find the length of the longest subsequence in an array where the absolute difference between adjacent elements in the subsequence is one. The array's elements are not necessarily sorted.
 
 2. Approach: Use dynamic programming to solve this problem by maintaining an array `dp` where `dp[i]` represents the length of the longest subsequence ending at index `i`. Initialize each element of `dp` to 1, as the minimum subsequence ending at any element is the element itself. Iterate through the array, and for each element at index `i`, check previous indices `j` (from 0 to i-1). If the absolute difference between the element at `i` and `j` is one, update `dp[i]` to the maximum of its current value and `dp[j] + 1`. The answer will be the maximum value in the `dp` array. This method leverages the subproblem of finding the longest subsequence up to each index, building upon these results to find the overall longest subsequence.
 
@@ -587,7 +587,7 @@ int longestSubsequence(int arr[], int n) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n^2) due to the nested loops, and the space complexity is O(n) for storing the dp array."
-Dynamic Programming,Maximum subsequence sum such that no three are consecutive,"1. Problem Summary: The problem is to find the maximum sum of a subsequence from a given list of integers such that no three consecutive elements are selected. This problem is a variation of the classic maximum subarray sum problem with an additional constraint on the selection of elements.
+Dynamic Programming,Maximum subsequence sum such that no three are consecutive,https://www.geeksforgeeks.org/maximum-subsequence-sum-such-that-no-three-are-consecutive/,"1. Problem Summary: The problem is to find the maximum sum of a subsequence from a given list of integers such that no three consecutive elements are selected. This problem is a variation of the classic maximum subarray sum problem with an additional constraint on the selection of elements.
 
 2. Approach: The dynamic programming approach involves maintaining a state `dp[i]` which represents the maximum sum obtainable up to the `i-th` element without selecting three consecutive elements. For each element, you have three choices:
    - Exclude the current element (`arr[i]`), hence `dp[i] = dp[i-1]`.
@@ -620,7 +620,7 @@ int maxSum(vector<int>& arr) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) and space complexity is also O(n), where n is the number of elements in the input array."
-Dynamic Programming,Egg Dropping Problem,"1. Problem Summary: The Egg Dropping Problem involves determining the minimum number of attempts needed to find the critical floor in a building from which an egg can be dropped without breaking. The challenge is to minimize these attempts, given a certain number of eggs and floors.
+Dynamic Programming,Egg Dropping Problem,https://practice.geeksforgeeks.org/problems/egg-dropping-puzzle/0,"1. Problem Summary: The Egg Dropping Problem involves determining the minimum number of attempts needed to find the critical floor in a building from which an egg can be dropped without breaking. The challenge is to minimize these attempts, given a certain number of eggs and floors.
 
 2. Approach: The problem is tackled using dynamic programming by building a table `dp` where `dp[k][n]` represents the minimum number of trials needed for `k` eggs and `n` floors. Start by initializing the cases for one egg (`dp[1][n] = n`) and one floor (`dp[k][1] = 1`). For more than one egg and floor, use a binary search to optimize the worst-case number of drops, which involves a trade-off between dropping an egg from a higher floor (if it breaks, solve for below floors) or a lower floor (if it doesn’t break, solve for above floors). The recurrence relation is `dp[k][n] = 1 + min(max(dp[k-1][x-1], dp[k][n-x]))` for each possible floor `x`, optimized by binary search.
 
@@ -657,7 +657,7 @@ int eggDrop(int K, int N) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(KN log N) due to the use of binary search within the DP table computation, and the space complexity is O(KN) for storing the DP table."
-Dynamic Programming,Maximum Length Chain of Pairs,"1. Problem Summary: 
+Dynamic Programming,Maximum Length Chain of Pairs,https://practice.geeksforgeeks.org/problems/max-length-chain/1,"1. Problem Summary: 
    The ""Maximum Length Chain of Pairs"" problem involves finding the longest chain of pairs from a given set of pairs, where a pair (a, b) can follow another pair (c, d) only if b < c. The goal is to maximize the number of pairs in the chain.
 
 2. Approach:
@@ -688,7 +688,7 @@ int maxChainLength(vector<pair<int, int>>& pairs) {
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(n^2) due to the nested loops for comparing pairs, and the space complexity is O(n) for storing the DP values."
-Dynamic Programming,Maximum size square sub-matrix with all 1s,"1. Problem Summary:  
+Dynamic Programming,Maximum size square sub-matrix with all 1s,https://practice.geeksforgeeks.org/problems/largest-square-formed-in-a-matrix/0,"1. Problem Summary:  
    The problem is to find the largest square sub-matrix entirely filled with 1s in a given binary matrix. The output should be the size (length of a side) of this square sub-matrix.
 
 2. Approach:  
@@ -721,7 +721,7 @@ int maximalSquare(vector<vector<int>>& matrix) {
 
 4. Time Complexity and Space Complexity:  
    The time complexity is O(m*n) and the space complexity is O(m*n), where m is the number of rows and n is the number of columns in the matrix."
-Dynamic Programming,Maximum sum of pairs with specific difference,"1. Problem Summary: The problem involves finding the maximum sum of pairs in an array such that the absolute difference between the elements of the pairs is less than or equal to a given value \( k \). Elements can only be used in one pair.
+Dynamic Programming,Maximum sum of pairs with specific difference,https://practice.geeksforgeeks.org/problems/pairs-with-specific-difference/0,"1. Problem Summary: The problem involves finding the maximum sum of pairs in an array such that the absolute difference between the elements of the pairs is less than or equal to a given value \( k \). Elements can only be used in one pair.
 
 2. Approach: Start by sorting the array to easily find potential pairs. Use dynamic programming where \( dp[i] \) represents the maximum sum using the first \( i \) elements. For each element, decide whether to pair it with its previous element or not. If pairing is possible (i.e., the difference between the current element and the previous one is less than or equal to \( k \)), compare the sum by including this pair (current and previous elements) plus the optimal sum up to the element before the previous one, versus not pairing the current element at all. Update \( dp[i] \) based on the maximum of these two options. The essence of the approach is in evaluating and deciding at each step whether pairing offers a better sum or skipping the current element does.
 
@@ -746,7 +746,7 @@ int maxSumPairWithDifferenceLessThanK(int arr[], int n, int k) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is \( O(n \log n) \) due to the sorting step, and the space complexity is \( O(n) \) for the dynamic programming array."
-Dynamic Programming,Min Cost PathProblem,"1. Problem Summary: The Min Cost Path Problem involves finding the minimum cost path in a grid from the top-left corner to the bottom-right corner, where each cell in the grid contains a cost to traverse.
+Dynamic Programming,Min Cost PathProblem,https://practice.geeksforgeeks.org/problems/path-in-matrix3805/1,"1. Problem Summary: The Min Cost Path Problem involves finding the minimum cost path in a grid from the top-left corner to the bottom-right corner, where each cell in the grid contains a cost to traverse.
 
 2. Approach: The problem can be efficiently solved using dynamic programming. Create a 2D array `dp` where `dp[i][j]` represents the minimum cost to reach cell `(i, j)` from the top-left corner. Initialize `dp[0][0]` with the cost of the top-left corner. For each cell, compute the minimum cost by considering the minimum of the paths from the left and top neighbors, adding the current cell's cost. The last cell `dp[n-1][m-1]` will then contain the minimum cost to reach the bottom-right corner. This approach ensures that each subproblem is solved only once and uses these solutions to build up answers to bigger problems.
 
@@ -779,7 +779,7 @@ int minCostPath(vector<vector<int>>& cost) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n*m) and the space complexity is O(n*m), where n is the number of rows and m is the number of columns in the grid."
-Dynamic Programming,Maximum difference of zeros and ones in binary string,"1. Problem Summary:
+Dynamic Programming,Maximum difference of zeros and ones in binary string,https://practice.geeksforgeeks.org/problems/maximum-difference-of-zeros-and-ones-in-binary-string4111/1,"1. Problem Summary:
    The problem involves finding the maximum difference between the number of 0's and the number of 1's in any substring of a given binary string. The goal is to maximize the count of 0's and minimize the count of 1's in the substring.
 
 2. Approach:
@@ -809,7 +809,7 @@ int maxDifference(string s) {
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(n) and the space complexity is O(1), where n is the length of the string."
-Dynamic Programming,Minimum number of jumps to reach end,"1. Problem Summary: 
+Dynamic Programming,Minimum number of jumps to reach end,https://practice.geeksforgeeks.org/problems/minimum-number-of-jumps/0,"1. Problem Summary: 
    The problem involves finding the minimum number of jumps required to reach the end of an array where each element represents the maximum jump length from that position. The goal is to start at the first element and reach the last element in the minimum number of jumps.
 
 2. Approach: 
@@ -845,7 +845,7 @@ int minJumps(vector<int>& arr) {
 
 4. Time Complexity and Space Complexity: 
    The time complexity is O(n) as each element is processed once, and the space complexity is O(1) since only a few variables are used."
-Dynamic Programming,Minimum cost to fill given weight in a bag,"1. Problem Summary: The problem is to find the minimum cost to fill a bag of a given capacity with items of varying weights and costs. Each item can only be used once, and the goal is to exactly fill the bag or determine that it is not possible.
+Dynamic Programming,Minimum cost to fill given weight in a bag,https://practice.geeksforgeeks.org/problems/minimum-cost-to-fill-given-weight-in-a-bag1956/1,"1. Problem Summary: The problem is to find the minimum cost to fill a bag of a given capacity with items of varying weights and costs. Each item can only be used once, and the goal is to exactly fill the bag or determine that it is not possible.
 
 2. Approach: Use dynamic programming to solve this problem by creating a DP array where `dp[i]` represents the minimum cost to fill a bag of exact weight `i`. Initialize `dp[0]` to `0` (cost of filling a bag of weight 0) and all other `dp[i]` to a large number (indicating it's initially unachievable). For each item, iterate through the DP array from the total weight down to the item's weight, updating `dp[j]` as the minimum of its current value and `dp[j - weight of item] + cost of item`. This ensures that each item is only considered once and the bag is filled optimally.
 
@@ -872,7 +872,7 @@ int minCostFillBag(vector<int>& weights, vector<int>& costs, int W) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n*W), where n is the number of items and W is the total weight. The space complexity is O(W), due to the DP array used to store costs for weights up to W."
-Dynamic Programming,Minimum removals from array to make max –min <= K,"1. Problem Summary: The problem involves finding the minimum number of elements to remove from an array such that the difference between the maximum and minimum remaining elements is less than or equal to a given threshold \( K \).
+Dynamic Programming,Minimum removals from array to make max –min <= K,https://www.geeksforgeeks.org/minimum-removals-array-make-max-min-k/,"1. Problem Summary: The problem involves finding the minimum number of elements to remove from an array such that the difference between the maximum and minimum remaining elements is less than or equal to a given threshold \( K \).
 
 2. Approach: The optimal solution uses dynamic programming. First, sort the array to linearly check the difference between elements. Use a dynamic programming table `dp[i]` where `dp[i]` represents the minimum number of deletions required for the subarray from the start up to the \(i^{th}\) index. For each element in the sorted array, calculate the minimum deletions required by comparing it with all previous elements until the difference exceeds \( K \). If the difference between the \(i^{th}\) and \(j^{th}\) element is within \( K \), then `dp[i]` can potentially be updated to `dp[j] + (i - j - 1)` (removing elements between \(j\) and \(i\)). Initialize `dp[i]` with the maximum deletions assuming all previous elements are removed, and iteratively update it for the minimum possible deletions.
 
@@ -903,7 +903,7 @@ int minRemovals(vector<int>& arr, int K) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is \( O(n^2) \) due to nested loops iterating over the array elements, and the space complexity is \( O(n) \) for storing the dynamic programming table."
-Dynamic Programming,Longest Common Substring,"1. Problem Summary: The Longest Common Substring problem involves finding the longest substring that two strings have in common. The substring must be contiguous in both strings.
+Dynamic Programming,Longest Common Substring,https://practice.geeksforgeeks.org/problems/longest-common-substring/0,"1. Problem Summary: The Longest Common Substring problem involves finding the longest substring that two strings have in common. The substring must be contiguous in both strings.
 
 2. Approach: Use dynamic programming to construct a 2D table where `dp[i][j]` represents the length of the longest common substring ending at `s1[i-1]` and `s2[j-1]`. Initialize a matrix `dp` of size `(m+1) x (n+1)` to zero, where `m` and `n` are the lengths of the two strings. Iterate through each character of both strings; if characters match (`s1[i-1] == s2[j-1]`), set `dp[i][j]` to `dp[i-1][j-1] + 1`. Track the maximum value found in `dp` during these updates for the result. This approach builds the solution incrementally, leveraging previously computed results stored in the `dp` table, making it intuitive and easy to remember.
 
@@ -932,7 +932,7 @@ int longestCommonSubstring(string s1, string s2) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(m*n) and the space complexity is O(m*n), where m and n are the lengths of the two input strings."
-Dynamic Programming,Count number of ways to reacha given score in a game,"1. Problem Summary: The problem is to count the number of ways to reach a specific score in a game where you can score only 3, 5, or 10 points at a time. For example, given a score ""n"", determine how many different combinations of scoring 3, 5, and 10 points can sum up to exactly ""n"".
+Dynamic Programming,Count number of ways to reacha given score in a game,https://practice.geeksforgeeks.org/problems/reach-a-given-score/0,"1. Problem Summary: The problem is to count the number of ways to reach a specific score in a game where you can score only 3, 5, or 10 points at a time. For example, given a score ""n"", determine how many different combinations of scoring 3, 5, and 10 points can sum up to exactly ""n"".
 
 2. Approach: The problem can be approached using dynamic programming by building a solution for all scores from 0 up to n. For each score `i`, the number of ways to achieve it can be computed by considering the sum of ways to achieve `i-3`, `i-5`, and `i-10`, provided these indices are non-negative. This works because each score can be reached by either adding 3, 5, or 10 to a previously reachable score. Initializing the base case where reaching a score of 0 has exactly one way (by scoring nothing), the solution builds up from there.
 
@@ -956,7 +956,7 @@ int countWaysToScore(int n) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) and the space complexity is also O(n), where n is the target score."
-Dynamic Programming,Count Balanced Binary Trees of Height h,"1. Problem Summary: The task is to count the number of distinct balanced binary trees of height ""h"". A balanced binary tree is defined such that for any node, the height difference between the left subtree and right subtree is at most 1.
+Dynamic Programming,Count Balanced Binary Trees of Height h,https://practice.geeksforgeeks.org/problems/bbt-counter/0,"1. Problem Summary: The task is to count the number of distinct balanced binary trees of height ""h"". A balanced binary tree is defined such that for any node, the height difference between the left subtree and right subtree is at most 1.
 
 2. Approach: The solution uses dynamic programming to build up the count from smaller subproblems. We define `dp[h]` as the number of balanced binary trees with height `h`. The base cases are `dp[0] = 1` (a tree with height 0 has only one node, the root) and `dp[1] = 1` (the root can have either two children or none, both subtrees being of height 0). For `h > 1`, each tree of height `h` can be constructed by taking a root node and attaching two smaller trees of heights `h-1` and `h-2` as its left and right children. Thus, the recurrence relation is `dp[h] = dp[h-1]*dp[h-1] + 2*dp[h-1]*dp[h-2]`, where the first term accounts for the cases where both subtrees are of height `h-1`, and the second term accounts for the cases where one subtree is of height `h-1` and the other is of height `h-2`.
 
@@ -978,7 +978,7 @@ int countBalancedBinaryTrees(int h) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(h) since we compute the number of trees for each height up to `h` once, and the space complexity is O(h) due to the storage of results in the dp array."
-Dynamic Programming,LargestSum Contiguous Subarray [V>V>V>V IMP ],"1. Problem Summary: The problem is to find the maximum sum of a contiguous subarray within a one-dimensional array of numbers. This classic problem is known as Kadane's Algorithm in computer science.
+Dynamic Programming,LargestSum Contiguous Subarray [V>V>V>V IMP ],https://practice.geeksforgeeks.org/problems/kadanes-algorithm/0,"1. Problem Summary: The problem is to find the maximum sum of a contiguous subarray within a one-dimensional array of numbers. This classic problem is known as Kadane's Algorithm in computer science.
 
 2. Approach: The optimal solution uses dynamic programming to solve this in linear time. Start by initializing two variables, `max_current` and `max_global`, to the first element of the array. As you iterate through the array, update `max_current` to be the maximum of the current element and the sum of `max_current` and the current element. This decision checks if it's better to start a new subarray at the current element or to continue the current subarray. Update `max_global` whenever `max_current` exceeds `max_global`. This approach leverages the idea of locally optimal choices (current element vs. extending the current subarray) to find the globally optimal solution (maximum sum subarray).
 
@@ -1001,7 +1001,7 @@ int largestSumContiguousSubarray(vector<int>& nums) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the number of elements in the array, and the space complexity is O(1)."
-Dynamic Programming,Smallest sum contiguous subarray,"1. Problem Summary: The problem is to find the smallest sum of any contiguous subarray within a given array of integers. This is a variation of the classic maximum subarray problem, focusing instead on the minimum sum.
+Dynamic Programming,Smallest sum contiguous subarray,https://www.geeksforgeeks.org/smallest-sum-contiguous-subarray/,"1. Problem Summary: The problem is to find the smallest sum of any contiguous subarray within a given array of integers. This is a variation of the classic maximum subarray problem, focusing instead on the minimum sum.
 
 2. Approach: The optimal approach to solve this problem uses a variation of Kadane's algorithm, which is typically used to find the maximum sum subarray. Instead, modify it to track the minimum sum. Initialize two variables, `current_min` and `global_min`, to the first element of the array. Iterate through the array starting from the second element. For each element, update `current_min` to be the minimum of the current element and the sum of `current_min` with the current element. This ensures that `current_min` always holds the minimum sum ending at the current index. Update `global_min` whenever a new minimum `current_min` is found. This approach effectively captures the smallest sum of any contiguous subarray by dynamically adjusting to the minimum path as the iteration progresses.
 
@@ -1025,7 +1025,7 @@ int smallestSumSubarray(vector<int>& nums) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the length of the array, as it processes each element exactly once. The space complexity is O(1), using only a constant amount of extra space."
-Dynamic Programming,Unbounded Knapsack (Repetition of items allowed),"1. Problem Summary: The Unbounded Knapsack problem involves finding the maximum value that can be obtained from a knapsack with a given capacity when each type of item can be used unlimited times. Each item has a weight and a value.
+Dynamic Programming,Unbounded Knapsack (Repetition of items allowed),https://practice.geeksforgeeks.org/problems/knapsack-with-duplicate-items4201/1,"1. Problem Summary: The Unbounded Knapsack problem involves finding the maximum value that can be obtained from a knapsack with a given capacity when each type of item can be used unlimited times. Each item has a weight and a value.
 
 2. Approach: The dynamic programming approach for the Unbounded Knapsack problem uses a 1D array `dp` where `dp[j]` represents the maximum value that can be achieved with a knapsack capacity of `j`. Initialize `dp[0]` to 0 because a knapsack with zero capacity can hold no items. Iterate over each capacity from 1 to the maximum capacity. For each capacity, iterate through each item, and if the item can fit (item's weight is less than or equal to the current capacity), update `dp[j]` by considering the maximum of not taking the item or taking the item and adding its value plus the value of the remaining capacity (`dp[j - item.weight]`). This approach ensures that each capacity considers all items and the best possible combination of items to maximize value.
 
@@ -1048,7 +1048,7 @@ int unboundedKnapsack(int W, vector<int>& wt, vector<int>& val, int n) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n*W), where n is the number of items and W is the total capacity of the knapsack. The space complexity is O(W), due to the storage of the dp array."
-Dynamic Programming,Word Break Problem,"1. Problem Summary: The Word Break Problem involves determining if a given string can be segmented into a sequence of one or more dictionary words. The dictionary is provided as a set of words.
+Dynamic Programming,Word Break Problem,https://practice.geeksforgeeks.org/problems/word-break/0,"1. Problem Summary: The Word Break Problem involves determining if a given string can be segmented into a sequence of one or more dictionary words. The dictionary is provided as a set of words.
 
 2. Approach: The optimal solution uses dynamic programming. We define a boolean array `dp` where `dp[i]` indicates whether the substring `s[0...i-1]` can be segmented into dictionary words. We initialize `dp[0]` to `true` since an empty string can trivially be segmented. For each position `i` from 1 to the length of the string, we check every possible substring ending at `i` to see if it can form a word found in the dictionary. If any such substring from `j` to `i` is in the dictionary and `dp[j]` is `true`, then we set `dp[i]` to `true`. This approach builds the solution by using previously computed results, thus avoiding redundant calculations.
 
@@ -1075,7 +1075,7 @@ bool wordBreak(string s, vector<string>& wordDict) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n^2 * k), where n is the length of the string and k is the average length of words in the dictionary, due to substring creation and checking. The space complexity is O(n) due to the `dp` array."
-Dynamic Programming,Largest Independent Set Problem,"1. Problem Summary: The Largest Independent Set Problem involves finding the maximum-sized set of nodes in a tree such that no two nodes in the set are adjacent. This is a classic problem in graph theory and dynamic programming.
+Dynamic Programming,Largest Independent Set Problem,https://www.geeksforgeeks.org/largest-independent-set-problem-dp-26/,"1. Problem Summary: The Largest Independent Set Problem involves finding the maximum-sized set of nodes in a tree such that no two nodes in the set are adjacent. This is a classic problem in graph theory and dynamic programming.
 
 2. Approach: The solution uses a recursive dynamic programming approach where each node has two possibilities: either it is included in the independent set or it is not. If a node is included, its children cannot be included. If it is not included, the result for this node is the sum of the results for its children. We use a memoization table to store results for each node to avoid recalculating them. The recursive function computes the maximum size of the independent set for each subtree rooted at a given node, considering both including and not including the node itself.
 
@@ -1121,7 +1121,7 @@ int main() {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the number of nodes, as each node is processed once due to memoization. The space complexity is also O(n) due to the storage required for the memoization table and the recursion stack."
-Dynamic Programming,Partition problem,"1. Problem Summary:  
+Dynamic Programming,Partition problem,https://practice.geeksforgeeks.org/problems/subset-sum-problem2014/1,"1. Problem Summary:  
 The Partition problem is a classic problem in computer science that involves determining whether a given set of integers can be partitioned into two subsets such that the sums of the numbers in each subset are equal. This problem is a particular case of the subset sum problem and is NP-complete.
 
 2. Approach:  
@@ -1154,7 +1154,7 @@ bool canPartition(vector<int>& nums) {
 
 4. Time Complexity and Space Complexity:  
 The time complexity is O(n*sum) and the space complexity is O(n*sum), where n is the number of elements in the input set and sum is the total sum of all elements divided by 2."
-Dynamic Programming,Longest Palindromic Subsequence,"1. Problem Summary: The Longest Palindromic Subsequence (LPS) problem involves finding the length of the longest subsequence of a given string that is also a palindrome. A subsequence is a sequence derived from another sequence by deleting some or no elements without changing the order of the remaining elements.
+Dynamic Programming,Longest Palindromic Subsequence,https://www.geeksforgeeks.org/longest-palindromic-subsequence-dp-12/,"1. Problem Summary: The Longest Palindromic Subsequence (LPS) problem involves finding the length of the longest subsequence of a given string that is also a palindrome. A subsequence is a sequence derived from another sequence by deleting some or no elements without changing the order of the remaining elements.
 
 2. Approach: The LPS problem can be approached using dynamic programming. We define a 2D array `dp` where `dp[i][j]` represents the length of the longest palindromic subsequence in the substring from index `i` to `j`. If the characters at index `i` and `j` are the same, then `dp[i][j] = dp[i+1][j-1] + 2`. If they are different, then `dp[i][j] = max(dp[i+1][j], dp[i][j-1])`. The base cases are when `i` is equal to `j`, where `dp[i][j] = 1` since a single character is a palindrome by itself. The final answer is `dp[0][n-1]`, where `n` is the length of the string.
 
@@ -1190,7 +1190,7 @@ int longestPalindromicSubsequence(string s) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n^2), where n is the length of the string, due to the nested loops iterating through the string. The space complexity is also O(n^2) because of the 2D dp array used to store subproblem results."
-Dynamic Programming,Count All Palindromic Subsequence in a given String,"1. Problem Summary: The task is to count all distinct palindromic subsequences in a given string. A subsequence is a sequence that can be derived from another sequence by deleting some or no elements without changing the order of the remaining elements.
+Dynamic Programming,Count All Palindromic Subsequence in a given String,https://practice.geeksforgeeks.org/problems/count-palindromic-subsequences/1,"1. Problem Summary: The task is to count all distinct palindromic subsequences in a given string. A subsequence is a sequence that can be derived from another sequence by deleting some or no elements without changing the order of the remaining elements.
 
 2. Approach: Use dynamic programming to solve this problem by creating a 2D table `dp` where `dp[i][j]` represents the count of palindromic subsequences in the substring `s[i...j]`. Initialize all diagonal elements (single characters) with 1 since every single character is a palindrome. For substrings longer than one character, if `s[i]` is equal to `s[j]`, then the count includes all subsequences between these two characters plus the subsequences from the inner substring `s[i+1...j-1]` and an additional 2 for the characters themselves. If `s[i]` is not equal to `s[j]`, subtract the overlapping subsequences. This approach ensures that all subsequences are counted without duplication.
 
@@ -1221,7 +1221,7 @@ int countPalindromicSubsequences(string s) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n^2) and the space complexity is also O(n^2), where n is the length of the string. This is due to the use of a 2D dp array and nested loops iterating over the string length."
-Dynamic Programming,Longest Palindromic Substring,"1. Problem Summary:
+Dynamic Programming,Longest Palindromic Substring,https://leetcode.com/problems/longest-palindromic-substring/,"1. Problem Summary:
    The ""Longest Palindromic Substring"" problem involves finding the longest contiguous substring of a given string that is also a palindrome.
 
 2. Approach:
@@ -1269,7 +1269,7 @@ Dynamic Programming,Longest Palindromic Substring,"1. Problem Summary:
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(n^2) and the space complexity is also O(n^2), where n is the length of the input string."
-Dynamic Programming,Longest alternating subsequence,"1. Problem Summary: The Longest Alternating Subsequence (LAS) problem involves finding the length of the longest subsequence of a given sequence where the elements alternately increase and decrease.
+Dynamic Programming,Longest alternating subsequence,https://practice.geeksforgeeks.org/problems/longest-alternating-subsequence/0,"1. Problem Summary: The Longest Alternating Subsequence (LAS) problem involves finding the length of the longest subsequence of a given sequence where the elements alternately increase and decrease.
 
 2. Approach: The optimal algorithm uses dynamic programming. We maintain two arrays `up` and `down` where `up[i]` represents the length of the longest alternating subsequence ending at index `i` with an increasing pattern, and `down[i]` captures the same for a decreasing pattern. For each element in the sequence, you compare it with previous elements and update `up[i]` and `down[i]` based on whether the current element forms an increasing or decreasing pair with the previous elements. The solution to the problem is the maximum value found in either `up` or `down` arrays.
 
@@ -1298,7 +1298,7 @@ int longestAlternatingSubsequence(vector<int>& nums) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n^2) and the space complexity is O(n), where n is the length of the input sequence."
-Dynamic Programming,Weighted Job Scheduling,"1. Problem Summary: The Weighted Job Scheduling problem involves finding the maximum profit from non-overlapping jobs, each with a start time, end time, and profit. The challenge is to schedule jobs to maximize total profit without job overlaps.
+Dynamic Programming,Weighted Job Scheduling,https://www.geeksforgeeks.org/weighted-job-scheduling/,"1. Problem Summary: The Weighted Job Scheduling problem involves finding the maximum profit from non-overlapping jobs, each with a start time, end time, and profit. The challenge is to schedule jobs to maximize total profit without job overlaps.
 
 2. Approach: The solution uses dynamic programming. First, sort the jobs based on their end times. Initialize a DP array where `dp[i]` represents the maximum profit including the `i-th` job. For each job, compute the maximum profit by either taking the job and adding its profit to the best solution before its start, or skipping it. Use binary search to find the last non-conflicting job efficiently. This approach builds up the solution incrementally, ensuring that for each job, the optimal decision (to take or skip the job) is made based on previously computed results.
 
@@ -1348,7 +1348,7 @@ int findMaxProfit(vector<Job>& jobs) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n log n) due to sorting and binary search operations, and the space complexity is O(n) for storing the DP results."
-Dynamic Programming,Coin game winner where every player has three choices,"1. Problem Summary:  
+Dynamic Programming,Coin game winner where every player has three choices,https://www.geeksforgeeks.org/coin-game-winner-every-player-three-choices/,"1. Problem Summary:  
    The ""Coin game winner where every player has three choices"" problem involves two players who take turns picking 1, x, or y coins from a pile. The winner is the player who picks the last coin(s). The task is to determine whether the first player has a winning strategy given the total number of coins and the values of x and y.
 
 2. Approach:  
@@ -1374,7 +1374,7 @@ Dynamic Programming,Coin game winner where every player has three choices,"1. Pr
 
 4. Time Complexity and Space Complexity:  
    The time and space complexity of the algorithm are both O(n), where n is the number of coins."
-Dynamic Programming,Count Derangements (Permutation such that no element appears in its original position) [ IMPORTANT ],"1. Problem Summary: 
+Dynamic Programming,Count Derangements (Permutation such that no element appears in its original position) [ IMPORTANT ],https://www.geeksforgeeks.org/count-derangements-permutation-such-that-no-element-appears-in-its-original-position/,"1. Problem Summary: 
    In the ""Count Derangements"" problem, you are asked to find the number of permutations of a set of `n` elements where no element appears in its original position. This is also known as a subfactorial or derangement problem.
 
 2. Approach: 
@@ -1400,7 +1400,7 @@ int countDerangements(int n) {
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(n) due to the single loop calculating derangements for all numbers up to `n`. The space complexity is also O(n) because of the storage required for the dynamic programming table."
-Dynamic Programming,Maximum profit by buying and selling a share at most twice [ IMP ],"1. Problem Summary: The problem is to find the maximum profit that can be earned by buying and selling a stock at most twice on different days. The stock prices for different days are given in an array.
+Dynamic Programming,Maximum profit by buying and selling a share at most twice [ IMP ],https://www.geeksforgeeks.org/maximum-profit-by-buying-and-selling-a-share-at-most-twice/,"1. Problem Summary: The problem is to find the maximum profit that can be earned by buying and selling a stock at most twice on different days. The stock prices for different days are given in an array.
 
 2. Approach: The optimal approach involves using dynamic programming to track two transactions. First, compute the maximum profit that can be made with a single transaction up to each day. Store these values. Then, compute the maximum profit for two transactions by iterating from the last day to the first day, updating the potential second transaction profit using the previously stored values. The key is to maintain two arrays: one for the maximum profit up to each day with one transaction, and another for the maximum profit from each day to the end with at most two transactions.
 
@@ -1439,7 +1439,7 @@ int maxProfit(vector<int>& prices) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) and the space complexity is O(n), where n is the number of days."
-Dynamic Programming,Optimal Strategy for a Game,"1. Problem Summary: In the ""Optimal Strategy for a Game"" problem, you are given a row of coins of different values, and two players take turns picking a coin from either end of the row. The objective is to maximize the amount of money a player can collect by the end of the game.
+Dynamic Programming,Optimal Strategy for a Game,https://practice.geeksforgeeks.org/problems/optimal-strategy-for-a-game/0,"1. Problem Summary: In the ""Optimal Strategy for a Game"" problem, you are given a row of coins of different values, and two players take turns picking a coin from either end of the row. The objective is to maximize the amount of money a player can collect by the end of the game.
 
 2. Approach: The solution uses dynamic programming to solve the problem by considering all possible outcomes and choosing the optimal strategy at each step. We define a 2D array `dp[i][j]` where each element represents the maximum value a player can collect from coins between indices `i` and `j`. The player can choose either the coin at the beginning (`i`) or the end (`j`). If the player picks `i`, the opponent will then play optimally for the remaining coins from `i+1` to `j`. Similarly, if the player picks `j`, the opponent will play optimally from `i` to `j-1`. The recurrence relation thus becomes `dp[i][j] = max(coins[i] + min(dp[i+2][j], dp[i+1][j-1]), coins[j] + min(dp[i+1][j-1], dp[i][j-2]))`. This captures the decision making process, taking into account the opponent's optimal response.
 
@@ -1465,7 +1465,7 @@ int optimalStrategy(vector<int>& coins) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n^2) due to the nested loops and filling up the dp table, and the space complexity is also O(n^2) because of the storage required for the 2D dp array."
-Dynamic Programming,Optimal Binary Search Tree,"1. Problem Summary:
+Dynamic Programming,Optimal Binary Search Tree,https://www.geeksforgeeks.org/optimal-binary-search-tree-dp-24/,"1. Problem Summary:
    The Optimal Binary Search Tree (OBST) problem involves finding the least costly binary search tree for a given set of keys with their respective probabilities of being accessed. The cost is determined by the sum of the products of key access probabilities and their depths in the tree.
 
 2. Approach:
@@ -1503,7 +1503,7 @@ double optimalSearchTree(vector<int>& keys, vector<double>& p) {
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(n^3) due to the three nested loops, and the space complexity is O(n^2) for storing the dynamic programming table."
-Dynamic Programming,Palindrome PartitioningProblem,"1. Problem Summary: The Palindrome Partitioning Problem involves splitting a given string into as few substrings as possible such that each substring is a palindrome. The goal is to determine the minimum number of cuts needed.
+Dynamic Programming,Palindrome PartitioningProblem,https://practice.geeksforgeeks.org/problems/palindromic-patitioning4845/1,"1. Problem Summary: The Palindrome Partitioning Problem involves splitting a given string into as few substrings as possible such that each substring is a palindrome. The goal is to determine the minimum number of cuts needed.
 
 2. Approach: The dynamic programming approach involves two main steps. First, create a 2D boolean array `isPalindrome` where `isPalindrome[i][j]` is true if the substring from index `i` to `j` is a palindrome. This can be filled by checking characters and using previously computed palindrome information. Second, use another array `minCut` where `minCut[i]` represents the minimum cuts needed for the substring starting from the beginning up to index `i`. For each character, if the substring ending at that character is a palindrome, update the `minCut` array using the minimum of the previous results plus one cut. This approach ensures that each substring is checked minimally and efficiently.
 
@@ -1534,7 +1534,7 @@ int minPalindromePartitions(string s) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n^2) due to the nested loops for checking palindromes and calculating cuts, and the space complexity is also O(n^2) due to the 2D boolean array for palindrome checks."
-Dynamic Programming,Word Wrap Problem,"1. Problem Summary: The Word Wrap Problem involves arranging a sequence of words such that they fit within a fixed width line while minimizing the cost of breaking lines. The cost is typically calculated based on the square of the number of extra spaces at the end of each line, except the last one.
+Dynamic Programming,Word Wrap Problem,https://practice.geeksforgeeks.org/problems/word-wrap/0,"1. Problem Summary: The Word Wrap Problem involves arranging a sequence of words such that they fit within a fixed width line while minimizing the cost of breaking lines. The cost is typically calculated based on the square of the number of extra spaces at the end of each line, except the last one.
 
 2. Approach: The optimal algorithm uses dynamic programming to solve this problem. We define `cost[i][j]` as the cost of putting words from `i` to `j` in a single line. If the combined length of words from `i` to `j` with spaces exceeds the line width, `cost[i][j]` is set to infinity. Otherwise, it's set to the square of the remaining space after placing these words. We then use an array `dp[]`, where `dp[i]` represents the minimum cost of wrapping words from 1 to `i`. We compute `dp[i]` by considering each `k` from 1 to `i` and checking if words from `k` to `i` can fit on one line, updating `dp[i]` as the minimum of its current value and `dp[k-1] + cost[k][i]`. Finally, `dp[n]` gives the minimum cost for all words.
 
@@ -1578,7 +1578,7 @@ int solveWordWrap(vector<int>& words, int maxWidth) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n^2) and the space complexity is also O(n^2), where n is the number of words."
-Dynamic Programming,Mobile Numeric Keypad Problem [ IMP ],"1. Problem Summary:  
+Dynamic Programming,Mobile Numeric Keypad Problem [ IMP ],https://practice.geeksforgeeks.org/problems/mobile-numeric-keypad5456/1,"1. Problem Summary:  
    The Mobile Numeric Keypad Problem involves finding out the number of possible numbers of a given length that can be formed using a standard mobile numeric keypad, where from each key, you can move to certain other keys (or stay on the same key) to form a number.
 
 2. Approach:  
@@ -1620,7 +1620,7 @@ int countNumbers(int n) {
 
 4. Time Complexity and Space Complexity:  
    The time complexity is O(n), and the space complexity is O(n), where n is the length of the number to be formed."
-Dynamic Programming,Boolean Parenthesization Problem,"1. Problem Summary: 
+Dynamic Programming,Boolean Parenthesization Problem,https://practice.geeksforgeeks.org/problems/boolean-parenthesization/0,"1. Problem Summary: 
 The Boolean Parenthesization Problem involves finding the number of ways to parenthesize a boolean expression (made of symbols `T` (True), `F` (False) and operators `&` (AND), `|` (OR), `^` (XOR)) such that the expression evaluates to a given boolean value.
 
 2. Approach:
@@ -1666,7 +1666,7 @@ int countParenth(string symbols, string operators) {
 
 4. Time Complexity and Space Complexity:
 The time complexity is O(n^3) due to the three nested loops, and the space complexity is O(n^2) because of the storage required for the two matrices."
-Dynamic Programming,Largest rectangular sub-matrix whose sum is 0,"1. Problem Summary: The problem is to find the largest sub-matrix within a given matrix where the sum of the elements is zero. This sub-matrix can be of any size and located anywhere within the larger matrix.
+Dynamic Programming,Largest rectangular sub-matrix whose sum is 0,https://www.geeksforgeeks.org/largest-rectangular-sub-matrix-whose-sum-0/,"1. Problem Summary: The problem is to find the largest sub-matrix within a given matrix where the sum of the elements is zero. This sub-matrix can be of any size and located anywhere within the larger matrix.
 
 2. Approach: The optimal solution uses a combination of dynamic programming and hashing. First, iterate over all possible pairs of row indices (top and bottom). For each pair, compute the cumulative sum of elements column-wise between these two rows. This transformation reduces the problem to finding the largest subarray with a sum of zero in a 1D array for each column segment. Use a hashmap to store the sum of elements up to each column index and check if the same sum has occurred before. If it has, the subarray between the previous index where this sum occurred and the current column index has a sum of zero. Update the maximum size of the sub-matrix found so far. Repeat this for each pair of rows.
 
@@ -1711,7 +1711,7 @@ pair<int, int> largestZeroSumSubmatrix(vector<vector<int>>& matrix) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n^3 * m) and the space complexity is O(m), where n is the number of rows and m is the number of columns in the matrix. The cubic time complexity arises from iterating over all pairs of rows and then iterating over columns, while the space complexity is due to storing cumulative sums and the hashmap."
-Dynamic Programming,Largest area rectangular sub-matrix with equal number of 1’s and 0’s [ IMP ],"1. Problem Summary: The problem is to find the largest rectangular sub-matrix in a binary matrix (consisting of 0's and 1's) where the number of 1's and 0's are equal. The challenge is to optimize the solution to handle larger matrices efficiently.
+Dynamic Programming,Largest area rectangular sub-matrix with equal number of 1’s and 0’s [ IMP ],https://www.geeksforgeeks.org/largest-area-rectangular-sub-matrix-equal-number-1s-0s/,"1. Problem Summary: The problem is to find the largest rectangular sub-matrix in a binary matrix (consisting of 0's and 1's) where the number of 1's and 0's are equal. The challenge is to optimize the solution to handle larger matrices efficiently.
 
 2. Approach: The optimal approach involves using a dynamic programming technique combined with hashing. First, transform the matrix such that each 0 becomes -1, which allows us to use a prefix sum to find subarrays with a sum of 0 (indicating equal numbers of 1's and 0's). For each pair of rows, compute the cumulative sum for columns between these rows. Use a hash map to store the first occurrence of each cumulative sum. If the same sum occurs again, it indicates a subarray (bounded by these two rows) with equal numbers of 1's and 0's. Update the maximum area if this sub-matrix is larger than the previously found one. This approach leverages the idea of finding zero-sum subarrays using prefix sums and hashing, which is a common technique in array processing problems.
 
@@ -1761,7 +1761,7 @@ int largestSubmatrixWithEqualZeroesOnes(vector<vector<int>>& matrix) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(rows^2 * cols), and the space complexity is O(cols), where `rows` and `cols` are the dimensions of the matrix. This is due to the nested loops over rows and the single pass over columns within these loops, combined with hashing operations."
-Dynamic Programming,Maximum sum rectangle in a 2D matrix,"1. Problem Summary: 
+Dynamic Programming,Maximum sum rectangle in a 2D matrix,https://practice.geeksforgeeks.org/problems/maximum-sum-rectangle/0,"1. Problem Summary: 
 The problem is to find the maximum sum of any rectangle in a given 2D matrix. This sub-matrix must be contiguous along both rows and columns.
 
 2. Approach:
@@ -1801,7 +1801,7 @@ int kadane(vector<int>& arr) {
 
 4. Time Complexity and Space Complexity: 
 The time complexity is O(cols^2 * rows), and the space complexity is O(rows), where `cols` and `rows` are the number of columns and rows in the matrix, respectively."
-Dynamic Programming,Maximum profit by buying and selling a share at most k times,"1. Problem Summary:
+Dynamic Programming,Maximum profit by buying and selling a share at most k times,https://practice.geeksforgeeks.org/problems/maximum-profit4657/1,"1. Problem Summary:
    The problem involves finding the maximum profit that can be made by buying and selling a stock at most `k` times given the stock price for `n` days. The challenge is to maximize profit under the constraint that you must sell the stock before buying it again.
 
 2. Approach:
@@ -1830,7 +1830,7 @@ int maxProfit(int k, vector<int>& prices) {
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(kn) and the space complexity is O(kn), where `n` is the number of days and `k` is the maximum number of transactions allowed."
-Dynamic Programming,Find if a string is interleaved of two other strings,"1. Problem Summary: The problem is to determine if a given string `C` can be formed by interleaving two other strings `A` and `B`. Interleaving means that the characters from `A` and `B` must be in the same order in `C` as they are in their respective strings, but they can be merged in any way without mixing up the order within each string.
+Dynamic Programming,Find if a string is interleaved of two other strings,https://practice.geeksforgeeks.org/problems/interleaved-strings/1,"1. Problem Summary: The problem is to determine if a given string `C` can be formed by interleaving two other strings `A` and `B`. Interleaving means that the characters from `A` and `B` must be in the same order in `C` as they are in their respective strings, but they can be merged in any way without mixing up the order within each string.
 
 2. Approach: Use dynamic programming to solve this problem. Create a 2D boolean DP table `dp` where `dp[i][j]` represents whether the first `i` characters of `A` and the first `j` characters of `B` can form the first `i+j` characters of `C`. Initialize `dp[0][0]` to true, as empty strings interleave to form an empty string. For each cell in the table, set `dp[i][j]` to true if either `dp[i-1][j]` is true and `A[i-1]` equals `C[i+j-1]`, or if `dp[i][j-1]` is true and `B[j-1]` equals `C[i+j-1]`. This approach builds up the solution by verifying each sub-problem of interleaving prefixes of `A` and `B` to form prefixes of `C`.
 
@@ -1859,7 +1859,7 @@ bool isInterleave(string A, string B, string C) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(m*n) and the space complexity is also O(m*n), where m and n are the lengths of strings A and B, respectively."
-Dynamic Programming,Maximum Length of Pair Chain,"1. Problem Summary: The ""Maximum Length of Pair Chain"" problem involves finding the longest chain of pairs where each pair consists of two numbers. Each pair `(a, b)` can follow another pair `(c, d)` in the chain if `b < c`. The goal is to form the longest possible chain.
+Dynamic Programming,Maximum Length of Pair Chain,https://leetcode.com/problems/maximum-length-of-pair-chain/,"1. Problem Summary: The ""Maximum Length of Pair Chain"" problem involves finding the longest chain of pairs where each pair consists of two numbers. Each pair `(a, b)` can follow another pair `(c, d)` in the chain if `b < c`. The goal is to form the longest possible chain.
 
 2. Approach: 
    - First, sort the pairs based on their first element (if they are the same, then by the second element). This sorting helps in linearly checking the possibility of chaining without revisiting earlier pairs.

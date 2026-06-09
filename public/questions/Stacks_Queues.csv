@@ -1,5 +1,5 @@
-TOPIC,PROBLEM LINK,SOLUTION
-Stacks & Queues, Implement Stack from Scratch,"1. Problem Summary: Implement a stack data structure from scratch. A stack is a linear data structure that follows the Last In First Out (LIFO) principle, where the last element added to the stack is the first one to be removed.
+TOPIC,PROBLEM NAME,URL,SOLUTION
+Stacks & Queues, Implement Stack from Scratch,https://www.tutorialspoint.com/javaexamples/data_stack.htm,"1. Problem Summary: Implement a stack data structure from scratch. A stack is a linear data structure that follows the Last In First Out (LIFO) principle, where the last element added to the stack is the first one to be removed.
 
 2. Approach: To implement a stack, we'll use dynamic array (like `vector` in C++) to store the elements. The main operations to implement are `push` (add an element to the top), `pop` (remove the top element), and `top` (retrieve the top element without removing it). We'll maintain an index to track the current top of the stack. `push` will add an element at the next available index, `pop` will remove the element at the current top (if the stack is not empty), and `top` will return the element at the current top. Using a vector simplifies dynamic resizing while maintaining the ability to access the top element in constant time.
 
@@ -37,7 +37,7 @@ public:
 ```
 
 4. Time Complexity and Space Complexity: All operations (`push`, `pop`, `top`, `isEmpty`) have a time complexity of O(1). Space complexity is O(n), where n is the number of elements in the stack."
-Stacks & Queues, Implement Queue from Scratch,"1. Problem Summary: Implement a queue using basic data structures like arrays or linked lists. A queue is a linear data structure that follows the First In First Out (FIFO) principle, where elements are added at one end (rear) and removed from the other end (front).
+Stacks & Queues, Implement Queue from Scratch,https://www.geeksforgeeks.org/queue-set-1introduction-and-array-implementation/,"1. Problem Summary: Implement a queue using basic data structures like arrays or linked lists. A queue is a linear data structure that follows the First In First Out (FIFO) principle, where elements are added at one end (rear) and removed from the other end (front).
 
 2. Approach: The optimal way to implement a queue from scratch is using a linked list. With a linked list, you can efficiently add elements at the end and remove elements from the beginning. Initialize two pointers, `front` and `rear`, which point to the first and the last node of the linked list respectively. For enqueue operation (adding elements), create a new node, link it after the current `rear`, and update the `rear` to this new node. For dequeue operation (removing elements), return the data from the `front` node, update the `front` to the next node, and handle the edge case when the queue becomes empty.
 
@@ -97,7 +97,7 @@ public:
 ```
 
 4. Time Complexity and Space Complexity: The time complexity for both enqueue and dequeue operations is O(1). The space complexity is O(n), where n is the number of elements in the queue."
-Stacks & Queues,Implement 2 stack in an array,"1. Problem Summary: The task is to implement two stacks within a single array. The goal is to efficiently utilize the space such that both stacks can grow and shrink without causing unnecessary memory usage or overflow unless the entire array space is exhausted.
+Stacks & Queues,Implement 2 stack in an array,https://practice.geeksforgeeks.org/problems/implement-two-stacks-in-an-array/1,"1. Problem Summary: The task is to implement two stacks within a single array. The goal is to efficiently utilize the space such that both stacks can grow and shrink without causing unnecessary memory usage or overflow unless the entire array space is exhausted.
 
 2. Approach: The array is divided conceptually into two parts from the start and the end, growing towards each other in the middle. Stack1 starts from the beginning of the array and grows towards the end, and Stack2 starts from the end of the array and grows towards the beginning. This approach ensures that space is utilized efficiently as long as there is space in the array; one stack can grow at the expense of the other shrinking. Operations like push and pop for each stack involve checking and updating indices that represent the tops of the stacks. If the indices meet, it indicates that the array is full (when pushing) or empty (when popping from an empty stack).
 
@@ -162,7 +162,7 @@ public:
 ```
 
 4. Time Complexity and Space Complexity: Both time complexity for operations (push and pop) is O(1), and space complexity is O(n) for the array storage."
-Stacks & Queues,find the middle element of a stack,"1. Problem Summary: The objective is to find the middle element of a stack without using any additional data structures to store the elements. The challenge arises since stacks traditionally allow only top element access.
+Stacks & Queues,find the middle element of a stack,https://www.geeksforgeeks.org/design-a-stack-with-find-middle-operation/,"1. Problem Summary: The objective is to find the middle element of a stack without using any additional data structures to store the elements. The challenge arises since stacks traditionally allow only top element access.
 
 2. Approach: To efficiently find the middle element of a stack, utilize two pointers technique adapted to stack operations. This involves maintaining two pointers, `slow` and `fast`, where `slow` moves one step (one pop operation) and `fast` moves two steps (two pop operations). By the time `fast` reaches the end of the stack (i.e., it encounters an empty state after pops), `slow` will be at the middle of the stack. This method requires careful handling of the pop operations to ensure the stack's integrity is maintained or restored post-operation if needed.
 
@@ -206,7 +206,7 @@ int findMiddle(stack<int>& stk) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) as each element is processed up to twice, and the space complexity is O(n) due to the use of an additional stack for temporary storage and restoration."
-Stacks & Queues,"Implement ""N"" stacks in an Array","1. Problem Summary:
+Stacks & Queues,"Implement ""N"" stacks in an Array",https://www.geeksforgeeks.org/efficiently-implement-k-stacks-single-array/,"1. Problem Summary:
    Implementing ""N"" stacks in a single array involves managing multiple stack operations such as push, pop, and top within one contiguous block of memory, ensuring efficient use of space and minimizing memory waste.
 
 2. Approach:
@@ -269,7 +269,7 @@ public:
 ```
 4. Time Complexity and Space Complexity:
    The time complexity for push and pop operations is O(1). The space complexity is O(n + s), where n is the number of stacks and s is the size of the array."
-Stacks & Queues,Check the expression has valid or Balanced parenthesis or not.,"1. Problem Summary: The problem is to determine if the given expression has balanced parentheses. This means each opening bracket (such as '(', '{', '[') must have a corresponding closing bracket (such as ')', '}', ']') in the correct order.
+Stacks & Queues,Check the expression has valid or Balanced parenthesis or not.,https://practice.geeksforgeeks.org/problems/parenthesis-checker/0,"1. Problem Summary: The problem is to determine if the given expression has balanced parentheses. This means each opening bracket (such as '(', '{', '[') must have a corresponding closing bracket (such as ')', '}', ']') in the correct order.
 
 2. Approach: The optimal algorithm uses a stack to track opening parentheses. As you iterate through the expression, push any opening bracket onto the stack. When you encounter a closing bracket, check the stack's top element. If the stack is empty or the top does not match the corresponding opening bracket, the expression is unbalanced. If it matches, pop the stack. After processing the entire expression, if the stack is empty, the expression is balanced; otherwise, it is not. This approach intuitively mimics the nesting of expressions in programming and mathematics, making it easier to remember and replicate.
 
@@ -297,7 +297,7 @@ bool isBalanced(string expr) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the length of the string, as we traverse the string once. The space complexity is O(n) in the worst case when all characters are opening brackets."
-Stacks & Queues,Reverse a String using Stack,"1. Problem Summary: The task is to reverse a given string using a stack data structure. The challenge involves pushing each character of the string onto a stack and then utilizing the stack's Last In, First Out (LIFO) nature to reverse the string.
+Stacks & Queues,Reverse a String using Stack,https://practice.geeksforgeeks.org/problems/reverse-a-string-using-stack/1,"1. Problem Summary: The task is to reverse a given string using a stack data structure. The challenge involves pushing each character of the string onto a stack and then utilizing the stack's Last In, First Out (LIFO) nature to reverse the string.
 
 2. Approach: To reverse a string using a stack, first create an empty stack. Iterate over each character of the input string and push each character onto the stack. Since stacks operate on a LIFO principle, the last character pushed becomes the first to be popped. After pushing all characters, construct the reversed string by popping each character from the stack until the stack is empty. This method leverages the intrinsic properties of stacks to reverse the sequence of characters naturally.
 
@@ -325,7 +325,7 @@ string reverseStringUsingStack(string s) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) and the space complexity is also O(n), where n is the length of the string."
-Stacks & Queues,Design a Stack that supports getMin() in O(1) time and O(1) extra space.,"1. Problem Summary:  
+Stacks & Queues,Design a Stack that supports getMin() in O(1) time and O(1) extra space.,https://practice.geeksforgeeks.org/problems/special-stack/1,"1. Problem Summary:  
    The task is to design a stack that, in addition to standard stack operations, can retrieve the minimum element in constant time (O(1)) without using additional space proportional to the number of elements in the stack.
 
 2. Approach:  
@@ -382,7 +382,7 @@ public:
 
 4. Time Complexity and Space Complexity:  
    All operations (push, pop, top, getMin) run in O(1) time. The space complexity is O(1) extra space, as the stack uses only space necessary for its elements without additional structures for tracking the minimum."
-Stacks & Queues,Find the next Greater element,"1. Problem Summary: 
+Stacks & Queues,Find the next Greater element,https://practice.geeksforgeeks.org/problems/next-larger-element/0,"1. Problem Summary: 
    The ""Find the next Greater Element"" problem asks for each element in an array, to find the first greater element on its right. If no such element exists, the result should be -1 for that element.
 
 2. Approach: 
@@ -416,7 +416,7 @@ vector<int> nextGreaterElement(vector<int>& nums) {
 
 4. Time Complexity and Space Complexity: 
    The time complexity is O(n) because each element is pushed and popped from the stack at most once. The space complexity is O(n) due to the stack and the result array."
-Stacks & Queues,The celebrity Problem,"1. Problem Summary: In the ""Celebrity Problem,"" you are given a matrix where the element at `[i][j]` is `true` if person `i` knows person `j`. The task is to identify the ""celebrity,"" who is known by everyone but knows no one themselves, among a group of `n` people.
+Stacks & Queues,The celebrity Problem,https://practice.geeksforgeeks.org/problems/the-celebrity-problem/1,"1. Problem Summary: In the ""Celebrity Problem,"" you are given a matrix where the element at `[i][j]` is `true` if person `i` knows person `j`. The task is to identify the ""celebrity,"" who is known by everyone but knows no one themselves, among a group of `n` people.
 
 2. Approach: The optimal approach uses a two-pointer technique to narrow down the potential celebrity. Start by initializing two pointers, one at the beginning (`i=0`) and one at the end (`j=n-1`) of the list of people. Compare whether person `i` knows person `j`. If `i` knows `j`, then `i` cannot be the celebrity, so move the pointer to `i+1`; otherwise, `j` cannot be the celebrity, so move the pointer to `j-1`. Continue this until `i` equals `j`, at which point you have a potential celebrity candidate. Verify this candidate by ensuring they are not known by any other person and that they know no other person. This approach intuitively uses elimination to narrow down the possibilities, making it easier to remember and implement.
 
@@ -443,7 +443,7 @@ int findCelebrity(int n, vector<vector<bool>>& knows) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) as each person is compared at most twice, and the space complexity is O(1) as no extra space is used beyond variables."
-Stacks & Queues,Arithmetic Expression evaluation,"1. Problem Summary: 
+Stacks & Queues,Arithmetic Expression evaluation,"https://www.geeksforgeeks.org/arithmetic-expression-evalution/#:~:text=The%20stack%20organization%20is%20very,i.e.%2C%20A%20%2B%20B).","1. Problem Summary: 
 The task involves evaluating an arithmetic expression that consists of integers and basic operators (like +, -, *, /) possibly including parentheses to denote precedence. The goal is to compute the integer result of the expression.
 
 2. Approach: 
@@ -547,7 +547,7 @@ int evaluateExpression(string tokens) {
 
 4. Time Complexity and Space Complexity: 
 The time complexity is O(n) where n is the length of the expression, as each character is processed once. Space complexity is also O(n) to store the values and operators in stacks."
-Stacks & Queues,Evaluation of Postfix expression,"1. Problem Summary: 
+Stacks & Queues,Evaluation of Postfix expression,https://practice.geeksforgeeks.org/problems/evaluation-of-postfix-expression/0,"1. Problem Summary: 
    The task is to evaluate a postfix expression (also known as Reverse Polish notation) where operators follow their operands. This format eliminates the need for parentheses to denote operation precedence.
 
 2. Approach: 
@@ -580,7 +580,7 @@ int evaluatePostfix(string expression) {
 
 4. Time Complexity and Space Complexity: 
    The time complexity is O(n) where n is the length of the expression, as each character is processed once. The space complexity is O(n) in the worst case when all characters are operands and are pushed onto the stack."
-Stacks & Queues,Implement a method to insert an element at its bottom without using any other data structure.,"1. Problem Summary: The task involves inserting an element at the bottom of a stack without utilizing any additional data structures. This requires manipulation of the stack's order temporarily to place the new element at the bottom.
+Stacks & Queues,Implement a method to insert an element at its bottom without using any other data structure.,https://stackoverflow.com/questions/45130465/inserting-at-the-end-of-stack,"1. Problem Summary: The task involves inserting an element at the bottom of a stack without utilizing any additional data structures. This requires manipulation of the stack's order temporarily to place the new element at the bottom.
 
 2. Approach: The solution to this problem uses recursion, which effectively utilizes the call stack as a temporary storage to hold elements while the stack is manipulated. First, if the stack is empty, the element is directly pushed onto the stack. Otherwise, the top element of the stack is removed and stored temporarily (using recursion). After reaching the base case (an empty stack), the new element is pushed onto the stack. Then, as the recursion unwinds, each stored element is pushed back on top of the new element, thus maintaining the original order above the newly inserted bottom element. This approach intuitively mimics peeling layers off the stack, placing the new element at the base, and then restoring the layers.
 
@@ -602,7 +602,7 @@ void insertAtBottom(stack<int>& stk, int element) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) and the space complexity is O(n), where n is the number of elements in the stack. This is due to the recursion depth being equal to the size of the stack."
-Stacks & Queues,Reverse a stack using recursion,"1. Problem Summary: The task is to reverse a given stack using only recursion without using any extra stack or data structure for storage. The stack should be reversed in-place.
+Stacks & Queues,Reverse a stack using recursion,https://www.geeksforgeeks.org/reverse-a-stack-using-recursion/,"1. Problem Summary: The task is to reverse a given stack using only recursion without using any extra stack or data structure for storage. The stack should be reversed in-place.
 
 2. Approach: The solution involves two recursive functions: one to remove all items from the stack and another to insert each item at the bottom of the stack. First, recursively pop all elements from the stack until it's empty. For each element popped, recursively call another function to insert this element at the bottom of the stack. The insertion function places the current element at the bottom by first removing all elements, pushing the current element, and then pushing all removed elements back on top. This approach leverages the call stack of recursion as temporary storage to reverse the original stack.
 
@@ -633,7 +633,7 @@ void reverseStack(stack<int>& st) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n^2), where n is the number of elements in the stack, due to the nested recursive calls. The space complexity is O(n) due to the recursive stack space used."
-Stacks & Queues,Sort a Stack using recursion,"1. Problem Summary:
+Stacks & Queues,Sort a Stack using recursion,https://practice.geeksforgeeks.org/problems/sort-a-stack/1,"1. Problem Summary:
    The problem is to sort a given stack using only recursion, without using any additional data structures like another stack, array, etc. The goal is to sort the stack in such a way that the smallest elements are on top.
 
 2. Approach:
@@ -667,7 +667,7 @@ void sortStack(stack<int>& s) {
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(n^2) in the worst case, where n is the number of elements in the stack. The space complexity is O(n) due to the recursive stack space."
-Stacks & Queues,Merge Overlapping Intervals,"1. Problem Summary: The ""Merge Overlapping Intervals"" problem involves taking a list of intervals and merging all overlapping intervals to produce a list of mutually exclusive intervals.
+Stacks & Queues,Merge Overlapping Intervals,https://practice.geeksforgeeks.org/problems/overlapping-intervals/0,"1. Problem Summary: The ""Merge Overlapping Intervals"" problem involves taking a list of intervals and merging all overlapping intervals to produce a list of mutually exclusive intervals.
 
 2. Approach: 
    Start by sorting the intervals based on their starting points. This allows you to easily compare the current interval with the previous one to check for overlaps. For each interval in the sorted list, check if it overlaps with the last interval in the merged list (initially empty). If they overlap (i.e., the start of the current interval is less than or equal to the end of the last merged interval), merge them by updating the end of the last merged interval to the maximum of its own end and the end of the current interval. If they do not overlap, simply add the current interval to the merged list. This method leverages sorting to simplify the comparison and merging process, making it intuitive and efficient.
@@ -696,7 +696,7 @@ vector<vector<int>> mergeIntervals(vector<vector<int>>& intervals) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n log n) due to the sorting step, and the space complexity is O(n) for storing the result."
-Stacks & Queues,Largest rectangular Area in Histogram,"1. Problem Summary:
+Stacks & Queues,Largest rectangular Area in Histogram,https://practice.geeksforgeeks.org/problems/maximum-rectangular-area-in-a-histogram/0,"1. Problem Summary:
    The problem is to find the largest rectangular area possible in a histogram where each bar's width is 1 and the height of the bars is given by an array of integers.
 
 2. Approach:
@@ -727,7 +727,7 @@ int largestRectangleArea(vector<int>& heights) {
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(n) and the space complexity is O(n), where n is the number of bars in the histogram."
-Stacks & Queues,Length of the Longest Valid Substring,"1. Problem Summary: The problem is to find the length of the longest valid substring of parentheses. A valid substring is one where each opening parenthesis '(' has a corresponding closing parenthesis ')'.
+Stacks & Queues,Length of the Longest Valid Substring,https://practice.geeksforgeeks.org/problems/valid-substring0624/1,"1. Problem Summary: The problem is to find the length of the longest valid substring of parentheses. A valid substring is one where each opening parenthesis '(' has a corresponding closing parenthesis ')'.
 
 2. Approach: The optimal approach uses a stack to track indices of characters and a variable to store the length of the longest valid substring. Start by pushing -1 onto the stack to act as a base for later valid substrings. Traverse the string: for each opening bracket '(', push its index onto the stack; for each closing bracket ')', pop the top of the stack. If the stack is empty after the pop, push the current index onto the stack (it acts as a new base). If the stack is not empty, calculate the length of the current valid substring by subtracting the current index with the new top of the stack. Update the maximum length accordingly. This method leverages the stack to efficiently track and calculate lengths of valid substrings by using indices.
 
@@ -758,7 +758,7 @@ int longestValidParentheses(string s) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n), where n is the length of the string, as we traverse the string once. The space complexity is O(n) in the worst case, due to the stack storage."
-Stacks & Queues,Expression contains redundant bracket or not,"1. Problem Summary:
+Stacks & Queues,Expression contains redundant bracket or not,https://www.geeksforgeeks.org/expression-contains-redundant-bracket-not/,"1. Problem Summary:
    The problem is to determine if an expression has redundant brackets. Redundant brackets are those which do not affect the overall value of the expression (e.g., `(a+b)` is not redundant, but `((a+b))` is).
 
 2. Approach:
@@ -791,7 +791,7 @@ Stacks & Queues,Expression contains redundant bracket or not,"1. Problem Summary
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(n), and the space complexity is O(n), where n is the length of the expression."
-Stacks & Queues,Implement Stack using Queue,"1. Problem Summary: The task is to implement a stack data structure using only queue operations. A stack operates on the Last-In-First-Out (LIFO) principle, whereas a queue is First-In-First-Out (FIFO).
+Stacks & Queues,Implement Stack using Queue,https://practice.geeksforgeeks.org/problems/stack-using-two-queues/1,"1. Problem Summary: The task is to implement a stack data structure using only queue operations. A stack operates on the Last-In-First-Out (LIFO) principle, whereas a queue is First-In-First-Out (FIFO).
 
 2. Approach: To simulate stack behavior using queues, we can use two queues where one queue is used to hold the stack elements and the other is used during the push operation to ensure the LIFO order. For the push operation, the new element is enqueued to the auxiliary queue and all elements of the primary queue are dequeued and enqueued into the auxiliary queue, thus reversing the order. The queues are then swapped. For pop and top operations, simply dequeue from the primary queue, which now holds elements in a LIFO order.
 
@@ -828,7 +828,7 @@ public:
 ```
 
 4. Time Complexity and Space Complexity: The time complexity for push is O(n), while pop and top are O(1). The space complexity is O(n), where n is the number of elements in the stack."
-Stacks & Queues,Implement Stack using Deque,"1. Problem Summary:  
+Stacks & Queues,Implement Stack using Deque,https://www.geeksforgeeks.org/implement-stack-queue-using-deque/,"1. Problem Summary:  
 The task is to implement a stack data structure using a deque. A stack follows the Last In First Out (LIFO) principle, where the last element added is the first one to be removed.
 
 2. Approach:  
@@ -868,7 +868,7 @@ public:
 
 4. Time Complexity and Space Complexity:  
 All operations (push, pop, top, isEmpty) have a time complexity of O(1). The space complexity is O(n), where n is the number of elements in the stack."
-Stacks & Queues,Stack Permutations (Check if an array is stack permutation of other),"1. Problem Summary: The problem requires checking if one array is a stack permutation of another. A stack permutation is possible if elements can be pushed and popped from a stack to transform the sequence from one array to another.
+Stacks & Queues,Stack Permutations (Check if an array is stack permutation of other),https://www.geeksforgeeks.org/stack-permutations-check-if-an-array-is-stack-permutation-of-other/,"1. Problem Summary: The problem requires checking if one array is a stack permutation of another. A stack permutation is possible if elements can be pushed and popped from a stack to transform the sequence from one array to another.
 
 2. Approach: To solve this, simulate the stack operations. Start by pushing elements from the input array onto a stack until the top of the stack matches the current element of the output array. Whenever the top element matches, pop it from the stack. Continue this process until all elements of the input array are processed or until you can no longer match the output array's sequence with stack operations. If at the end of the input array, the stack is empty, then the output array is a valid stack permutation of the input array; otherwise, it is not.
 
@@ -896,7 +896,7 @@ bool checkStackPermutation(vector<int>& input, vector<int>& output) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) and the space complexity is O(n), where n is the number of elements in the input array."
-Stacks & Queues,Implement Queue using Stack  ,"1. Problem Summary:
+Stacks & Queues,Implement Queue using Stack  ,https://practice.geeksforgeeks.org/problems/queue-using-two-stacks/1,"1. Problem Summary:
    Implement a queue using two stacks. The queue should support standard operations like enqueue, dequeue, and peek efficiently.
 
 2. Approach:
@@ -946,7 +946,7 @@ public:
 
 4. Time Complexity and Space Complexity:
    Amortized time complexity for enqueue is O(1), for dequeue and peek is O(1) amortized. Space complexity is O(n), where n is the number of elements in the queue."
-Stacks & Queues,"Implement ""n"" queue in an array","1. Problem Summary: The challenge is to efficiently implement multiple queues (specifically ""n"" queues) using a single array, ensuring optimal use of space and minimizing the overhead of queue operations like enqueue and dequeue.
+Stacks & Queues,"Implement ""n"" queue in an array",https://www.geeksforgeeks.org/efficiently-implement-k-queues-single-array/,"1. Problem Summary: The challenge is to efficiently implement multiple queues (specifically ""n"" queues) using a single array, ensuring optimal use of space and minimizing the overhead of queue operations like enqueue and dequeue.
 
 2. Approach: The optimal way to implement ""n"" queues in a single array is to use a dynamic array allocation technique. Each queue utilizes a front and rear index, along with a next index that points to the next available free slot in the array. We maintain three arrays: one for the actual data, one for the front and rear pointers of each queue, and one for managing free slots. Initially, all slots in the array are free. When enqueueing, update the rear to point to the next free slot, and update the next free slot using the free array. When dequeueing, update the front pointer and free the slot for future use. This method ensures efficient space utilization and constant time complexity for queue operations.
 
@@ -1020,7 +1020,7 @@ public:
 
 ```
 4. Time Complexity and Space Complexity: The time complexity for each operation (enqueue and dequeue) is O(1), and the space complexity is O(n + k), where n is the number of queues and k is the total number of elements in the array."
-Stacks & Queues,Implement a Circular queue,"1. Problem Summary: Implement a Circular Queue using an array. The circular queue should support operations like enqueue (insert an element), dequeue (remove an element), isEmpty, isFull, front (get the front element), and rear (get the last element).
+Stacks & Queues,Implement a Circular queue,https://www.geeksforgeeks.org/circular-queue-set-1-introduction-array-implementation/,"1. Problem Summary: Implement a Circular Queue using an array. The circular queue should support operations like enqueue (insert an element), dequeue (remove an element), isEmpty, isFull, front (get the front element), and rear (get the last element).
 
 2. Approach: A circular queue uses an array and two pointers, `front` and `rear`, to manage the elements. Initially, set `front` and `rear` to -1 to indicate an empty queue. For `enqueue`, check if the queue is full; if not, adjust the `rear` pointer circularly using modulo operation and insert the new element. For `dequeue`, check if the queue is empty; if not, retrieve the element at `front` and adjust the `front` pointer similarly. Use modulo to wrap around the array when necessary, which is key to making the queue circular and efficiently utilizing the array space.
 
@@ -1072,7 +1072,7 @@ public:
 ```
 
 4. Time Complexity and Space Complexity: Time complexity for all operations (enqueue, dequeue, isEmpty, isFull, front, rear) is O(1). Space complexity is O(n), where n is the capacity of the queue."
-Stacks & Queues,LRU Cache Implementationa,"1. Problem Summary:  
+Stacks & Queues,LRU Cache Implementationa,https://practice.geeksforgeeks.org/problems/lru-cache/1,"1. Problem Summary:  
    The LRU (Least Recently Used) Cache problem involves designing a data structure that supports the operations: accessing an item and adding an item, with the constraint that the cache should not exceed a specified size limit. When the cache is full, the least recently used item should be evicted.
 
 2. Approach:  
@@ -1154,7 +1154,7 @@ public:
 
 4. Time Complexity and Space Complexity:  
    Both time and space complexities are O(1) for access and O(N) for storage, where N is the capacity of the cache."
-Stacks & Queues,Reverse a Queue using recursion,"1. Problem Summary:  
+Stacks & Queues,Reverse a Queue using recursion,https://practice.geeksforgeeks.org/problems/queue-reversal/1,"1. Problem Summary:  
    The task is to reverse the elements of a given queue using recursion. This problem tests understanding of both queue operations and recursive function calls.
 
 2. Approach:  
@@ -1178,7 +1178,7 @@ Stacks & Queues,Reverse a Queue using recursion,"1. Problem Summary:
 
 4. Time Complexity and Space Complexity:  
    The time complexity is O(n) where n is the number of elements in the queue, as each element is processed exactly once. The space complexity is O(n) due to recursive call stack."
-Stacks & Queues,Reverse the first “K” elements of a queue,"1. Problem Summary:  
+Stacks & Queues,Reverse the first “K” elements of a queue,https://practice.geeksforgeeks.org/problems/reverse-first-k-elements-of-queue/1,"1. Problem Summary:  
    The problem involves reversing the first ""K"" elements of a queue while leaving the rest of the elements in their original order. The challenge is to achieve this without altering the inherent sequence of the remaining elements.
 
 2. Approach:  
@@ -1212,7 +1212,7 @@ void reverseFirstKElements(int K, queue<int> &q) {
 
 4. Time Complexity and Space Complexity:  
    The time complexity is O(n), where n is the number of elements in the queue, as each element is processed individually. The space complexity is O(k), where k is the number of elements to reverse, due to additional storage in the stack."
-Stacks & Queues,Interleave the first half of the queue with second half,"1. Problem Summary:
+Stacks & Queues,Interleave the first half of the queue with second half,https://www.geeksforgeeks.org/interleave-first-half-queue-second-half/,"1. Problem Summary:
    The problem involves rearranging the elements of a given queue such that the first half of the queue is interleaved with the second half. For instance, if the queue contains elements [1, 2, 3, 4, 5, 6], the output should be [1, 4, 2, 5, 3, 6].
 
 2. Approach:
@@ -1264,7 +1264,7 @@ void interleaveQueue(queue<int>& q) {
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(n) and the space complexity is O(n), where n is the number of elements in the queue. This is because we use a stack to store half of the elements and perform a constant number of operations (push and pop) proportional to the number of elements."
-Stacks & Queues,Find the first circular tour that visits all Petrol Pumps,"1. Problem Summary: The problem involves finding the starting petrol pump in a circular route from which a truck can complete the entire circle without exhausting its fuel. Each petrol pump provides a certain amount of petrol and has a distance to the next pump, requiring fuel to travel.
+Stacks & Queues,Find the first circular tour that visits all Petrol Pumps,https://practice.geeksforgeeks.org/problems/circular-tour/1,"1. Problem Summary: The problem involves finding the starting petrol pump in a circular route from which a truck can complete the entire circle without exhausting its fuel. Each petrol pump provides a certain amount of petrol and has a distance to the next pump, requiring fuel to travel.
 
 2. Approach: The solution uses a single loop iteration to identify the start point of the circular tour. Begin at the first pump and attempt to traverse the circle, tracking the total petrol and the total distance. If at any point the petrol in the truck becomes less than zero, it indicates that the tour cannot start from the current starting point. Reset the starting point to the next pump and continue. The excess petrol at each unsuccessful starting point is accumulated and if the overall surplus (total petrol minus total distance) is non-negative by the end of the loop, the last reset starting point is the solution.
 
@@ -1295,7 +1295,7 @@ int findStartingPoint(vector<int>& petrol, vector<int>& distance) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the number of petrol pumps. The space complexity is O(1) as only a constant amount of extra space is used."
-Stacks & Queues,Minimum time required to rot all oranges,"1. Problem Summary:  
+Stacks & Queues,Minimum time required to rot all oranges,https://practice.geeksforgeeks.org/problems/rotten-oranges/0,"1. Problem Summary:  
 The problem involves a grid where each cell can either be empty (0), contain a fresh orange (1), or contain a rotten orange (2). The challenge is to determine the minimum number of minutes required for all fresh oranges to become rotten, given that a rotten orange can rot its adjacent (up, down, left, right) fresh oranges each minute.
 
 2. Approach:  
@@ -1345,7 +1345,7 @@ int minTimeToRot(vector<vector<int>>& grid) {
 
 4. Time Complexity and Space Complexity:  
 The time complexity is O(N*M), where N and M are the dimensions of the grid, since each cell is processed once. The space complexity is O(N*M) in the worst case, due to the queue holding all the rotten oranges."
-Stacks & Queues,Distance of nearest cell having 1 in a binary matrix,"1. Problem Summary: The problem involves finding the minimum distance from each cell in a binary matrix to the nearest cell containing the value 1. The matrix consists of 0s and 1s, where 1 represents a particular condition (like land in a sea of water represented by 0s) and the distance is measured in terms of the number of moves to the nearest cell with 1 using only up, down, left, or right moves.
+Stacks & Queues,Distance of nearest cell having 1 in a binary matrix,https://practice.geeksforgeeks.org/problems/distance-of-nearest-cell-having-1/0,"1. Problem Summary: The problem involves finding the minimum distance from each cell in a binary matrix to the nearest cell containing the value 1. The matrix consists of 0s and 1s, where 1 represents a particular condition (like land in a sea of water represented by 0s) and the distance is measured in terms of the number of moves to the nearest cell with 1 using only up, down, left, or right moves.
 
 2. Approach: The optimal solution utilizes a Breadth-First Search (BFS) starting from all cells containing 1 simultaneously. Initially, push all positions of 1s in the queue and set their distance to 0. For each cell that contains 0, set its initial distance to a large number or infinity. As the BFS progresses, update the distance of each neighboring cell if the current cell provides a shorter path. This simultaneous BFS ensures that each cell's distance is computed with respect to the nearest 1, effectively and efficiently spreading out from all initial 1 positions.
 
@@ -1392,7 +1392,7 @@ vector<vector<int>> updateMatrix(vector<vector<int>>& matrix) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(R*C) where R is the number of rows and C is the number of columns in the matrix, as each cell is processed once. The space complexity is also O(R*C) due to the queue and distance matrix storage."
-Stacks & Queues,First negative integer in every window of size “k”,"1. Problem Summary:
+Stacks & Queues,First negative integer in every window of size “k”,https://practice.geeksforgeeks.org/problems/first-negative-integer-in-every-window-of-size-k/0,"1. Problem Summary:
    The problem requires finding the first negative integer in every contiguous subarray of size ""k"" from a given array of integers.
 
 2. Approach:
@@ -1434,7 +1434,7 @@ vector<int> firstNegativeInWindow(vector<int>& arr, int k) {
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(n) since each element is processed at most twice (once for insertion and once for removal from the deque). The space complexity is O(k) due to the storage of indices in the deque, where k is the window size."
-Stacks & Queues,Check if all levels of two trees are anagrams or not.,"1. Problem Summary: The task is to determine if all corresponding levels of two binary trees are anagrams of each other. This means that for each level in both trees, the nodes at that level should have the same multiset of values, irrespective of their order.
+Stacks & Queues,Check if all levels of two trees are anagrams or not.,https://www.geeksforgeeks.org/check-if-all-levels-of-two-trees-are-anagrams-or-not/,"1. Problem Summary: The task is to determine if all corresponding levels of two binary trees are anagrams of each other. This means that for each level in both trees, the nodes at that level should have the same multiset of values, irrespective of their order.
 
 2. Approach: Use breadth-first search (BFS) to traverse each level of both trees simultaneously. For each level, extract the node values into two separate lists (one for each tree). Sort these lists and compare them to check if they are identical. If at any level the lists are not identical, the trees do not have anagrams at all levels. Sorting the lists helps in easy comparison of the multiset of values. Using BFS ensures that we traverse level by level, and sorting ensures that the order of nodes does not affect the comparison.
 
@@ -1477,7 +1477,7 @@ bool areLevelsAnagrams(TreeNode* root1, TreeNode* root2) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(N log N) due to the sorting of levels, where N is the total number of nodes in the larger tree. The space complexity is O(N) to store the nodes in the queue and the lists for each level."
-Stacks & Queues,Sum of minimum and maximum elements of all subarrays of size “k”.,"1. Problem Summary:
+Stacks & Queues,Sum of minimum and maximum elements of all subarrays of size “k”.,https://www.geeksforgeeks.org/sum-minimum-maximum-elements-subarrays-size-k/,"1. Problem Summary:
 The problem involves finding the sum of the minimum and maximum elements of all subarrays of size ""k"" from a given array. The challenge is to compute this sum efficiently for potentially large arrays and subarray sizes.
 
 2. Approach:
@@ -1517,7 +1517,7 @@ int sumOfMinAndMax(vector<int>& nums, int k) {
 
 4. Time Complexity and Space Complexity:
 The time complexity is O(n) because each element is added and removed from the deques at most once. The space complexity is O(k) due to the storage of indices in the deques."
-Stacks & Queues,Minimum sum of squares of character counts in a given string after removing “k” characters.,"1. Problem Summary: The problem involves determining the minimum sum of squares of character counts in a string after removing ""k"" characters. The goal is to strategically remove characters to minimize the sum of the squares of the remaining character frequencies.
+Stacks & Queues,Minimum sum of squares of character counts in a given string after removing “k” characters.,https://practice.geeksforgeeks.org/problems/game-with-string/0,"1. Problem Summary: The problem involves determining the minimum sum of squares of character counts in a string after removing ""k"" characters. The goal is to strategically remove characters to minimize the sum of the squares of the remaining character frequencies.
 
 2. Approach: To solve this problem, use a greedy algorithm with a max-heap (or priority queue) to efficiently manage and update character frequencies. First, calculate the frequency of each character in the string. Then, insert these frequencies into the max-heap. For each of the ""k"" removals, extract the maximum frequency from the heap, decrement it by one, and reinsert it into the heap if it's still greater than zero. After ""k"" removals, compute the sum of the squares of the remaining frequencies in the heap. This approach ensures that we always reduce the character count that will most decrease the sum of squares, which is the character with the highest frequency.
 
@@ -1557,7 +1557,7 @@ int minSumSquareAfterKRemovals(string s, int k) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n + k log n) and the space complexity is O(n), where n is the length of the input string."
-Stacks & Queues,Queue based approach or first non-repeating character in a stream.,"1. Problem Summary:
+Stacks & Queues,Queue based approach or first non-repeating character in a stream.,https://practice.geeksforgeeks.org/problems/first-non-repeating-character-in-a-stream/0,"1. Problem Summary:
    The problem requires finding the first non-repeating character at each point in a stream of characters. As new characters are read, the output should be updated to show the current first non-repeating character.
 
 2. Approach:
@@ -1599,7 +1599,7 @@ void findFirstNonRepeating() {
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(n) where n is the number of characters in the stream, as each character is processed once. The space complexity is O(1) since the size of the frequency array is constant and the queue size depends only on the number of unique characters."
-Stacks & Queues,Next Smaller Element,"1. Problem Summary: Given an array, for each element, find the next smaller element present in the array. If no smaller element exists for an element, return -1 for that element. The result should be an array of integers representing the next smaller element for each index.
+Stacks & Queues,Next Smaller Element,https://www.geeksforgeeks.org/next-smaller-element/,"1. Problem Summary: Given an array, for each element, find the next smaller element present in the array. If no smaller element exists for an element, return -1 for that element. The result should be an array of integers representing the next smaller element for each index.
 
 2. Approach: Utilize a stack to keep track of indices of the elements for which the next smaller element has not been found yet. Traverse the array from left to right. For each element, while the stack is not empty and the current element is less than the element at the index stored at the top of the stack, pop the index from the stack and update the result for that index with the current element. Push the current index onto the stack after processing. This approach ensures each element is pushed and popped from the stack exactly once, making it efficient.
 

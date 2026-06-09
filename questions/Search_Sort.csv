@@ -1,5 +1,5 @@
-TOPIC,PROBLEM LINK,SOLUTION
-Searching & Sorting,Search in a rotated sorted array,"1. Problem Summary:
+TOPIC,PROBLEM NAME,URL,SOLUTION
+Searching & Sorting,Search in a rotated sorted array,https://leetcode.com/problems/search-in-rotated-sorted-array/,"1. Problem Summary:
    The problem involves finding the index of a target value in an array that has been sorted and then rotated at some unknown pivot. The array initially increasing in order but is then ""rotated"" from a pivot point.
 
 2. Approach:
@@ -38,7 +38,7 @@ int searchRotatedArray(vector<int>& nums, int target) {
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(log n) due to the binary search approach, and the space complexity is O(1) since no additional space is used beyond temporary variables."
-Searching & Sorting,square root of an integer,"1. Problem Summary: The problem is to find the square root of a given non-negative integer `x` without using built-in square root functions. The result should be the floor value of the actual square root.
+Searching & Sorting,square root of an integer,https://practice.geeksforgeeks.org/problems/count-squares3649/1,"1. Problem Summary: The problem is to find the square root of a given non-negative integer `x` without using built-in square root functions. The result should be the floor value of the actual square root.
 
 2. Approach: The optimal approach to solve this problem is by using a binary search algorithm. Initialize two pointers, `low` as 0 and `high` as `x`. Compute the mid-point `mid` and compare its square with `x`. If `mid*mid` equals `x`, then `mid` is the square root. If `mid*mid` is less than `x`, move the `low` pointer to `mid + 1`, otherwise move the `high` pointer to `mid - 1`. This binary search continues until `low` exceeds `high`, ensuring that the largest `mid` whose square is less than or equal to `x` is found. This method efficiently narrows down the potential values for the square root by halving the search space in each iteration.
 
@@ -66,7 +66,7 @@ int sqrt(int x) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(log x) due to the binary search, and the space complexity is O(1), using only a few extra variables."
-Searching & Sorting,Maximum and minimum of an array using minimum number of comparisons,"1. Problem Summary: The task is to find the maximum and minimum elements in an array using the least number of comparisons, which is a common problem in optimizing algorithm efficiency.
+Searching & Sorting,Maximum and minimum of an array using minimum number of comparisons,https://practice.geeksforgeeks.org/problems/middle-of-three2926/1,"1. Problem Summary: The task is to find the maximum and minimum elements in an array using the least number of comparisons, which is a common problem in optimizing algorithm efficiency.
 
 2. Approach: The optimal approach is to use the Tournament Method, which pairs elements and compares them in a divide-and-conquer manner. First, split the array into two halves. For each pair, compare the elements and assign the smaller one to a min candidate and the larger one to a max candidate. This method reduces the total number of comparisons by minimizing redundant comparisons between potential min and max values. By comparing in pairs, each stage ensures that only necessary comparisons are made, thus optimizing the process. This intuitive pairing is similar to a tournament where winners (maximums) and losers (minimums) advance in their respective categories.
 
@@ -98,7 +98,7 @@ pair<int, int> findMinMax(vector<int>& arr, int low, int high) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) and the space complexity is O(log n) due to the recursive stack space."
-Searching & Sorting,Optimum location of point to minimize total distance,"1. Problem Summary:
+Searching & Sorting,Optimum location of point to minimize total distance,"https://www.geeksforgeeks.org/optimum-location-point-minimize-total-distance/#:~:text=We%20need%20to%20find%20a,set%20of%20points%20is%20minimum.&text=In%20above%20figure%20optimum%20location,is%20minimum%20obtainable%20total%20distance.","1. Problem Summary:
    The problem involves finding a point (P) on a given straight line (defined by a linear equation) such that the sum of the Euclidean distances from P to a set of given points is minimized.
 
 2. Approach:
@@ -143,7 +143,7 @@ double findOptimalT(double x0, double y0, double dx, double dy, vector<pair<doub
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(log(range/error) * n) due to the ternary search and distance calculations, where n is the number of points, and space complexity is O(1)."
-Searching & Sorting,Find the repeating and the missing,"1. Problem Summary: The problem involves finding one repeating and one missing number from an array of integers where the integers range from 1 to n. Each number appears exactly once, except for one number which repeats and one number which is missing.
+Searching & Sorting,Find the repeating and the missing,https://practice.geeksforgeeks.org/problems/find-missing-and-repeating2512/1,"1. Problem Summary: The problem involves finding one repeating and one missing number from an array of integers where the integers range from 1 to n. Each number appears exactly once, except for one number which repeats and one number which is missing.
 
 2. Approach: The optimal approach uses the mathematical properties of numbers. Calculate the sum of the first n natural numbers (`sum_n`) and the sum of squares of the first n natural numbers (`sum_n_squares`). Then, compute the sum and sum of squares of the elements in the array (`sum_arr` and `sum_arr_squares`). The difference between `sum_n` and `sum_arr` gives the net difference between the missing and repeating numbers, while the difference between `sum_n_squares` and `sum_arr_squares` gives the difference between the square of the missing number and the square of the repeating number. These two equations can be solved simultaneously to find the missing and repeating numbers.
 
@@ -176,7 +176,7 @@ pair<int, int> findRepeatingAndMissing(const vector<int>& arr) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) and the space complexity is O(1), as the solution involves a single pass through the array and uses a constant amount of extra space."
-Searching & Sorting,find majority element,"1. Problem Summary:
+Searching & Sorting,find majority element,https://practice.geeksforgeeks.org/problems/majority-element/0,"1. Problem Summary:
    The ""find majority element"" problem entails identifying an element in an array that appears more than n/2 times, where n is the total number of elements in the array.
 
 2. Approach:
@@ -204,7 +204,7 @@ int findMajorityElement(vector<int>& nums) {
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(n) and the space complexity is O(1), making this approach highly efficient."
-Searching & Sorting,Searching in an array where adjacent differ by at most k,"1. Problem Summary:
+Searching & Sorting,Searching in an array where adjacent differ by at most k,https://www.geeksforgeeks.org/searching-array-adjacent-differ-k/,"1. Problem Summary:
    The problem involves finding a target element in an array where the difference between any two adjacent elements is at most k. The challenge is to optimize the search process beyond a simple linear search.
 
 2. Approach:
@@ -231,7 +231,7 @@ int searchInArray(vector<int>& arr, int x, int k) {
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(n) in the worst case scenario but typically faster depending on the value of k and the differences in the array. Space complexity is O(1)."
-Searching & Sorting,find a pair with a given difference,"1. Problem Summary: The problem requires finding a pair of elements in a given array whose difference equals a specified number. The challenge is to find whether such a pair exists and is typically asked to be solved efficiently.
+Searching & Sorting,find a pair with a given difference,https://practice.geeksforgeeks.org/problems/find-pair-given-difference/0,"1. Problem Summary: The problem requires finding a pair of elements in a given array whose difference equals a specified number. The challenge is to find whether such a pair exists and is typically asked to be solved efficiently.
 
 2. Approach: The optimal algorithm uses sorting combined with a two-pointer technique. First, sort the array in ascending order. Initialize two pointers, `i` and `j` both at the start of the array. Incrementally move the pointer `j` to find the required difference with `i`. If the difference between the values at these pointers is less than the target, move `j` to increase the difference. If it's more, move `i` to decrease the difference. Continue this until a pair is found or the pointers validate the entire array. This method intuitively uses the sorted order to efficiently explore possible pairs by adjusting the pointers based on the current difference relative to the target.
 
@@ -259,7 +259,7 @@ bool findPairWithGivenDifference(vector<int>& arr, int n) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n log n) due to sorting, and the space complexity is O(1) if the sorting is done in-place."
-Searching & Sorting,find four elements that sum to a given value,"1. Problem Summary: The problem requires finding four distinct elements in an array that sum up to a specific target value. It is a variant of the k-sum problem, where k is 4 in this case.
+Searching & Sorting,find four elements that sum to a given value,https://practice.geeksforgeeks.org/problems/find-all-four-sum-numbers/0,"1. Problem Summary: The problem requires finding four distinct elements in an array that sum up to a specific target value. It is a variant of the k-sum problem, where k is 4 in this case.
 
 2. Approach: The optimal approach involves sorting the array and then using a combination of two pointers and hashing for a more efficient search. First, sort the array. For each pair of elements in the sorted array, use two pointers to find the remaining two numbers that make the sum equal to the target. By fixing the first two elements and using two pointers for the remaining part of the array, we reduce the problem to a two-sum problem, which can be solved in linear time. This method avoids the need for a four-nested loop, significantly reducing the time complexity.
 
@@ -300,7 +300,7 @@ vector<vector<int>> fourSum(vector<int>& nums, int target) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n^3) due to the three nested loops after sorting, and the space complexity is O(1) if we ignore the space required for the output."
-Searching & Sorting,maximum sum such that no 2 elements are adjacent,"1. Problem Summary: The problem is to find the maximum sum of elements from a given array where no two selected elements are adjacent. This is a common dynamic programming problem that tests the understanding of optimizing choices while adhering to constraints.
+Searching & Sorting,maximum sum such that no 2 elements are adjacent,https://practice.geeksforgeeks.org/problems/stickler-theif/0,"1. Problem Summary: The problem is to find the maximum sum of elements from a given array where no two selected elements are adjacent. This is a common dynamic programming problem that tests the understanding of optimizing choices while adhering to constraints.
 
 2. Approach: The optimal algorithm uses dynamic programming to solve this problem. We maintain an array `dp` where `dp[i]` represents the maximum sum we can achieve using the first `i` elements of the array, ensuring no two selected elements are adjacent. At each position `i`, we have two choices: either take the current element or skip it. If we take the current element, we add its value to `dp[i-2]` (since we cannot take the `i-1`th element). If we skip it, the value remains as `dp[i-1]`. The maximum of these two choices will be our `dp[i]`. Start with initializing `dp[0]` to the first element of the array, and `dp[1]` to the maximum of the first two elements.
 
@@ -323,7 +323,7 @@ int maxSumNoTwoAdjacent(vector<int>& nums) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) and the space complexity is O(n), where n is the number of elements in the input array."
-Searching & Sorting,Count triplet with sum smaller than a given value,"1. Problem Summary: The problem requires finding the count of triplets in an array such that the sum of the elements of the triplet is less than a given value `X`. The array may contain both positive and negative numbers.
+Searching & Sorting,Count triplet with sum smaller than a given value,https://practice.geeksforgeeks.org/problems/count-triplets-with-sum-smaller-than-x5549/1,"1. Problem Summary: The problem requires finding the count of triplets in an array such that the sum of the elements of the triplet is less than a given value `X`. The array may contain both positive and negative numbers.
 
 2. Approach: The optimal approach utilizes sorting and the two-pointer technique. First, sort the array. For each element in the array, use it as the first element of a potential triplet, and then try to find suitable second and third elements using two pointers, one starting just after the current first element and the other at the end of the array. Move the second pointer forward (increasing sum) and the third pointer backward (decreasing sum) to find pairs whose sum with the first element is less than `X`. This method ensures that all possible triplets are considered without redundant checks, leveraging the sorted nature of the array for efficient searching.
 
@@ -354,7 +354,7 @@ int countTriplets(vector<int>& arr, int X) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n^2), where n is the number of elements in the array, due to the nested loops after sorting. The space complexity is O(1), as no extra space is needed beyond input storage."
-Searching & Sorting,merge 2 sorted arrays,"1. Problem Summary: 
+Searching & Sorting,merge 2 sorted arrays,https://practice.geeksforgeeks.org/problems/merge-two-sorted-arrays5135/1,"1. Problem Summary: 
    The problem involves merging two pre-sorted arrays into a single sorted array. The input consists of two integer arrays sorted in non-decreasing order, and the output should be a merged sorted array containing all elements from both input arrays.
 
 2. Approach: 
@@ -391,7 +391,7 @@ vector<int> mergeSortedArrays(vector<int>& arr1, vector<int>& arr2) {
 
 4. Time Complexity and Space Complexity: 
    The time complexity is O(n + m), where n and m are the lengths of the two arrays, respectively. The space complexity is O(n + m) for storing the result array."
-Searching & Sorting,print all subarrays with 0 sum,"1. Problem Summary: The problem requires finding all subarrays within a given array that sum to zero. A subarray is a contiguous part of the original array, and the goal is to identify every possible subarray that meets this criterion.
+Searching & Sorting,print all subarrays with 0 sum,https://practice.geeksforgeeks.org/problems/zero-sum-subarrays/0,"1. Problem Summary: The problem requires finding all subarrays within a given array that sum to zero. A subarray is a contiguous part of the original array, and the goal is to identify every possible subarray that meets this criterion.
 
 2. Approach: The optimal solution uses a hashmap to track the cumulative sum of the elements of the array as you iterate through it. The key insight is that if the cumulative sum has been seen before, all elements between the previous occurrence and the current index sum to zero. We initialize the hashmap with a zero sum at index -1 to handle cases where a subarray starting from index 0 sums to zero. As we iterate, we check if the current cumulative sum minus zero (the target sum) exists in the hashmap, which indicates a subarray summing to zero ends at the current index.
 
@@ -418,7 +418,7 @@ void printAllSubarraysWithZeroSum(vector<int>& arr) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the number of elements in the array, due to a single pass through the array. The space complexity is O(n) as well, due to the storage required for the hashmap."
-Searching & Sorting,Product array Puzzle,"1. Problem Summary: 
+Searching & Sorting,Product array Puzzle,https://practice.geeksforgeeks.org/problems/product-array-puzzle/0,"1. Problem Summary: 
    The problem requires calculating a product array where each element is the product of all elements in the input array except the one at the current index. The challenge is to do this without using division.
 
 2. Approach:
@@ -454,7 +454,7 @@ Searching & Sorting,Product array Puzzle,"1. Problem Summary:
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(n) as we iterate over the array three times (once for `left[]`, once for `right[]`, and once to compute the product array). The space complexity is O(n) due to the additional arrays used for `left[]` and `right[]`."
-Searching & Sorting,Sort array according to count of set bits,"1. Problem Summary: The task is to sort an array of integers based on the number of 1s in their binary representation. If two numbers have the same count of set bits, they should remain in the order they appeared in the original array.
+Searching & Sorting,Sort array according to count of set bits,https://practice.geeksforgeeks.org/problems/sort-by-set-bit-count/0,"1. Problem Summary: The task is to sort an array of integers based on the number of 1s in their binary representation. If two numbers have the same count of set bits, they should remain in the order they appeared in the original array.
 
 2. Approach: The optimal approach involves using a stable sorting algorithm with a custom comparator. The comparator will prioritize numbers based on their count of set bits, which can be efficiently counted using the built-in `__builtin_popcount` function in C++. A stable sort is necessary to maintain the relative order of elements with the same number of set bits. By leveraging a stable sort like `stable_sort` from the C++ Standard Library, we can ensure that the elements are sorted correctly while maintaining the initial relative order for elements with equal set bit counts.
 
@@ -483,7 +483,7 @@ int main() {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n log n) due to the sorting, and the space complexity is O(1) since stable_sort is an in-place sorting algorithm if extra space is not considered for the internal workings of the sorting algorithm."
-Searching & Sorting,minimum no. of swaps required to sort the array,"1. Problem Summary: The problem requires determining the minimum number of swaps needed to sort an array. The task is to rearrange the elements such that they are in ascending order, using the fewest swaps.
+Searching & Sorting,minimum no. of swaps required to sort the array,https://practice.geeksforgeeks.org/problems/minimum-swaps/1,"1. Problem Summary: The problem requires determining the minimum number of swaps needed to sort an array. The task is to rearrange the elements such that they are in ascending order, using the fewest swaps.
 
 2. Approach: The optimal approach involves treating the array as a graph where each element is a node and each directed edge pairs the element with its correct position in a sorted array. First, find the correct position of each element by comparing it with a sorted version of the array. Then, identify cycles in this mapping, because each cycle can be resolved with a number of swaps equal to the size of the cycle minus one. Iterate through the array, and for each unvisited element, trace through its cycle to count the number of swaps needed, then move to the next unvisited element.
 
@@ -522,7 +522,7 @@ int minSwaps(vector<int> &arr) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n log n) due to sorting, and the space complexity is O(n) for storing the element indices and visited status."
-Searching & Sorting,Bishu and Soldiers,"1. Problem Summary:
+Searching & Sorting,Bishu and Soldiers,https://www.hackerearth.com/practice/algorithms/searching/binary-search/practice-problems/algorithm/bishu-and-soldiers/,"1. Problem Summary:
    In the ""Bishu and Soldiers"" problem, Bishu wants to determine how many soldiers he can defeat and the total power of these soldiers, based on his power level. Given an array of soldiers' powers and multiple power levels of Bishu, for each power level, you need to output the number of soldiers defeated and their cumulative power.
 
 2. Approach:
@@ -554,7 +554,7 @@ void bishuAndSoldiers(vector<int>& soldiers, vector<int>& powerLevels) {
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(n log n) due to sorting and O(q log n) for processing q queries with binary search, where n is the number of soldiers. The space complexity is O(n) for storing the prefix sums."
-Searching & Sorting,Rasta and Kheshtak,"1. Problem Summary:  
+Searching & Sorting,Rasta and Kheshtak,https://www.hackerearth.com/practice/algorithms/searching/binary-search/practice-problems/algorithm/rasta-and-kheshtak/,"1. Problem Summary:  
    The problem ""Rasta and Kheshtak"" involves finding the number of distinct groups of cells in a grid that can form a specific pattern. Each group must have a specific bitwise XOR sum of their values.
 
 2. Approach:  
@@ -604,7 +604,7 @@ int main() {
 
 4. Time Complexity and Space Complexity:  
    The time complexity is O(N * B) where N is the number of elements in the grid and B is the number of bits in the numbers (typically 32 for integers). The space complexity is O(1), excluding the input size."
-Searching & Sorting,Kth smallest number again,"1. Problem Summary:  
+Searching & Sorting,Kth smallest number again,https://www.hackerearth.com/practice/algorithms/searching/binary-search/practice-problems/algorithm/kth-smallest-number-again-2/,"1. Problem Summary:  
    The ""Kth smallest number again"" problem involves finding the kth smallest number within a given list of intervals. Each query specifies an interval and a k-value, and the task is to determine the kth smallest number within that interval.
 
 2. Approach:  
@@ -641,7 +641,7 @@ Searching & Sorting,Kth smallest number again,"1. Problem Summary:
 
 4. Time Complexity and Space Complexity:  
    The time complexity is O(n log n) due to sorting, and the space complexity is O(n) for storing merged intervals."
-Searching & Sorting,Find pivot element in a sorted array,"1. Problem Summary: The task is to find the pivot element in a rotated sorted array where the array was initially sorted in ascending order and then some elements from the beginning were moved to the end.
+Searching & Sorting,Find pivot element in a sorted array,http://theoryofprogramming.com/2017/12/16/find-pivot-element-sorted-rotated-array/,"1. Problem Summary: The task is to find the pivot element in a rotated sorted array where the array was initially sorted in ascending order and then some elements from the beginning were moved to the end.
 
 2. Approach: To find the pivot element efficiently, utilize a binary search technique. The pivot is the point where the order of the sorted elements is disrupted. Start by comparing the middle element of the array with the endpoints. If the middle element is greater than the first element, the pivot must be on the right half of the array. Otherwise, it lies on the left half. Continue this process recursively or iteratively, narrowing down the search range by adjusting the start or end index based on the middle comparison until the pivot is found. This approach leverages the partially sorted nature of the array to skip over half the elements in each step.
 
@@ -671,7 +671,7 @@ int findPivot(vector<int>& nums) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(log n) due to the binary search approach, and the space complexity is O(1) as only constant extra space is used."
-Searching & Sorting,K-th Element of Two Sorted Arrays,"1. Problem Summary: Given two sorted arrays and an integer k, find the k-th element of the union of these two arrays. The arrays may have different sizes.
+Searching & Sorting,K-th Element of Two Sorted Arrays,https://practice.geeksforgeeks.org/problems/k-th-element-of-two-sorted-array/0,"1. Problem Summary: Given two sorted arrays and an integer k, find the k-th element of the union of these two arrays. The arrays may have different sizes.
 
 2. Approach: The optimal way to solve this problem is by using a binary search technique. Instead of merging the arrays, which would take O(n+m) time, we perform a binary search on the smaller array to find the partition point. The key idea is to partition both arrays such that the left part contains exactly k elements. Adjust the partition using binary search until the maximum element on the left side of both arrays is less than or equal to the minimum element on the right side of both arrays. This ensures that the k-th element (or the maximum of the left elements if the arrays were merged) is found at the partition boundary.
 
@@ -707,7 +707,7 @@ int findKthElement(vector<int>& arr1, vector<int>& arr2, int k) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(log(min(n, m))) where n and m are the sizes of the two arrays, and the space complexity is O(1)."
-Searching & Sorting,Aggressive cows,"1. Problem Summary: The ""Aggressive cows"" problem involves placing cows in stalls such that the minimum distance between any two cows is maximized. Given stall positions and the number of cows, determine the largest minimum distance possible.
+Searching & Sorting,Aggressive cows,https://www.spoj.com/problems/AGGRCOW/,"1. Problem Summary: The ""Aggressive cows"" problem involves placing cows in stalls such that the minimum distance between any two cows is maximized. Given stall positions and the number of cows, determine the largest minimum distance possible.
 
 2. Approach: The solution leverages binary search on the answer combined with a greedy placement strategy. Firstly, sort the stall positions. Define a function `canPlaceCows(stalls, distance, cows)` that checks if it's possible to place all cows with at least 'distance' units apart in the given sorted stalls. Use binary search on the possible distances (from 1 to the difference between the maximum and minimum stall positions). For each middle point in the binary search, use the `canPlaceCows` function to verify if the cows can be placed with at least that distance. Adjust the search range based on the result, narrowing down to the maximum feasible distance.
 
@@ -751,7 +751,7 @@ int aggressiveCows(vector<int>& stalls, int cows) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(N log M), where N is the number of stalls and M is the range of distances. The space complexity is O(1) beyond input storage."
-Searching & Sorting,Book Allocation Problem,"1. Problem Summary:  
+Searching & Sorting,Book Allocation Problem,https://practice.geeksforgeeks.org/problems/allocate-minimum-number-of-pages/0,"1. Problem Summary:  
    The Book Allocation Problem involves determining the minimum possible maximum number of pages that a student can read when books are distributed among them. Books must be assigned in contiguous order, and the goal is to minimize the maximum pages any student has to read.
 
 2. Approach:  
@@ -795,7 +795,7 @@ Searching & Sorting,Book Allocation Problem,"1. Problem Summary:
 
 4. Time Complexity and Space Complexity:  
    The time complexity is O(N log M), where N is the number of books and M is the range between the maximum number of pages in any single book and the total number of pages. The space complexity is O(1)."
-Searching & Sorting,EKOSPOJ:,"1. Problem Summary:
+Searching & Sorting,EKOSPOJ:,https://www.spoj.com/problems/EKO/,"1. Problem Summary:
    In the ""EKOSPOJ"" problem, you are given an array representing the height of trees and a minimum wood length `M` that needs to be collected by cutting the trees from a certain height `H`. The goal is to find the maximum possible height `H` such that the total wood collected is at least `M`.
 
 2. Approach:
@@ -839,7 +839,7 @@ int main() {
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(N log(maxHeight)), where N is the number of trees and maxHeight is the maximum height of a tree. The space complexity is O(1), not counting the input storage."
-Searching & Sorting,Job Scheduling Algo,"1. Problem Summary:  
+Searching & Sorting,Job Scheduling Algo,https://www.geeksforgeeks.org/weighted-job-scheduling-log-n-time/,"1. Problem Summary:  
    The Job Scheduling problem involves scheduling jobs to maximize profit when each job has a deadline and associated profit if completed by the deadline. Jobs may have different durations but are assumed to be completed in a single unit of time.
 
 2. Approach:  
@@ -886,7 +886,7 @@ vector<int> jobScheduling(vector<Job>& jobs) {
 
 4. Time Complexity and Space Complexity:  
    The time complexity is O(n log n) due to the sorting of jobs, and the space complexity is O(n) for storing job slots."
-Searching & Sorting,Missing Number in AP,"1. Problem Summary: 
+Searching & Sorting,Missing Number in AP,https://practice.geeksforgeeks.org/problems/arithmetic-number/0,"1. Problem Summary: 
    The problem involves finding a missing number in an arithmetic progression (AP) sequence. Given a list of numbers where exactly one number is missing, the task is to identify that missing element.
 
 2. Approach: 
@@ -917,7 +917,7 @@ int findMissing(vector<int>& arr) {
 
 4. Time Complexity and Space Complexity: 
    The time complexity is O(log n) due to the binary search, and the space complexity is O(1) as we are not using any additional space beyond the input array."
-Searching & Sorting,Smallest number with atleastn trailing zeroes infactorial,"1. Problem Summary:
+Searching & Sorting,Smallest number with atleastn trailing zeroes infactorial,https://practice.geeksforgeeks.org/problems/smallest-factorial-number5929/1,"1. Problem Summary:
    The problem requires finding the smallest integer \( x \) such that \( x! \) (x factorial) has at least \( n \) trailing zeroes.
 
 2. Approach:
@@ -952,7 +952,7 @@ int findSmallestNumber(int n) {
 
 4. Time Complexity and Space Complexity:
    The time complexity is \( O(\log n \cdot \log n) \) due to the binary search and the logarithmic number of divisions inside the `countTrailingZeroes` function. The space complexity is \( O(1) \)."
-Searching & Sorting,Painters Partition Problem:,"1. Problem Summary: The Painters Partition Problem involves determining the minimum amount of time required to paint 'n' boards by 'k' painters, where each painter has the same speed of painting but cannot paint a fraction of a board. The goal is to minimize the maximum amount of time any painter takes, considering that each painter paints consecutive boards.
+Searching & Sorting,Painters Partition Problem:,https://practice.geeksforgeeks.org/problems/allocate-minimum-number-of-pages/0,"1. Problem Summary: The Painters Partition Problem involves determining the minimum amount of time required to paint 'n' boards by 'k' painters, where each painter has the same speed of painting but cannot paint a fraction of a board. The goal is to minimize the maximum amount of time any painter takes, considering that each painter paints consecutive boards.
 
 2. Approach: The optimal approach uses binary search combined with a greedy method. We define feasible conditions based on the maximum length of time a painter can take. The binary search is applied over the possible range of maximum times (from max(board lengths) to sum(board lengths)). For each mid value in the binary search, we use a greedy approach to check if it's possible to paint all boards with 'k' painters within that mid value as the maximum time limit. The greedy part involves assigning boards to a painter until adding another board would exceed the mid value. If more than 'k' painters are needed, the mid value is too small.
 
@@ -990,7 +990,7 @@ int paintersPartition(vector<int>& boards, int k) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n log(sum - max)), where 'n' is the number of boards, 'sum' is the sum of all board lengths, and 'max' is the maximum board length. The space complexity is O(1)."
-Searching & Sorting,ROTI-Prata SPOJ,"1. Problem Summary: The problem is to determine the minimum time required to cook a given number of pratas (Indian flatbreads) when each cook has a different speed and can cook pratas in increasing times. The cooks can work simultaneously.
+Searching & Sorting,ROTI-Prata SPOJ,https://www.spoj.com/problems/PRATA/,"1. Problem Summary: The problem is to determine the minimum time required to cook a given number of pratas (Indian flatbreads) when each cook has a different speed and can cook pratas in increasing times. The cooks can work simultaneously.
 
 2. Approach: The solution uses a binary search on the possible minimum time to determine the least amount of time needed to cook all pratas. For each mid-point in the binary search, a helper function calculates the total number of pratas that can be cooked by all chefs within that time. This function iterates over each chef and calculates how many pratas they can individually cook by summing the series until the time exceeds the mid-point. If the total number of pratas cooked meets or exceeds the required number, the search space is narrowed to the left; otherwise, it is narrowed to the right.
 
@@ -1026,7 +1026,7 @@ int minTime(int pratas, vector<int>& ranks) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(log(maxTime) * n * sqrt(maxTime/rank)), where n is the number of cooks and maxTime is the upper bound of the binary search time. The space complexity is O(1), as we only use a few auxiliary variables."
-Searching & Sorting,DoubleHelix SPOJ,"1. Problem Summary: 
+Searching & Sorting,DoubleHelix SPOJ,https://www.spoj.com/problems/ANARC05B/,"1. Problem Summary: 
    The ""DoubleHelix SPOJ"" problem involves finding the maximum sum path in two sorted arrays. Each path starts at the beginning of an array and ends at the end, switching between arrays whenever the elements in both arrays are the same.
 
 2. Approach: 
@@ -1070,7 +1070,7 @@ Searching & Sorting,DoubleHelix SPOJ,"1. Problem Summary:
 
 4. Time Complexity and Space Complexity: 
    The time complexity is O(n + m) where n and m are the lengths of the two arrays, respectively, due to the linear traversal of both arrays. The space complexity is O(1) as only a constant amount of extra space is used."
-Searching & Sorting,Subset Sums,"1. Problem Summary: 
+Searching & Sorting,Subset Sums,https://www.spoj.com/problems/SUBSUMS/,"1. Problem Summary: 
 The ""Subset Sums"" problem involves finding all possible sums of subsets of a given set of integers. This includes sums from all combinations, from the smallest subset (empty set) to the largest subset (the entire set).
 
 2. Approach:
@@ -1101,7 +1101,7 @@ vector<int> subsetSums(int arr[], int n) {
 
 4. Time Complexity and Space Complexity:
 The time complexity is O(2^n) due to the binary decision at each of the n elements, and the space complexity is O(n) due to the recursion stack depth."
-Searching & Sorting,Findthe inversion count,"1. Problem Summary: 
+Searching & Sorting,Findthe inversion count,https://practice.geeksforgeeks.org/problems/inversion-of-array/0,"1. Problem Summary: 
    The problem ""Find the Inversion Count"" involves determining the number of pairs `(i, j)` in an array where `i < j` and `arr[i] > arr[j]`. This count helps in understanding how far the array is from being sorted.
 
 2. Approach:
@@ -1147,7 +1147,7 @@ Searching & Sorting,Findthe inversion count,"1. Problem Summary:
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(n log n) due to the merge sort algorithm, and the space complexity is O(n) for the temporary array used during the merge steps."
-Searching & Sorting,Implement Merge-sort in-place,"1. Problem Summary:  
+Searching & Sorting,Implement Merge-sort in-place,https://www.geeksforgeeks.org/in-place-merge-sort/,"1. Problem Summary:  
    The task is to implement the merge-sort algorithm in an in-place manner, which means sorting the array without using additional memory proportional to the array size.
 
 2. Approach:  
@@ -1197,7 +1197,7 @@ Searching & Sorting,Implement Merge-sort in-place,"1. Problem Summary:
 
 4. Time Complexity and Space Complexity:  
    The time complexity is O(n^2) in the worst case due to the shifting of elements, and the space complexity is O(1) as it sorts in-place."
-Searching & Sorting,Partitioning and Sorting Arrays with Many Repeated Entries,"1. Problem Summary:  
+Searching & Sorting,Partitioning and Sorting Arrays with Many Repeated Entries,https://www.baeldung.com/java-sorting-arrays-with-repeated-entries,"1. Problem Summary:  
 The problem involves sorting an array that contains many repeated entries efficiently. Traditional sorting algorithms may not be optimal due to the high frequency of duplicate values.
 
 2. Approach:  

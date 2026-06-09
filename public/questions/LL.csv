@@ -1,5 +1,5 @@
-TOPIC,PROBLEM LINK,SOLUTION
-LinkedList,Write a Program to reverse the Linked List. (Both Iterative and recursive),"1. Problem Summary: The task is to reverse a singly linked list. This can be done using an iterative method or a recursive method, where the order of the nodes in the list is reversed.
+TOPIC,PROBLEM NAME,URL,SOLUTION
+LinkedList,Write a Program to reverse the Linked List. (Both Iterative and recursive),https://www.geeksforgeeks.org/reverse-a-linked-list/,"1. Problem Summary: The task is to reverse a singly linked list. This can be done using an iterative method or a recursive method, where the order of the nodes in the list is reversed.
 
 2. Approach: In the iterative approach, you initialize three pointers: previous (`prev`), current (`curr`), and next (`next`). Start with `prev` as `NULL` and `curr` as the head of the list. Traverse the list and in each iteration, temporarily store the next node, flip the `curr` node's next pointer to point to `prev`, and advance `prev` and `curr` pointers one step forward. For the recursive approach, the function will call itself for the rest of the list, then adjust the pointers similarly by making the next node of the current node point to the current node itself, effectively reversing their links.
 
@@ -39,7 +39,7 @@ Node* reverseListRecursive(Node* head) {
 ```
 
 4. Time Complexity and Space Complexity: Both iterative and recursive methods have a time complexity of O(n), where n is the number of nodes in the list. The iterative method has a space complexity of O(1), while the recursive method has a space complexity of O(n) due to the stack space used by recursive calls."
-LinkedList,Reverse a Linked List in group of Given Size. [Very Imp],"1. Problem Summary: The problem requires reversing every consecutive sub-list of a linked list of length `k`. If the number of nodes in the last group is less than `k`, they are left as is.
+LinkedList,Reverse a Linked List in group of Given Size. [Very Imp],https://practice.geeksforgeeks.org/problems/reverse-a-linked-list-in-groups-of-given-size/1,"1. Problem Summary: The problem requires reversing every consecutive sub-list of a linked list of length `k`. If the number of nodes in the last group is less than `k`, they are left as is.
 
 2. Approach: The optimal approach involves using a recursive or iterative method to reverse every block of `k` nodes in the linked list. First, traverse the list to count nodes and check if there are at least `k` nodes to reverse. If yes, reverse the first `k` nodes. Then recursively or iteratively proceed to the next segment of the list. The key is to manage pointers for the current node, previous node, and the next node effectively to detach and reverse segments, then reconnect them properly.
 
@@ -84,7 +84,7 @@ Node* reverseKGroup(Node* head, int k) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n), where n is the number of nodes in the linked list, as each node is processed once. The space complexity is O(n/k) due to recursive stack space, which can be O(1) if an iterative approach is used."
-LinkedList,Write a program to Detect loop in a linked list.,"1. Problem Summary: The task is to determine if a linked list has a cycle, which occurs when a node’s next pointer points to a previous node in the list, thus forming a loop.
+LinkedList,Write a program to Detect loop in a linked list.,https://practice.geeksforgeeks.org/problems/detect-loop-in-linked-list/1,"1. Problem Summary: The task is to determine if a linked list has a cycle, which occurs when a node’s next pointer points to a previous node in the list, thus forming a loop.
 
 2. Approach: The optimal algorithm to detect a loop in a linked list is Floyd’s Cycle-Finding Algorithm (also known as the tortoise and the hare algorithm). This approach uses two pointers, slow and fast, which move at different speeds. The slow pointer moves one step at a time, while the fast pointer moves two steps at a time. If there is a loop, the fast pointer will eventually meet the slow pointer inside the loop. If the fast pointer reaches the end of the list (null), there is no loop. This method is intuitive as it simulates a race track scenario where a faster runner (fast pointer) will eventually meet the slower runner (slow pointer) again if the track is circular (loop).
 
@@ -112,7 +112,7 @@ bool hasCycle(ListNode *head) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the number of nodes in the linked list, and the space complexity is O(1) since no extra space is used beyond the two pointers."
-LinkedList,Write a program to Delete loop in a linked list.,"1. Problem Summary: The task is to detect and remove any loop present in a singly linked list. A loop in a linked list occurs when a node's next pointer points to a previous node in the list, causing an infinite cycle.
+LinkedList,Write a program to Delete loop in a linked list.,https://practice.geeksforgeeks.org/problems/remove-loop-in-linked-list/1,"1. Problem Summary: The task is to detect and remove any loop present in a singly linked list. A loop in a linked list occurs when a node's next pointer points to a previous node in the list, causing an infinite cycle.
 
 2. Approach: The optimal approach uses Floyd's Cycle Detection algorithm, also known as the tortoise and the hare algorithm, to first detect the loop. Two pointers, slow and fast (moving at one step and two steps at a time, respectively), are used. When these two pointers meet, a loop is confirmed. To remove the loop, keep one pointer where they met and move the other pointer to the head of the list. Then, move both pointers at the same pace; they will meet at the loop starting node. To remove the loop, find the last node of the loop and set its next pointer to null.
 
@@ -163,7 +163,7 @@ void appendNode(Node*& head, int val) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(N) where N is the number of nodes in the linked list, as each node is visited at most twice. The space complexity is O(1) since no additional space proportional to the input size is used."
-LinkedList,Find the starting point of the loop. ,"1. Problem Summary: The problem is to detect and return the starting node of a loop in a linked list where the list may contain a cycle, meaning some nodes are revisited.
+LinkedList,Find the starting point of the loop. ,https://www.geeksforgeeks.org/find-first-node-of-loop-in-a-linked-list/,"1. Problem Summary: The problem is to detect and return the starting node of a loop in a linked list where the list may contain a cycle, meaning some nodes are revisited.
 
 2. Approach: The optimal algorithm uses Floyd’s Cycle-Finding Algorithm which involves two pointers, often called `slow` and `fast`. Both pointers start at the head of the list. The `fast` pointer moves two steps at a time, and the `slow` pointer moves one step at a time. If there is a loop, they will meet inside the loop. Once they meet, reset one pointer to the head of the list and keep the other at the meeting point, then move both one step at a time. The node where they meet again is the start of the loop. This method leverages the mathematical insight that the distance from the head to the start of the loop equals the distance from the meeting point to the start of the loop, when traversed one step at a time.
 
@@ -205,7 +205,7 @@ Node* findStartOfLoop(Node* head) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) and the space complexity is O(1), where n is the number of nodes in the linked list."
-LinkedList,Remove Duplicates in a sorted Linked List.,"1. Problem Summary: In this problem, we are given a sorted linked list, and we need to remove all duplicate numbers such that each element appears only once.
+LinkedList,Remove Duplicates in a sorted Linked List.,https://practice.geeksforgeeks.org/problems/remove-duplicate-element-from-sorted-linked-list/1,"1. Problem Summary: In this problem, we are given a sorted linked list, and we need to remove all duplicate numbers such that each element appears only once.
 
 2. Approach: Utilize a single traversal of the linked list to detect and remove duplicates. Start by creating a pointer, `current`, which initially points to the head of the list. As you iterate through the list, compare the value of `current` with the value of `current->next`. If they are the same, it means there's a duplicate; update `current->next` to skip the duplicate node, effectively removing it. If they are different, simply move the `current` pointer forward. This approach ensures that you only keep the first occurrence of each element and remove the subsequent duplicates.
 
@@ -237,7 +237,7 @@ void removeDuplicatesFromSortedList(ListNode* head) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n), where n is the number of nodes in the list, as we traverse the list once. The space complexity is O(1) since no additional space is used apart from temporary pointers."
-LinkedList,Remove Duplicates in a Un-sorted Linked List.,"1. Problem Summary: The task is to remove duplicate values from an unsorted linked list. Each node in the linked list contains a single data value and a reference to the next node.
+LinkedList,Remove Duplicates in a Un-sorted Linked List.,https://practice.geeksforgeeks.org/problems/remove-duplicates-from-an-unsorted-linked-list/1,"1. Problem Summary: The task is to remove duplicate values from an unsorted linked list. Each node in the linked list contains a single data value and a reference to the next node.
 
 2. Approach: The optimal way to remove duplicates from an unsorted linked list is to traverse the list while keeping track of the values seen using a hash set. For each node, check if its value exists in the hash set. If it does, adjust the links to skip the current node, effectively removing it from the list. If it doesn't, add the node's value to the set and proceed. This method ensures each value only appears once in the linked list, and nodes are only visited once, making it efficient.
 
@@ -271,7 +271,7 @@ void removeDuplicates(Node* head) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the number of nodes in the list, as each node is processed once. The space complexity is O(n) due to the storage required for the hash set."
-LinkedList,Write a Program to Move the last element to Front in a Linked List.,"1. Problem Summary:
+LinkedList,Write a Program to Move the last element to Front in a Linked List.,https://www.geeksforgeeks.org/move-last-element-to-front-of-a-given-linked-list/,"1. Problem Summary:
    The task is to modify a given singly linked list by moving its last element to the front. This operation should adjust the pointers accordingly without creating a new list.
 
 2. Approach:
@@ -309,7 +309,7 @@ LinkedList,Write a Program to Move the last element to Front in a Linked List.,"
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(n), where n is the number of nodes, as it involves a single traversal of the list. The space complexity is O(1) since no additional space is used beyond pointers."
-LinkedList,Add “1” to a number represented as a Linked List.,"1. Problem Summary:  
+LinkedList,Add “1” to a number represented as a Linked List.,https://practice.geeksforgeeks.org/problems/add-1-to-a-number-represented-as-linked-list/1,"1. Problem Summary:  
    The problem involves adding one to a number that is represented as a linked list, where each node contains a single digit. The digits are stored in reverse order, meaning the least significant digit is at the head of the list.
 
 2. Approach:  
@@ -356,7 +356,7 @@ Node* addOneToLinkedList(Node* head) {
 
 4. Time Complexity and Space Complexity:  
    The time complexity is O(n) where n is the number of nodes in the linked list, as we potentially traverse the list up to three times (twice for reversing and once for adding). The space complexity is O(1) since we use a constant amount of extra space."
-LinkedList,Add two numbers represented by linked lists.,"1. Problem Summary: Given two numbers represented by two linked lists, where each node contains a single digit, the task is to add these two numbers and return the sum as a linked list. The digits are stored in reverse order, meaning the 1's digit is at the head of the list.
+LinkedList,Add two numbers represented by linked lists.,https://practice.geeksforgeeks.org/problems/add-two-numbers-represented-by-linked-lists/1,"1. Problem Summary: Given two numbers represented by two linked lists, where each node contains a single digit, the task is to add these two numbers and return the sum as a linked list. The digits are stored in reverse order, meaning the 1's digit is at the head of the list.
 
 2. Approach: Start by initializing a dummy node which will eventually be the head of the resulting linked list and a pointer `current` to track the current node for result insertion. Use a variable `carry` to keep track of any overflow between digits. Iterate through both linked lists simultaneously, adding corresponding digits along with the `carry` from the previous step. If a list is exhausted, continue with the remaining digits of the other list. After the loop, check if there's any remaining `carry` and add it as a new node. This approach ensures that we handle different lengths of lists and possible carry over the largest digit.
 
@@ -396,7 +396,7 @@ ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(max(n, m)) where n and m are the lengths of the two linked lists. The space complexity is O(max(n, m)) for the new list."
-LinkedList,Intersection of two Sorted Linked List.,"1. Problem Summary: The problem involves finding the intersection of two sorted linked lists. This means identifying and returning a new list containing only the elements that are present in both input lists without duplicates.
+LinkedList,Intersection of two Sorted Linked List.,https://practice.geeksforgeeks.org/problems/intersection-of-two-sorted-linked-lists/1,"1. Problem Summary: The problem involves finding the intersection of two sorted linked lists. This means identifying and returning a new list containing only the elements that are present in both input lists without duplicates.
 
 2. Approach: Start by initializing two pointers, one for each list. Traverse both lists simultaneously using a while loop. If the elements pointed by both pointers are the same, add the element to the result list and move both pointers forward. If the element in the first list is smaller, move its pointer forward to try and find a matching element. Do the same for the second list if its element is smaller. Continue this process until the end of either list is reached. This approach leverages the sorted order of the lists to efficiently find common elements without needing extra space for hash tables or similar structures.
 
@@ -431,7 +431,7 @@ Node* findIntersection(Node* head1, Node* head2) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n + m), where n and m are the lengths of the two linked lists. The space complexity is O(min(n, m)) for storing the intersection elements."
-LinkedList,Intersection Point of two Linked Lists.,"1. Problem Summary:
+LinkedList,Intersection Point of two Linked Lists.,https://practice.geeksforgeeks.org/problems/intersection-point-in-y-shapped-linked-lists/1,"1. Problem Summary:
    The problem involves finding the intersection point of two singly linked lists. The intersection is defined as the point where the two lists meet, which can be identified by the same node reference (not value).
 
 2. Approach:
@@ -463,7 +463,7 @@ LinkedList,Intersection Point of two Linked Lists.,"1. Problem Summary:
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(m+n), where m and n are the lengths of the two lists. The space complexity is O(1), as no additional space is used."
-LinkedList,Merge Sort For Linked lists.[Very Important],"1. Problem Summary: Merge sort for linked lists involves sorting a linked list using the merge sort algorithm, which is a divide-and-conquer approach. The algorithm splits the list into halves, recursively sorts each half, and then merges the sorted halves.
+LinkedList,Merge Sort For Linked lists.[Very Important],https://practice.geeksforgeeks.org/problems/sort-a-linked-list/1,"1. Problem Summary: Merge sort for linked lists involves sorting a linked list using the merge sort algorithm, which is a divide-and-conquer approach. The algorithm splits the list into halves, recursively sorts each half, and then merges the sorted halves.
 
 2. Approach: The merge sort algorithm for linked lists starts by finding the middle of the list, which can be done using the slow and fast pointer technique (where the slow pointer moves one step and the fast pointer moves two steps). Once the list is split into two halves, the merge sort function is recursively called on each half. After the two halves are sorted, a merge function is used to combine these two sorted halves into a single sorted list. This merge function compares the heads of the two lists, picking the smaller value each time to construct the new sorted list, until all elements are merged.
 
@@ -515,7 +515,7 @@ Node* mergeSort(Node* head) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity of merge sort for linked lists is O(n log n), and the space complexity is O(log n) due to the recursive stack space used."
-LinkedList,Quicksort for Linked Lists.[Very Important],"1. Problem Summary: The task is to sort a linked list using a quicksort algorithm. Unlike arrays, linked lists have different memory allocation and access patterns, which requires adapting the quicksort algorithm specifically for linked lists.
+LinkedList,Quicksort for Linked Lists.[Very Important],https://practice.geeksforgeeks.org/problems/quick-sort-on-linked-list/1,"1. Problem Summary: The task is to sort a linked list using a quicksort algorithm. Unlike arrays, linked lists have different memory allocation and access patterns, which requires adapting the quicksort algorithm specifically for linked lists.
 
 2. Approach: Quicksort for linked lists involves selecting a pivot and partitioning the list into two sub-lists: one with elements less than the pivot and another with elements greater than or equal to the pivot. Recursively apply quicksort to these sub-lists. The key challenge is efficiently partitioning the list and updating links without extra space. Choose the rightmost element as the pivot for simplicity, and use two pointers approach to create the two sub-lists. After partitioning, recursively sort the sub-lists and link them properly to form the sorted linked list.
 
@@ -595,7 +595,7 @@ Node* quickSort(Node* head) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n log n) on average and O(n^2) in the worst case when the list is already sorted or reverse sorted. Space complexity is O(log n) due to recursion stack space in average case and O(n) in the worst case."
-LinkedList,Find the middle Element of a linked list.,"1. Problem Summary: The task is to find the middle element of a singly linked list. If the list has an even number of elements, the second of the two middle elements is considered the middle.
+LinkedList,Find the middle Element of a linked list.,https://leetcode.com/problems/middle-of-the-linked-list/,"1. Problem Summary: The task is to find the middle element of a singly linked list. If the list has an even number of elements, the second of the two middle elements is considered the middle.
 
 2. Approach: The optimal way to find the middle element of a linked list is to use the two-pointer technique, often referred to as the ""Tortoise and Hare"" approach. Initialize two pointers, `slow` and `fast`, at the head of the linked list. Move the `fast` pointer two steps for every one step the `slow` pointer takes. When the `fast` pointer reaches the end of the list, the `slow` pointer will be at the middle. This method efficiently locates the middle element without needing to know the size of the list beforehand.
 
@@ -621,7 +621,7 @@ ListNode* findMiddle(ListNode* head) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the number of elements in the linked list, and the space complexity is O(1) as we are using a constant amount of space."
-LinkedList,Check if a linked list is a circular linked list.,"1. Problem Summary: The task is to determine whether a given linked list is circular, meaning the last node points back to some previous node in the list, rather than ending with a null pointer.
+LinkedList,Check if a linked list is a circular linked list.,https://practice.geeksforgeeks.org/problems/circular-linked-list/1,"1. Problem Summary: The task is to determine whether a given linked list is circular, meaning the last node points back to some previous node in the list, rather than ending with a null pointer.
 
 2. Approach: The most efficient way to detect if a linked list is circular is by using the Floyd’s Cycle-Finding Algorithm, also known as the tortoise and the hare algorithm. This involves using two pointers, `slow` and `fast`, which move through the list at different speeds (`slow` moves one step at a time and `fast` moves two steps at a time). If the linked list has a cycle, the `fast` pointer will eventually meet the `slow` pointer, proving the existence of a cycle. If `fast` reaches the end of the list (`fast` or `fast->next` becomes null), the list is not circular.
 
@@ -650,7 +650,7 @@ bool isCircularLinkedList(Node* head) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n), where n is the number of nodes in the list, and the space complexity is O(1) as it uses only two pointers regardless of the size of the input list."
-LinkedList,Split a Circular linked list into two halves.,"1. Problem Summary: The task involves splitting a circular linked list into two equal halves. If the list has an odd number of nodes, the extra node should go to the first half.
+LinkedList,Split a Circular linked list into two halves.,https://practice.geeksforgeeks.org/problems/split-a-circular-linked-list-into-two-halves/1,"1. Problem Summary: The task involves splitting a circular linked list into two equal halves. If the list has an odd number of nodes, the extra node should go to the first half.
 
 2. Approach: To split a circular linked list, first determine its length by traversing from the head until you encounter the head again. Use two pointers, `slow` and `fast`, for finding the middle of the list: move `slow` by one step and `fast` by two steps. When `fast` completes the loop or is at the last node, `slow` will be at the middle. To split, adjust the `next` pointers of the nodes at the end of the first half and the second half to point to their respective starts, forming two separate circular linked lists.
 
@@ -698,7 +698,7 @@ void splitList(Node* head, Node head1_ref, Node head2_ref) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the number of nodes in the list, as we traverse the list once. The space complexity is O(1) as we only use a few extra pointers."
-LinkedList,Write a Program to check whether the Singly Linked list is a palindrome or not.,"1. Problem Summary:
+LinkedList,Write a Program to check whether the Singly Linked list is a palindrome or not.,https://practice.geeksforgeeks.org/problems/check-if-linked-list-is-pallindrome/1,"1. Problem Summary:
    The task is to determine whether a given singly linked list is a palindrome. A list is considered a palindrome if it reads the same forwards and backwards.
 
 2. Approach:
@@ -748,7 +748,7 @@ bool isPalindrome(ListNode* head) {
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(n) since each node is visited at most twice, and the space complexity is O(1) as we are only using a fixed amount of extra space."
-LinkedList,Deletion from a Circular Linked List.,"1. Problem Summary: 
+LinkedList,Deletion from a Circular Linked List.,https://www.geeksforgeeks.org/deletion-circular-linked-list/,"1. Problem Summary: 
    Deletion from a Circular Linked List involves removing a specified node from a list where the last node points back to the first node, forming a circle. This operation needs careful handling of pointers to maintain the circular nature of the list.
 
 2. Approach: 
@@ -797,7 +797,7 @@ void printList(Node* head) {
 ```
 4. Time Complexity and Space Complexity: 
    The time complexity is O(n), where n is the number of nodes in the list, as we may need to traverse the entire list. The space complexity is O(1), as no additional space is required beyond temporary variables."
-LinkedList,Reverse a Doubly Linked list.,"1. Problem Summary: The task is to reverse a doubly linked list, where each node contains pointers to both the previous and next nodes. The goal is to invert the direction of the list so that the head becomes the tail and vice versa.
+LinkedList,Reverse a Doubly Linked list.,https://practice.geeksforgeeks.org/problems/reverse-a-doubly-linked-list/1,"1. Problem Summary: The task is to reverse a doubly linked list, where each node contains pointers to both the previous and next nodes. The goal is to invert the direction of the list so that the head becomes the tail and vice versa.
 
 2. Approach: To reverse a doubly linked list, traverse the list from head to tail. For each node, swap its `next` and `prev` pointers. After swapping these pointers for all nodes, reset the head of the list to what was previously the tail node. This approach leverages the bidirectional nature of the doubly linked list, allowing the reversal process to be straightforward and intuitive. Remembering the swapping of `next` and `prev` pointers is key and forms the crux of the algorithm.
 
@@ -835,7 +835,7 @@ Node* reverseDoublyLinkedList(Node* head) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n), where n is the number of nodes in the list, as we traverse the list once. The space complexity is O(1) since we only use a few extra variables for the reversal process."
-LinkedList,Find pairs with a given sum in a DLL.,"1. Problem Summary:
+LinkedList,Find pairs with a given sum in a DLL.,https://www.geeksforgeeks.org/find-pairs-given-sum-doubly-linked-list/,"1. Problem Summary:
    The problem is to find all pairs of elements in a doubly linked list (DLL) that sum up to a given value. The list is unsorted and may contain duplicates.
 
 2. Approach:
@@ -876,7 +876,7 @@ void findPairsWithSum(Node* head, int target) {
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(n) as each element is visited at most twice, and the space complexity is O(1) since no additional space is used beyond the two pointers."
-LinkedList,Count triplets in a sorted DLL whose sum is equal to given value “X”.,"1. Problem Summary: 
+LinkedList,Count triplets in a sorted DLL whose sum is equal to given value “X”.,https://www.geeksforgeeks.org/count-triplets-sorted-doubly-linked-list-whose-sum-equal-given-value-x/,"1. Problem Summary: 
    The task is to find the number of triplets in a given sorted doubly linked list (DLL) that add up to a specified sum ""X"". Each triplet consists of three different nodes from the list.
 
 2. Approach: 
@@ -918,7 +918,7 @@ int countTriplets(Node* head, int X) {
 
 4. Time Complexity and Space Complexity: 
    The time complexity is O(n^2), where n is the number of nodes in the DLL, as the outer loop runs linearly through the list and the inner two-pointer approach potentially iterates through the rest of the list. The space complexity is O(1) since no additional space is used proportional to the input size."
-LinkedList,Sort a “k”sorted Doubly Linked list.[Very IMP],"1. Problem Summary: The problem involves sorting a ""k""-sorted doubly linked list where each element is at most k positions away from its target position in the sorted order. The goal is to achieve a fully sorted list.
+LinkedList,Sort a “k”sorted Doubly Linked list.[Very IMP],https://www.geeksforgeeks.org/sort-k-sorted-doubly-linked-list/,"1. Problem Summary: The problem involves sorting a ""k""-sorted doubly linked list where each element is at most k positions away from its target position in the sorted order. The goal is to achieve a fully sorted list.
 
 2. Approach: The optimal way to sort a ""k""-sorted doubly linked list is by using a min-heap. First, traverse the linked list and insert the first 'k+1' elements into the heap. The heap helps in always getting the smallest element in O(log k) time. Then, for each subsequent element in the list, extract the minimum from the heap, add it back to the linked list, and insert the next element from the list into the heap. Continue this process until the heap is empty. This method ensures that the linked list is sorted as we are always inserting the smallest element found in the heap back into the list, maintaining the order.
 
@@ -981,7 +981,7 @@ int main() {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n log k) due to the operations on the min-heap, and the space complexity is O(k) for storing elements in the heap."
-LinkedList,Rotate DoublyLinked list by N nodes.,"1. Problem Summary: The task is to rotate a doubly linked list clockwise by N nodes. Rotating means shifting the nodes such that after rotation, the Nth node from the end becomes the new head of the list.
+LinkedList,Rotate DoublyLinked list by N nodes.,https://www.geeksforgeeks.org/rotate-doubly-linked-list-n-nodes/,"1. Problem Summary: The task is to rotate a doubly linked list clockwise by N nodes. Rotating means shifting the nodes such that after rotation, the Nth node from the end becomes the new head of the list.
 
 2. Approach: To rotate the list, first, determine the length of the doubly linked list. Compute the effective rotations needed by taking `N % length` to handle cases where N is greater than the length. Identify the new head by traversing the list up to the `length - N` node. Adjust the previous and next pointers of relevant nodes to re-link the list into its new rotated form. This approach leverages the properties of the doubly linked list, allowing efficient re-linking without additional storage, making it intuitive and easy to remember.
 
@@ -1031,7 +1031,7 @@ void rotate(Node **head, int N) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the number of nodes in the list, and the space complexity is O(1) as no extra space is used."
-LinkedList,Rotate a Doubly Linked list in group of Given Size.[Very IMP],"1. Problem Summary:
+LinkedList,Rotate a Doubly Linked list in group of Given Size.[Very IMP],https://www.geeksforgeeks.org/reverse-doubly-linked-list-groups-given-size/,"1. Problem Summary:
    The problem involves rotating a doubly linked list in groups of a specified size. If the size of the group exceeds the remaining nodes, those nodes are rotated within themselves.
 
 2. Approach:
@@ -1077,7 +1077,7 @@ Node* rotateInGroup(Node* head, int k) {
 
 4. Time Complexity and Space Complexity:
    The time complexity of this algorithm is O(n) as each node is processed once. The space complexity is O(1) for iterative and O(n/k) for recursive (due to recursion stack) where 'k' is the group size."
-LinkedList,Can we reverse a linked list in less than O(n) ?,"1. Problem Summary: The task is to reverse a singly linked list. The challenge is to determine if this can be achieved in less than O(n) time complexity, where n is the number of nodes in the linked list.
+LinkedList,Can we reverse a linked list in less than O(n) ?,,"1. Problem Summary: The task is to reverse a singly linked list. The challenge is to determine if this can be achieved in less than O(n) time complexity, where n is the number of nodes in the linked list.
 
 2. Approach: Reversing a linked list requires changing the direction of the `next` pointers of all nodes. Starting with a `NULL` pointer for the reversed list's end, iterate through each node of the original list, and at each step, detach the node and reattach it at the beginning of the new reversed list. This method ensures each node is visited and rearranged exactly once, making it intuitive that the process cannot be faster than O(n) as each node needs individual processing. Remembering this approach is facilitated by visualizing the movement of each node from its original position to a new position at the head of a forming reversed list.
 
@@ -1107,7 +1107,7 @@ Node* reverseLinkedList(Node* head) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) as each node is processed exactly once. The space complexity is O(1) as only a few extra pointers are used."
-LinkedList,Why Quicksort is preferred for. Arrays and Merge Sort for LinkedLists ?,"1. Problem Summary:
+LinkedList,Why Quicksort is preferred for. Arrays and Merge Sort for LinkedLists ?,,"1. Problem Summary:
    Quicksort is generally preferred for arrays due to its efficient in-place sorting with a good average case performance, while Merge Sort is favored for LinkedLists because of its ability to sort data structures that do not provide random access efficiently.
 
 2. Approach:
@@ -1170,7 +1170,7 @@ Node* sortedMerge(Node* a, Node* b) {
 
 4. Time Complexity and Space Complexity:
    Quicksort has a time complexity of O(n log n) on average but can degrade to O(n^2) in the worst case; it uses O(log n) space due to recursion. Merge Sort consistently runs in O(n log n) time for both arrays and LinkedLists, but uses O(n) space in arrays and O(log n) space in LinkedLists due to different memory allocation needs."
-LinkedList,Flatten a Linked List,"1. Problem Summary: The ""Flatten a Linked List"" problem involves taking a linked list where each node contains a next pointer and a child pointer (which may point to another linked list), and flattening it into a single list with all nodes following the order given by next and child pointers.
+LinkedList,Flatten a Linked List,https://practice.geeksforgeeks.org/problems/flattening-a-linked-list/1,"1. Problem Summary: The ""Flatten a Linked List"" problem involves taking a linked list where each node contains a next pointer and a child pointer (which may point to another linked list), and flattening it into a single list with all nodes following the order given by next and child pointers.
 
 2. Approach: The optimal way to flatten the linked list is to use a depth-first search (DFS) approach, where you recursively flatten the child linked lists first, then append them to the main list. Start from the head of the linked list, and for each node, if it has a child, recursively flatten this child list, then merge the child list into the main list right after the current node and adjust the next pointers accordingly. Continue this process until all nodes are visited. This approach ensures that all child lists are flattened and appended in the correct order.
 
@@ -1208,7 +1208,7 @@ Node* flattenList(Node* head) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n), where n is the total number of nodes in the list, since each node is processed once. The space complexity is O(1) if we ignore the recursion stack, otherwise O(d) where d is the depth of the list."
-LinkedList,"Sort a LL of 0's, 1's and 2's","1. Problem Summary: The problem involves sorting a singly linked list that contains only the integers 0, 1, and 2. The goal is to sort the list such that all zeros are at the beginning, followed by all ones, and then all twos.
+LinkedList,"Sort a LL of 0's, 1's and 2's",https://practice.geeksforgeeks.org/problems/given-a-linked-list-of-0s-1s-and-2s-sort-it/1,"1. Problem Summary: The problem involves sorting a singly linked list that contains only the integers 0, 1, and 2. The goal is to sort the list such that all zeros are at the beginning, followed by all ones, and then all twos.
 
 2. Approach: The optimal algorithm is based on the Dutch National Flag problem by Edsger Dijkstra. Instead of sorting directly, count the occurrences of 0s, 1s, and 2s as you traverse the linked list once. Then, traverse the list again, updating nodes to 0 until you've exhausted your count of 0s, then set nodes to 1 until all 1s are placed, and finally set remaining nodes to 2. This approach avoids the complications of swapping node values and works directly with setting values, making it easier to implement and remember.
 
@@ -1243,7 +1243,7 @@ void sortLinkedList(Node* head) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) as the list is traversed twice, and the space complexity is O(1) since we use only a constant amount of extra space."
-LinkedList,Clone a linked list with next and random pointer,"1. Problem Summary: The problem involves cloning a linked list where each node has two pointers: `next`, pointing to the next node in the sequence, and `random`, which points to any node in the list or null. The goal is to create a deep copy of the list with all the intricate random connections accurately replicated.
+LinkedList,Clone a linked list with next and random pointer,https://practice.geeksforgeeks.org/problems/clone-a-linked-list-with-next-and-random-pointer/1,"1. Problem Summary: The problem involves cloning a linked list where each node has two pointers: `next`, pointing to the next node in the sequence, and `random`, which points to any node in the list or null. The goal is to create a deep copy of the list with all the intricate random connections accurately replicated.
 
 2. Approach: The optimal approach uses a three-step technique to clone the list without requiring extra space for a hashmap. First, interweave the original list with cloned nodes, placing each clone immediately after its original. Second, assign the random pointers for the cloned nodes by using the original nodes' random pointers. Finally, restore the original list and separate out the cloned nodes. This method leverages the original list structure to avoid the need for additional data structures for mapping nodes, making it intuitive and easy to remember and replicate.
 
@@ -1296,7 +1296,7 @@ Node* cloneLinkedList(Node* head) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) as each node is visited a constant number of times. The space complexity is O(1) since no extra space proportional to the input size is used."
-LinkedList,Merge K sorted Linked list,"1. Problem Summary: The problem involves merging k sorted linked lists into a single sorted linked list. Each linked list is sorted in non-decreasing order, and the challenge is to efficiently combine all these lists into one sorted list.
+LinkedList,Merge K sorted Linked list,https://practice.geeksforgeeks.org/problems/merge-k-sorted-linked-lists/1,"1. Problem Summary: The problem involves merging k sorted linked lists into a single sorted linked list. Each linked list is sorted in non-decreasing order, and the challenge is to efficiently combine all these lists into one sorted list.
 
 2. Approach: The optimal algorithm to solve this problem utilizes a min-heap (or priority queue) to keep track of the smallest elements from each list. Start by pushing the head of each linked list into the min-heap. The heap helps in retrieving the smallest element efficiently. In each iteration, extract the smallest element from the heap, add it to the result list, and if this element has a next node in its list, push that node into the heap. Continue this process until the heap is empty. This approach ensures that each insertion and removal from the heap is logarithmic with respect to the number of lists, and every element is processed.
 
@@ -1339,7 +1339,7 @@ ListNode* mergeKLists(vector<ListNode*>& lists) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(N log k), where N is the total number of nodes and k is the number of lists, and the space complexity is O(k) for the heap storage."
-LinkedList,Multiply 2 no. represented by LL,"1. Problem Summary: The problem involves multiplying two numbers where each number is represented as a linked list. Each node in the linked list represents a single digit, and the digits are stored in reverse order, i.e., the least significant digit comes first.
+LinkedList,Multiply 2 no. represented by LL,https://practice.geeksforgeeks.org/problems/multiply-two-linked-lists/1,"1. Problem Summary: The problem involves multiplying two numbers where each number is represented as a linked list. Each node in the linked list represents a single digit, and the digits are stored in reverse order, i.e., the least significant digit comes first.
 
 2. Approach: Start by reversing both linked lists to facilitate easier multiplication as the least significant digits are at the head of the lists. Use two nested loops to multiply each digit of the first number by each digit of the second number, similar to the ""grade school"" method of multiplication. Store intermediate results in an array where the index represents the power of 10 (position of the digit). After computing the products, handle carry over for each position in the result array. Finally, convert the result array back into a linked list.
 
@@ -1410,7 +1410,7 @@ ListNode* reverseList(ListNode* head) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(m*n) and the space complexity is O(m+n), where m and n are the lengths of the two linked lists."
-LinkedList,Delete nodes which have a greater value on right side,"1. Problem Summary:  
+LinkedList,Delete nodes which have a greater value on right side,https://practice.geeksforgeeks.org/problems/delete-nodes-having-greater-value-on-right/1,"1. Problem Summary:  
    The task is to modify a given singly linked list by removing all nodes that have a greater value node to their right. After processing, every node in the list should either be the greatest in the list or have only smaller values to its right.
 
 2. Approach:  
@@ -1456,7 +1456,7 @@ void deleteGreaterNodes(Node*& head) {
 
 4. Time Complexity and Space Complexity:  
    The time complexity is O(n) as each node is visited a constant number of times. The space complexity is O(1) since no additional space proportional to the input size is used."
-LinkedList,Segregate even and odd nodes in a Linked List,"1. Problem Summary: 
+LinkedList,Segregate even and odd nodes in a Linked List,https://practice.geeksforgeeks.org/problems/segregate-even-and-odd-nodes-in-a-linked-list/0,"1. Problem Summary: 
 The task is to rearrange the nodes in a singly linked list such that all the even-valued nodes precede the odd-valued nodes. The relative order among even and odd nodes should be preserved.
 
 2. Approach:
@@ -1512,7 +1512,7 @@ void segregateEvenOdd(Node** head) {
 
 4. Time Complexity and Space Complexity:
 The time complexity is O(n), where n is the number of nodes in the linked list, as we traverse the list once. The space complexity is O(1) as we only use a fixed number of pointers regardless of the input size."
-LinkedList,Program for n’th node from the end of a Linked List,"1. Problem Summary: The goal is to find the n-th node from the end of a singly linked list. This is a common problem in data structures where you need to access elements from the end without knowing the length of the list beforehand.
+LinkedList,Program for n’th node from the end of a Linked List,https://practice.geeksforgeeks.org/problems/nth-node-from-end-of-linked-list/1,"1. Problem Summary: The goal is to find the n-th node from the end of a singly linked list. This is a common problem in data structures where you need to access elements from the end without knowing the length of the list beforehand.
 
 2. Approach: The optimal approach to solve this problem is to use the two-pointer technique, specifically the ""fast and slow"" pointer method. Initially, both pointers, `fast` and `slow`, are set at the head of the list. First, advance the `fast` pointer by `n` nodes. Then, move both `fast` and `slow` pointers simultaneously until the `fast` pointer reaches the end of the list. At this point, the `slow` pointer will be at the desired n-th node from the end. This approach intuitively uses the distance between the two pointers to count down from the end of the list, making it easy to remember and implement.
 
@@ -1541,7 +1541,7 @@ Node* nthFromEnd(Node* head, int n) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(L) where L is the length of the linked list, and the space complexity is O(1) as it uses a constant amount of space."
-LinkedList,Find the first non-repeating character from a stream of characters,"1. Problem Summary: 
+LinkedList,Find the first non-repeating character from a stream of characters,https://practice.geeksforgeeks.org/problems/first-non-repeating-character-in-a-stream/0,"1. Problem Summary: 
    The problem focuses on identifying the first non-repeating character at any moment from a continuous stream of characters. As characters are read one by one, the solution should efficiently update and return the first unique character seen so far.
 
 2. Approach: 

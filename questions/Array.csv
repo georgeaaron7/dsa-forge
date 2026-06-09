@@ -1,5 +1,5 @@
-TOPIC,PROBLEM LINK,SOLUTION
-Array,Reverse the array,"1. Problem Summary: The task is to reverse the elements of a given array. This means transforming the array so that the first element becomes the last, the second element becomes the second to last, and so on, effectively reversing the order of all elements.
+TOPIC,PROBLEM NAME,URL,SOLUTION
+Array,Reverse the array,https://www.geeksforgeeks.org/write-a-program-to-reverse-an-array-or-string/,"1. Problem Summary: The task is to reverse the elements of a given array. This means transforming the array so that the first element becomes the last, the second element becomes the second to last, and so on, effectively reversing the order of all elements.
 
 2. Approach: The optimal way to reverse an array is to use two-pointer technique. Initialize two pointers, one at the start (`begin`) and one at the end (`end`) of the array. Swap the elements at these pointers, then move the `begin` pointer one step forward and the `end` pointer one step backward. Continue this process until the `begin` pointer is greater than or equal to the `end` pointer. This method efficiently reverses the array in-place, minimizing the need for extra space and additional operations. The swapping directly alters the array, making it easy to remember and implement during coding interviews.
 
@@ -20,7 +20,7 @@ void reverseArray(vector<int>& arr) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the number of elements in the array, as each element is visited once. The space complexity is O(1), as the reversal is done in place without using extra space."
-Array,Find the maximum and minimum element in an array,"1. Problem Summary: The task is to find both the maximum and minimum elements in a given array of integers. This is a fundamental problem that tests basic array traversal and comparison operations.
+Array,Find the maximum and minimum element in an array,https://www.geeksforgeeks.org/maximum-and-minimum-in-an-array/,"1. Problem Summary: The task is to find both the maximum and minimum elements in a given array of integers. This is a fundamental problem that tests basic array traversal and comparison operations.
 
 2. Approach: The optimal way to solve this problem is by using a single traversal of the array. Start by initializing two variables, `maxElement` and `minElement`, to the first element of the array. As you iterate through the array, compare each element with `maxElement` and `minElement`. If an element is greater than `maxElement`, update `maxElement`. Similarly, if an element is less than `minElement`, update `minElement`. This approach ensures that each element is compared only once with the current maximum and minimum, making it highly efficient.
 
@@ -47,7 +47,7 @@ pair<int, int> findMaxMin(vector<int>& arr) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the number of elements in the array, as each element is visited once. The space complexity is O(1) since only a constant amount of extra space is used."
-Array,"Find the ""Kth"" max and min element of an array ","1. Problem Summary: The task is to find the Kth smallest and Kth largest elements in an unsorted array. This is a common problem that tests understanding of array sorting and element retrieval.
+Array,"Find the ""Kth"" max and min element of an array ",https://practice.geeksforgeeks.org/problems/kth-smallest-element/0,"1. Problem Summary: The task is to find the Kth smallest and Kth largest elements in an unsorted array. This is a common problem that tests understanding of array sorting and element retrieval.
 
 2. Approach: The optimal approach to find the Kth smallest and Kth largest elements involves sorting the array first and then directly accessing the elements. After sorting, the Kth smallest element is at the (K-1)th index, and the Kth largest element is at the (n-K)th index, where n is the number of elements in the array. This method leverages the efficiency of modern sorting algorithms and provides a direct way to access the desired elements without additional computations.
 
@@ -66,7 +66,7 @@ pair<int, int> findKthElements(vector<int>& arr, int K) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n log n) due to the sorting step, and the space complexity is O(1) if in-place sorting is used."
-Array,"Given an array which consists of only 0, 1 and 2. Sort the array without using any sorting algo","1. Problem Summary: The task is to sort an array that contains only the integers 0, 1, and 2. The challenge is to do this sorting without using any conventional sorting algorithm, ensuring an efficient solution.
+Array,"Given an array which consists of only 0, 1 and 2. Sort the array without using any sorting algo",https://practice.geeksforgeeks.org/problems/sort-an-array-of-0s-1s-and-2s/0,"1. Problem Summary: The task is to sort an array that contains only the integers 0, 1, and 2. The challenge is to do this sorting without using any conventional sorting algorithm, ensuring an efficient solution.
 
 2. Approach: The optimal algorithm for this problem is known as the Dutch National Flag algorithm, proposed by Edsger Dijkstra. The algorithm segregates the array into three sections corresponding to 0s, 1s, and 2s, using three pointers: `low`, `mid`, and `high`. Initially, `low` and `mid` are set to the start of the array, and `high` is set to the end. Traverse the array with the `mid` pointer: if the element at `mid` is 0, swap it with the element at `low` and increment both `low` and `mid`. If it's 1, just increment `mid`. If it's 2, swap it with the element at `high` and decrement `high`, without moving `mid`. This way, the algorithm efficiently groups all 0s to the beginning, 1s in the middle, and 2s to the end.
 
@@ -94,7 +94,7 @@ void sortColors(vector<int>& nums) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) as each element is processed once. The space complexity is O(1) as the sorting is done in place without using extra space."
-Array,Move all the negative elements to one side of the array ,"1. Problem Summary: The task is to rearrange the elements in an array such that all negative numbers are moved to one side of the array. The order of positive elements and negative elements does not need to be maintained.
+Array,Move all the negative elements to one side of the array ,https://www.geeksforgeeks.org/move-negative-numbers-beginning-positive-end-constant-extra-space/,"1. Problem Summary: The task is to rearrange the elements in an array such that all negative numbers are moved to one side of the array. The order of positive elements and negative elements does not need to be maintained.
 
 2. Approach: A two-pointer technique can be effectively used to solve this problem. Initialize two pointers, `left` starting from the beginning of the array and `right` from the end. Move `left` forward until you find a positive number and `right` backward until you find a negative number, then swap these elements. This process is repeated until `left` is greater than `right`. This approach intuitively separates negatives and positives by direct comparison and swapping, making it easy to remember and implement.
 
@@ -120,7 +120,7 @@ void moveNegativesToOneSide(vector<int>& arr) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the number of elements in the array, and the space complexity is O(1), as no additional data structures are used."
-Array,Find the Union and Intersection of the two sorted arrays.,"1. Problem Summary: 
+Array,Find the Union and Intersection of the two sorted arrays.,https://practice.geeksforgeeks.org/problems/union-of-two-arrays/0,"1. Problem Summary: 
    The task is to find the union and intersection of two sorted arrays. The union contains all unique elements from both arrays, while the intersection includes elements that are present in both arrays.
 
 2. Approach: 
@@ -184,7 +184,7 @@ vector<int> findIntersection(int arr1[], int arr2[], int n, int m) {
 
 4. Time Complexity and Space Complexity: 
    The time complexity is O(n + m) where n and m are the lengths of the two arrays, as each array is traversed at most once. The space complexity is O(n + m) for storing the results."
-Array,Write a program to cyclically rotate an array by one.,"1. Problem Summary: The task is to cyclically rotate the elements of an array to the right by one position, such that the last element moves to the first position in the array, and all other elements shift one position to the right.
+Array,Write a program to cyclically rotate an array by one.,https://practice.geeksforgeeks.org/problems/cyclically-rotate-an-array-by-one/0,"1. Problem Summary: The task is to cyclically rotate the elements of an array to the right by one position, such that the last element moves to the first position in the array, and all other elements shift one position to the right.
 
 2. Approach: The optimal way to approach this problem is to first store the last element of the array, as it will be moved to the first position. Then, iterate through the array from the end to the beginning, shifting each element one position to the right. Finally, place the stored last element into the first position of the array. This approach is intuitive as it mimics the action of taking the last piece of a puzzle out and then sliding all other pieces rightward, before placing the removed piece into the new gap at the beginning.
 
@@ -205,7 +205,7 @@ void cyclicRotateByOne(vector<int>& arr) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) as we traverse through the array once, and the space complexity is O(1) since no additional space is used apart from a few variables."
-Array,find Largest sum contiguous Subarray [V. IMP],"1. Problem Summary:  
+Array,find Largest sum contiguous Subarray [V. IMP],https://practice.geeksforgeeks.org/problems/kadanes-algorithm/0,"1. Problem Summary:  
 The task is to find the maximum sum of a contiguous subarray within a given one-dimensional integer array. This is a classic problem to demonstrate the use of dynamic programming for optimization.
 
 2. Approach:  
@@ -231,7 +231,7 @@ int maxSubArraySum(vector<int>& nums) {
 
 4. Time Complexity and Space Complexity:  
 The time complexity is O(n) where n is the number of elements in the array, as it processes each element exactly once. The space complexity is O(1), as it uses a constant amount of extra space."
-Array,Minimise the maximum difference between heights [V.IMP],"1. Problem Summary: The problem is to adjust the heights of the given array of towers, either by increasing or decreasing each tower's height by a fixed amount `k`, and then find the minimum possible difference between the tallest and shortest tower heights after the adjustment.
+Array,Minimise the maximum difference between heights [V.IMP],https://practice.geeksforgeeks.org/problems/minimize-the-heights3351/1,"1. Problem Summary: The problem is to adjust the heights of the given array of towers, either by increasing or decreasing each tower's height by a fixed amount `k`, and then find the minimum possible difference between the tallest and shortest tower heights after the adjustment.
 
 2. Approach: First, sort the array of tower heights. The maximum difference without any adjustments is between the first and last elements of the sorted array. For each tower, consider increasing the height of shorter towers (those before and including the middle) by `k` and decreasing the height of taller towers (those after the middle) by `k`. At each step, calculate the potential maximum and minimum heights that could result from these adjustments and update the minimum difference accordingly. This approach leverages the sorted order to systematically test the effect of adjustments on the range of heights.
 
@@ -255,7 +255,7 @@ int minimizeMaxDiff(vector<int>& heights, int k) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n log n) due to sorting, and the space complexity is O(1) as no additional significant space is used beyond input modifications."
-Array,Minimum no. of Jumps to reach end of an array,"1. Problem Summary: The problem is to find the minimum number of jumps required to reach the end of a given array of integers, where each element represents the maximum jump length from that position.
+Array,Minimum no. of Jumps to reach end of an array,https://practice.geeksforgeeks.org/problems/minimum-number-of-jumps/0,"1. Problem Summary: The problem is to find the minimum number of jumps required to reach the end of a given array of integers, where each element represents the maximum jump length from that position.
 
 2. Approach: Use a greedy algorithm to solve this problem efficiently. Start from the first element and maintain variables for the current maximum reach, the steps possible within the current reach, and the count of jumps taken. Traverse the array, and for each element, update the maximum reach. If the current index reaches the end of the steps allowed by the previous jump, increment the jump count and update the steps to the maximum reach. This approach ensures that each step is optimized to extend the reach as far as possible before making another jump.
 
@@ -288,7 +288,7 @@ int minJumps(vector<int>& arr) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) as each element is processed once. The space complexity is O(1) as no additional space proportional to the input size is used."
-Array,find duplicate in an array of N+1 Integers,"1. Problem Summary: The task is to find a duplicate number in an array containing `n+1` integers, where each integer is between `1` and `n` inclusive. The presence of `n+1` integers ensures at least one duplicate exists.
+Array,find duplicate in an array of N+1 Integers,https://leetcode.com/problems/find-the-duplicate-number/,"1. Problem Summary: The task is to find a duplicate number in an array containing `n+1` integers, where each integer is between `1` and `n` inclusive. The presence of `n+1` integers ensures at least one duplicate exists.
 
 2. Approach: The optimal approach to solve this problem is using the Floyd's Tortoise and Hare (Cycle Detection) algorithm. This technique leverages a two-pointer method to detect a cycle within the sequence formed by the array values treated as pointers. Initially, set both a slow pointer (`tortoise`) and a fast pointer (`hare`) at the start of the array. Move `tortoise` one step and `hare` two steps at a time. The first meeting point of these pointers will confirm the cycle. To find the entry point of the cycle, which is the duplicate number, reset one pointer to the start and move both pointers one step at a time; their next meeting point is the duplicate.
 
@@ -319,7 +319,7 @@ int findDuplicate(vector<int>& nums) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) due to the traversal through the array, and the space complexity is O(1) as it uses only constant extra space."
-Array,Merge 2 sorted arrays without using Extra space.,"1. Problem Summary: The task is to merge two sorted arrays into the first array when the first array has enough space to accommodate elements of both arrays. This must be done in-place without using any additional space.
+Array,Merge 2 sorted arrays without using Extra space.,https://practice.geeksforgeeks.org/problems/merge-two-sorted-arrays5135/1,"1. Problem Summary: The task is to merge two sorted arrays into the first array when the first array has enough space to accommodate elements of both arrays. This must be done in-place without using any additional space.
 
 2. Approach: Start by positioning two pointers at the ends of the two arrays (not counting the extra space in the first array). Compare the elements at these pointers, and place the larger element at the end of the first array, moving the pointer in the first array backward to fill the array from the end. This ensures that the largest elements are placed at the end of the merged array first, avoiding overwriting smaller elements that have not yet been compared. Continue this process until all elements from the second array are placed into the first array. This approach leverages the existing sorted order and the extra space in the first array effectively.
 
@@ -344,7 +344,7 @@ void mergeSortedArrays(int arr1[], int n, int arr2[], int m) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n + m) where n and m are the sizes of the two arrays respectively. The space complexity is O(1) since no extra space is used beyond the given arrays."
-Array,Kadane's Algo [V.V.V.V.V IMP],"1. Problem Summary: The problem requires finding the maximum sum of a contiguous subarray within a one-dimensional integer array. This is commonly known as the ""Maximum Subarray Problem.""
+Array,Kadane's Algo [V.V.V.V.V IMP],https://practice.geeksforgeeks.org/problems/kadanes-algorithm/0,"1. Problem Summary: The problem requires finding the maximum sum of a contiguous subarray within a one-dimensional integer array. This is commonly known as the ""Maximum Subarray Problem.""
 
 2. Approach: Kadane's algorithm is an efficient way to solve this problem by iterating through the array and maintaining two variables: `current_sum` and `max_sum`. Start `current_sum` at 0 and `max_sum` with the value of the first element or zero (if implementing strictly positive subarray sums). For each element in the array, add it to `current_sum`. If `current_sum` becomes negative, reset it to zero (if considering only positive sums) or keep it if considering negative values as well. Update `max_sum` if `current_sum` exceeds `max_sum`. This approach leverages the idea that a maximum subarray will never start with a negative sum.
 
@@ -370,7 +370,7 @@ int maxSubarraySum(vector<int>& nums) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) as it requires a single pass through the array, and the space complexity is O(1) as it uses only a constant amount of extra space."
-Array,Merge Intervals,"1. Problem Summary: Given a collection of intervals, merge all overlapping intervals and return an array of the non-overlapping intervals that cover all the intervals in the input.
+Array,Merge Intervals,https://leetcode.com/problems/merge-intervals/,"1. Problem Summary: Given a collection of intervals, merge all overlapping intervals and return an array of the non-overlapping intervals that cover all the intervals in the input.
 
 2. Approach: The optimal way to tackle the merge intervals problem is to first sort the intervals based on their start times. Once sorted, iterate through the sorted intervals and merge them if they overlap. Overlapping is determined if the start of the current interval is less than or equal to the end of the last merged interval. If they overlap, merge them by updating the end of the last merged interval to be the maximum of the ends of the overlapping intervals. If they don't overlap, simply add the current interval to the result list.
 
@@ -406,7 +406,7 @@ vector<vector<int>> mergeIntervals(vector<vector<int>>& intervals) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n log n) due to the sorting step, and the space complexity is O(n) for storing the result."
-Array,Next Permutation,"1. Problem Summary: The ""Next Permutation"" problem requires finding the next lexicographical permutation of a given array of numbers. If no such permutation exists (i.e., the array is sorted in descending order), the array should be rearranged as the lowest possible order (ascending).
+Array,Next Permutation,https://leetcode.com/problems/next-permutation/,"1. Problem Summary: The ""Next Permutation"" problem requires finding the next lexicographical permutation of a given array of numbers. If no such permutation exists (i.e., the array is sorted in descending order), the array should be rearranged as the lowest possible order (ascending).
 
 2. Approach: Start by identifying the rightmost pair of successive elements (a[k], a[k+1]), where a[k] < a[k+1]. If no such pair exists, the entire array is in descending order, and reversing it gives the smallest permutation. If such a pair is found, find the largest index l greater than k such that a[k] < a[l]. Swap elements a[k] and a[l], then reverse the sequence from a[k+1] to the end to get the next permutation. This approach exploits the properties of lexicographical ordering by making the smallest necessary change to increase the order.
 
@@ -437,7 +437,7 @@ void nextPermutation(vector<int>& nums) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) and the space complexity is O(1), where n is the length of the input array. This is because the algorithm makes a single pass through the array and performs a constant number of operations on the array elements."
-Array,Count Inversion,"1. Problem Summary:  
+Array,Count Inversion,https://practice.geeksforgeeks.org/problems/inversion-of-array/0,"1. Problem Summary:  
    In the ""Count Inversion"" problem, you are required to count the number of inversions in an array where an inversion is a pair of indices \(i, j\) such that \(i < j\) and \(arr[i] > arr[j]\).
 
 2. Approach:  
@@ -489,7 +489,7 @@ Array,Count Inversion,"1. Problem Summary:
 
 4. Time Complexity and Space Complexity:  
    The time complexity of the algorithm is \(O(n \log n)\), and the space complexity is \(O(n)\) due to the use of temporary arrays in the merge step."
-Array,Best time to buy and Sell stock,"1. Problem Summary: In the ""Best Time to Buy and Sell Stock"" problem, you are given an array where each element represents the stock price on a given day. You need to find the maximum profit you can achieve by buying on one day and selling on a later day.
+Array,Best time to buy and Sell stock,https://leetcode.com/problems/best-time-to-buy-and-sell-stock/,"1. Problem Summary: In the ""Best Time to Buy and Sell Stock"" problem, you are given an array where each element represents the stock price on a given day. You need to find the maximum profit you can achieve by buying on one day and selling on a later day.
 
 2. Approach: The optimal approach to solve this problem is to use a single pass through the array while maintaining two variables: `minPrice` to track the lowest stock price encountered so far, and `maxProfit` to track the maximum profit that can be achieved. As you iterate through the stock prices, update `minPrice` if the current price is lower than `minPrice`. For each price, calculate the potential profit by subtracting `minPrice` from the current price and update `maxProfit` if this potential profit is higher than the current `maxProfit`. This approach efficiently finds the maximum profit with minimal computation by leveraging the sequential nature of buying and selling stocks.
 
@@ -513,7 +513,7 @@ int maxProfit(vector<int>& prices) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) as it involves a single pass through the array, and the space complexity is O(1) since only a few variables are used."
-Array,find all pairs on integer array whose sum is equal to given number,"1. Problem Summary: The problem requires finding all unique pairs of elements in an integer array that sum up to a specified target number.
+Array,find all pairs on integer array whose sum is equal to given number,https://practice.geeksforgeeks.org/problems/count-pairs-with-given-sum5022/1,"1. Problem Summary: The problem requires finding all unique pairs of elements in an integer array that sum up to a specified target number.
 
 2. Approach: Use a hashmap to track the complement of each element (target - current element) as you iterate through the array. For each element, check if its complement exists in the hashmap. If it does, you have found a pair that sums up to the target. Add this pair to the result and continue. This approach ensures that each pair is counted only once. The use of a hashmap allows for efficient lookups and avoids the need for a nested loop, making the solution more scalable.
 
@@ -538,7 +538,7 @@ vector<pair<int, int>> findPairsWithSum(vector<int>& nums, int target) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the number of elements in the array, and the space complexity is also O(n) due to the storage required for the hashmap."
-Array,find common elements In 3 sorted arrays,"1. Problem Summary: The task is to find common elements that appear in three sorted arrays. The arrays are non-decreasing order and may contain duplicates.
+Array,find common elements In 3 sorted arrays,https://practice.geeksforgeeks.org/problems/common-elements1132/1,"1. Problem Summary: The task is to find common elements that appear in three sorted arrays. The arrays are non-decreasing order and may contain duplicates.
 
 2. Approach: The optimal way to solve this problem is by using three pointers, each initialized to the start of the three arrays. Incrementally compare the elements at these pointers. If they match, it's a common element; record it and move all pointers forward. If they don't match, advance the pointer pointing to the smallest element. This approach ensures each array is traversed only once, efficiently finding all common elements by exploiting the sorted property of the arrays.
 
@@ -567,7 +567,7 @@ vector<int> findCommonElements(vector<int>& arr1, vector<int>& arr2, vector<int>
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n1 + n2 + n3), where n1, n2, and n3 are the lengths of the three arrays. The space complexity is O(min(n1, n2, n3)) for storing the common elements."
-Array,Rearrange the array in alternating positive and negative items with O(1) extra space,"1. Problem Summary: The task is to rearrange a given array such that positive and negative numbers are placed alternately. If there are extra positive or negative numbers, they should be appended at the end of the array. The rearrangement must be done in-place with O(1) extra space.
+Array,Rearrange the array in alternating positive and negative items with O(1) extra space,https://www.geeksforgeeks.org/rearrange-array-alternating-positive-negative-items-o1-extra-space/,"1. Problem Summary: The task is to rearrange a given array such that positive and negative numbers are placed alternately. If there are extra positive or negative numbers, they should be appended at the end of the array. The rearrangement must be done in-place with O(1) extra space.
 
 2. Approach: The optimal solution involves first partitioning the array so that all negative numbers are at the beginning and all positive numbers follow. This can be achieved using a modified partition process similar to the one used in quicksort. After partitioning, swap the elements to alternate negative and positive positions. Start with a pointer at the beginning of the array for negative numbers and another pointer where the positive segment starts. Swap elements to ensure alternation and move pointers accordingly. This method ensures that the structure of alternating positives and negatives forms without using additional space.
 
@@ -608,7 +608,7 @@ int main() {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) as each element is processed in linear passes. The space complexity is O(1) since the rearrangement is done in-place without using extra space."
-Array,Find if there is any subarray with sum equal to 0,"1. Problem Summary: The task is to determine if there exists any subarray within a given array of integers that sums up to zero. A subarray is a contiguous part of the array.
+Array,Find if there is any subarray with sum equal to 0,https://practice.geeksforgeeks.org/problems/subarray-with-0-sum/0,"1. Problem Summary: The task is to determine if there exists any subarray within a given array of integers that sums up to zero. A subarray is a contiguous part of the array.
 
 2. Approach: The optimal approach involves using a hash map to keep track of cumulative sums of elements as we iterate through the array. We initialize the sum to zero and start iterating. For each element, we update the cumulative sum. If the cumulative sum has been seen before in the hash map or if it is zero, it indicates that there is a subarray (from the previous index of this sum to the current index) whose elements sum up to zero. If not, we store this cumulative sum in the hash map with its corresponding index. This approach leverages the fact that if the cumulative sum up to two different indices is the same, the sum of the elements between these indices must be zero.
 
@@ -634,7 +634,7 @@ bool hasSubarrayWithZeroSum(vector<int>& nums) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) and the space complexity is O(n), where n is the number of elements in the array. This is because we traverse the array once and store cumulative sums in the hash map."
-Array,Find factorial of a large number,"1. Problem Summary: The problem is to compute the factorial of a large number that doesn't fit in standard data types like `int` or `long`. Factorials grow very fast, making it impractical to store results in these types for larger numbers.
+Array,Find factorial of a large number,https://practice.geeksforgeeks.org/problems/factorials-of-large-numbers/0,"1. Problem Summary: The problem is to compute the factorial of a large number that doesn't fit in standard data types like `int` or `long`. Factorials grow very fast, making it impractical to store results in these types for larger numbers.
 
 2. Approach: The optimal algorithm uses an array to store individual digits of the factorial result. Start by initializing the array with the first factorial value, 1. For each number from 2 up to n, multiply each digit of the current result stored in the array by this number, adjusting for carry-over as you would in manual multiplication. Keep track of the size of the resultant number (number of digits). This approach simulates the manual multiplication process to handle large numbers that exceed typical data type limits.
 
@@ -669,7 +669,7 @@ void factorial(int n) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n^2) due to the nested loops for each multiplication, and space complexity is O(n) for storing the digits of the factorial."
-Array,find maximum product subarray ,"1. Problem Summary: 
+Array,find maximum product subarray ,https://practice.geeksforgeeks.org/problems/maximum-product-subarray3604/1,"1. Problem Summary: 
    The problem is to find the maximum product of a contiguous subarray within a given one-dimensional integer array. This subarray can include negative numbers, which can affect the product significantly.
 
 2. Approach:
@@ -695,7 +695,7 @@ Array,find maximum product subarray ,"1. Problem Summary:
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(n) where n is the number of elements in the array, since we traverse the array once. The space complexity is O(1), as we only use a constant amount of extra space."
-Array,Find longest coinsecutive subsequence,"1. Problem Summary: 
+Array,Find longest coinsecutive subsequence,https://practice.geeksforgeeks.org/problems/longest-consecutive-subsequence/0,"1. Problem Summary: 
    The problem is to find the length of the longest consecutive elements sequence in an unsorted array. The sequence does not need to be contiguous in the array but should be consecutive in terms of values.
 
 2. Approach: 
@@ -729,7 +729,7 @@ int findLongestConsecutive(vector<int>& nums) {
 
 4. Time Complexity and Space Complexity: 
    The time complexity is O(n) due to the single traversal and constant-time set operations, and the space complexity is O(n) for storing the elements in the set."
-Array,"Given an array of size n and a number k, fin all elements that appear more than "" n/k "" times.","1. Problem Summary: 
+Array,"Given an array of size n and a number k, fin all elements that appear more than "" n/k "" times.",https://www.geeksforgeeks.org/given-an-array-of-of-size-n-finds-all-the-elements-that-appear-more-than-nk-times/,"1. Problem Summary: 
    The task is to identify all elements in an array that appear more than n/k times, where n is the size of the array and k is a given integer.
 
 2. Approach: 
@@ -787,7 +787,7 @@ int main() {
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(n) and the space complexity is O(k), which is efficient given the constraints."
-Array,Maximum profit by buying and selling a share atmost twice,"1. Problem Summary: The problem is to find the maximum profit that can be earned by buying and selling a stock at most twice on different days. The constraint is that a new transaction can only start after the previous one is completed (sell before you buy again).
+Array,Maximum profit by buying and selling a share atmost twice,https://www.geeksforgeeks.org/maximum-profit-by-buying-and-selling-a-share-at-most-twice/,"1. Problem Summary: The problem is to find the maximum profit that can be earned by buying and selling a stock at most twice on different days. The constraint is that a new transaction can only start after the previous one is completed (sell before you buy again).
 
 2. Approach: The optimal algorithm involves tracking four variables: the maximum profit after the first buy (`first_buy`), the maximum profit after the first sell (`first_sell`), the maximum profit after the second buy (`second_buy`), and the maximum profit after the second sell (`second_sell`). Initialize `first_buy` and `second_buy` to a very small number (to simulate buying stock at a high negative cost, meaning no stock bought yet) and `first_sell` and `second_sell` to zero. Traverse through the list of stock prices, updating these four variables sequentially: update `first_buy` to maximize a previous first buy or the negative of the current price, `first_sell` to maximize the previous first sell or the sum of the current price and `first_buy`, and similarly for `second_buy` and `second_sell`. This approach captures the best profits possible at each transaction stage as you iterate through the stock prices.
 
@@ -811,7 +811,7 @@ int maxProfit(vector<int>& prices) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the number of days (stock prices), and the space complexity is O(1), as only a constant amount of extra space is used."
-Array,Find whether an array is a subset of another array,"1. Problem Summary: 
+Array,Find whether an array is a subset of another array,https://practice.geeksforgeeks.org/problems/array-subset-of-another-array/0,"1. Problem Summary: 
    The problem is to determine if one array (let's call it `A`) is a subset of another array (`B`). This means every element in `A` must also appear in `B`.
 
 2. Approach:
@@ -841,7 +841,7 @@ bool isSubset(vector<int>& A, vector<int>& B) {
 
 4. Time Complexity and Space Complexity: 
    The time complexity is O(n + m), where n is the size of array `B` and m is the size of array `A`. The space complexity is O(n) due to the storage of elements of `B` in the hash map."
-Array,Find the triplet that sum to a given value,"1. Problem Summary: Given an array of integers and a target sum, the task is to find three distinct elements in the array whose sum equals the target sum.
+Array,Find the triplet that sum to a given value,https://practice.geeksforgeeks.org/problems/triplet-sum-in-array/0,"1. Problem Summary: Given an array of integers and a target sum, the task is to find three distinct elements in the array whose sum equals the target sum.
 
 2. Approach: The optimal solution involves sorting the array first, which allows the use of a two-pointer technique to efficiently find the triplet. After sorting, iterate through the array using a loop. For each element at index `i`, set two pointers: one starting just after `i` (`left = i + 1`) and another at the end of the array (`right = n - 1`). Move the `left` pointer rightward (increasing) and the `right` pointer leftward (decreasing) to find if a triplet sums to the target. If the sum of the triplet is less than the target, move the `left` pointer to the right to increase the sum. If the sum is more, move the `right` pointer to the left. This algorithm efficiently narrows down the possible triplets.
 
@@ -877,7 +877,7 @@ vector<vector<int>> findTriplets(vector<int>& arr, int target) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n^2) due to the two nested loops after sorting, and the space complexity is O(1) if the output space is not considered; otherwise, it depends on the number of triplets found."
-Array,Trapping Rain water problem,"1. Problem Summary: In the Trapping Rain Water problem, you are given an array representing an elevation map where the width of each bar is 1. The task is to compute how much water it can trap after raining.
+Array,Trapping Rain water problem,https://practice.geeksforgeeks.org/problems/trapping-rain-water/0,"1. Problem Summary: In the Trapping Rain Water problem, you are given an array representing an elevation map where the width of each bar is 1. The task is to compute how much water it can trap after raining.
 
 2. Approach: The optimal way to solve this problem involves using two pointers and two arrays (or dynamically updating maximums) to track the maximum heights from both the left and the right of each bar. Start by creating two arrays, `left_max` and `right_max`, where each index `i` contains the maximum height from the start up to `i` and from the end to `i`, respectively. The trapped water at each bar is the minimum of `left_max[i]` and `right_max[i]` minus the height of the bar itself if this value is positive. To optimize space, instead of using two arrays, you can use two pointers moving from both ends towards the center, updating the maximum heights on-the-fly and calculating the trapped water directly.
 
@@ -909,7 +909,7 @@ int trap(vector<int>& height) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the number of bars in the elevation map. The space complexity is O(1) since we are using a constant amount of additional space."
-Array,Chocolate Distribution problem,"1. Problem Summary: The Chocolate Distribution problem involves finding the minimum difference between the maximum and minimum chocolates given to students from a packet of chocolates, where each packet contains a different number of chocolates. The task is to distribute these packets among a given number of students such that the difference in chocolates between any two students is minimized.
+Array,Chocolate Distribution problem,https://practice.geeksforgeeks.org/problems/chocolate-distribution-problem/0,"1. Problem Summary: The Chocolate Distribution problem involves finding the minimum difference between the maximum and minimum chocolates given to students from a packet of chocolates, where each packet contains a different number of chocolates. The task is to distribute these packets among a given number of students such that the difference in chocolates between any two students is minimized.
 
 2. Approach: The optimal approach is to first sort the array of chocolates. Once sorted, you iterate over the array with a sliding window of size equal to the number of students. In each iteration, calculate the difference between the chocolates in the first and last packet of the current window. The minimum of all these differences will be the answer. Sorting ensures that packets with a closer number of chocolates are considered together, making it intuitive to find the smallest range.
 
@@ -934,7 +934,7 @@ int findMinDiff(vector<int> &arr, int n, int m) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n log n) due to the sorting step, and the space complexity is O(1) as no additional space is used beyond input storage."
-Array,Smallest Subarray with sum greater than a given value,"1. Problem Summary: The problem requires finding the length of the smallest contiguous subarray whose sum is greater than a given value `x`. The input is an array of positive integers.
+Array,Smallest Subarray with sum greater than a given value,https://practice.geeksforgeeks.org/problems/smallest-subarray-with-sum-greater-than-x/0,"1. Problem Summary: The problem requires finding the length of the smallest contiguous subarray whose sum is greater than a given value `x`. The input is an array of positive integers.
 
 2. Approach: The optimal algorithm to solve this problem is the sliding window technique. Initialize two pointers, `start` and `end`, at the beginning of the array and a variable `sum` to keep track of the sum of the current subarray. Expand the window by moving `end` and update the sum until it becomes greater than `x`. Then, attempt to shrink the window from the left by moving the `start` pointer and updating the sum, checking each time if the sum remains greater than `x`. Keep track of the minimum length of such subarrays. This approach ensures that each element is processed at most twice (once for expanding and once for shrinking the window), leading to an efficient solution.
 
@@ -967,7 +967,7 @@ int smallestSubWithSum(vector<int>& arr, int x) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the number of elements in the array, as each element is processed at most twice. The space complexity is O(1), as only a few extra variables are needed."
-Array,Three way partitioning of an array around a given value,"1. Problem Summary:  
+Array,Three way partitioning of an array around a given value,https://practice.geeksforgeeks.org/problems/three-way-partitioning/1,"1. Problem Summary:  
    The task is to partition an array into three parts such that elements less than a given value are on one side, elements equal to the value are in the middle, and elements greater than the value are on the other side.
 
 2. Approach:  
@@ -999,7 +999,7 @@ void threeWayPartition(vector<int>& arr, int lowVal, int highVal) {
 
 4. Time Complexity and Space Complexity:  
    The time complexity is O(n) as each element is processed at most twice. The space complexity is O(1) as the partitioning is done in-place."
-Array,Minimum swaps required bring elements less equal K together,"1. Problem Summary: The problem requires determining the minimum number of adjacent swaps needed to group all elements less than or equal to a given value `K` together in an array.
+Array,Minimum swaps required bring elements less equal K together,https://practice.geeksforgeeks.org/problems/minimum-swaps-required-to-bring-all-elements-less-than-or-equal-to-k-together/0,"1. Problem Summary: The problem requires determining the minimum number of adjacent swaps needed to group all elements less than or equal to a given value `K` together in an array.
 
 2. Approach: First, count the number of elements `<= K` in the array, denoted as `countK`. This count defines the window size. Use a sliding window approach to find the window of size `countK` that already contains the maximum number of elements `<= K`, as this minimizes the swaps needed. Slide the window across the array while counting how many elements `<= K` are outside this window for each position. The minimum of these counts during the sliding window traversal gives the answer. This method leverages the fixed window size to efficiently compute swaps by updating the count incrementally as the window slides.
 
@@ -1032,7 +1032,7 @@ int minSwaps(vector<int>& arr, int K) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the length of the array, and the space complexity is O(1) as only a few extra variables are used."
-Array,Minimum no. of operations required to make an array palindrome,"1. Problem Summary: The problem is to find the minimum number of operations required to convert a given array into a palindrome. An operation is defined as replacing any element with any other element.
+Array,Minimum no. of operations required to make an array palindrome,https://practice.geeksforgeeks.org/problems/palindromic-array/0,"1. Problem Summary: The problem is to find the minimum number of operations required to convert a given array into a palindrome. An operation is defined as replacing any element with any other element.
 
 2. Approach: The optimal approach involves using two pointers, one at the start and one at the end of the array. Compare the elements at these pointers; if they are the same, move both pointers towards the center. If they differ, increment the operation count and move the pointers such that the larger of the two values is effectively replaced by the smaller one, ensuring that fewer changes are needed in subsequent steps. Continue this process until the pointers meet or cross. This approach leverages the symmetry of palindromes to minimize the number of changes by always aligning the most significant discrepancies first.
 
@@ -1064,7 +1064,7 @@ int minOperationsToPalindrome(vector<int>& arr) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n), where n is the length of the array, as each element is considered at most once. The space complexity is O(1), as no additional space is used beyond the input."
-Array,Median of 2 sorted arrays of equal size,"1. Problem Summary: The task is to find the median of two sorted arrays of the same size. The median is the middle value in an ordered integer list, and if the list length is even, it is the average of the two middle numbers.
+Array,Median of 2 sorted arrays of equal size,https://practice.geeksforgeeks.org/problems/find-the-median0527/1,"1. Problem Summary: The task is to find the median of two sorted arrays of the same size. The median is the middle value in an ordered integer list, and if the list length is even, it is the average of the two middle numbers.
 
 2. Approach: The optimal solution uses a binary search algorithm. Start by identifying the smaller of the two arrays to minimize the search space. Use binary search on this array to find a partition that divides both arrays into two halves such that all elements in the left half are less than or equal to all elements in the right half. Adjust the partition using binary search criteria: if the maximum element on the left side of one array is greater than the minimum on the right side of the other array, adjust the partition. The median is then either the maximum of the left sides if the combined length is odd, or the average of the maximum of the left sides and the minimum of the right sides if even. This approach efficiently narrows down the potential candidates for the median by leveraging the properties of sorted arrays.
 
@@ -1106,7 +1106,7 @@ double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(log(min(n1, n2))) where n1 and n2 are the sizes of the two arrays, and the space complexity is O(1)."
-Array,Median of 2 sorted arrays of different size,"1. Problem Summary: 
+Array,Median of 2 sorted arrays of different size,https://www.geeksforgeeks.org/median-of-two-sorted-arrays-of-different-sizes/,"1. Problem Summary: 
 The problem is to find the median of two sorted arrays of different sizes. The median is the middle value in an odd-length combined array or the average of the two middle values in an even-length combined array.
 
 2. Approach: 

@@ -1,5 +1,5 @@
-TOPIC,PROBLEM LINK,SOLUTION
-Graph,"Create a Graph, print it","1. Problem Summary: The task is to create a graph from a given set of edges and vertices, and then print the graph. The graph can be either directed or undirected.
+TOPIC,PROBLEM NAME,URL,SOLUTION
+Graph,"Create a Graph, print it",https://1drv.ms/t/s!AqTOHFO77CqEiRua06v1PATyiFg5,"1. Problem Summary: The task is to create a graph from a given set of edges and vertices, and then print the graph. The graph can be either directed or undirected.
 
 2. Approach: To create and print a graph, we'll use an adjacency list, which is efficient in terms of space and time complexity for sparse graphs. Start by initializing a map or vector of lists, where each key or index represents a vertex and the list contains the neighboring vertices. For each edge provided, add the vertex to the adjacency list of its neighbor. If the graph is undirected, add both vertices to each other's lists. To print the graph, iterate over the adjacency list and print each vertex followed by its adjacent vertices.
 
@@ -39,7 +39,7 @@ int main() {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(V + E) where V is the number of vertices and E is the number of edges. The space complexity is also O(V + E), as we store each edge and vertex in the adjacency list."
-Graph,Implement BFS algorithm ,"1. Problem Summary:  
+Graph,Implement BFS algorithm ,https://practice.geeksforgeeks.org/problems/bfs-traversal-of-graph/1,"1. Problem Summary:  
    The task is to implement the Breadth-First Search (BFS) algorithm for traversing or searching tree or graph data structures. It starts at an arbitrary node and explores all its neighboring nodes at the present depth prior to moving on to nodes at the next depth level.
 
 2. Approach:  
@@ -74,7 +74,7 @@ void BFS(int start, vector<vector<int>>& adj) {
 
 4. Time Complexity and Space Complexity:  
    The time complexity is O(V + E) where V is the number of vertices and E is the number of edges. The space complexity is O(V) due to the storage needed for the visited array and the queue."
-Graph,Implement DFS Algo ,"1. Problem Summary: Depth First Search (DFS) is a fundamental graph traversal algorithm used to explore nodes and edges of a graph. It dives deeper into the graph as far as possible before backtracking.
+Graph,Implement DFS Algo ,https://www.geeksforgeeks.org/depth-first-search-or-dfs-for-a-graph/,"1. Problem Summary: Depth First Search (DFS) is a fundamental graph traversal algorithm used to explore nodes and edges of a graph. It dives deeper into the graph as far as possible before backtracking.
 
 2. Approach: DFS can be implemented using recursion or a stack. Starting from a source node, the algorithm explores as deep as possible along each branch before backtracking. This is achieved by marking visited nodes to avoid cycles and using a stack to keep track of the next node to visit. The recursive approach mimics the stack behavior inherently. The intuition behind DFS is similar to exploring a maze; move forward as much as possible and when you can't, backtrack to the last decision point and try a different path.
 
@@ -108,7 +108,7 @@ void startDFS(int V, vector<int> adj[]) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(V + E) where V is the number of vertices and E is the number of edges. The space complexity is O(V) due to the storage of visited nodes and the recursion call stack."
-Graph,Detect Cycle in Directed Graph using BFS/DFS Algo ,"1. Problem Summary: The task is to detect if a cycle exists in a directed graph using BFS or DFS algorithms. A cycle in a directed graph indicates the possibility of returning to a node along the directed edges.
+Graph,Detect Cycle in Directed Graph using BFS/DFS Algo ,https://www.geeksforgeeks.org/detect-cycle-in-a-graph/,"1. Problem Summary: The task is to detect if a cycle exists in a directed graph using BFS or DFS algorithms. A cycle in a directed graph indicates the possibility of returning to a node along the directed edges.
 
 2. Approach: For detecting cycles in directed graphs using DFS, we use a recursive approach along with two markers: visited and recStack (recursive stack). Each node is initially marked unvisited. As we traverse using DFS, we mark nodes as visited and also add them to the recStack. If we encounter a node that is already in the recStack during DFS, a cycle is detected. After exploring all paths from a node, it is removed from recStack, indicating that all paths from this node are processed and no cycle from this node was found. This approach intuitively uses the recStack to keep track of nodes in the current DFS path, and if we revisit any of these nodes, it confirms a cycle.
 
@@ -143,7 +143,7 @@ bool isCyclic(int V, vector<int> adj[]) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(V+E) where V is the number of vertices and E is the number of edges. The space complexity is O(V) due to the storage of visited and recursion stack arrays."
-Graph,Detect Cycle in UnDirected Graph using BFS/DFS Algo ,"1. Problem Summary: Detecting a cycle in an undirected graph is a fundamental problem that checks whether the graph contains a loop. This is crucial for understanding graph properties and for applications such as network analysis.
+Graph,Detect Cycle in UnDirected Graph using BFS/DFS Algo ,https://practice.geeksforgeeks.org/problems/detect-cycle-in-an-undirected-graph/1,"1. Problem Summary: Detecting a cycle in an undirected graph is a fundamental problem that checks whether the graph contains a loop. This is crucial for understanding graph properties and for applications such as network analysis.
 
 2. Approach: To detect a cycle using BFS or DFS, we traverse the graph, starting from an arbitrary node, and keep track of visited nodes. The core idea is to visit all adjacent vertices and check if any of these vertices were visited previously but are not the parent of the current vertex, which indicates a cycle. For BFS, we use a queue and for DFS, a recursive stack method can be employed. Maintaining a parent array or variable helps in checking whether the visited node is the parent or not, thereby detecting cycles effectively.
 
@@ -178,7 +178,7 @@ bool isCyclic(vector<int> adj[], int V) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity for this algorithm is O(V+E) where V is the number of vertices and E is the number of edges. The space complexity is O(V), due to the storage needed for the visited array and recursion stack (in the case of DFS)."
-Graph,Search in a Maze,"1. Problem Summary: 
+Graph,Search in a Maze,https://practice.geeksforgeeks.org/problems/rat-in-a-maze-problem/1,"1. Problem Summary: 
    The ""Search in a Maze"" problem involves finding a path from a starting point to a destination in a grid-based maze. The maze is represented as a 2D array where open paths and blocked cells are denoted by specific values.
 
 2. Approach: 
@@ -216,7 +216,7 @@ bool hasPath(vector<vector<int>>& maze, int startX, int startY, int destX, int d
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(M*N) where M and N are the dimensions of the maze, since each cell is visited at most once. The space complexity is also O(M*N) due to the recursion stack (in case of DFS) or the queue (in BFS) and the visited array."
-Graph,Minimum Step by Knight,"1. Problem Summary: The ""Minimum Step by Knight"" problem involves finding the shortest path a knight can take on a chessboard to reach a target position from a starting position. The board can be of any size, and the knight moves in its standard L-shaped pattern.
+Graph,Minimum Step by Knight,https://practice.geeksforgeeks.org/problems/steps-by-knight/0,"1. Problem Summary: The ""Minimum Step by Knight"" problem involves finding the shortest path a knight can take on a chessboard to reach a target position from a starting position. The board can be of any size, and the knight moves in its standard L-shaped pattern.
 
 2. Approach: The problem is best approached using the Breadth-First Search (BFS) algorithm due to its layer-by-layer exploration, which is suitable for finding the shortest path in an unweighted grid-like scenario. We begin by enqueuing the starting position of the knight along with a step count initialized to zero. For each position, we explore all possible knight moves (there are up to 8), and for each valid move (i.e., within the board limits and not previously visited), we enqueue the new position with the step count incremented by one. This continues until the target position is dequeued, at which point the associated step count is the minimum number of moves.
 
@@ -254,7 +254,7 @@ int minKnightMoves(int x1, int y1, int x2, int y2) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(N^2) and the space complexity is also O(N^2), where N is the dimension of the chessboard (typically N=8 for a standard board)."
-Graph,flood fill algo,"1. Problem Summary:
+Graph,flood fill algo,https://leetcode.com/problems/flood-fill/,"1. Problem Summary:
    The flood fill algorithm is used to change the color of a contiguous region of pixels in a 2D image to a new color, starting from a given pixel if it matches the original color of that pixel.
 
 2. Approach:
@@ -285,7 +285,7 @@ void floodFill(vector<vector<int>> &screen, int x, int y, int newColor) {
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(M*N), where M is the number of rows and N is the number of columns in the image, as each pixel is processed once. The space complexity is O(M*N) in the worst case due to the recursion stack depth in DFS."
-Graph,Clone a graph,"1. Problem Summary: The ""Clone a graph"" problem involves creating a copy of a given graph where each node and its connections (edges) are duplicated exactly. The graph can be represented using adjacency lists and may contain cycles and self-loops.
+Graph,Clone a graph,https://leetcode.com/problems/clone-graph/,"1. Problem Summary: The ""Clone a graph"" problem involves creating a copy of a given graph where each node and its connections (edges) are duplicated exactly. The graph can be represented using adjacency lists and may contain cycles and self-loops.
 
 2. Approach: To clone a graph, use a depth-first search (DFS) or breadth-first search (BFS) traversal. Start by creating a copy of the first node and use a hash map to store the mapping of original nodes to their clones. This map also helps in avoiding infinite loops caused by cycles in the graph. For each node visited, copy its neighbors if they haven't been copied yet, and recursively continue this process. Using a map ensures that each node is copied exactly once and all connections are preserved in the cloned graph.
 
@@ -324,7 +324,7 @@ Node* dfs(Node* node, unordered_map<Node*, Node*>& copies) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(V + E), where V is the number of vertices and E is the number of edges, due to the traversal of each node and edge once. The space complexity is O(V), which is used by the hash map and the recursion stack."
-Graph,Making wired Connections,"1. Problem Summary: The problem involves finding the minimum number of operations needed to connect all computers in a network using available cables. Each cable connects two computers directly, and the goal is to ensure that all computers are connected either directly or indirectly.
+Graph,Making wired Connections,https://leetcode.com/problems/number-of-operations-to-make-network-connected/,"1. Problem Summary: The problem involves finding the minimum number of operations needed to connect all computers in a network using available cables. Each cable connects two computers directly, and the goal is to ensure that all computers are connected either directly or indirectly.
 
 2. Approach: The problem can be modeled as finding the number of connected components in a graph, where each node represents a computer and each edge represents a cable. We can solve this problem using the Union-Find (Disjoint Set Union, DSU) data structure. First, initialize each computer as its own set. For each cable connecting two computers, unite their sets. After processing all cables, the number of unique sets (connected components) gives the number of operations needed, which is the number of components minus one (to connect them all together). This approach intuitively groups computers into sets, making it easier to visualize and count connections.
 
@@ -373,7 +373,7 @@ int makeConnected(int n, vector<vector<int>>& connections) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(N + M) where N is the number of computers and M is the number of connections, due to the union-find operations. The space complexity is O(N) for storing parent and rank arrays."
-Graph,word Ladder ,"1. Problem Summary: The Word Ladder problem involves finding the shortest transformation sequence from a start word to an end word by changing only one letter at a time, with each intermediate word being a valid word in a given dictionary.
+Graph,word Ladder ,https://leetcode.com/problems/word-ladder/,"1. Problem Summary: The Word Ladder problem involves finding the shortest transformation sequence from a start word to an end word by changing only one letter at a time, with each intermediate word being a valid word in a given dictionary.
 
 2. Approach: The optimal approach uses a Breadth-First Search (BFS) algorithm. Start by adding the beginWord to a queue along with a step count. For each word, iterate over its length and for each character position, try replacing it with every letter from 'a' to 'z'. If the new word is in the word list and hasn't been visited, add it to the queue. To optimize, use a bidirectional BFS, starting one BFS from the beginWord and another from the endWord, and meet in the middle. This significantly reduces the number of levels to explore.
 
@@ -415,7 +415,7 @@ int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
 ```
 
 4. Time Complexity and Space Complexity: Time complexity is O(N * L * 26), where N is the number of words in the dictionary and L is the length of each word. Space complexity is O(N), used for the queue and the dictionary set."
-Graph,Dijkstra algo,"1. Problem Summary:  
+Graph,Dijkstra algo,https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-greedy-algo-7/,"1. Problem Summary:  
    Dijkstra's algorithm is used to find the shortest paths from a source vertex to all other vertices in a weighted graph with non-negative edge weights.
 
 2. Approach:  
@@ -454,7 +454,7 @@ Graph,Dijkstra algo,"1. Problem Summary:
 
 4. Time Complexity and Space Complexity:  
    The time complexity is O((V+E) log V) and the space complexity is O(V + E), where V is the number of vertices and E is the number of edges in the graph."
-Graph,Implement Topological Sort ,"1. Problem Summary:  
+Graph,Implement Topological Sort ,https://practice.geeksforgeeks.org/problems/topological-sort/1,"1. Problem Summary:  
    Topological sorting of a directed graph is a linear ordering of its vertices such that for every directed edge UV from vertex U to vertex V, U comes before V in the ordering. This problem is applicable in scenarios where there is a need to determine the sequence of tasks or events.
 
 2. Approach:  
@@ -504,7 +504,7 @@ vector<int> topologicalSort(vector<vector<int>>& graph, int numVertices) {
 
 4. Time Complexity and Space Complexity:  
    The time complexity is O(V + E) where V is the number of vertices and E is the number of edges, as each vertex and edge is processed once. The space complexity is O(V) due to the storage of in-degrees, queue, and the topological order list."
-Graph,Minimum time taken by each job to be completed given by a Directed Acyclic Graph,"1. Problem Summary: The problem is to determine the minimum time required for each job to be completed where jobs are represented as nodes in a Directed Acyclic Graph (DAG), and edges indicate dependencies between jobs. Each job can only start once all its prerequisites are completed.
+Graph,Minimum time taken by each job to be completed given by a Directed Acyclic Graph,https://www.geeksforgeeks.org/minimum-time-taken-by-each-job-to-be-completed-given-by-a-directed-acyclic-graph/,"1. Problem Summary: The problem is to determine the minimum time required for each job to be completed where jobs are represented as nodes in a Directed Acyclic Graph (DAG), and edges indicate dependencies between jobs. Each job can only start once all its prerequisites are completed.
 
 2. Approach: The optimal algorithm uses a topological sorting combined with a dynamic programming approach. First, perform a topological sort on the DAG to determine the order in which jobs should be processed. This ensures that all prerequisites of a job are processed before the job itself. For each node processed in topological order, calculate the maximum time taken for its prerequisites and add the time required for the current job. This can be efficiently done using an array where each index corresponds to a job and stores the maximum time required to complete that job up to that point.
 
@@ -550,7 +550,7 @@ vector<int> minCompletionTime(vector<vector<int>>& graph, vector<int>& jobTimes)
 ```
 
 4. Time Complexity and Space Complexity: The algorithm runs in O(V + E) time and uses O(V) space, where V is the number of vertices (jobs) and E is the number of edges (dependencies) in the graph."
-Graph,Find whether it is possible to finish all tasks or not from given dependencies,"1. Problem Summary:
+Graph,Find whether it is possible to finish all tasks or not from given dependencies,https://www.geeksforgeeks.org/find-whether-it-is-possible-to-finish-all-tasks-or-not-from-given-dependencies/,"1. Problem Summary:
    Determine if all tasks can be completed given a set of dependencies between tasks. This is essentially checking for a cycle in a directed graph where nodes represent tasks and edges represent dependencies.
 
 2. Approach:
@@ -595,7 +595,7 @@ bool canFinishTasks(int numTasks, vector<pair<int, int>>& dependencies) {
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(V + E) where V is the number of tasks and E is the number of dependencies, due to the DFS traversal. The space complexity is also O(V + E) to store the graph and recursion stack."
-Graph,Find the no. of Isalnds,"1. Problem Summary: The problem ""Find the Number of Islands"" involves determining how many distinct islands are present in a given 2D grid, where '1' represents land and '0' represents water. Each piece of land connected vertically or horizontally (not diagonally) forms part of an island.
+Graph,Find the no. of Isalnds,https://practice.geeksforgeeks.org/problems/find-the-number-of-islands/1,"1. Problem Summary: The problem ""Find the Number of Islands"" involves determining how many distinct islands are present in a given 2D grid, where '1' represents land and '0' represents water. Each piece of land connected vertically or horizontally (not diagonally) forms part of an island.
 
 2. Approach: The optimal way to solve this problem is by using Depth-First Search (DFS). Traverse each cell in the grid, and when a land cell ('1') is found, initiate a DFS from that cell to mark all connected land cells as visited. This process counts as finding one island. The DFS will explore all neighboring cells (up, down, left, right) that are part of the same island and mark them as visited by setting them to '0' or using a visited matrix. Continue this process for all cells in the grid. This method intuitively groups and counts all connected components of land as separate islands.
 
@@ -630,7 +630,7 @@ int numIslands(vector<vector<char>>& grid) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(M*N) where M is the number of rows and N is the number of columns in the grid, as each cell is visited once. The space complexity is O(M*N) in the worst case due to the recursion stack during the DFS."
-Graph,"Given a sorted Dictionary of an Alien Language, find order of characters","1. Problem Summary: Given a list of words sorted lexicographically according to the rules of an alien language, the task is to deduce and return the correct order of characters in that language.
+Graph,"Given a sorted Dictionary of an Alien Language, find order of characters",https://practice.geeksforgeeks.org/problems/alien-dictionary/1,"1. Problem Summary: Given a list of words sorted lexicographically according to the rules of an alien language, the task is to deduce and return the correct order of characters in that language.
 
 2. Approach: The problem can be solved using graph theory, specifically topological sorting of a directed graph. First, compare adjacent words to determine the ordering of characters and construct a directed graph where an edge from node `u` to node `v` implies `u` comes before `v` in the alien language. Use a hash map to keep track of the adjacency list and another hash map to count the in-degrees (number of incoming edges) for each character. Implement a queue to perform a topological sort starting from nodes (characters) with zero in-degree, appending these characters to the result. If at any point the queue is empty but there are still characters with non-zero in-degrees, a cycle exists, and the order is invalid.
 
@@ -692,7 +692,7 @@ string alienOrder(vector<string>& words) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(C), where C is the total length of all the words in the dictionary, as we process each character at most twice. The space complexity is O(1) or O(U + min(U^2, E)), where U is the total unique characters and E is the total edges in the graph, since the input size is fixed by the character set of the language."
-Graph,Implement Kruksal’sAlgorithm,"1. Problem Summary: Kruskal’s Algorithm is used to find the Minimum Spanning Tree (MST) of a weighted graph. It ensures the lowest total edge weight for connecting all vertices without forming any cycles.
+Graph,Implement Kruksal’sAlgorithm,https://www.geeksforgeeks.org/kruskals-minimum-spanning-tree-algorithm-greedy-algo-2/,"1. Problem Summary: Kruskal’s Algorithm is used to find the Minimum Spanning Tree (MST) of a weighted graph. It ensures the lowest total edge weight for connecting all vertices without forming any cycles.
 
 2. Approach: Kruskal's algorithm operates by sorting all the edges of the graph in ascending order based on their weights. It then iteratively adds the shortest edge to the MST, provided it does not form a cycle with the already included edges. This check for cycles is efficiently managed using a union-find (disjoint-set) data structure. The algorithm continues adding edges until the MST has `V-1` edges, where `V` is the number of vertices in the graph. This approach leverages the greedy method, always choosing the least weight edge that doesn't close a cycle.
 
@@ -747,7 +747,7 @@ vector<Edge> kruskal() {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(E log E) due to sorting of edges and near-constant time operations of union-find, and space complexity is O(E + V), where E is the number of edges and V is the number of vertices."
-Graph,Implement Prim’s Algorithm,"1. Problem Summary: Prim's algorithm is used to find the minimum spanning tree (MST) of a weighted, undirected graph. This algorithm builds the MST by adding edges one by one, starting from an arbitrary vertex.
+Graph,Implement Prim’s Algorithm,https://www.geeksforgeeks.org/prims-minimum-spanning-tree-mst-greedy-algo-5/,"1. Problem Summary: Prim's algorithm is used to find the minimum spanning tree (MST) of a weighted, undirected graph. This algorithm builds the MST by adding edges one by one, starting from an arbitrary vertex.
 
 2. Approach: Prim's algorithm operates by maintaining two sets of vertices: those included in the MST and those not yet included. Starting from an arbitrary vertex, the algorithm repeatedly selects the minimum weight edge connecting a vertex in the MST to a vertex outside the MST. It uses a priority queue to efficiently retrieve the next vertex with the smallest edge weight. Each time a vertex is added to the MST, you update the potential connecting edges (in the priority queue) from this vertex to other vertices that are not yet in the MST.
 
@@ -803,7 +803,7 @@ int main() {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(E log V) due to the use of a priority queue, and the space complexity is O(V) for storing the graph and auxiliary data structures."
-Graph,Total no. of Spanning tree in a graph,"1. Problem Summary: The task is to find the total number of spanning trees that can be formed from a given undirected graph. A spanning tree is a subgraph that includes all the vertices of the original graph and is a tree.
+Graph,Total no. of Spanning tree in a graph,https://www.geeksforgeeks.org/total-number-spanning-trees-graph/,"1. Problem Summary: The task is to find the total number of spanning trees that can be formed from a given undirected graph. A spanning tree is a subgraph that includes all the vertices of the original graph and is a tree.
 
 2. Approach: To solve this problem, the Kirchhoff’s Matrix Tree Theorem is the most efficient method. This theorem uses the Laplacian matrix of the graph, which is derived from the degree matrix and the adjacency matrix. First, construct the degree matrix (a diagonal matrix where each diagonal element equals the degree of the corresponding vertex). Next, create the adjacency matrix (where each element at (i, j) is 1 if there is an edge between vertex i and vertex j, and 0 otherwise). The Laplacian matrix is then obtained by subtracting the adjacency matrix from the degree matrix. To find the number of spanning trees, compute the determinant of any cofactor of the Laplacian matrix (typically by deleting any row and corresponding column). Calculating the determinant provides the count of spanning trees.
 
@@ -859,7 +859,7 @@ int numberOfSpanningTrees(vector<vector<int>>& graph) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n^4) due to the determinant calculation of an (n-1)x(n-1) matrix, and the space complexity is O(n^2) for storing the Laplacian matrix."
-Graph,Implement Bellman Ford Algorithm,"1. Problem Summary: The Bellman Ford algorithm is used to find the shortest path from a single source vertex to all other vertices in a graph, which may include negative weight edges. It can also detect negative weight cycles in the graph.
+Graph,Implement Bellman Ford Algorithm,https://practice.geeksforgeeks.org/problems/negative-weight-cycle/0,"1. Problem Summary: The Bellman Ford algorithm is used to find the shortest path from a single source vertex to all other vertices in a graph, which may include negative weight edges. It can also detect negative weight cycles in the graph.
 
 2. Approach: The Bellman Ford algorithm works by iteratively relaxing all the edges in the graph. Initially, the distance to the source vertex is set to zero, while all other vertices are set to infinity. For each vertex, the algorithm relaxes edges up to (V-1) times where V is the number of vertices. Relaxing an edge involves checking if a shorter path to a vertex can be found by going through an adjacent vertex and, if so, updating the shortest path estimate. After V-1 iterations, a final check on all edges is performed to detect any negative weight cycles, which exist if a shorter path can still be found.
 
@@ -899,7 +899,7 @@ void BellmanFord(vector<vector<int>>& edges, int V, int src) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(VE) where V is the number of vertices and E is the number of edges. The space complexity is O(V) for storing distances."
-Graph,Implement Floyd warshallAlgorithm,"1. Problem Summary: Floyd-Warshall Algorithm is used to find the shortest paths between all pairs of vertices in a weighted graph, which can include negative weights but no negative cycles.
+Graph,Implement Floyd warshallAlgorithm,https://practice.geeksforgeeks.org/problems/implementing-floyd-warshall/0,"1. Problem Summary: Floyd-Warshall Algorithm is used to find the shortest paths between all pairs of vertices in a weighted graph, which can include negative weights but no negative cycles.
 
 2. Approach: The Floyd-Warshall algorithm utilizes dynamic programming to gradually build up solutions for shorter paths to solutions for longer paths by considering all vertices as intermediate points. The algorithm works in three nested loops: the outer loop iterates through each node considering it as an intermediate point, and the two inner loops try to find the shortest path between every pair of vertices through the intermediate node. Intuitively, it checks if a detour through an intermediate vertex offers a shorter path between any two vertices. By the end of the iterations, the algorithm provides the shortest distance for all pairs and can be easily memorized and implemented using a simple 3-level nested loop structure.
 
@@ -922,7 +922,7 @@ void floydWarshall(vector<vector<int>>& dist, int V) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity of the Floyd-Warshall algorithm is O(V^3) and the space complexity is O(V^2), where V is the number of vertices in the graph."
-Graph,Travelling Salesman Problem,"1. Problem Summary: The Travelling Salesman Problem (TSP) involves finding the shortest possible route that visits each city exactly once and returns to the origin city. It is a classic example of a combinatorial optimization problem and is known for its NP-hardness.
+Graph,Travelling Salesman Problem,https://www.geeksforgeeks.org/travelling-salesman-problem-set-1/,"1. Problem Summary: The Travelling Salesman Problem (TSP) involves finding the shortest possible route that visits each city exactly once and returns to the origin city. It is a classic example of a combinatorial optimization problem and is known for its NP-hardness.
 
 2. Approach: The optimal approach to solve TSP is using Dynamic Programming with the Held-Karp algorithm. This algorithm uses a bitmask to represent subsets of visited cities, and a 2D array to store the minimum cost to reach each subset of cities ending at each city. The idea is to build up solutions for smaller subsets and use them to solve larger subsets. Start with the base case where only the starting city is visited. Then, for each subset of cities and each endpoint, calculate the minimum tour cost using previously computed values for smaller subsets.
 
@@ -957,7 +957,7 @@ int tsp(vector<vector<int>>& dist) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n^2 * 2^n) and the space complexity is O(n * 2^n), where n is the number of cities."
-Graph,Graph ColouringProblem,"1. Problem Summary: In the Graph Colouring Problem, the objective is to assign colors to the vertices of a graph such that no two adjacent vertices share the same color. The challenge is often to do this using the minimum number of colors.
+Graph,Graph ColouringProblem,"https://www.geeksforgeeks.org/graph-coloring-applications/#:~:text=Graph%20coloring%20problem%20is%20to,are%20colored%20using%20same%20color.","1. Problem Summary: In the Graph Colouring Problem, the objective is to assign colors to the vertices of a graph such that no two adjacent vertices share the same color. The challenge is often to do this using the minimum number of colors.
 
 2. Approach: The optimal solution often pursued is the Greedy Coloring Algorithm. This algorithm processes vertices one by one in a specific order (like the order of their indices or based on a heuristic such as degree of nodes). For each vertex, it looks at the colors of its adjacent vertices and assigns the smallest available color that hasn't been used by its neighbors. This approach is intuitive as it mimics the process of filling a map with different colors ensuring adjacent regions don’t share the same color, and it's easy to remember as you're essentially just picking the first available color during each step.
 
@@ -1002,7 +1002,7 @@ void graphColoring(vector<int> adj[], int V) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity of this algorithm is O(V^2) where V is the number of vertices, assuming adjacency list representation of the graph. The space complexity is O(V), needed for storing colors and availability."
-Graph,Snake and Ladders Problem,"1. Problem Summary:  
+Graph,Snake and Ladders Problem,https://leetcode.com/problems/snakes-and-ladders/,"1. Problem Summary:  
    The Snake and Ladders problem involves finding the minimum number of dice throws required to move from the start (square 1) to the end (square 100) on a game board with snakes and ladders, where each snake or ladder connects two specific squares.
 
 2. Approach:  
@@ -1044,7 +1044,7 @@ Graph,Snake and Ladders Problem,"1. Problem Summary:
 
 4. Time Complexity and Space Complexity:  
    The time complexity is O(N) and the space complexity is also O(N), where N is the number of squares on the board."
-Graph,Find bridge in a graph,"1. Problem Summary: In graph theory, a bridge (or cut-edge) is an edge which, when removed, increases the number of connected components of the graph. The task is to find all such bridges in a given undirected graph.
+Graph,Find bridge in a graph,https://www.geeksforgeeks.org/bridge-in-a-graph/,"1. Problem Summary: In graph theory, a bridge (or cut-edge) is an edge which, when removed, increases the number of connected components of the graph. The task is to find all such bridges in a given undirected graph.
 
 2. Approach: The optimal algorithm to find bridges in an undirected graph is based on Depth-First Search (DFS). During the DFS traversal, we maintain arrays to store the discovery time and the lowest point reachable for each vertex. A bridge is found when an edge from a vertex `u` to `v` is such that no vertex `v` or below in the DFS tree can reach back to `u` or its ancestors. This condition is checked using `low[v] > disc[u]`, where `low[v]` is the lowest discovery time reachable from `v` and `disc[u]` is the discovery time of `u`. This method efficiently identifies bridges by leveraging the properties of DFS tree and back edges.
 
@@ -1084,7 +1084,7 @@ vector<pair<int, int>> findBridges(int n, vector<int> adj[]) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(V + E) and the space complexity is O(V), where V is the number of vertices and E is the number of edges in the graph. This accounts for the DFS traversal and storage of discovery times and low values."
-Graph,Count Strongly connected Components(Kosaraju Algo),"1. Problem Summary: The task is to count the number of strongly connected components (SCCs) in a directed graph. An SCC is a subgraph in which every vertex is reachable from every other vertex in the same subgraph.
+Graph,Count Strongly connected Components(Kosaraju Algo),https://practice.geeksforgeeks.org/problems/strongly-connected-components-kosarajus-algo/1,"1. Problem Summary: The task is to count the number of strongly connected components (SCCs) in a directed graph. An SCC is a subgraph in which every vertex is reachable from every other vertex in the same subgraph.
 
 2. Approach: Kosaraju's algorithm is a two-pass method to find all SCCs. First, perform a Depth First Search (DFS) on the original graph to determine the finish times of each vertex. Use a stack to track the order of completion. Second, transpose the graph (reverse all edges) and perform DFS in the order of decreasing finish times using the stack. Each DFS from the stack that explores new nodes identifies a new SCC. This method efficiently captures all SCCs by leveraging the properties of node reachability and reversal of graph edges.
 
@@ -1140,7 +1140,7 @@ int countSCCs(int n, vector<int> adj[]) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(V + E) and space complexity is O(V + E), where V is the number of vertices and E is the number of edges in the graph."
-Graph,Check whether a graph is Bipartite or Not,"1. Problem Summary: The problem is to determine whether a given graph is bipartite. A bipartite graph is one where its vertices can be divided into two disjoint and independent sets such that no two graph vertices within the same set are adjacent.
+Graph,Check whether a graph is Bipartite or Not,https://www.geeksforgeeks.org/bipartite-graph/,"1. Problem Summary: The problem is to determine whether a given graph is bipartite. A bipartite graph is one where its vertices can be divided into two disjoint and independent sets such that no two graph vertices within the same set are adjacent.
 
 2. Approach: To check if a graph is bipartite, we can use a coloring method with two colors. We start by assigning a color to a starting vertex and then use Breadth-First Search (BFS) or Depth-First Search (DFS) to color the graph. Each neighboring vertex should get the opposite color of its parent. If we find a vertex that needs to be colored with the same color as its adjacent vertex, the graph is not bipartite. This approach intuitively checks for odd-length cycles, which are indicators that a graph is not bipartite.
 
@@ -1179,7 +1179,7 @@ bool isBipartite(vector<vector<int>>& graph) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(V + E), where V is the number of vertices and E is the number of edges, due to the BFS traversal. The space complexity is O(V) for storing colors and the BFS queue."
-Graph,Detect Negative cycle in a graph,"1. Problem Summary: The problem involves detecting a negative cycle in a weighted graph. A negative cycle is a cycle in which the sum of the edges' weights is negative, which can affect shortest path calculations.
+Graph,Detect Negative cycle in a graph,https://www.geeksforgeeks.org/detect-negative-cycle-graph-bellman-ford/,"1. Problem Summary: The problem involves detecting a negative cycle in a weighted graph. A negative cycle is a cycle in which the sum of the edges' weights is negative, which can affect shortest path calculations.
 
 2. Approach: The Bellman-Ford algorithm is typically used to detect negative cycles in graphs. It works by attempting to relax all the edges in the graph `V-1` times (`V` being the number of vertices). After these iterations, if any edge can still be relaxed (i.e., the distance to a vertex can still be reduced), it indicates the presence of a negative cycle. The algorithm initializes distances to all vertices as infinity except the source vertex, which is set to zero. By iteratively updating the distances for each edge, if we can update any distance on the `V`th iteration, a negative cycle exists.
 
@@ -1212,7 +1212,7 @@ bool hasNegativeCycle(int V, vector<vector<int>>& edges) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(V*E) where V is the number of vertices and E is the number of edges; the space complexity is O(V), needed for the distance array."
-Graph,Longest path in a Directed Acyclic Graph,"1. Problem Summary: 
+Graph,Longest path in a Directed Acyclic Graph,https://www.geeksforgeeks.org/find-longest-path-directed-acyclic-graph/,"1. Problem Summary: 
    The problem is to find the longest path in a Directed Acyclic Graph (DAG). Given a DAG, the task is to determine the maximum length of any path, which is defined as the sum of weights (or the number of edges in an unweighted graph) from a starting node to an ending node.
 
 2. Approach: 
@@ -1269,7 +1269,7 @@ Graph,Longest path in a Directed Acyclic Graph,"1. Problem Summary:
 
 4. Time Complexity and Space Complexity:
    The time complexity of this algorithm is O(V + E) due to the DFS for topological sorting and the single pass for updating distances, where V is the number of vertices and E is the number of edges. The space complexity is O(V) due to the storage of the topological sort, distance array, and visited array."
-Graph,Journey to the Moon,"1. Problem Summary:
+Graph,Journey to the Moon,https://www.hackerrank.com/challenges/journey-to-the-moon/problem,"1. Problem Summary:
    The ""Journey to the Moon"" problem involves determining the number of valid astronaut pairs that can be formed from different countries, given that astronauts from the same country cannot be paired together. Astronauts are represented in pairs indicating they are from the same country.
 
 2. Approach:
@@ -1323,7 +1323,7 @@ Graph,Journey to the Moon,"1. Problem Summary:
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(V + E) where V is the number of astronauts and E is the number of pairs, due to the DFS traversal of the graph. The space complexity is O(V + E) to store the adjacency list and the visited array."
-Graph,Cheapest Flights Within K Stops,"1. Problem Summary: Given a list of flights where each flight is represented as a tuple (from, to, price), and an origin city src, a destination city dst, and an integer K, the problem is to find the cheapest price from src to dst with at most K stops.
+Graph,Cheapest Flights Within K Stops,https://leetcode.com/problems/cheapest-flights-within-k-stops/description/,"1. Problem Summary: Given a list of flights where each flight is represented as a tuple (from, to, price), and an origin city src, a destination city dst, and an integer K, the problem is to find the cheapest price from src to dst with at most K stops.
 
 2. Approach: The optimal algorithm to solve this problem uses a Breadth-First Search (BFS) approach with modifications to handle the ""K stops"" constraint. We use a queue to manage the current city, cost to reach it, and the number of stops used so far. For each city dequeued, we explore all possible next cities based on the flights available. To ensure we do not process more than K stops, we check the stops count before enqueueing a new city. We also maintain a visited array that keeps track of the minimum cost to reach each city with a given number of stops, which helps in pruning suboptimal paths.
 
@@ -1363,7 +1363,7 @@ int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(V * E * K) where V is the number of vertices, E is the number of edges, and K is the maximum number of stops. The space complexity is O(V * K) due to the storage of the visited array."
-Graph,Oliver and the Game,"1. Problem Summary: In the ""Oliver and the Game"" problem, you are given a tree and a series of queries. Each query asks whether Oliver can move from node X to node Y following specific movement rules: either only moving towards children or only moving towards the parent.
+Graph,Oliver and the Game,https://www.hackerearth.com/practice/algorithms/graphs/topological-sort/practice-problems/algorithm/oliver-and-the-game-3/,"1. Problem Summary: In the ""Oliver and the Game"" problem, you are given a tree and a series of queries. Each query asks whether Oliver can move from node X to node Y following specific movement rules: either only moving towards children or only moving towards the parent.
 
 2. Approach: The solution involves using Depth First Search (DFS) to preprocess the tree and assign entry and exit times to each node. These times help in determining the ancestor-descendant relationship between any two nodes efficiently. When Oliver moves towards a child, you check if Y's entry and exit times are within the range of X's entry and exit times. For moving towards the parent, the reverse should hold. This preprocessing allows each query to be answered in constant time, making the approach efficient.
 
@@ -1413,7 +1413,7 @@ int main() {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(N + Q) due to the DFS traversal and constant-time query processing. The space complexity is O(N) for storing the tree and DFS recursion stack."
-Graph,Water Jug problem using BFS,"1. Problem Summary: The Water Jug problem involves two jugs with capacities X and Y and the goal is to measure Z liters of water using these jugs. The challenge is to determine whether it is possible to obtain exactly Z liters, and if so, how to achieve it.
+Graph,Water Jug problem using BFS,https://www.geeksforgeeks.org/water-jug-problem-using-bfs/,"1. Problem Summary: The Water Jug problem involves two jugs with capacities X and Y and the goal is to measure Z liters of water using these jugs. The challenge is to determine whether it is possible to obtain exactly Z liters, and if so, how to achieve it.
 
 2. Approach: The solution to this problem can be efficiently approached using Breadth-First Search (BFS). Each state in the BFS represents a specific amount of water in both jugs `(a, b)`. From each state, we explore all possible states that can be reached by filling either jug, emptying either jug, or pouring water from one jug to the other until either is empty or full. Each state is checked only once by keeping track of visited states to avoid redundant processing. The BFS continues until the solution is found (one of the jugs measures exactly Z liters) or all possible states are explored.
 
@@ -1453,7 +1453,7 @@ bool canMeasureWater(int x, int y, int z) {
 ```
 
 4. Time Complexity and Space Complexity: The time and space complexity are both O(X*Y), where X and Y are the capacities of the two jugs. Each state `(a, b)` is processed once and stored in the queue and visited array."
-Graph,Water Jug problem using BFS,"1. Problem Summary: The Water Jug problem involves two jugs with capacities `x` and `y` liters and a target of `z` liters. The challenge is to determine if it is possible to measure exactly `z` liters using these two jugs and a series of operations including fill, empty, and pour from one jug to another.
+Graph,Water Jug problem using BFS,https://www.geeksforgeeks.org/water-jug-problem-using-bfs/,"1. Problem Summary: The Water Jug problem involves two jugs with capacities `x` and `y` liters and a target of `z` liters. The challenge is to determine if it is possible to measure exactly `z` liters using these two jugs and a series of operations including fill, empty, and pour from one jug to another.
 
 2. Approach: Use Breadth-First Search (BFS) to explore all possible states `(a, b)` where `a` and `b` are the current amounts of water in the two jugs, respectively. Start from the initial state `(0, 0)` and apply all possible operations to generate new states. For each state, check if it can lead to the target volume `z`. Each state is pushed into a queue and marked as visited to avoid repetition. The BFS ensures that we explore the shortest path (minimum steps) to reach the target state.
 
@@ -1493,7 +1493,7 @@ bool canMeasureWater(int x, int y, int z) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(x * y) since each state `(a, b)` is processed once, and the space complexity is also O(x * y) due to the storage of visited states."
-Graph,Find if there is a path of more thank length from a source,"1. Problem Summary: The problem is to determine whether there exists a path longer than a given length `k` from a specified source vertex in a directed or undirected graph. The path does not need to be simple (nodes and edges can be repeated).
+Graph,Find if there is a path of more thank length from a source,https://www.geeksforgeeks.org/find-if-there-is-a-path-of-more-than-k-length-from-a-source/,"1. Problem Summary: The problem is to determine whether there exists a path longer than a given length `k` from a specified source vertex in a directed or undirected graph. The path does not need to be simple (nodes and edges can be repeated).
 
 2. Approach: The solution to this problem can effectively utilize a Depth-First Search (DFS) algorithm. Start DFS from the given source node and track the cumulative path length. If at any point the path length exceeds `k`, immediately return true. Use a recursive function for DFS that takes current node and current length as parameters. If the DFS completes without finding such a path, return false. This approach leverages the recursive nature of DFS to explore all possible paths efficiently until the required path length is found or all possibilities are exhausted.
 
@@ -1523,7 +1523,7 @@ bool hasPathLongerThanK(vector<int> adj[], int V, int src, int k) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(V + E) where V is the number of vertices and E is the number of edges, due to the DFS traversal. The space complexity is O(V) primarily due to the recursion stack and visited array."
-Graph,M-ColouringProblem,"1. Problem Summary:
+Graph,M-ColouringProblem,https://practice.geeksforgeeks.org/problems/m-coloring-problem/0,"1. Problem Summary:
    The M-Colouring Problem involves determining if it's possible to color the vertices of a graph using at most M different colors such that no two adjacent vertices share the same color. This problem is a classic example of graph coloring, applicable in scenarios like scheduling and partitioning.
 
 2. Approach:
@@ -1567,7 +1567,7 @@ bool graphColoring(vector<int> graph[], int m, int V) {
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(m^V) where V is the number of vertices, due to trying M colors at each of the V vertices. The space complexity is O(V) to store the color assignment of each vertex."
-Graph,Minimum edges to reverse o make path from source to destination,"1. Problem Summary: 
+Graph,Minimum edges to reverse o make path from source to destination,https://www.geeksforgeeks.org/minimum-edges-reverse-make-path-source-destination/,"1. Problem Summary: 
    The problem is about finding the minimum number of edges that need to be reversed in a directed graph to create a path from a specified source vertex to a destination vertex.
 
 2. Approach: 
@@ -1610,7 +1610,7 @@ int minReversal(vector<vector<int>>& graph, int source, int destination) {
 
 4. Time Complexity and Space Complexity:
    The time complexity is O(E log V) due to the use of a priority queue in Dijkstra's algorithm, where E is the number of edges and V is the number of vertices. The space complexity is O(V) for the distance array and priority queue."
-Graph,Paths to travel each nodes using each edge(Seven Bridges),"1. Problem Summary:
+Graph,Paths to travel each nodes using each edge(Seven Bridges),https://www.geeksforgeeks.org/paths-travel-nodes-using-edgeseven-bridges-konigsberg/,"1. Problem Summary:
    The problem revolves around finding a path through a graph that visits every edge exactly once, known as an Eulerian path or circuit. This concept originates from the famous ""Seven Bridges of Königsberg"" problem solved by Euler.
 
 2. Approach:
@@ -1687,7 +1687,7 @@ Graph,Paths to travel each nodes using each edge(Seven Bridges),"1. Problem Summ
 
 4. Time Complexity and Space Complexity:
    The time complexity of Fleury's algorithm is O((V+E)^2) due to the edge removal and checking for bridges, and the space complexity is O(V + E) for storing the graph and auxiliary data structures."
-Graph,Vertex Cover Problem,"1. Problem Summary: The Vertex Cover Problem involves finding the smallest set of vertices in a given undirected graph such that every edge is connected to at least one vertex from this set. It is a well-known NP-complete problem in computer science and combinatorial optimization.
+Graph,Vertex Cover Problem,https://www.geeksforgeeks.org/vertex-cover-problem-set-1-introduction-approximate-algorithm-2/,"1. Problem Summary: The Vertex Cover Problem involves finding the smallest set of vertices in a given undirected graph such that every edge is connected to at least one vertex from this set. It is a well-known NP-complete problem in computer science and combinatorial optimization.
 
 2. Approach: The optimal solution for the Vertex Cover Problem is computationally intensive due to its NP-complete nature, but a 2-approximation can be achieved using a greedy algorithm. The algorithm works by repeatedly selecting an edge and adding both of its vertices to the vertex cover, then removing all edges incident to these vertices. This approach intuitively covers all edges while potentially doubling the minimum number of vertices needed. Understanding this pattern helps in visualizing the process as iteratively ""covering"" edges and simplifies remembering and coding the approach.
 
@@ -1720,7 +1720,7 @@ set<int> findVertexCover(vector<vector<int>>& graph, int V) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity of the algorithm is O(V + E) where V is the number of vertices and E is the number of edges. The space complexity is O(V) due to the storage of the vertex cover set and visited vertices."
-Graph,Chinese Postman or Route Inspection,"1. Problem Summary: 
+Graph,Chinese Postman or Route Inspection,https://www.geeksforgeeks.org/chinese-postman-route-inspection-set-1-introduction/,"1. Problem Summary: 
    The Chinese Postman Problem, also known as the Route Inspection Problem, involves finding the shortest closed path or circuit that visits every edge of a graph at least once. It is applicable in scenarios like garbage collection routes, mail delivery routes, or street sweeping paths.
 
 2. Approach: 
@@ -1785,7 +1785,7 @@ void printCircuit(vector<int>& circuit) {
 
 4. Time Complexity and Space Complexity: 
    The time complexity is dominated by the Floyd-Warshall algorithm and the minimum weight perfect matching algorithm, both of which can be O(n^3) for a graph with n vertices. The space complexity is O(n^2) due to the storage of the graph and distance matrix."
-Graph,Number of Triangles in a Directed and Undirected Graph,"1. Problem Summary: The problem involves counting the number of triangles (a set of three vertices where each vertex is connected to the other two) in a given graph which can be either directed or undirected.
+Graph,Number of Triangles in a Directed and Undirected Graph,https://www.geeksforgeeks.org/number-of-triangles-in-directed-and-undirected-graphs/,"1. Problem Summary: The problem involves counting the number of triangles (a set of three vertices where each vertex is connected to the other two) in a given graph which can be either directed or undirected.
 
 2. Approach: The optimal approach uses matrix multiplication to find triangles. First, represent the graph using an adjacency matrix. For an undirected graph, a triangle is indicated when the matrix product of the adjacency matrix with itself three times (cubed) at position (i, i) is non-zero. Specifically, for directed graphs, you have to check each permutation of potential triangles, while for undirected graphs, each diagonal entry in the cubed matrix indicates the count of triangles connected to a vertex. This count is then divided by 6 (as each triangle is counted six times) to get the total number of unique triangles.
 
@@ -1823,7 +1823,7 @@ int countTriangles(vector<vector<int>> &graph, bool isDirected) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(n^3) due to the matrix multiplication, and the space complexity is O(n^2) for storing the adjacency matrix and its powers."
-Graph,Minimise the cashflow among a given set of friends who have borrowed money from each other,"1. Problem Summary: The problem involves a group of friends who have borrowed money from each other, and the goal is to minimize the total number of transactions required to settle all debts.
+Graph,Minimise the cashflow among a given set of friends who have borrowed money from each other,https://www.geeksforgeeks.org/minimize-cash-flow-among-given-set-friends-borrowed-money/,"1. Problem Summary: The problem involves a group of friends who have borrowed money from each other, and the goal is to minimize the total number of transactions required to settle all debts.
 
 2. Approach: The optimal solution uses a greedy algorithm. First, compute the net amount each friend needs to pay or receive by summing up all the debts they owe and subtracting the amounts they are owed. The key insight is to always settle the debt of the person with the maximum credit and the person with the maximum debit first, as this reduces the total number of transactions. This process is repeated by recalculating the net balances after each transaction until all debts are settled. This approach ensures minimal transactions by always tackling the largest debts first.
 
@@ -1864,7 +1864,7 @@ void settleDebts(vector<int> &amount) {
 ```
 
 4. Time Complexity and Space Complexity: The time complexity is O(N^2) due to the calculation of net amounts and the while loop that iterates until all debts are settled. The space complexity is O(N) for storing the net amount of each person."
-Graph,Two Clique Problem,"1. Problem Summary: The Two Clique Problem involves determining whether a given undirected graph can be divided into two cliques. A clique is a subset of vertices such that every two distinct vertices are adjacent.
+Graph,Two Clique Problem,https://www.geeksforgeeks.org/two-clique-problem-check-graph-can-divided-two-cliques/,"1. Problem Summary: The Two Clique Problem involves determining whether a given undirected graph can be divided into two cliques. A clique is a subset of vertices such that every two distinct vertices are adjacent.
 
 2. Approach: The key to solving this problem is to use the concept of complement graphs. The complement of a graph G is a graph G' on the same vertices such that two distinct vertices of G' are adjacent if and only if they are not adjacent in G. If the complement graph G' can be bipartite, then the original graph G can be divided into two cliques. This is because the two sets of vertices in the bipartite graph correspond to two cliques in the original graph. To determine if G' is bipartite, use a graph coloring algorithm that tries to color the graph using two colors such that no two adjacent vertices share the same color.
 
