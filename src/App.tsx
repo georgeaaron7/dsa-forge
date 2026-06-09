@@ -4,6 +4,10 @@ import { getStats, getDueProblems, getWeakProblems } from './lib/db';
 import { ingestAllCSVs } from './lib/ingestion';
 import { getResumeState, setCurrentView, setCurrentMode, saveResumeState } from './lib/resumeState';
 
+// Supabase Import
+import { supabase } from './lib/supabaseClient';
+import type { User } from '@supabase/supabase-js';
+
 import Sidebar from './components/Sidebar';
 import Dashboard from './components/Dashboard';
 import ReviewPlayer from './components/ReviewPlayer';
@@ -23,6 +27,8 @@ const defaultStats: UserStats = {
 };
 
 export default function App() {
+  const [user, setUser] = useState<User | null>(null);
+  const [authLoading, setAuthLoading] = useState(true);
   const [loading, setLoading] = useState(true);
   const [currentView, setView] = useState<ViewName>('dashboard');
   const [currentMode, setMode] = useState<StudyMode | null>(null);
@@ -36,32 +42,31 @@ export default function App() {
   const [xpBursts, setXpBursts] = useState<{ id: number; amount: number; x: number; y: number }[]>([]);
   const burstIdRef = useRef(0);
 
-  // ─── Initialize ─────────────────────────────────────────
-  const initialize = useCallback(async () => {
-    try {
-      // Ingest CSVs (no-op if already done)
-      await ingestAllCSVs();
+  // ─── Listen for Auth State Changes ───────────────────────
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+      setAuthLoading(false);
+    });
 
-      // Restore resume state
-      const resume = getResumeState();
-      setView(resume.currentView || 'dashboard');
-      setMode(resume.currentMode);
-      setCurrentTopicId(resume.currentTopicId);
-      setResumeProblemId(resume.currentProblemId);
-      setResumeCursor(resume.reviewQueueCursor || 0);
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+      setAuthLoading(false);
+    });
 
-      // Load stats
-      await refreshStats();
-    } catch (err) {
-      console.error('Initialization failed:', err);
-    } finally {
-      setLoading(false);
-    }
+    return () => subscription.unsubscribe();
   }, []);
 
-  useEffect(() => {
-    initialize();
-  }, [initialize]);
+  // Trigger Google Login Flow
+  const handleGoogleLogin = async () => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: window.location.origin,
+      },
+    });
+    if (error) console.error('OAuth initiation failed:', error.message);
+  };
 
   // ─── Refresh stats ──────────────────────────────────────
   const refreshStats = async () => {
@@ -79,6 +84,34 @@ export default function App() {
     }
   };
 
+  // ─── Initialize Local DB (Only runs if Authenticated) ────
+  const initialize = useCallback(async () => {
+    if (!user) return;
+    setLoading(true);
+    try {
+      await ingestAllCSVs();
+
+      const resume = getResumeState();
+      setView(resume.currentView || 'dashboard');
+      setMode(resume.currentMode);
+      setCurrentTopicId(resume.currentTopicId);
+      setResumeProblemId(resume.currentProblemId);
+      setResumeCursor(resume.reviewQueueCursor || 0);
+
+      await refreshStats();
+    } catch (err) {
+      console.error('Initialization failed:', err);
+    } finally {
+      setLoading(false);
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (user) {
+      initialize();
+    }
+  }, [user, initialize]);
+
   // ─── Navigation ─────────────────────────────────────────
   const handleNavigate = (view: ViewName, mode?: StudyMode, topicId?: string) => {
     setView(view);
@@ -94,7 +127,6 @@ export default function App() {
       saveResumeState({ currentTopicId: topicId });
     }
 
-    // If navigating to review with a mode, we start fresh
     if (view === 'review' && mode && mode !== 'continue') {
       setResumeProblemId(null);
       setResumeCursor(0);
@@ -113,7 +145,7 @@ export default function App() {
   };
 
   // ─── Loading Screen ─────────────────────────────────────
-  if (loading) {
+  if (authLoading || (user && loading)) {
     return (
       <div className="loading-screen">
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '24px' }}>
@@ -132,10 +164,56 @@ export default function App() {
           </div>
           <div style={{ textAlign: 'center' }}>
             <h2 style={{ fontSize: 'var(--fs-xl)', fontWeight: 700, marginBottom: '8px' }}>DSA Forge</h2>
-            <p style={{ color: 'var(--text-tertiary)', fontSize: 'var(--fs-sm)' }}>Loading your revision platform...</p>
+            <p style={{ color: 'var(--text-tertiary)', fontSize: 'var(--fs-sm)' }}>
+              {authLoading ? 'Verifying profile...' : 'Loading your revision platform...'}
+            </p>
           </div>
           <div className="loading-spinner" />
         </div>
+      </div>
+    );
+  }
+
+  // ─── Unauthenticated Gatekeeper Screen ───────────────────
+  if (!user) {
+    return (
+      <div className="loading-screen" style={{ flexDirection: 'column', gap: '32px', padding: 'var(--space-xl)' }}>
+        <div style={{ textAlign: 'center' }}>
+          <div style={{ fontSize: '48px', marginBottom: 'var(--space-md)' }}>⚡</div>
+          <h1 style={{ fontSize: '2rem', fontWeight: 800, marginBottom: '8px', letterSpacing: '-0.025em' }}>Welcome to DSA Forge</h1>
+          <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--fs-sm)', maxWidth: '320px', margin: '0 auto' }}>
+            Sign in with Google to sync your metrics and practice streams.
+          </p>
+        </div>
+
+        <button
+          onClick={handleGoogleLogin}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '12px',
+            backgroundColor: '#ffffff',
+            color: '#11131c',
+            border: 'none',
+            padding: '12px 24px',
+            borderRadius: '12px',
+            fontSize: 'var(--fs-md)',
+            fontWeight: 600,
+            cursor: 'pointer',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.25)',
+            transition: 'transform 0.2s'
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.02)')}
+          onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+        >
+          <svg style={{ width: '18px', height: '18px' }} viewBox="0 0 24 24">
+            <path fill="#EA4335" d="M12 5.04c1.66 0 3.2.57 4.38 1.69l3.27-3.27C17.68 1.54 14.98 1 12 1 7.35 1 3.37 3.67 1.39 7.56l3.89 3.02C6.21 7.59 8.87 5.04 12 5.04z" />
+            <path fill="#4285F4" d="M23.49 12.27c0-.81-.07-1.59-.2-2.34H12v4.43h6.44c-.28 1.47-1.11 2.71-2.36 3.55l3.65 2.83c2.13-1.97 3.36-4.87 3.36-8.51z" />
+            <path fill="#FBBC05" d="M5.28 14.54c-.24-.72-.38-1.5-.38-2.31s.14-1.59.38-2.31L1.39 6.9C.5 8.71 0 10.74 0 12.87s.5 4.16 1.39 5.97l3.89-3.3z" />
+            <path fill="#34A853" d="M12 23c3.24 0 5.97-1.08 7.96-2.93l-3.65-2.83c-1.01.68-2.31 1.08-3.96 1.08-3.13 0-5.79-2.55-6.74-5.54L.72 16.11C2.71 19.99 6.69 23 12 23z" />
+          </svg>
+          Continue with Google
+        </button>
       </div>
     );
   }
@@ -195,7 +273,7 @@ export default function App() {
       case 'analytics':
         return <Analytics />;
       case 'settings':
-        return <SettingsView />;
+        return <SettingsView user={user} />;
       default:
         return (
           <Dashboard
@@ -218,6 +296,7 @@ export default function App() {
         weakCount={weakCount}
         isOpen={sidebarOpen}
         onToggle={() => setSidebarOpen(!sidebarOpen)}
+        user={user}
       />
 
       <main className="app-main">

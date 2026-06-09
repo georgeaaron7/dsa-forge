@@ -14,6 +14,7 @@ import {
   X,
 } from 'lucide-react';
 import type { ViewName, UserStats } from '../types';
+import type { User } from '@supabase/supabase-js';
 
 interface SidebarProps {
   activeView: ViewName;
@@ -23,6 +24,7 @@ interface SidebarProps {
   weakCount: number;
   isOpen: boolean;
   onToggle: () => void;
+  user: User;
 }
 
 const navItems: { view: ViewName; label: string; icon: React.ReactNode; section: string }[] = [
@@ -36,7 +38,7 @@ const navItems: { view: ViewName; label: string; icon: React.ReactNode; section:
   { view: 'settings', label: 'Settings', icon: <Settings size={18} />, section: 'other' },
 ];
 
-export default function Sidebar({ activeView, onNavigate, stats, dueCount, weakCount, isOpen, onToggle }: SidebarProps) {
+export default function Sidebar({ activeView, onNavigate, stats, dueCount, weakCount, isOpen, onToggle, user }: SidebarProps) {
   const sections = [
     { key: 'main', label: null },
     { key: 'study', label: 'Study' },
@@ -112,9 +114,33 @@ export default function Sidebar({ activeView, onNavigate, stats, dueCount, weakC
           </div>
         </div>
 
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '12px',
+          padding: 'var(--space-sm) var(--space-md)',
+          borderTop: '1px solid #242631',
+          marginTop: 'var(--space-md)'
+        }}>
+          {user?.user_metadata?.avatar_url && (
+            <img
+              src={user.user_metadata.avatar_url}
+              alt="Avatar"
+              style={{ width: '28px', height: '28px', borderRadius: '50%', border: '1px solid var(--accent-primary)' }}
+            />
+          )}
+          <div style={{ display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+            <span style={{ fontSize: '12px', fontWeight: 600, color: 'var(--text-primary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+              {user?.user_metadata?.full_name || 'Active Profile'}
+            </span>
+            <span style={{ fontSize: '10px', color: 'var(--text-tertiary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+              {user?.email}
+            </span>
+          </div>
+        </div>
+
         <div
           style={{
-            marginTop: 'auto',
             padding: 'var(--space-md)',
             textAlign: 'center',
             fontSize: '11px',

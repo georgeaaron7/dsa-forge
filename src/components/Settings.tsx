@@ -14,12 +14,23 @@ import type { BackupData } from '../types';
 import { getAllReviews, getAllMastery, getAllSessions, getStats, putStats, putMasteryBulk, putReview, clearAllData, getDataCounts } from '../lib/db';
 import { forceReIngest } from '../lib/ingestion';
 import { clearResumeState } from '../lib/resumeState';
+import { supabase } from '../lib/supabaseClient';
+import type { User } from '@supabase/supabase-js';
 
-export default function SettingsView() {
+interface SettingsViewProps {
+  user: User;
+}
+
+export default function SettingsView({ user }: SettingsViewProps) {
   const [message, setMessage] = useState<{ text: string; type: 'success' | 'error' } | null>(null);
   const [counts, setCounts] = useState<{ problems: number; topics: number; reviews: number } | null>(null);
   const [exporting, setExporting] = useState(false);
   const [reingesting, setReingesting] = useState(false);
+
+  const handleSignOut = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) console.error('Failed sign out:', error.message);
+  };
 
   const showMessage = (text: string, type: 'success' | 'error') => {
     setMessage({ text, type });
@@ -263,6 +274,22 @@ export default function SettingsView() {
             <button className="btn btn-danger" onClick={handleClearAll}>
               <Trash2 size={16} />
               Clear All
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Connected Account Settings */}
+      <div className="settings-section">
+        <h3>Connected Profile</h3>
+        <div className="glass-card" style={{ marginTop: 'var(--space-md)' }}>
+          <div className="settings-row" style={{ borderBottom: 'none', paddingBottom: 0 }}>
+            <span className="settings-row-label">
+              Signed in as {user?.user_metadata?.full_name || 'User'}
+              <span>{user?.email}</span>
+            </span>
+            <button className="btn btn-danger" onClick={handleSignOut} style={{ marginLeft: 'auto' }}>
+              Sign Out
             </button>
           </div>
         </div>
