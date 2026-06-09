@@ -1,0 +1,724 @@
+TOPIC,PROBLEM LINK,SOLUTION
+Heap,Implement a Maxheap/MinHeap using arrays and recursion.,"1. Problem Summary:  
+   The task is to implement a MaxHeap or MinHeap using an array. The heap should support insertion, deletion, and retrieval of the maximum or minimum element efficiently.
+
+2. Approach:  
+   A heap can be represented as a complete binary tree stored in an array. The parent-child relationship is maintained by indices: for any element at index `i`, its children are at indices `2*i+1` and `2*i+2`, and its parent is at index `(i-1)/2`. For a MaxHeap, every parent node is greater than or equal to its children; the opposite is true for a MinHeap.  
+   To insert an element, add it at the end of the array and ""bubble it up"" to maintain the heap property by swapping it with its parent as long as the heap property is violated.  
+   To delete the root (maximum in MaxHeap or minimum in MinHeap), replace it with the last element of the array, reduce the size of the heap, and then ""bubble down"" this element to restore the heap property.  
+   The ""bubble up"" and ""bubble down"" operations are recursive, comparing the current element with its parent (in bubble up) or its children (in bubble down) and swapping if necessary.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+void bubbleUp(vector<int>& heap, int index) {
+    if (index == 0) return; // Base case: root of the heap
+    int parentIndex = (index - 1) / 2;
+    if (heap[parentIndex] < heap[index]) { // For MaxHeap, swap if parent is less
+        swap(heap[parentIndex], heap[index]);
+        bubbleUp(heap, parentIndex);
+    }
+}
+
+void bubbleDown(vector<int>& heap, int index, int heapSize) {
+    int leftChild = 2 * index + 1;
+    int rightChild = 2 * index + 2;
+    int largest = index;
+
+    if (leftChild < heapSize && heap[leftChild] > heap[largest]) {
+        largest = leftChild;
+    }
+    if (rightChild < heapSize && heap[rightChild] > heap[largest]) {
+        largest = rightChild;
+    }
+    if (largest != index) {
+        swap(heap[index], heap[largest]);
+        bubbleDown(heap, largest, heapSize);
+    }
+}
+
+void insert(vector<int>& heap, int value) {
+    heap.push_back(value);
+    bubbleUp(heap, heap.size() - 1);
+}
+
+void deleteRoot(vector<int>& heap) {
+    if (heap.size() == 0) return;
+    heap[0] = heap.back();
+    heap.pop_back();
+    bubbleDown(heap, 0, heap.size());
+}
+
+int getRoot(vector<int>& heap) {
+    return heap.empty() ? -1 : heap[0];
+}
+```
+
+4. Time Complexity and Space Complexity:  
+   Insertion and deletion operations have a time complexity of O(log n) due to the bubble up and bubble down processes. Space complexity is O(n) for storing the heap elements in the array."
+Heap,Sort an Array using heap. (HeapSort),"1. Problem Summary:
+   HeapSort is a comparison-based sorting technique based on a Binary Heap data structure. It is similar to selection sort where we first find the maximum element and place the maximum element at the end.
+
+2. Approach:
+   HeapSort involves building a Max Heap from the data, which rearranges the elements so the largest value is at the root of the heap. We then swap this largest element with the last item of the heap, reducing the heap size by one. This process is repeated for the remaining heap to get the next largest element from the remaining elements. After building the initial Max Heap, the elements are repeatedly removed from the root and added to the array in reverse order, thus sorting the array. The key operations are maintaining the heap property during the build phase and after each removal of the largest element.
+
+3. Pseudo-code:
+   ```cpp
+   #include<bits/stdc++.h>
+   using namespace std;
+
+   void heapify(vector<int>& arr, int n, int i) {
+       int largest = i; // Initialize largest as root
+       int left = 2 * i + 1; // left child
+       int right = 2 * i + 2; // right child
+
+       // If left child is larger than root
+       if (left < n && arr[left] > arr[largest])
+           largest = left;
+
+       // If right child is larger than largest so far
+       if (right < n && arr[right] > arr[largest])
+           largest = right;
+
+       // If largest is not root
+       if (largest != i) {
+           swap(arr[i], arr[largest]);
+           // Recursively heapify the affected sub-tree
+           heapify(arr, n, largest);
+       }
+   }
+
+   void heapSort(vector<int>& arr) {
+       int n = arr.size();
+
+       // Build heap (rearrange array)
+       for (int i = n / 2 - 1; i >= 0; i--)
+           heapify(arr, n, i);
+
+       // One by one extract an element from heap
+       for (int i = n - 1; i > 0; i--) {
+           // Move current root to end
+           swap(arr[0], arr[i]);
+
+           // call max heapify on the reduced heap
+           heapify(arr, i, 0);
+       }
+   }
+
+   int main() {
+       vector<int> arr = {12, 11, 13, 5, 6, 7};
+       heapSort(arr);
+       cout << ""Sorted array is \n"";
+       for (int i = 0; i < arr.size(); i++)
+           cout << arr[i] << "" "";
+       return 0;
+   }
+   ```
+
+4. Time Complexity and Space Complexity:
+   The time complexity of HeapSort is O(n log n) for all cases. Space complexity is O(1) as it is an in-place sorting algorithm."
+Heap,Maximum of all subarrays of size k.,"1. Problem Summary: Given an array and an integer k, find the maximum element for each subarray of consecutive elements of size k. This problem is a sliding window problem where the window of size k moves one element at a time.
+
+2. Approach: The optimal approach uses a deque (double-ended queue) to maintain the indices of useful elements for each window of size k. As we iterate over the array, we ensure that the deque always contains potential candidates for the maximum of the current window. We do this by removing indices from the deque if they are out of the current window's bounds or if the element at those indices is less than the current element being considered. This ensures that the front of the deque always contains the index of the maximum element for the current window. The use of deque allows efficient addition and removal of elements.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<int> maxSlidingWindow(vector<int>& nums, int k) {
+    deque<int> dq;
+    vector<int> max_elements;
+    for (int i = 0; i < nums.size(); i++) {
+        // Remove elements not within the window
+        if (!dq.empty() && dq.front() == i - k) {
+            dq.pop_front();
+        }
+        // Maintain elements in decreasing order in the deque
+        while (!dq.empty() && nums[dq.back()] < nums[i]) {
+            dq.pop_back();
+        }
+        // Add current element's index at the back of the deque
+        dq.push_back(i);
+        // The front of the deque is the max of the window
+        if (i >= k - 1) {
+            max_elements.push_back(nums[dq.front()]);
+        }
+    }
+    return max_elements;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the number of elements in the array, as each element is processed at most twice. The space complexity is O(k) due to the storage of indices in the deque."
+Heap,“k” largest element in an array,"1. Problem Summary: The problem is to find the ""k"" largest elements in an unsorted array. The challenge is to efficiently extract these elements without fully sorting the array.
+
+2. Approach: An optimal way to solve this problem is by using a min-heap of size k. First, populate the heap with the first k elements of the array. For each subsequent element in the array, compare it with the smallest element in the heap (the root of the heap). If the current element is larger, remove the root from the heap and insert the current element. This ensures that the heap always contains the k largest elements seen so far. By the end of the traversal, the heap contains the k largest elements of the entire array. This approach leverages the heap's property of constant time minimum element retrieval and logarithmic time insertion and deletion.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<int> findKLargestElements(vector<int>& nums, int k) {
+    priority_queue<int, vector<int>, greater<int>> minHeap; // create a min-heap
+    for (int i = 0; i < nums.size(); i++) {
+        if (minHeap.size() < k) {
+            minHeap.push(nums[i]); // fill the heap until we have k elements
+        } else if (nums[i] > minHeap.top()) {
+            minHeap.pop(); // remove the smallest element in the heap
+            minHeap.push(nums[i]); // insert the current element
+        }
+    }
+    vector<int> result;
+    while (!minHeap.empty()) {
+        result.push_back(minHeap.top());
+        minHeap.pop();
+    }
+    return result;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n log k) where n is the number of elements in the array, and the space complexity is O(k) for storing the heap."
+Heap,Kth smallest and largest element in an unsorted array,"1. Problem Summary: The task is to find the kth smallest and kth largest elements in an unsorted array. The challenge is to do this efficiently without sorting the entire array.
+
+2. Approach: The optimal approach uses a min-heap for finding the kth largest element and a max-heap for the kth smallest element. For the kth smallest, build a max-heap of the first k elements. For each subsequent element, if it's smaller than the root, replace the root with this element and heapify. The root of the heap will be the kth smallest element after processing all elements. Similarly, use a min-heap for the kth largest by keeping only the largest k elements in the heap. This approach leverages the heap's property of always having the largest (or smallest) element at the root, allowing efficient pruning of the data.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int findKthSmallest(vector<int>& nums, int k) {
+    priority_queue<int> maxHeap; // max-heap for kth smallest
+    for (int i = 0; i < k; ++i) {
+        maxHeap.push(nums[i]);
+    }
+    for (int i = k; i < nums.size(); ++i) {
+        if (nums[i] < maxHeap.top()) {
+            maxHeap.pop();
+            maxHeap.push(nums[i]);
+        }
+    }
+    return maxHeap.top();
+}
+
+int findKthLargest(vector<int>& nums, int k) {
+    priority_queue<int, vector<int>, greater<int>> minHeap; // min-heap for kth largest
+    for (int i = 0; i < k; ++i) {
+        minHeap.push(nums[i]);
+    }
+    for (int i = k; i < nums.size(); ++i) {
+        if (nums[i] > minHeap.top()) {
+            minHeap.pop();
+            minHeap.push(nums[i]);
+        }
+    }
+    return minHeap.top();
+}
+```
+
+4. Time Complexity and Space Complexity: Both operations have a time complexity of O(n log k) and a space complexity of O(k), where n is the number of elements in the array."
+Heap,Merge “K” sorted arrays. [ IMP ],"1. Problem Summary:
+   The problem involves merging ""K"" sorted arrays into a single sorted array. Each of the K arrays can have different lengths.
+
+2. Approach:
+   The optimal way to merge K sorted arrays is by using a min-heap (priority queue). First, push the first element of each array along with its array index and element index into the heap. The heap helps in getting the smallest element at each step efficiently. Extract the smallest element from the heap, add it to the result array, and then push the next element from the same array (from which the extracted element was taken) into the heap. Continue this process until the heap is empty. This method efficiently handles the merging process by always ensuring the smallest current elements are compared.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+vector<int> mergeKSortedArrays(vector<vector<int>>& arrays) {
+    vector<int> result;
+    priority_queue<tuple<int, int, int>, vector<tuple<int, int, int>>, greater<tuple<int, int, int>>> minHeap;
+
+    // Insert the first element of each array into the heap
+    for (int i = 0; i < arrays.size(); i++) {
+        if (!arrays[i].empty()) {
+            minHeap.push(make_tuple(arrays[i][0], i, 0));
+        }
+    }
+
+    while (!minHeap.empty()) {
+        auto [val, arrIdx, eleIdx] = minHeap.top();
+        minHeap.pop();
+        result.push_back(val);
+        // Push the next element from the same array
+        if (eleIdx + 1 < arrays[arrIdx].size()) {
+            minHeap.push(make_tuple(arrays[arrIdx][eleIdx + 1], arrIdx, eleIdx + 1));
+        }
+    }
+
+    return result;
+}
+```
+
+4. Time Complexity and Space Complexity:
+   The time complexity is O(N log K), where N is the total number of elements across all arrays and K is the number of arrays. The space complexity is O(K) due to the storage requirements of the min-heap."
+Heap,Merge 2 Binary Max Heaps,"1. Problem Summary: The task is to merge two binary max heaps into a single binary max heap. A binary max heap is a complete binary tree where the value of each node is greater than or equal to the values of its children.
+
+2. Approach: The most straightforward method to merge two max heaps is to combine the elements of both heaps into a single array and then build a new max heap from this array. Start by inserting all elements from both heaps into a single array. Then, apply the heapify process from the last non-leaf node down to the root node to ensure all heap properties are maintained. This approach leverages the fact that building a heap from an unsorted array is more efficient than inserting elements one by one.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+void heapify(vector<int>& heap, int n, int i) {
+    int largest = i; 
+    int left = 2 * i + 1; 
+    int right = 2 * i + 2;
+
+    if (left < n && heap[left] > heap[largest])
+        largest = left;
+
+    if (right < n && heap[right] > heap[largest])
+        largest = right;
+
+    if (largest != i) {
+        swap(heap[i], heap[largest]);
+        heapify(heap, n, largest);
+    }
+}
+
+vector<int> mergeHeaps(vector<int>& heap1, vector<int>& heap2) {
+    vector<int> mergedHeap(heap1.begin(), heap1.end());
+    mergedHeap.insert(mergedHeap.end(), heap2.begin(), heap2.end());
+
+    int n = mergedHeap.size();
+    for (int i = n / 2 - 1; i >= 0; i--)
+        heapify(mergedHeap, n, i);
+
+    return mergedHeap;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the total number of elements in the merged heap, and the space complexity is also O(n) due to the storage of the merged heap elements."
+Heap,Kth largest sum continuous subarrays,"1. Problem Summary: The problem requires finding the kth largest sum of continuous subarrays from a given array. The task is to determine the sum of elements in every possible subarray and then find the kth largest among these sums.
+
+2. Approach: An optimal approach involves using a min-heap to keep track of the top k largest sums without needing to sort all possible subarray sums, which would be inefficient. First, compute the sum of all possible subarrays by iterating over the array with two nested loops, where the outer loop fixes the starting point and the inner loop fixes the ending point of the subarray. For each subarray sum calculated, if the size of the heap is less than k, push the sum into the heap. If the size is k and the current sum is greater than the minimum element in the heap, replace the minimum element with the current sum. This ensures that the heap always contains the k largest sums. At the end of the process, the root of the heap will be the kth largest sum.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int kthLargestSum(int arr[], int n, int k) {
+    priority_queue<int, vector<int>, greater<int>> minHeap;
+
+    for (int start = 0; start < n; ++start) {
+        int sum = 0;
+        for (int end = start; end < n; ++end) {
+            sum += arr[end];
+            if (minHeap.size() < k) {
+                minHeap.push(sum);
+            } else if (sum > minHeap.top()) {
+                minHeap.pop();
+                minHeap.push(sum);
+            }
+        }
+    }
+
+    return minHeap.top();
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n^2 log k) due to the nested loops over the array and operations on the heap, and the space complexity is O(k) for storing the heap."
+Heap,Leetcode- reorganize strings,"1. Problem Summary: The task is to rearrange the characters of a given string so that no two adjacent characters are the same. If it is possible, return the rearranged string; otherwise, return an empty string.
+
+2. Approach: The optimal approach utilizes a max-heap (priority queue) to ensure the most frequent characters are placed first, reducing the chance of adjacent duplicates. First, count the frequency of each character in the string. Use a priority queue to sort characters by their frequency in descending order. Then, extract the two most frequent characters from the heap (if possible), append them to the result, and reinsert them into the heap with decreased frequencies. This ensures that we try to alternate between the most frequent characters, thus preventing any two identical characters from being adjacent.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+string reorganizeString(string S) {
+    vector<int> count(26, 0);
+    for (char c : S) 
+        count[c - 'a']++;
+    
+    priority_queue<pair<int, char>> maxHeap;
+    for (int i = 0; i < 26; i++) {
+        if (count[i] > 0)
+            maxHeap.push({count[i], 'a' + i});
+    }
+    
+    string result = """";
+    while (maxHeap.size() > 1) {
+        auto top1 = maxHeap.top(); maxHeap.pop();
+        auto top2 = maxHeap.top(); maxHeap.pop();
+        
+        result += top1.second;
+        result += top2.second;
+        
+        if (--top1.first > 0) maxHeap.push(top1);
+        if (--top2.first > 0) maxHeap.push(top2);
+    }
+    
+    if (!maxHeap.empty()) {
+        if (maxHeap.top().first > 1) return """";
+        result += maxHeap.top().second;
+    }
+    
+    return result;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(N log N) due to the heap operations, and the space complexity is O(N), where N is the length of the input string."
+Heap,Merge “K” Sorted Linked Lists [V.IMP],"1. Problem Summary:
+   The problem is to merge 'K' sorted linked lists into a single sorted linked list. The lists may have different lengths.
+
+2. Approach:
+   The optimal approach is to use a min-heap (priority queue) to efficiently merge the lists. First, insert the head of each list into the min-heap. The heap is used to always retrieve the smallest element among the current heads of the lists. Extract the smallest element from the heap, add it to the result list, and then insert the next node from the same list into the heap. This process is repeated until the heap is empty. Using a heap ensures that each insertion and extraction operation is done in logarithmic time relative to the number of lists, which is crucial for efficiency.
+
+3. Pseudo-code:
+   ```cpp
+   #include <bits/stdc++.h>
+   using namespace std;
+
+   struct ListNode {
+       int val;
+       ListNode *next;
+       ListNode(int x) : val(x), next(NULL) {}
+   };
+
+   struct compare {
+       bool operator()(ListNode* l1, ListNode* l2) {
+           return l1->val > l2->val;
+       }
+   };
+
+   ListNode* mergeKLists(vector<ListNode*>& lists) {
+       priority_queue<ListNode*, vector<ListNode*>, compare> pq;
+       for (ListNode* list : lists) {
+           if (list) pq.push(list);
+       }
+       
+       ListNode *dummy = new ListNode(0);
+       ListNode *tail = dummy;
+       
+       while (!pq.empty()) {
+           ListNode* top = pq.top();
+           pq.pop();
+           tail->next = top;
+           tail = tail->next;
+           if (top->next) pq.push(top->next);
+       }
+       
+       return dummy->next;
+   }
+   ```
+
+4. Time Complexity and Space Complexity:
+   The time complexity is O(N log K), where N is the total number of nodes and K is the number of lists, due to the heap operations. The space complexity is O(K), which is required for the heap."
+Heap,Smallest range in “K” Lists,"1. Problem Summary:
+   The ""Smallest Range in 'K' Lists"" problem involves finding the smallest range that includes at least one number from each of the 'K' sorted lists.
+
+2. Approach:
+   The optimal solution uses a min-heap to keep track of the smallest elements across the 'K' lists. Begin by inserting the first element of each list into the heap along with the index of the list and the index of the element within that list. Track the current maximum element of the elements inserted in the heap. For each element removed from the heap (which will be the smallest), insert the next element from the same list into the heap, updating the maximum if necessary. Continue this process, updating the smallest range whenever the range between the current maximum and the minimum element (from the heap) is smaller than the previously recorded range. This approach ensures that at any point, the heap contains elements from all lists, allowing the calculation of the range dynamically.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+pair<int, int> smallestRange(vector<vector<int>>& lists) {
+    auto comp = [&](const auto& a, const auto& b) { return a.first > b.first; };
+    priority_queue<pair<int, int>, vector<pair<int, int>>, decltype(comp)> minHeap(comp);
+    int currentMax = INT_MIN;
+
+    // Initialize the heap
+    for (int i = 0; i < lists.size(); i++) {
+        minHeap.push({lists[i][0], i});
+        currentMax = max(currentMax, lists[i][0]);
+    }
+
+    int start = 0, end = INT_MAX;
+    vector<int> nextIndex(lists.size(), 1);
+
+    while (true) {
+        auto [minVal, idx] = minHeap.top();
+        minHeap.pop();
+        if (end - start > currentMax - minVal) {
+            start = minVal;
+            end = currentMax;
+        }
+        if (nextIndex[idx] < lists[idx].size()) {
+            minHeap.push({lists[idx][nextIndex[idx]], idx});
+            currentMax = max(currentMax, lists[idx][nextIndex[idx]]);
+            nextIndex[idx]++;
+        } else {
+            break;
+        }
+    }
+
+    return {start, end};
+}
+```
+
+4. Time Complexity and Space Complexity:
+   The time complexity is O(N log K), where N is the total number of elements across all lists, and K is the number of lists. The space complexity is O(K), which is required for the heap and auxiliary data structures."
+Heap,Median in a stream of Integers,"1. Problem Summary: 
+   The problem involves finding the median of a stream of integers as each new number is added. The stream is continuous, and the median needs to be updated in real-time after the insertion of each new element.
+
+2. Approach: 
+   Use two heaps, a max-heap to store the smaller half of the numbers and a min-heap to store the larger half. This ensures that the largest number in the lower half (from the max-heap) and the smallest number in the upper half (from the min-heap) are easily accessible. When a new number arrives, compare it with the roots of the heaps to decide where to insert it. Balance the heaps if their sizes differ by more than one. The median is either the root of one heap (if the total number of elements is odd) or the average of the roots of both heaps (if even).
+
+3. Pseudo-code:
+   ```cpp
+   #include<bits/stdc++.h>
+   using namespace std;
+
+   priority_queue<int> max_heap; // Lower half
+   priority_queue<int, vector<int>, greater<int>> min_heap; // Upper half
+
+   void addNum(int num) {
+       if(max_heap.empty() || num <= max_heap.top())
+           max_heap.push(num);
+       else
+           min_heap.push(num);
+
+       if(max_heap.size() > min_heap.size() + 1) {
+           min_heap.push(max_heap.top());
+           max_heap.pop();
+       } else if(min_heap.size() > max_heap.size() + 1) {
+           max_heap.push(min_heap.top());
+           min_heap.pop();
+       }
+   }
+
+   double findMedian() {
+       if(max_heap.size() > min_heap.size())
+           return max_heap.top();
+       else if(min_heap.size() > max_heap.size())
+           return min_heap.top();
+       else
+           return (max_heap.top() + min_heap.top()) / 2.0;
+   }
+   ```
+
+4. Time Complexity and Space Complexity: 
+   The time complexity for adding a number is O(log n) due to the heap operations, and finding the median is O(1). The space complexity is O(n), where n is the number of elements processed."
+Heap,Check if a Binary Tree is Heap,"1. Problem Summary: 
+The problem is to determine whether a given binary tree is a binary heap. A binary heap must satisfy two properties: it should be a complete tree, and each node's value should be greater than or equal to the values of its children (for a max heap).
+
+2. Approach: 
+To solve this problem, we perform a level-order traversal (using a queue) to check for the completeness of the tree and simultaneously ensure that each node follows the max heap property. First, we check if the tree is complete by ensuring all levels before the last are fully filled, and all nodes in the last level are as left as possible. During this traversal, we also verify that each node's value is greater than or equal to its children's values. If both conditions are met throughout the traversal, the tree is a heap.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
+};
+
+bool isHeap(Node* root) {
+    if (!root) return true;
+
+    queue<Node*> q;
+    q.push(root);
+    bool nullSeen = false;
+
+    while (!q.empty()) {
+        Node* current = q.front();
+        q.pop();
+
+        // Check for complete tree property
+        if (current->left) {
+            if (nullSeen || current->left->data > current->data) return false;
+            q.push(current->left);
+        } else {
+            nullSeen = true;
+        }
+
+        if (current->right) {
+            if (nullSeen || current->right->data > current->data) return false;
+            q.push(current->right);
+        } else {
+            nullSeen = true;
+        }
+    }
+
+    return true;
+}
+```
+
+4. Time Complexity and Space Complexity:
+The time complexity is O(n) as each node is visited once, and the space complexity is O(n) due to the use of a queue for level-order traversal."
+Heap,Connect “n” ropes with minimum cost,"1. Problem Summary: The problem involves finding the minimum cost to connect 'n' ropes into one rope. The cost to connect two ropes is equal to the sum of their lengths. The goal is to minimize the total cost of connecting all ropes.
+
+2. Approach: The optimal approach to solve this problem is to use a min-heap (or priority queue). By always connecting the two smallest ropes first, we ensure that the resultant larger ropes contribute the least to future sums, thus minimizing the overall cost. Initialize by pushing all rope lengths into the min-heap. Then repeatedly extract the two smallest elements, sum them, add the result back to the heap, and keep track of the sum. Continue this process until only one rope remains in the heap, which means all ropes have been connected.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int minCost(vector<int>& ropes) {
+    priority_queue<int, vector<int>, greater<int>> minHeap(ropes.begin(), ropes.end());
+    int totalCost = 0;
+    while (minHeap.size() > 1) {
+        int first = minHeap.top();
+        minHeap.pop();
+        int second = minHeap.top();
+        minHeap.pop();
+        int sum = first + second;
+        totalCost += sum;
+        minHeap.push(sum);
+    }
+    return totalCost;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n log n) due to the operations on the min-heap, and the space complexity is O(n) for storing the ropes in the heap."
+Heap,Convert BST to Min Heap,"1. Problem Summary: The task is to convert a given Binary Search Tree (BST) into a Min Heap with the condition that the structure of the tree remains a binary tree. The properties of the Min Heap should be such that every parent node is smaller than its child nodes.
+
+2. Approach: The optimal solution involves a two-step process. First, perform an in-order traversal of the BST to capture the elements in sorted order since in-order traversal of a BST yields elements in non-decreasing order. Store these elements in an array. Second, use this array to reconstruct the tree by assigning elements from the array to the tree nodes via a level-order traversal, ensuring the min-heap property (parent nodes are smaller than child nodes). This approach leverages the sorted properties of BST and the structural properties of binary trees.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+void inorderTraversal(TreeNode* node, vector<int>& sortedValues) {
+    if (!node) return;
+    inorderTraversal(node->left, sortedValues);
+    sortedValues.push_back(node->val);
+    inorderTraversal(node->right, sortedValues);
+}
+
+void convertToMinHeap(TreeNode* node, vector<int>& sortedValues, int& index) {
+    if (!node) return;
+    node->val = sortedValues[index++];
+    convertToMinHeap(node->left, sortedValues, index);
+    convertToMinHeap(node->right, sortedValues, index);
+}
+
+void BSTToMinHeap(TreeNode* root) {
+    vector<int> sortedValues;
+    int index = 0;
+    inorderTraversal(root, sortedValues);
+    convertToMinHeap(root, sortedValues, index);
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n), where n is the number of nodes in the BST, as it involves traversing each node exactly once. The space complexity is also O(n) due to the storage of node values and the recursion stack during in-order traversal."
+Heap,Convert min heap to max heap,"1. Problem Summary: The task is to convert a given Min Heap into a Max Heap. A Min Heap is a complete binary tree where the value of each node is less than or equal to its children, while in a Max Heap, each node is greater than or equal to its children.
+
+2. Approach: The optimal way to convert a Min Heap to a Max Heap is not to rebuild the heap from scratch but to utilize the existing heap structure. Since the tree is already a complete binary tree, we only need to rearrange the elements to satisfy the Max Heap property. This can be efficiently done by starting from the last non-leaf node and moving upwards to the root, applying the Max Heapify process at each node. Max Heapify ensures that the subtree rooted at any node obeys the Max Heap properties by swapping root with its largest child (if necessary) and recursively heapifying the affected subtree.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+void maxHeapify(vector<int>& arr, int i, int n) {
+    int largest = i;
+    int left = 2 * i + 1;
+    int right = 2 * i + 2;
+
+    if (left < n && arr[left] > arr[largest])
+        largest = left;
+    if (right < n && arr[right] > arr[largest])
+        largest = right;
+
+    if (largest != i) {
+        swap(arr[i], arr[largest]);
+        maxHeapify(arr, largest, n);
+    }
+}
+
+void convertMinHeapToMaxHeap(vector<int>& arr) {
+    int n = arr.size();
+    for (int i = n / 2 - 1; i >= 0; i--)
+        maxHeapify(arr, i, n);
+}
+
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the number of elements in the heap, as each call to maxHeapify is O(log n) and we call it for roughly half the nodes. The space complexity is O(log n) due to the recursion stack during heapify."
+Heap,Rearrange characters in a string such that no two adjacent are same.,"1. Problem Summary: 
+The task is to rearrange the characters in a given string so that no two adjacent characters are the same. If it's possible to rearrange, return the rearranged string; otherwise, return an empty string or a special value indicating it's not possible.
+
+2. Approach: 
+To solve this problem, use a max-heap (priority queue) to always place the most frequent character next, which ensures that no two adjacent characters are the same. First, count the frequency of each character using a hash map. Then, push each character with its frequency into a max-heap. While the heap is not empty, extract the most frequent character and decrease its count. If the previously used character can be used again (its count > 0), push it back into the heap. Continue this process until all characters are placed or it becomes impossible to place without repeating adjacent characters.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+string rearrangeString(string s) {
+    // Frequency map
+    unordered_map<char, int> freq;
+    for (char c : s) {
+        freq[c]++;
+    }
+
+    // Max heap based on frequency
+    priority_queue<pair<int, char>> maxHeap;
+    for (auto& p : freq) {
+        maxHeap.push({p.second, p.first});
+    }
+
+    string result = """";
+    pair<int, char> prev(-1, '#');
+
+    // Process the heap
+    while (!maxHeap.empty()) {
+        auto current = maxHeap.top();
+        maxHeap.pop();
+        result += current.second;
+        current.first--;
+
+        if (prev.first > 0) {
+            maxHeap.push(prev);
+        }
+        prev = current;
+    }
+
+    if (result.length() != s.length()) return """"; // It wasn't possible to rearrange
+    return result;
+}
+```
+
+4. Time Complexity and Space Complexity:
+The time complexity is O(n log k) where n is the length of the string and k is the number of distinct characters, and the space complexity is O(k) for storing the characters in the heap and map."
+Heap,Minimum sum of two numbers formed from digits of an array,"1. Problem Summary: The problem involves forming two minimum possible numbers from the digits of a given array and then calculating their sum. The digits from the array can be used only once.
+
+2. Approach: To solve this problem, first, sort the array of digits in ascending order to ensure the smallest numbers are formed. Then, distribute these digits alternatively into two different numbers to balance their magnitudes and keep them minimal. This can be done by appending even-indexed digits to one number and odd-indexed digits to another. Finally, convert these sequences of digits back to numbers and calculate their sum. This method ensures that both numbers remain as small as possible, utilizing the positional value of digits effectively.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+int formMinSum(vector<int> digits) {
+    sort(digits.begin(), digits.end()); // Sort the digits
+    string num1 = """", num2 = """";
+    
+    // Distribute digits to form two numbers
+    for (int i = 0; i < digits.size(); ++i) {
+        if (i % 2 == 0) 
+            num1 += to_string(digits[i]); // Even index
+        else 
+            num2 += to_string(digits[i]); // Odd index
+    }
+    
+    // Convert string to integer and calculate sum
+    int number1 = stoi(num1);
+    int number2 = stoi(num2);
+    
+    return number1 + number2;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n log n) due to the sort operation, and the space complexity is O(n) for storing the numbers as strings."

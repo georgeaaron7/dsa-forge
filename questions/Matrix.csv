@@ -1,0 +1,356 @@
+TOPIC,PROBLEM LINK,SOLUTION
+Matrix,Spiral traversal on a Matrix,"1. Problem Summary: The task is to traverse and collect elements of a 2D matrix in a spiral order starting from the top-left corner, moving right initially and then navigating down, left, and up as boundaries are reached and adjusted.
+
+2. Approach: The process involves setting boundaries for rows and columns: `top`, `bottom`, `left`, and `right`. Initially, `top` is set to 0, `bottom` to the last row index, `left` to 0, and `right` to the last column index. The traversal starts from the `top-left` corner and proceeds to the `right` until the `right` boundary is hit, then moves down the `right` boundary, shifts left upon hitting the `bottom`, and finally moves up when the `left` boundary is reached. After completing a full loop (right, down, left, up), the boundaries are adjusted inward (increment `top`, decrement `bottom`, increment `left`, and decrement `right`) and the process repeats until the boundaries overlap or cross each other.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<int> spiralOrder(vector<vector<int>>& matrix) {
+    vector<int> result;
+    if (matrix.empty()) return result;
+    
+    int top = 0, bottom = matrix.size() - 1;
+    int left = 0, right = matrix[0].size() - 1;
+    
+    while (top <= bottom && left <= right) {
+        // Traverse from left to right along the top row
+        for (int i = left; i <= right; i++) {
+            result.push_back(matrix[top][i]);
+        }
+        top++;
+        
+        // Traverse downwards along the right column
+        for (int i = top; i <= bottom; i++) {
+            result.push_back(matrix[i][right]);
+        }
+        right--;
+        
+        if (top <= bottom) {
+            // Traverse from right to left along the bottom row
+            for (int i = right; i >= left; i--) {
+                result.push_back(matrix[bottom][i]);
+            }
+            bottom--;
+        }
+        
+        if (left <= right) {
+            // Traverse upwards along the left column
+            for (int i = bottom; i >= top; i--) {
+                result.push_back(matrix[i][left]);
+            }
+            left++;
+        }
+    }
+    
+    return result;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(N) where N is the total number of elements in the matrix, and the space complexity is O(1) beyond the space used by the result vector."
+Matrix,Search an element in a matriix,"1. Problem Summary: The task is to find whether a given element exists in a sorted 2D matrix. The matrix is sorted in a way that the elements in each row are sorted in ascending order, and the first element of each row is greater than the last element of the previous row.
+
+2. Approach: The optimal way to search for an element in this matrix is to use a binary search approach, but with a twist to accommodate the 2D nature. Imagine the 2D matrix as a flattened array where row and column indices are mapped to single index positions. Start the binary search with two pointers, one pointing to the beginning of the matrix and one to the end. Calculate the middle position and map it back to matrix coordinates (row and column) to access the element. If the element matches, return true. If the element is smaller, adjust the end pointer; if larger, adjust the start pointer. Repeat until the element is found or the pointers cross.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+bool searchMatrix(vector<vector<int>>& matrix, int target) {
+    if (matrix.empty() || matrix[0].empty()) return false;
+    int m = matrix.size(), n = matrix[0].size();
+    int low = 0, high = m * n - 1;
+    
+    while (low <= high) {
+        int mid = low + (high - low) / 2;
+        int row = mid / n;
+        int col = mid % n;
+        
+        if (matrix[row][col] == target) {
+            return true;
+        } else if (matrix[row][col] < target) {
+            low = mid + 1;
+        } else {
+            high = mid - 1;
+        }
+    }
+    return false;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(log(m*n)) where m is the number of rows and n is the number of columns, as the search process is logarithmic due to the binary search. The space complexity is O(1) as no extra space is used beyond the input matrix."
+Matrix,Find median in a row wise sorted matrix,"1. Problem Summary: Given a matrix where each row is sorted in non-decreasing order, the task is to find the median of all the elements in the matrix. The matrix has dimensions `m x n` and contains integers.
+
+2. Approach: The optimal way to find the median in a row-wise sorted matrix involves using binary search over the range of possible element values, rather than matrix indices. Start by identifying the minimum and maximum elements in the matrix, which define the search range. For each midpoint in this range, count how many matrix elements are less than or equal to this midpoint using upper bound logic for each row. Adjust the search boundaries based on whether the count of these elements is less than or greater than half the total number of elements. This binary search continues until the exact median value is pinpointed.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+int findMedian(vector<vector<int>>& matrix) {
+    int m = matrix.size(), n = matrix[0].size();
+    int low = INT_MAX, high = INT_MIN;
+
+    // Finding the global minimum and maximum in the matrix
+    for (int i = 0; i < m; i++) {
+        low = min(low, matrix[i][0]);
+        high = max(high, matrix[i][n-1]);
+    }
+
+    int desiredCount = (m * n + 1) / 2; // Position of the median in the sorted order
+
+    while (low < high) {
+        int mid = low + (high - low) / 2;
+        int count = 0;
+
+        // Count elements less than or equal to mid
+        for (int i = 0; i < m; i++)
+            count += upper_bound(matrix[i].begin(), matrix[i].end(), mid) - matrix[i].begin();
+
+        if (count < desiredCount)
+            low = mid + 1;
+        else
+            high = mid;
+    }
+
+    return low;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(m * log(n) * log(max-min)), where m is the number of rows, n is the number of columns, and max-min is the range of the numbers in the matrix. The space complexity is O(1), as only a few extra variables are used."
+Matrix,Find row with maximum no. of 1's,"1. Problem Summary: Given a binary matrix where each row is sorted in non-decreasing order, the task is to find the row with the maximum number of 1's.
+
+2. Approach: The optimal way to solve this problem utilizes the fact that rows are sorted. Start from the top-right corner of the matrix. If the element is 1, move left (decrease column index) to count all 1's in that row. If the element is 0, move down (increase row index) as there can't be any 1's to the left of this 0 in the current row. Keep track of the row with the maximum count of 1’s encountered. This approach ensures that each row and column is visited at most once, thus leading to an efficient solution.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+int findRowWithMaximumOnes(vector<vector<int>>& matrix) {
+    int max_row_index = -1;
+    int R = matrix.size(), C = matrix[0].size();
+    int i = 0, j = C - 1;
+    int max_count = 0;
+
+    while (i < R && j >= 0) {
+        if (matrix[i][j] == 1) {
+            max_row_index = i;
+            max_count = j + 1; // current column index + 1 gives number of 1's in the row
+            j--; // move left
+        } else {
+            i++; // move down
+        }
+    }
+    return max_row_index;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(R + C) where R is the number of rows, and C is the number of columns. The space complexity is O(1)."
+Matrix,Print elements in sorted order using row-column wise sorted matrix,"1. Problem Summary: The problem is to print all the elements of a matrix that is sorted in ascending order both row-wise and column-wise, in a single sorted list.
+
+2. Approach: The optimal approach is to use a min-heap to efficiently extract the smallest element from the matrix. Start by inserting the first element of each row into the heap, along with its position (row and column indices). Then repeatedly extract the smallest element from the heap, print it, and insert the next element from the same row into the heap if it exists. This approach ensures that the heap always contains the smallest unprinted elements from each row, and heap operations maintain the overall sorted order with minimal overhead.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+void printSorted(vector<vector<int>> &matrix) {
+    int n = matrix.size(), m = matrix[0].size();
+    priority_queue<pair<int, pair<int, int>>, vector<pair<int, pair<int, int>>>, greater<pair<int, pair<int, int>>>> minHeap;
+
+    // Insert the first element of each row into the heap
+    for (int i = 0; i < n; ++i) {
+        minHeap.push({matrix[i][0], {i, 0}});
+    }
+
+    // Extract the smallest element and insert the next element from the same row
+    while (!minHeap.empty()) {
+        auto [val, pos] = minHeap.top();
+        minHeap.pop();
+        cout << val << "" "";
+        int row = pos.first, col = pos.second;
+        if (col + 1 < m) {
+            minHeap.push({matrix[row][col + 1], {row, col + 1}});
+        }
+    }
+    cout << endl;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(N*M*logN) where N is the number of rows and M is the number of columns, due to heap operations for each element. The space complexity is O(N) for storing elements in the heap."
+Matrix,Maximum size rectangle,"1. Problem Summary: The ""Maximum size rectangle"" problem involves finding the largest rectangular area possible in a binary matrix that is entirely filled with 1s. The matrix consists of rows and columns with elements either 0 or 1.
+
+2. Approach: This problem can be approached using a dynamic programming technique similar to finding the largest rectangle in a histogram. For each row in the matrix, treat it as the base of a histogram where the height of each column in the histogram is the count of consecutive 1s up to that row. Utilize a stack to efficiently compute the maximum area rectangle for each histogram (each row of the matrix). Reset the height to zero whenever a zero is found in the matrix. By iterating through each row and applying the histogram maximum area logic, the largest rectangle can be found.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+int maxHistogramArea(vector<int>& heights) {
+    stack<int> s;
+    int max_area = 0, tp, area_with_top;
+    int i = 0;
+    while (i < heights.size()) {
+        if (s.empty() || heights[s.top()] <= heights[i])
+            s.push(i++);
+        else {
+            tp = s.top();
+            s.pop();
+            area_with_top = heights[tp] * (s.empty() ? i : i - s.top() - 1);
+            max_area = max(max_area, area_with_top);
+        }
+    }
+    while (!s.empty()) {
+        tp = s.top();
+        s.pop();
+        area_with_top = heights[tp] * (s.empty() ? i : i - s.top() - 1);
+        max_area = max(max_area, area_with_top);
+    }
+    return max_area;
+}
+
+int maxRectangle(vector<vector<int>>& matrix) {
+    if (matrix.empty()) return 0;
+    int max_area = 0;
+    vector<int> height(matrix[0].size(), 0);
+    for (int i = 0; i < matrix.size(); i++) {
+        for (int j = 0; j < matrix[0].size(); j++) {
+            height[j] = matrix[i][j] == 0 ? 0 : height[j] + 1;
+        }
+        max_area = max(max_area, maxHistogramArea(height));
+    }
+    return max_area;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity of the algorithm is O(m*n) where m is the number of rows and n is the number of columns in the matrix. The space complexity is O(n), where n is the number of columns, for storing the height array and stack."
+Matrix,Find a specific pair in matrix,"1. Problem Summary: Given an `n x n` matrix, the task is to find a specific pair `(a, b)` such that `a` is located at `(i, j)` and `b` is located at `(p, q)` with `a > b` and `i <= p` and `j <= q`. The goal is to maximize `a - b`.
+
+2. Approach: The optimal way to solve this problem involves dynamic programming to keep track of the maximum value encountered so far from the bottom right to the top left of the matrix. By iterating from the bottom right corner, we can maintain a running maximum of elements and compute the difference with the current element to find the maximum difference. This approach reduces redundant comparisons and exploits the matrix properties to efficiently find the result.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int findMaxDifference(vector<vector<int>>& mat) {
+    int n = mat.size();
+    int maxDiff = INT_MIN;
+    int maxElement = mat[n-1][n-1]; // Start from bottom-right corner
+
+    for (int i = n - 1; i >= 0; i--) {
+        for (int j = n - 1; j >= 0; j--) {
+            if (i != n-1 || j != n-1) { // Skip the initial assignment of maxElement
+                maxDiff = max(maxDiff, maxElement - mat[i][j]);
+            }
+            maxElement = max(maxElement, mat[i][j]);
+        }
+    }
+
+    return maxDiff;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n^2) as each element is visited once, and the space complexity is O(1) as no extra space is required beyond input storage."
+Matrix,Rotate matrix by 90 degrees,"1. Problem Summary: The task is to rotate a given N x N matrix by 90 degrees in a clockwise direction. The challenge is to perform this rotation in-place, without using additional memory for another matrix.
+
+2. Approach: The optimal approach involves transposing the matrix followed by reversing each row. The transpose of a matrix is obtained by swapping matrix[i][j] with matrix[j][i], essentially flipping the matrix over its diagonal. After transposing, reversing each row of the matrix will result in a 90-degree clockwise rotation. This method leverages the properties of matrix operations to achieve the desired rotation without the need for extra space, making it intuitive and easy to implement during coding interviews.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+void rotateMatrix(vector<vector<int>>& matrix) {
+    int n = matrix.size();
+    // Transpose the matrix
+    for (int i = 0; i < n; ++i) {
+        for (int j = i; j < n; ++j) {
+            swap(matrix[i][j], matrix[j][i]);
+        }
+    }
+    // Reverse each row
+    for (int i = 0; i < n; ++i) {
+        reverse(matrix[i].begin(), matrix[i].end());
+    }
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(N^2) where N is the dimension of the matrix, and the space complexity is O(1) since the rotation is done in-place."
+Matrix,Kth smallest element in a row-cpumn wise sorted matrix,"1. Problem Summary: The problem is to find the Kth smallest element in a matrix where each row and each column is sorted in increasing order. The matrix is not necessarily square.
+
+2. Approach: The optimal approach uses a min-heap to efficiently find the Kth smallest element. Start by pushing the first element of each row into a min-heap along with its position (row and column indices). Then, repeatedly extract the smallest element from the heap. For each element extracted, push the next element of the same row (if any) into the heap. Continue this process until you extract the Kth smallest element. This method leverages the sorted property of rows and columns, minimizing the number of elements we need to consider by focusing on potentially viable candidates for the Kth smallest position.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int kthSmallest(vector<vector<int>>& matrix, int k) {
+    int n = matrix.size();
+    priority_queue<pair<int, pair<int, int>>, vector<pair<int, pair<int, int>>>, greater<pair<int, pair<int, int>>>> minHeap;
+
+    // Insert the first element of each row into the heap
+    for (int i = 0; i < n; ++i) {
+        minHeap.push({matrix[i][0], {i, 0}});
+    }
+
+    int count = 0, result = 0;
+    while (!minHeap.empty()) {
+        auto [val, pos] = minHeap.top();
+        minHeap.pop();
+        int r = pos.first, c = pos.second;
+        result = val;
+        count++;
+        if (count == k) break;
+        if (c + 1 < matrix[r].size()) {
+            minHeap.push({matrix[r][c + 1], {r, c + 1}});
+        }
+    }
+    return result;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(K log N) where N is the number of rows, and the space complexity is O(N) due to the heap storage."
+Matrix,Common elements in all rows of a given matrix,"1. Problem Summary: The problem involves finding the common elements that appear in every row of a given matrix. The matrix can have varying numbers of columns in different rows.
+
+2. Approach: The optimal approach uses a hash map to keep track of elements and their frequency of appearance across rows. Start by initializing the hash map with elements from the first row. For each subsequent row, update the hash map to only keep those elements that appear again in the current row. This can be efficiently done by using a temporary hash map for each row to store frequencies and then comparing it with the global hash map. This method ensures that only elements common to all processed rows are retained, effectively narrowing down to the common elements across all rows.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+vector<int> findCommonElements(vector<vector<int>>& matrix) {
+    unordered_map<int, int> commonElements;
+    for (int element : matrix[0]) {
+        commonElements[element]++;
+    }
+
+    for (int i = 1; i < matrix.size(); i++) {
+        unordered_map<int, int> currentRowElements;
+        for (int element : matrix[i]) {
+            if (commonElements.find(element) != commonElements.end()) {
+                currentRowElements[element]++;
+            }
+        }
+        commonElements = currentRowElements; // Update the global map to only include common elements
+    }
+
+    vector<int> result;
+    for (auto& element : commonElements) {
+        if (element.second == matrix.size()) // Only include elements that appear in all rows
+            result.push_back(element.first);
+    }
+    return result;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n*m) where n is the number of rows and m is the average number of columns per row. The space complexity is O(k) where k is the number of unique elements in the first row."

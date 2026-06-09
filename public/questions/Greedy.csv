@@ -1,0 +1,1277 @@
+TOPIC,PROBLEM LINK,SOLUTION
+Greedy,Activity Selection Problem,"1. Problem Summary: The Activity Selection Problem involves selecting the maximum number of activities that don't overlap in time from a given set of activities. Each activity has a start time and an end time.
+
+2. Approach: The optimal solution for the Activity Selection Problem is a greedy algorithm. First, sort all the activities based on their end times. Start by selecting the activity that ends first, and then select the next activity that starts after the last selected activity ends. Continue this process until no more activities can be selected. This method ensures that we maximize the number of non-overlapping activities by always choosing the activity that leaves the most room for subsequent activities.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+vector<int> selectActivities(vector<pair<int,int>> activities) {
+    vector<int> selected;
+    // Sort activities based on their end times
+    sort(activities.begin(), activities.end(), [](const pair<int, int> &a, const pair<int, int> &b) {
+        return a.second < b.second;
+    });
+
+    // Initialize the last finished time
+    int lastEndTime = 0;
+
+    // Iterate over sorted activities
+    for(auto activity : activities) {
+        if(activity.first >= lastEndTime) {
+            // Select the activity if it starts after or when the last selected one ended
+            selected.push_back(activity.first);
+            lastEndTime = activity.second;
+        }
+    }
+    return selected;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n log n) due to the sorting step, and the space complexity is O(1) if we ignore the input and output storage."
+Greedy,Job SequencingProblem,"1. Problem Summary: The Job Sequencing Problem requires scheduling a set of jobs, each with a deadline and profit, such that the total profit from jobs completed before their deadlines is maximized. Each job takes a single unit of time to complete.
+
+2. Approach: The optimal approach to solve this problem is to use a greedy algorithm. First, sort all the jobs based on their profit in descending order. Initialize an array or a time slot tracker to mark which time slots are free (up to the maximum deadline encountered). For each job in the sorted list, find the latest slot before the job's deadline that is still free, and schedule the job there. This way, you maximize the profit for each slot filled and ensure jobs with higher profits are given preference.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+struct Job {
+    int id;     // Job ID
+    int dead;   // Deadline of job
+    int profit; // Profit if job is completed
+};
+
+bool comparison(Job a, Job b) {
+    return (a.profit > b.profit);
+}
+
+vector<int> JobScheduling(Job arr[], int n) {
+    sort(arr, arr + n, comparison); // Sort jobs based on descending profit
+    int maxDeadline = 0;
+    for (int i = 0; i < n; i++)
+        maxDeadline = max(maxDeadline, arr[i].dead);
+    
+    vector<int> slot(maxDeadline + 1, -1); // Time slots initialization
+
+    int countJobs = 0, jobProfit = 0;
+    for (int i = 0; i < n; i++) {
+        for (int j = arr[i].dead; j > 0; j--) {
+            if (slot[j] == -1) { // If slot is free
+                slot[j] = i;     // Assign this slot with job i
+                countJobs++;
+                jobProfit += arr[i].profit;
+                break;
+            }
+        }
+    }
+    return {countJobs, jobProfit}; // Return number of jobs and total profit
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n log n) due to the sorting operation, followed by O(n*m) for scheduling where m is the maximum deadline. The space complexity is O(m) for the slot array."
+Greedy,Huffman Coding,"1. Problem Summary: Huffman Coding is a compression technique used to reduce the size of data by encoding frequently occurring characters with shorter codes and less frequent characters with longer codes. It uses a binary tree where each leaf node represents a character, and the path from the root to the leaf represents the character's binary code.
+
+2. Approach: Huffman Coding utilizes a greedy algorithm to build an optimal binary tree, where the goal is to minimize the weighted path length. First, each character is treated as a node and is associated with its frequency. These nodes are inserted into a priority queue (min-heap). The algorithm repeatedly extracts the two nodes with the smallest frequencies, creates a new node with these two as children and a frequency equal to the sum of the two, and inserts this new node back into the priority queue. This process continues until only one node remains, which becomes the root of the Huffman tree. The paths from the root to each leaf determine the Huffman codes.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Node {
+    char character;
+    int freq;
+    Node *left, *right;
+    
+    Node(char character, int freq) : character(character), freq(freq), left(nullptr), right(nullptr) {}
+};
+
+struct Compare {
+    bool operator()(Node* l, Node* r) {
+        return l->freq > r->freq;
+    }
+};
+
+void printCodes(Node* root, string str) {
+    if (!root) return;
+    if (root->character != '$')
+        cout << root->character << "": "" << str << ""\n"";
+    printCodes(root->left, str + ""0"");
+    printCodes(root->right, str + ""1"");
+}
+
+void HuffmanCoding(vector<char>& data, vector<int>& freq, int size) {
+    priority_queue<Node*, vector<Node*>, Compare> minHeap;
+
+    for (int i = 0; i < size; ++i)
+        minHeap.push(new Node(data[i], freq[i]));
+
+    while (minHeap.size() != 1) {
+        Node *left = minHeap.top();
+        minHeap.pop();
+        Node *right = minHeap.top();
+        minHeap.pop();
+
+        Node *top = new Node('$', left->freq + right->freq);
+        top->left = left;
+        top->right = right;
+        minHeap.push(top);
+    }
+
+    printCodes(minHeap.top(), """");
+}
+
+int main() {
+    vector<char> data = {'a', 'b', 'c', 'd', 'e', 'f'};
+    vector<int> freq = {5, 9, 12, 13, 16, 45};
+    int size = data.size();
+
+    HuffmanCoding(data, freq, size);
+    return 0;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity of Huffman Coding is O(n log n), where n is the number of unique characters, due to the operations on the priority queue. The space complexity is O(n), as it requires storing the tree nodes and the priority queue."
+Greedy,Water Connection Problem,"1. Problem Summary:
+   The Water Connection Problem involves finding the number of water distribution systems in a network of pipes and houses, each system characterized by its diameter. Each house can either receive water from one pipe, send water through another, or both.
+
+2. Approach:
+   To solve the problem, we first represent the network as a directed graph where nodes are houses and edges are pipes with weights as diameters. We identify starting nodes for each system (nodes with only outgoing edges and no incoming ones). For each starting node, we traverse the graph using a depth-first search (DFS) to find the minimum diameter along the path until a terminal node (node with no outgoing edges) is reached. During traversal, maintain the minimum diameter encountered. This approach intuitively follows the flow of water from a source to its endpoint, ensuring we account for the smallest diameter (bottleneck) in each system.
+
+3. Pseudo-code:
+   ```cpp
+   #include<bits/stdc++.h>
+   using namespace std;
+
+   void dfs(int node, int &min_diameter, vector<bool> &visited, vector<pair<int, int>> &adj) {
+       visited[node] = true;
+       for (auto &edge : adj[node]) {
+           if (!visited[edge.first]) {
+               min_diameter = min(min_diameter, edge.second);
+               dfs(edge.first, min_diameter, visited, adj);
+           }
+       }
+   }
+
+   void findWaterSystems(vector<tuple<int, int, int>> &pipes, int n) {
+       vector<pair<int, int>> adj[n+1];
+       vector<bool> hasIncoming(n+1, false);
+       vector<bool> visited(n+1, false);
+
+       // Build graph
+       for (auto &pipe : pipes) {
+           int u = get<0>(pipe), v = get<1>(pipe), d = get<2>(pipe);
+           adj[u].push_back({v, d});
+           hasIncoming[v] = true;
+       }
+
+       // Find all systems
+       for (int i = 1; i <= n; ++i) {
+           if (!hasIncoming[i] && !adj[i].empty()) { // potential starting node
+               int min_diameter = INT_MAX;
+               dfs(i, min_diameter, visited, adj);
+               cout << ""System from "" << i << "" with min diameter "" << min_diameter << endl;
+           }
+       }
+   }
+   ```
+
+4. Time Complexity and Space Complexity:
+   The time complexity is O(N + P) and the space complexity is O(N + P), where N is the number of houses and P is the number of pipes. This accounts for building the graph and traversing it."
+Greedy,Fractional Knapsack Problem,"1. Problem Summary:
+   The Fractional Knapsack Problem involves selecting items with given weights and values to maximize the total value in a knapsack with a weight capacity limit. Unlike the 0/1 knapsack, items can be broken into smaller pieces.
+
+2. Approach:
+   The optimal approach for the Fractional Knapsack Problem is a greedy algorithm. First, calculate the value per weight ratio for each item. Then, sort the items based on this ratio in descending order. Start filling the knapsack from the item with the highest ratio and continue to the next highest, adding as much of an item as possible until the knapsack reaches its capacity limit. This method ensures maximum value accumulation by prioritizing items that offer the most value per unit weight.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+struct Item {
+    int value, weight;
+};
+
+bool compare(Item a, Item b) {
+    double r1 = (double)a.value / a.weight;
+    double r2 = (double)b.value / b.weight;
+    return r1 > r2;
+}
+
+double fractionalKnapsack(int W, Item arr[], int n) {
+    sort(arr, arr + n, compare);
+    
+    int curWeight = 0;
+    double finalValue = 0.0;
+    
+    for (int i = 0; i < n; i++) {
+        if (curWeight + arr[i].weight <= W) {
+            curWeight += arr[i].weight;
+            finalValue += arr[i].value;
+        } else {
+            int remain = W - curWeight;
+            finalValue += (arr[i].value / (double)arr[i].weight) * remain;
+            break;
+        }
+    }
+    return finalValue;
+}
+```
+
+4. Time Complexity and Space Complexity:
+   The time complexity is O(n log n) due to the sorting step, and the space complexity is O(1) beyond the input storage."
+Greedy,Greedy Algorithm to find Minimum number of Coins,"1. Problem Summary: The problem requires determining the minimum number of coins needed to make a specific amount of money using the highest denomination coins available first. The denominations have unlimited supply.
+
+2. Approach: To solve this, a greedy algorithm is used which always selects the largest denomination that does not exceed the remaining amount of money. Start by sorting the coin denominations in descending order. Then, iteratively subtract the largest denomination from the amount until the amount is reduced to zero, counting the number of coins used. This method works efficiently given that the coin denominations are standard (like in most currencies where larger denominations are multiples or combinations of smaller ones).
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int findMinimumCoins(int amount, vector<int>& coins) {
+    sort(coins.rbegin(), coins.rend()); // Sort coins in descending order
+    int count = 0;
+    for (int coin : coins) {
+        if (amount == 0) break; // If no amount left, break the loop
+        count += amount / coin; // Use as many of this coin as possible
+        amount %= coin; // Reduce the amount by the total value of used coins
+    }
+    return count;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n log n) due to sorting, where n is the number of coin denominations. The space complexity is O(1), assuming the sorting is done in-place."
+Greedy,Maximum trains for which stoppage can be provided,"1. Problem Summary: The problem requires scheduling the maximum number of trains that can stop at a station given their arrival and departure times, ensuring no two trains occupy the platform at the same time.
+
+2. Approach: The core idea is to use a greedy algorithm to select the maximum number of non-overlapping intervals (trains). First, sort the trains based on their departure times. Then, iteratively select trains that start after or when the last selected train departs. This method ensures that the maximum number of trains is selected without any overlap in their schedules. The sorting step helps in quickly finding the next available train that can be accommodated after the current train leaves.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Train {
+    int start, end;
+};
+
+bool compare(Train a, Train b) {
+    return a.end < b.end;
+}
+
+int maxTrains(vector<Train>& trains) {
+    sort(trains.begin(), trains.end(), compare);
+    int count = 0;
+    int lastDeparture = -1;
+    for (auto& train : trains) {
+        if (train.start > lastDeparture) {
+            lastDeparture = train.end;
+            count++;
+        }
+    }
+    return count;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n log n) due to the sorting step, and the space complexity is O(1) if we ignore the input storage."
+Greedy,Minimum Platforms Problem,"1. Problem Summary:
+   The Minimum Platforms Problem involves finding the minimum number of railway platforms required at a station so that no train is kept waiting due to a lack of available platforms. Given the arrival and departure times of all trains, one must ensure that at no point do trains overlap on the same platform without available space.
+
+2. Approach:
+   The optimal approach is to use a greedy algorithm with sorting and merging intervals. First, sort the arrival and departure times separately. Use two pointers to traverse the arrival and departure arrays. For each arriving train, check if a departure has occurred before the next arrival to free up a platform; if not, increment the count of platforms needed. This approach effectively tracks the maximum overlap of trains at any given time, which corresponds to the minimum number of platforms required.
+
+3. Pseudo-code:
+   ```cpp
+   #include<bits/stdc++.h>
+   using namespace std;
+
+   int findMinPlatforms(vector<int> &arrivals, vector<int> &departures) {
+       sort(arrivals.begin(), arrivals.end());
+       sort(departures.begin(), departures.end());
+       int n = arrivals.size();
+       
+       int platform_needed = 0, max_platforms = 0;
+       int i = 0, j = 0;
+       
+       while (i < n && j < n) {
+           if (arrivals[i] <= departures[j]) {
+               platform_needed++;
+               i++;
+               max_platforms = max(max_platforms, platform_needed);
+           } else {
+               platform_needed--;
+               j++;
+           }
+       }
+       return max_platforms;
+   }
+   ```
+
+4. Time Complexity and Space Complexity:
+   The time complexity is O(N log N) due to sorting, where N is the number of trains. The space complexity is O(1) as no additional space proportional to input size is used beyond variables for iteration and counting."
+Greedy,Buy Maximum Stocks if i stocks can be bought on i-th day,"1. Problem Summary:
+   In this problem, you are given the price of stocks on different days and you can buy up to 'i' stocks on the 'i-th' day. The objective is to maximize the number of stocks bought with a given amount of money.
+
+2. Approach:
+   The key to solving this problem is to prioritize buying stocks on days when they are cheapest, while also considering the maximum limit of stocks that can be bought on each day. First, pair each stock price with its day and sort these pairs by price. Then, iterate through the sorted list, buying as many stocks as possible on each day without exceeding the day's limit or running out of money. This greedy strategy ensures that you spend your money in the most efficient way possible, maximizing the number of stocks purchased.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int buyMaximumProducts(int n, int k, vector<int> price) {
+    vector<pair<int, int>> dayPrices;
+    for (int i = 0; i < n; i++) {
+        dayPrices.push_back({price[i], i + 1});
+    }
+    sort(dayPrices.begin(), dayPrices.end());
+
+    int totalStocks = 0;
+    for (int i = 0; i < n && k > 0; i++) {
+        int price = dayPrices[i].first;
+        int maxBuy = dayPrices[i].second;
+        int stocksToBuy = min(maxBuy, k / price);
+        totalStocks += stocksToBuy;
+        k -= stocksToBuy * price;
+    }
+    return totalStocks;
+}
+```
+
+4. Time Complexity and Space Complexity:
+   The time complexity is O(n log n) due to sorting, and the space complexity is O(n) for storing the day and price pairs."
+Greedy,Find the minimum and maximum amount to buy all N candies,"1. Problem Summary: The problem involves finding the minimum and maximum amount required to buy all N candies, where the price of each candy is given in an array. The buying strategy allows purchasing one candy at its listed price and getting another candy for free, if available.
+
+2. Approach: To solve this problem, we should first sort the array of candy prices. For finding the minimum amount, start buying the candies from the cheapest, and for each candy bought, skip the next one (as it's free). For the maximum amount, start buying the candies from the most expensive and apply the same skipping strategy. This greedy approach ensures that for the minimum cost, cheaper candies are paired for offers, and for maximum cost, the expensive candies are utilized effectively before the cheaper ones.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+int minCost(vector<int> &prices) {
+    sort(prices.begin(), prices.end());
+    int totalCost = 0;
+    int n = prices.size();
+    for (int i = 0; i < n; i += 2) {
+        totalCost += prices[i];
+    }
+    return totalCost;
+}
+
+int maxCost(vector<int> &prices) {
+    sort(prices.begin(), prices.end(), greater<int>());
+    int totalCost = 0;
+    int n = prices.size();
+    for (int i = 0; i < n; i += 2) {
+        totalCost += prices[i];
+    }
+    return totalCost;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(N log N) due to the sorting of the array, and the space complexity is O(1), assuming the sort is done in-place."
+Greedy,Minimize Cash Flow among a given set of friends who have borrowed money from each other,"1. Problem Summary: The problem is to minimize the number of transactions required to settle debts among a group of friends. Each friend can either owe money to or be owed money from other friends, represented in a matrix of debts.
+
+2. Approach: The optimal approach is to use a greedy algorithm. First, calculate the net amount each friend needs to pay or receive by summing up all debts for each friend. Then, recursively settle debts by selecting the maximum creditor (who needs to receive the most) and the maximum debtor (who needs to pay the most), and make the transaction between them. Adjust their balances accordingly and repeat the process until all debts are settled. This method minimizes transactions by always settling the largest debts first, which efficiently reduces the number of outstanding balances.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+void minimizeCashFlow(vector<vector<int>>& transactions) {
+    int n = transactions.size(); // Number of friends
+    vector<int> amount(n, 0); // Net amount each friend needs to pay or receive
+
+    // Calculate net amount for each person
+    for (int p = 0; p < n; p++) {
+        for (int i = 0; i < n; i++) {
+            amount[p] += (transactions[i][p] - transactions[p][i]);
+        }
+    }
+
+    settleDebts(amount);
+}
+
+void settleDebts(vector<int>& amount) {
+    int maxCredit = max_element(amount.begin(), amount.end()) - amount.begin();
+    int maxDebit = min_element(amount.begin(), amount.end()) - amount.begin();
+
+    if (amount[maxCredit] == 0 && amount[maxDebit] == 0) return; // Base case: all settled
+
+    int minAmount = min(-amount[maxDebit], amount[maxCredit]);
+    amount[maxCredit] -= minAmount;
+    amount[maxDebit] += minAmount;
+
+    cout << ""Person "" << maxDebit << "" pays "" << minAmount << "" to "" << ""Person "" << maxCredit << endl;
+
+    settleDebts(amount); // Recursive call
+}
+
+int main() {
+    vector<vector<int>> transactions = {{0, 1000, 2000}, {0, 0, 5000}, {0, 0, 0}};
+    minimizeCashFlow(transactions);
+    return 0;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(N^2) where N is the number of friends, due to the matrix traversal and recursive debt settling. The space complexity is O(N) for storing net balances."
+Greedy,Minimum Cost to cut a board into squares,"1. Problem Summary:  
+The problem is to find the minimum cost to cut a given board into squares. The board can be cut along certain horizontal and vertical lines, each having a specific cost associated with it. The goal is to minimize the total cutting cost.
+
+2. Approach:  
+The optimal strategy uses a greedy algorithm. First, we sort the costs of cutting horizontally and vertically in descending order since cutting through higher cost lines first can potentially reduce the subsequent total cost. When cutting through a line, the board is divided into segments, and each subsequent cut in the same direction will have to cut through all these segments. Therefore, each horizontal cut increases the cost of future vertical cuts and vice versa. We keep track of the number of segments created by cuts in each direction and multiply the cost of each new cut by the number of segments it must pass through.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+int minCostCut(vector<int>& horizontalCuts, vector<int>& verticalCuts) {
+    sort(horizontalCuts.begin(), horizontalCuts.end(), greater<int>());
+    sort(verticalCuts.begin(), verticalCuts.end(), greater<int>());
+    
+    int horizontalSegments = 1;
+    int verticalSegments = 1;
+    int i = 0, j = 0;
+    int totalCost = 0;
+
+    while (i < horizontalCuts.size() && j < verticalCuts.size()) {
+        if (horizontalCuts[i] > verticalCuts[j]) {
+            totalCost += horizontalCuts[i] * verticalSegments;
+            horizontalSegments++;
+            i++;
+        } else {
+            totalCost += verticalCuts[j] * horizontalSegments;
+            verticalSegments++;
+            j++;
+        }
+    }
+
+    while (i < horizontalCuts.size()) {
+        totalCost += horizontalCuts[i] * verticalSegments;
+        i++;
+    }
+
+    while (j < verticalCuts.size()) {
+        totalCost += verticalCuts[j] * horizontalSegments;
+        j++;
+    }
+
+    return totalCost;
+}
+```
+
+4. Time Complexity and Space Complexity:  
+The time complexity is O(N log N + M log M), where N and M are the number of horizontal and vertical cuts respectively. The space complexity is O(1), not considering the input storage."
+Greedy,Check if it is possible to survive on Island,"1. Problem Summary: The problem is to determine if a person can survive on an island by buying food from a shop that opens only on specific days. Given the days the person needs to survive (`S`), the maximum food units the person can buy per day (`M`), and the food units required per day (`N`), the task is to check if the person can survive the given number of days.
+
+2. Approach: The solution involves calculating the minimum food units needed (`S * N`) and comparing it with the maximum food units that can be bought over the period. First, determine the number of days the shop is open by calculating the number of weeks (`S / 7`) and the remaining days (`S % 7`). Multiply the full weeks by the number of days the shop is open in a week (`6`, assuming the shop is closed one day a week) and add the minimum of remaining days and the days the shop is open in the last partial week. If the total food units that can be bought (`days shop is open * M`) is greater than or equal to the food units needed, survival is possible. Otherwise, it's not.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+bool canSurvive(int S, int N, int M) {
+    if (M < N) return false;  // Daily requirement cannot be met even in one day
+    int weeks = S / 7;
+    int remainingDays = S % 7;
+    int shopOpenDays = weeks * 6 + min(remainingDays, 6);  // Assuming shop is closed one day per week
+    int maxFoodCanBuy = shopOpenDays * M;
+    int foodNeeded = S * N;
+    return maxFoodCanBuy >= foodNeeded;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(1) and the space complexity is O(1), as the calculations involve only a few arithmetic operations and use no additional space."
+Greedy,Find maximum meetings in one room,"1. Problem Summary: The problem is to find the maximum number of non-overlapping meetings that can be held in one room. Each meeting has a start time and an end time.
+
+2. Approach: The optimal way to solve this problem is by using a greedy algorithm. First, sort all meetings based on their ending times. This sorting helps in selecting meetings that finish earliest, allowing room for possibly more meetings to follow. Initialize a counter and a variable to track the end time of the last selected meeting. Iterate through the sorted meetings and for each meeting, if its start time is greater than or equal to the end time of the last selected meeting, increment the counter and update the end time to this meeting's end time. This approach ensures that we choose the maximum number of non-overlapping meetings.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+struct Meeting {
+    int start;
+    int end;
+};
+
+bool compareMeetings(Meeting a, Meeting b) {
+    return a.end < b.end;
+}
+
+int maxMeetings(vector<Meeting>& meetings) {
+    sort(meetings.begin(), meetings.end(), compareMeetings);
+    int count = 0;
+    int lastEndTime = 0;
+
+    for (auto& meeting : meetings) {
+        if (meeting.start >= lastEndTime) {
+            count++;
+            lastEndTime = meeting.end;
+        }
+    }
+    return count;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n log n) due to the sorting step, and the space complexity is O(1) if we ignore the input size."
+Greedy,Maximum product subset of an array,"1. Problem Summary: The task is to find the maximum product that can be obtained by multiplying a subset of numbers from a given array. The array can contain both positive and negative integers, as well as zeros.
+
+2. Approach: The optimal solution leverages a greedy algorithm. First, count the number of zeros and negative numbers. If there's only one negative number and all other elements are zero, return zero, as multiplying the negative number would yield a negative product. If the number of negative numbers is odd, exclude the smallest absolute value negative number to maximize the product. Multiply all positive numbers and the remaining negative numbers. If all numbers are zero, the result is zero. This approach efficiently determines the product by systematically choosing numbers that maximize the result.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int maxProductSubset(vector<int>& arr) {
+    int n = arr.size();
+    if (n == 0) return 0;
+
+    int countZero = 0, countNeg = 0, prod = 1;
+    int maxNeg = INT_MIN, minPos = INT_MAX;
+
+    for (int i = 0; i < n; i++) {
+        if (arr[i] == 0) {
+            countZero++;
+            continue;
+        }
+        if (arr[i] < 0) {
+            countNeg++;
+            maxNeg = max(maxNeg, arr[i]);
+        }
+        prod *= arr[i];
+    }
+
+    if (countZero == n) return 0;
+    if (countNeg % 2 != 0) {
+        if (countNeg == 1 && countZero + countNeg == n) return 0;
+        prod /= maxNeg;
+    }
+
+    return prod;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n), where n is the number of elements in the array, as it involves a single traversal of the array. The space complexity is O(1), as only a constant amount of extra space is used."
+Greedy,Maximize array sum after K negations,"1. Problem Summary: Given an array of integers and an integer K, the task is to maximize the sum of the array after negating any of the elements up to K times. Each element can be negated multiple times.
+
+2. Approach: The optimal solution uses a greedy approach to maximize the array sum. Start by sorting the array to prioritize the smallest elements (including negatives) for negation, as flipping the smallest values will have the most significant positive impact on the total sum. Iterate through the sorted array, and for each element, if it is negative and we still have negations left (K > 0), negate it. After iterating through the array, if there are any remaining negations (K > 0 and K is odd), negate the smallest absolute value in the array (which could be a previously negated negative or the smallest positive number) to ensure the maximum sum. This is because flipping the smallest absolute value minimally impacts the sum.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int maximizeSum(vector<int>& arr, int K) {
+    sort(arr.begin(), arr.end()); // Sort the array
+    int n = arr.size();
+
+    // Negate the negative numbers if possible
+    for (int i = 0; i < n && K > 0; ++i) {
+        if (arr[i] < 0) {
+            arr[i] = -arr[i];
+            K--;
+        }
+    }
+
+    // If K is still odd, negate the smallest element
+    if (K % 2 == 1) {
+        sort(arr.begin(), arr.end()); // Re-sort to find the new smallest element
+        arr[0] = -arr[0];
+    }
+
+    // Calculate the final sum of the array
+    return accumulate(arr.begin(), arr.end(), 0);
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n log n) due to sorting, and the space complexity is O(1) if we ignore the input storage."
+Greedy,Maximize the sum of arr[i]*i,"1. Problem Summary:  
+The problem is to maximize the sum of the product of each element of an array with its index. Given an array, the task is to reorder the array elements in such a way that when multiplied by their respective indices, the sum of these products is maximized.
+
+2. Approach:  
+To achieve the maximum sum, the largest numbers should be placed at the highest indices because the product contribution of higher indices is greater. Start by sorting the array in descending order. Once sorted, multiply each element by its index and sum these products. This greedy approach ensures that each element contributes maximally based on its value and position. Remember, sorting the array in descending order and then simply multiplying by the index exploits the fact that larger weights (array values) benefit more from larger multipliers (indices).
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int maximizeSum(vector<int>& arr) {
+    sort(arr.begin(), arr.end(), greater<int>()); // Sort in descending order
+    int maxSum = 0;
+    for (int i = 0; i < arr.size(); i++) {
+        maxSum += arr[i] * i; // Multiply element by its index and add to sum
+    }
+    return maxSum;
+}
+```
+
+4. Time Complexity and Space Complexity:  
+The time complexity is O(n log n) due to the sorting step, and the space complexity is O(1) if we ignore the input space."
+Greedy,Maximum sum of absolute difference of an array,"1. Problem Summary: The task is to reorder elements of an array to maximize the sum of absolute differences of consecutive elements, including the difference between the first and last elements in the reordered array.
+
+2. Approach: The optimal way to achieve the maximum sum of absolute differences is to sort the array and then rearrange the sorted elements in a specific pattern. Start by placing the smallest and largest elements as the first two elements of the result array, then continue placing the next smallest and next largest from the remaining elements alternately. This creates pairs of elements with the maximum possible difference, which is the key to maximizing the sum. This pattern leverages the property that large differences between adjacent numbers yield a higher sum, especially when the sequence wraps around from the last to the first element.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int maxSumOfAbsDifferences(vector<int>& arr) {
+    sort(arr.begin(), arr.end());
+    vector<int> result(arr.size());
+    int left = 0, right = arr.size() - 1;
+    int index = 0;
+    while (left <= right) {
+        if (index % 2 == 0) {
+            result[index++] = arr[right--]; // Place the largest remaining element
+        } else {
+            result[index++] = arr[left++]; // Place the smallest remaining element
+        }
+    }
+    int maxSum = 0;
+    for (int i = 0; i < arr.size(); i++) {
+        maxSum += abs(result[i] - result[(i + 1) % arr.size()]);
+    }
+    return maxSum;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n log n) due to sorting, and the space complexity is O(n) for storing the reordered array."
+Greedy,Maximize sum of consecutive differences in a circular array,"1. Problem Summary:  
+   The problem entails finding the maximum sum of consecutive differences in a circular array. In a circular array, the element after the last element is considered to be connected back to the first element.
+
+2. Approach:  
+   The optimal approach involves sorting the array first. Post sorting, the idea is to arrange elements alternately from the smallest and largest ends to maximize the difference between consecutive elements. This arrangement exploits the largest differences between the smallest and largest values repeatedly. To handle the circular nature, ensure that the first and last sorted elements are also optimally placed to maximize the difference. This can be visualized by imagining arranging the numbers in a circle, alternating between the smallest and the largest, drawing the maximum difference from the arrangement.
+
+3. Pseudo-code:
+   ```cpp
+   #include <bits/stdc++.h>
+   using namespace std;
+
+   int maxSumConsecutiveDifferences(vector<int>& arr) {
+       sort(arr.begin(), arr.end());
+       int n = arr.size();
+       vector<int> temp(n);
+       int small = 0, large = n - 1;
+       bool flag = true;
+
+       for (int i = 0; i < n; i++) {
+           if (flag)
+               temp[i] = arr[small++];
+           else
+               temp[i] = arr[large--];
+           flag = !flag;
+       }
+
+       int maxSum = 0;
+       for (int i = 0; i < n - 1; i++) {
+           maxSum += abs(temp[i] - temp[i + 1]);
+       }
+       maxSum += abs(temp[n - 1] - temp[0]);  // Circular connection
+
+       return maxSum;
+   }
+   ```
+
+4. Time Complexity and Space Complexity:  
+   The time complexity is O(n log n) due to sorting, and the space complexity is O(n) for storing the temporary array."
+Greedy,Minimum sum of absolute difference of pairs of two arrays,"1. Problem Summary: The problem involves finding the minimum sum of absolute differences between pairs from two arrays of equal size. Each element from one array must be paired exactly once with an element from the other array to calculate the absolute difference.
+
+2. Approach: The optimal approach to solve this problem is to sort both arrays and then pair corresponding elements from each array. By sorting both arrays, we ensure that each element from one array is paired with the closest possible value from the other array, minimizing the absolute difference. This method leverages the idea that pairing elements in increasing order yields the smallest possible differences, thereby minimizing the overall sum of these differences. This intuitive pairing approach is easy to remember as it simply involves sorting both arrays and summing up the differences of corresponding elements.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int minSumOfAbsoluteDifferences(vector<int>& A, vector<int>& B) {
+    sort(A.begin(), A.end());
+    sort(B.begin(), B.end());
+    int minSum = 0;
+    for (int i = 0; i < A.size(); ++i) {
+        minSum += abs(A[i] - B[i]);
+    }
+    return minSum;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n log n) due to the sorting of the arrays, where n is the size of the arrays. The space complexity is O(1) if we ignore the space used by the sorting algorithm or O(n) if extra space is used depending on the sorting algorithm implementation."
+Greedy,Program for Shortest Job First (or SJF) CPU Scheduling,"1. Problem Summary: Shortest Job First (SJF) is a CPU scheduling algorithm that selects the process with the smallest execution time to execute next. This approach minimizes the average waiting time for all processes in the queue.
+
+2. Approach: The algorithm starts by sorting all processes based on their burst times. It then executes each process sequentially from the shortest to the longest burst time. To implement SJF, you can use a simple sorting mechanism to organize the processes before execution. This visual arrangement helps in intuitively understanding that shorter tasks are prioritized, thus reducing the total waiting time. As processes complete their execution, they are removed from the queue, and the cycle continues until all processes are executed.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+struct Process {
+    int id;
+    int burstTime;
+};
+
+bool compareProcess(Process a, Process b) {
+    return a.burstTime < b.burstTime;
+}
+
+void shortestJobFirst(vector<Process>& processes) {
+    // Sorting processes by burst time
+    sort(processes.begin(), processes.end(), compareProcess);
+
+    int currentTime = 0;
+    int totalWaitTime = 0;
+    int totalTurnaroundTime = 0;
+
+    // Execute each process
+    for (Process p : processes) {
+        cout << ""Process ID: "" << p.id << "" Waiting Time: "" << currentTime << "" Turnaround Time: "" << (currentTime + p.burstTime) << endl;
+        totalWaitTime += currentTime;
+        totalTurnaroundTime += (currentTime + p.burstTime);
+        currentTime += p.burstTime;
+    }
+
+    cout << ""Average Waiting Time: "" << (float)totalWaitTime / processes.size() << endl;
+    cout << ""Average Turnaround Time: "" << (float)totalTurnaroundTime / processes.size() << endl;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n log n) due to the sorting step, and the space complexity is O(1) beyond the input storage."
+Greedy,Program for Least Recently Used (LRU) Page Replacement algorithm,"1. Problem Summary: The Least Recently Used (LRU) Page Replacement algorithm is used to manage a fixed-size memory and replace the least recently used pages when new pages are loaded and the memory is full. This ensures efficient use of limited memory resources in environments like operating systems.
+
+2. Approach: The LRU algorithm can be efficiently implemented using a combination of a hash map and a doubly linked list. The hash map stores keys and pointers to the nodes of the doubly linked list which contains the actual pages. When a page is accessed, it is moved to the front of the list if it exists, or added to the front if it does not. If the cache is full, the page at the end of the list (the least recently used one) is removed. This approach ensures that the most recently used pages are always at the front and the least recently used are at the end.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+class LRUCache {
+private:
+    int capacity;
+    list<int> recent;
+    unordered_map<int, list<int>::iterator> pages;
+public:
+    LRUCache(int capacity) : capacity(capacity) {}
+
+    int get(int key) {
+        if (pages.find(key) == pages.end())
+            return -1;
+        recent.erase(pages[key]);
+        recent.push_front(key);
+        pages[key] = recent.begin();
+        return *pages[key];
+    }
+
+    void put(int key, int value) {
+        if (pages.find(key) != pages.end())
+            recent.erase(pages[key]);
+        else if (recent.size() == capacity) {
+            pages.erase(recent.back());
+            recent.pop_back();
+        }
+        recent.push_front(key);
+        pages[key] = recent.begin();
+    }
+};
+```
+
+4. Time Complexity and Space Complexity: The time complexity for both get and put operations is O(1). The space complexity is O(capacity) due to the storage of the pages and the pointers in the list and hash map."
+Greedy,Smallest subset with sum greater than all other elements,"1. Problem Summary: 
+   The task is to find the smallest subset of a given array such that the sum of the elements in this subset is greater than the sum of all other elements not included in the subset.
+
+2. Approach: 
+   Begin by calculating the total sum of all elements in the array. Then, sort the array in descending order to prioritize larger numbers, as they contribute more to achieving a sum quickly. Initialize a variable to keep track of the cumulative sum of the chosen subset. Iterate through the sorted array, adding each element to the cumulative sum until this sum exceeds half of the total sum. The intuition is that once the subset's sum is more than half, it's guaranteed to be greater than the sum of the remaining elements. The number of elements added until this point forms the smallest subset.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int smallestSubset(vector<int>& arr) {
+    int totalSum = accumulate(arr.begin(), arr.end(), 0);
+    sort(arr.rbegin(), arr.rend()); // sort in descending order
+    int subsetSum = 0, count = 0;
+    for (int num : arr) {
+        subsetSum += num;
+        count++;
+        if (subsetSum > totalSum - subsetSum) {
+            break;
+        }
+    }
+    return count;
+}
+```
+
+4. Time Complexity and Space Complexity: 
+   The time complexity is O(n log n) due to sorting, and the space complexity is O(1), not counting the space used by the input array."
+Greedy,Chocolate Distribution Problem,"1. Problem Summary: The Chocolate Distribution Problem involves finding the minimum difference between the maximum and minimum chocolates given to any student when distributing a list of packets of chocolates among students. Each packet can only be given to one student.
+
+2. Approach: The problem is efficiently solved using a greedy algorithm. First, sort the array of chocolate packets. Once sorted, iterate through the array and find the minimum difference between the maximum and minimum chocolates in every possible group of 'm' students where 'm' is the number of students. This is done by checking the difference between the first and last chocolate packet in every contiguous subarray of size 'm'. The smallest difference found in these subarrays is the answer. Sorting ensures that we always consider the smallest possible range for each group of students.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+int findMinDiff(vector<int> arr, int n, int m) {
+    if (m == 0 || n == 0)
+        return 0;
+    sort(arr.begin(), arr.end());
+    if (n < m)
+        return -1;
+    int min_diff = INT_MAX;
+    for (int i = 0; i + m - 1 < n; i++) {
+        int diff = arr[i + m - 1] - arr[i];
+        if (diff < min_diff)
+            min_diff = diff;
+    }
+    return min_diff;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n log n) due to the sorting step, and the space complexity is O(1) if we ignore the space required for sorting."
+Greedy,DEFKIN -Defense of a Kingdom,"1. Problem Summary: In ""DEFKIN - Defense of a Kingdom"", the task is to find the maximum unprotected area on a grid after positioning towers at given coordinates. The grid dimensions and tower positions are provided as input.
+
+2. Approach: The problem can be solved using a greedy approach by focusing on the largest gaps between consecutive towers and between the towers and the grid boundaries. First, sort the tower coordinates separately for x and y. Calculate the maximum gaps between consecutive x-coordinates and y-coordinates of the towers, and also consider the gaps from the grid boundaries to the nearest tower in both directions. The maximum unprotected area will be the product of the largest gap found in the x-direction and the largest gap found in the y-direction.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int T, W, H, n, x, y;
+    cin >> T;
+    while (T--) {
+        cin >> W >> H >> n;
+        if (n == 0) {
+            cout << W * H << endl;
+            continue;
+        }
+        vector<int> X, Y;
+        for (int i = 0; i < n; i++) {
+            cin >> x >> y;
+            X.push_back(x);
+            Y.push_back(y);
+        }
+        sort(X.begin(), X.end());
+        sort(Y.begin(), Y.end());
+        
+        int maxGapX = max(X[0] - 1, W - X[n-1]);
+        int maxGapY = max(Y[0] - 1, H - Y[n-1]);
+        
+        for (int i = 1; i < n; i++) {
+            maxGapX = max(maxGapX, X[i] - X[i-1] - 1);
+            maxGapY = max(maxGapY, Y[i] - Y[i-1] - 1);
+        }
+        
+        cout << maxGapX * maxGapY << endl;
+    }
+    return 0;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n log n) due to sorting, and the space complexity is O(n) for storing tower coordinates."
+Greedy,DIEHARD -DIE HARD,"1. Problem Summary: In the ""DIE HARD"" problem, the goal is to maximize the survival time of the protagonist, Amr, in a hostile environment by choosing between different activities that affect his health and armor in various ways. Each activity can be performed multiple times, but each affects Amr's health and armor differently.
+
+2. Approach: The problem can be approached using a greedy algorithm combined with dynamic programming. We simulate the game by repeatedly choosing the activity that provides the best immediate benefit in terms of extending Amr's survival time. We can use a memoization technique to store the results of subproblems, which are defined by the current state of health and armor. We recursively choose the best option (Air, Water, or Fire) unless both health and armor drop below or equal to zero. The recursion terminates when no valid moves (activities) can be made, and we use memoization to avoid recalculating results for the same health and armor states.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int dp[1001][1001]; // Memoization array
+
+int maxSurvival(int health, int armor, vector<vector<int>>& effects) {
+    if (health <= 0 || armor <= 0) return 0; // Base case: no survival if any is zero or less
+    if (dp[health][armor] != -1) return dp[health][armor]; // Return memoized result
+
+    int max_time = 0;
+    for (auto effect : effects) {
+        int next_health = health + effect[0];
+        int next_armor = armor + effect[1];
+        if (next_health > 0 && next_armor > 0) { // Only consider valid states
+            max_time = max(max_time, 1 + maxSurvival(next_health, next_armor, effects));
+        }
+    }
+
+    return dp[health][armor] = max_time; // Memoize and return
+}
+
+int dieHard(int initial_health, int initial_armor) {
+    memset(dp, -1, sizeof(dp)); // Initialize memoization array
+    vector<vector<int>> effects = {{3, 2}, {-5, -10}, {-20, 5}}; // Effects of Air, Water, Fire
+    return maxSurvival(initial_health, initial_armor, effects);
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n * m * k) where n is the maximum health, m is the maximum armor, and k is the number of activities (3 in this case). The space complexity is O(n * m) due to the memoization array."
+Greedy,GERGOVIA -Wine trading in Gergovia,"1. Problem Summary:
+   In the ""GERGOVIA - Wine trading in Gergovia"" problem, individuals either need or have an excess of wine bottles. The goal is to balance the wine demand and supply across all houses while minimizing the total amount of wine moved between houses. Each house can either demand or supply wine, and the solution must find the minimum total distance wine needs to be moved.
+
+2. Approach:
+   The optimal solution utilizes a greedy approach. Iterate through each house, and for each house, maintain a running total `balance` which represents the net amount of wine that needs to be moved up to that point (positive for excess, negative for demand). For every house, add its wine value to `balance`. If `balance` is positive, it means there's an excess that needs to be moved to the right, and if negative, there's a deficit that needs to be covered by moving wine from the right. The absolute value of `balance` after processing each house gives the total amount of wine moved so far. This approach ensures that we are always making the local optimal choice of satisfying the nearest demand or supply, which leads to a globally optimal solution.
+
+3. Pseudo-code:
+   ```cpp
+   #include <bits/stdc++.h>
+   using namespace std;
+
+   long long calculateMinimumWineMovement(vector<int> houses) {
+       long long balance = 0, totalMovement = 0;
+       for (int wine : houses) {
+           balance += wine;
+           totalMovement += abs(balance);
+       }
+       return totalMovement;
+   }
+
+   int main() {
+       int n;
+       while (cin >> n && n != 0) {
+           vector<int> houses(n);
+           for (int i = 0; i < n; ++i) {
+               cin >> houses[i];
+           }
+           cout << calculateMinimumWineMovement(houses) << endl;
+       }
+       return 0;
+   }
+   ```
+
+4. Time Complexity and Space Complexity:
+   The time complexity is O(n) as it processes each house once, and the space complexity is O(1), not counting the input storage, as it only uses a few additional variables."
+Greedy,Picking Up Chicks,"1. Problem Summary:  
+In the ""Picking Up Chicks"" problem, the goal is to determine the minimum number of swaps needed to ensure that at least `K` chicks out of `N` reach the barn located at position `B` within a given time `T`. Each chick starts at a certain position and has a maximum speed.
+
+2. Approach:  
+The key is to calculate the maximum distance each chick can cover within time `T`, and from there, determine if it can reach the barn. Start by calculating the reachable position for each chick as `initial_position + speed * T`. Sort the chicks based on their reachable positions in descending order. Traverse this sorted list from the highest position, trying to ensure that the top `K` positions are above or equal to `B`. Count how many swaps are necessary for each chick that can reach the barn but is not in the top `K` positions, moving them up to ensure they are within the first `K` positions. If a chick cannot reach the barn, it's not considered further.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int minimumSwaps(vector<int>& positions, vector<int>& speeds, int N, int K, int B, int T) {
+    vector<pair<int, bool>> chicks(N);
+    for (int i = 0; i < N; ++i) {
+        int maxReach = positions[i] + speeds[i] * T;
+        chicks[i] = {maxReach, maxReach >= B};
+    }
+    sort(chicks.rbegin(), chicks.rend()); // Sort by maxReach in descending order
+
+    int swaps = 0, capable = 0, needed = K;
+    for (int i = 0; i < N && needed > 0; ++i) {
+        if (chicks[i].second) {
+            capable++;
+            if (capable > K) break; // More than needed chicks can reach
+            needed--;
+        } else if (needed > 0 && capable < K) {
+            swaps += K - capable;
+            capable++;
+            needed--;
+        }
+    }
+    if (needed > 0) return -1; // Not enough chicks can reach the barn
+    return swaps;
+}
+```
+
+4. Time Complexity and Space Complexity:  
+The time complexity is O(N log N) due to sorting, and the space complexity is O(N) for storing chick data."
+Greedy,CHOCOLA –Chocolate,"1. Problem Summary:
+   The ""CHOCOLA –Chocolate"" problem involves dividing a chocolate bar into 1x1 pieces in a way that minimizes the total cost of cuts. The bar can be cut horizontally or vertically, and each cut has a specific cost.
+
+2. Approach:
+   To solve this problem, use a greedy algorithm that always selects the most expensive cut available. Start by sorting all vertical and horizontal cuts in descending order of cost. Then, iteratively select the highest cost cut while keeping track of how many times each type of cut has been made. Each cut in a direction increases the number of segments in the other direction, which multiplies the cost of subsequent cuts in that direction. Continue this process until all cuts are made.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int minCost(int M, int N, vector<int> &X, vector<int> &Y) {
+    sort(X.rbegin(), X.rend()); // Sort descending
+    sort(Y.rbegin(), Y.rend()); // Sort descending
+
+    int total_cost = 0;
+    int hCuts = 1, vCuts = 1;
+    int i = 0, j = 0;
+
+    while (i < M && j < N) {
+        if (X[i] > Y[j]) {
+            total_cost += X[i] * vCuts;
+            hCuts++; // Increase the number of horizontal pieces
+            i++;
+        } else {
+            total_cost += Y[j] * hCuts;
+            vCuts++; // Increase the number of vertical pieces
+            j++;
+        }
+    }
+
+    // Add remaining cuts
+    while (i < M) {
+        total_cost += X[i] * vCuts;
+        i++;
+    }
+    while (j < N) {
+        total_cost += Y[j] * hCuts;
+        j++;
+    }
+
+    return total_cost;
+}
+```
+
+4. Time Complexity and Space Complexity:
+   The time complexity is O(M log M + N log N) due to sorting, and the space complexity is O(1) as only a few additional variables are used."
+Greedy,ARRANGE -Arranging Amplifiers,"1. Problem Summary: 
+   The ""ARRANGE - Arranging Amplifiers"" problem requires arranging a given list of integers (representing amplifiers' strengths) in a sequence to maximize the resultant multiplication value when each number is raised to the power of the next one in sequence.
+
+2. Approach: 
+   To solve this problem, a greedy strategy is employed. First, sort the amplifiers in descending order since larger numbers will have a more significant exponential impact. However, special attention is needed for the number '1' as it doesn't affect the product when used as a base but can be very useful as an exponent. Therefore, all '1's should be placed at the beginning except when there are three or more '3's, in which case a group of three '3's should precede to maximize the result due to the mathematical property of powers. After arranging '1's and handling the '3's, append the rest of the numbers in descending order.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<int> arrangeAmplifiers(vector<int> amps) {
+    vector<int> ones;
+    vector<int> others;
+    int count3 = 0;
+
+    // Separate 1s and count 3s
+    for (int amp : amps) {
+        if (amp == 1) ones.push_back(1);
+        else {
+            if (amp == 3) count3++;
+            others.push_back(amp);
+        }
+    }
+
+    // Sort non-1 amplifiers in descending order
+    sort(others.begin(), others.end(), greater<int>());
+
+    // Resultant arrangement
+    vector<int> result;
+
+    // Add all ones
+    result.insert(result.end(), ones.begin(), ones.end());
+
+    // Check for the special case of three or more 3's
+    if (count3 >= 3) {
+        for (int i = 0; i < count3; i++) result.push_back(3);
+        // Remove threes from others
+        others.erase(remove(others.begin(), others.end(), 3), others.end());
+    }
+
+    // Add remaining numbers
+    result.insert(result.end(), others.begin(), others.end());
+
+    return result;
+}
+```
+
+4. Time Complexity and Space Complexity: 
+   The time complexity is O(n log n) due to the sorting operation, and the space complexity is O(n) for storing the separated elements and the result."
+Greedy,K Centers Problem,"1. Problem Summary:  
+   The K Centers Problem involves choosing k locations (centers) from a set of n locations in such a way that the maximum distance from any location to its nearest center is minimized. It's a well-known NP-hard problem in combinatorial optimization and facility location.
+
+2. Approach:  
+   The greedy algorithm for the K Centers Problem starts by selecting an arbitrary point as the first center. For each subsequent center, choose the point that is farthest from the nearest center already chosen. This ensures that each new center covers the most distant uncovered points, aiming to minimize the maximum distance any point has to travel to reach a center. The process repeats until all k centers are chosen. This method intuitively spreads out the centers to cover as much area as efficiently as possible.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+vector<int> kCenters(vector<vector<int>>& distances, int k) {
+    int n = distances.size();
+    vector<int> centers;
+    vector<bool> chosen(n, false);
+    int farthest = 0;
+
+    // Start by choosing an arbitrary point as the first center
+    centers.push_back(0);
+    chosen[0] = true;
+
+    for (int i = 1; i < k; ++i) {
+        int maxDist = -1;
+        for (int j = 0; j < n; ++j) {
+            if (!chosen[j]) {
+                int distToNearestCenter = INT_MAX;
+                for (int center : centers) {
+                    distToNearestCenter = min(distToNearestCenter, distances[j][center]);
+                }
+                if (distToNearestCenter > maxDist) {
+                    maxDist = distToNearestCenter;
+                    farthest = j;
+                }
+            }
+        }
+        centers.push_back(farthest);
+        chosen[farthest] = true;
+    }
+    return centers;
+}
+```
+
+4. Time Complexity and Space Complexity:  
+   The time complexity is O(n^2 * k) due to the nested loops over n points for k centers, and the space complexity is O(n) for storing centers and the chosen status of each point."
+Greedy,Minimum Cost of ropes,"1. Problem Summary: The ""Minimum Cost of ropes"" problem involves connecting multiple ropes into one rope. The cost to connect two ropes is equal to the sum of their lengths. The goal is to connect all the ropes with the minimum total cost.
+
+2. Approach: The optimal way to solve this problem is by using a greedy algorithm with a min-heap (priority queue). Start by pushing all rope lengths into the min-heap. Then, repeatedly extract the two smallest ropes, connect them, and push the resulting rope's length back into the heap. The cost of each connection (sum of the two smallest ropes) is added to the total cost. Continue this process until only one rope remains in the heap. This method ensures that the smallest ropes are combined first, minimizing the overall cost.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int minCost(vector<int>& ropes) {
+    priority_queue<int, vector<int>, greater<int>> minHeap(ropes.begin(), ropes.end());
+    int totalCost = 0;
+
+    while (minHeap.size() > 1) {
+        int first = minHeap.top();
+        minHeap.pop();
+        int second = minHeap.top();
+        minHeap.pop();
+
+        int cost = first + second;
+        totalCost += cost;
+        minHeap.push(cost);
+    }
+
+    return totalCost;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n log n), where n is the number of ropes, due to the heap operations. The space complexity is O(n) for storing the ropes in the heap."
+Greedy,Find smallest number with given number of digits and sum of digits,"1. Problem Summary:  
+The task is to find the smallest number that can be formed with a given number of digits (d) and a specific sum of its digits (s). The number should not have leading zeros unless it is zero itself.
+
+2. Approach:  
+To solve this problem using a greedy algorithm, start from the most significant digit and try to make it as small as possible while still being able to achieve the desired sum with the remaining digits. Initialize all digits to zero, except make the most significant digit 1 to avoid leading zeros. Adjust this digit later if necessary. For each digit from the most significant to the least, determine the maximum value it can take (which is min(9, remaining sum of digits)). After assigning the maximum possible value to a digit, reduce the remaining sum accordingly. If the first digit was initially set to 1 and the remaining sum after processing all digits is still positive, increase the first digit by the necessary amount to reach the sum.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+string findSmallestNumber(int d, int s) {
+    if (s == 0) {
+        return d == 1 ? ""0"" : ""-1""; // Special case for zero
+    }
+    if (s > 9 * d) {
+        return ""-1""; // Impossible to achieve the sum with the given number of digits
+    }
+    string result(d, '0'); // Initialize result with d zeros
+    result[0] = '1'; // Avoid leading zero
+    int sumLeft = s - 1; // Adjust sum after setting first digit to 1
+    
+    for (int i = d - 1; i >= 0; i--) {
+        int add = min(9, sumLeft); // Maximum possible value for current digit
+        result[i] += add; // Assign value to the current digit
+        sumLeft -= add; // Decrease remaining sum
+    }
+    
+    if (sumLeft > 0) {
+        result[0] += sumLeft; // Adjust the first digit if there's still some sum left
+    }
+    
+    return result;
+}
+```
+
+4. Time Complexity and Space Complexity:  
+The time complexity is O(d), where d is the number of digits, as we iterate through each digit at most once. The space complexity is O(d) due to storing the result string."
+Greedy,Rearrange characters in a string such that no two adjacent are same,"1. Problem Summary:
+   The problem requires rearranging the characters in a given string so that no two adjacent characters are the same. If it's possible, the rearranged string should be returned; otherwise, indicate that it's not possible.
+
+2. Approach:
+   A greedy algorithm can be employed where characters are picked based on their frequency of occurrence. First, count the occurrences of each character and use a priority queue (max heap) to always select the character with the highest remaining count that isn't the same as the last character placed in the result. Begin by counting each character's frequency, then push these counts into the max heap. Iteratively pull the most frequent character from the heap, decrement its count, and append it to the result string. If the heap ever only contains one character type but its count is greater than 1, it's impossible to rearrange as required, and we should return an indication of failure.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+string rearrangeString(string s) {
+    vector<int> count(26, 0);
+    for (char c : s) count[c - 'a']++;
+    
+    priority_queue<pair<int, char>> maxHeap;
+    for (int i = 0; i < 26; i++) {
+        if (count[i] > 0)
+            maxHeap.push({count[i], i + 'a'});
+    }
+    
+    string result = """";
+    pair<int, char> prev(-1, '#');
+    
+    while (!maxHeap.empty()) {
+        auto [freq, ch] = maxHeap.top();
+        maxHeap.pop();
+        result += ch;
+        
+        if (prev.first > 0)
+            maxHeap.push(prev);
+        
+        prev = {freq - 1, ch};
+    }
+    
+    if (result.length() != s.length()) return ""Not possible"";
+    return result;
+}
+```
+
+4. Time Complexity and Space Complexity:
+   The time complexity is O(n log k) where n is the length of the string and k is the number of distinct characters (at most 26), and the space complexity is O(k) for storing the characters in the heap and count array."
+Greedy,Find maximum sum possible equal sum of three stacks,"1. Problem Summary: The problem involves finding the maximum sum that can be obtained by popping elements from the tops of three stacks such that the sum of the heights (values) of the three stacks is equal. 
+
+2. Approach: The optimal solution uses a greedy approach by iteratively reducing the stack with the highest current sum until all three stacks have the same sum. Start by calculating the initial sums of all three stacks. Then, in a loop, identify the stack with the highest sum and pop the top element from it, updating the sum of that stack accordingly. Repeat this process until all three stack sums are equal or any stack becomes empty. This approach ensures that we are always working towards equalizing the sums by reducing the largest discrepancy.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+int maxEqualSum(vector<int>& stack1, vector<int>& stack2, vector<int>& stack3) {
+    int sum1 = accumulate(stack1.begin(), stack1.end(), 0);
+    int sum2 = accumulate(stack2.begin(), stack2.end(), 0);
+    int sum3 = accumulate(stack3.begin(), stack3.end(), 0);
+    
+    int index1 = 0, index2 = 0, index3 = 0;
+    while (index1 < stack1.size() && index2 < stack2.size() && index3 < stack3.size()) {
+        if (sum1 == sum2 && sum2 == sum3)
+            return sum1;
+        if (sum1 >= sum2 && sum1 >= sum3)
+            sum1 -= stack1[index1++];
+        else if (sum2 >= sum1 && sum2 >= sum3)
+            sum2 -= stack2[index2++];
+        else
+            sum3 -= stack3[index3++];
+    }
+    return 0;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n1 + n2 + n3), where n1, n2, and n3 are the sizes of the three stacks. The space complexity is O(1) since no additional space is used apart from variables."

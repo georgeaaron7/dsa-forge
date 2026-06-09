@@ -1,0 +1,317 @@
+TOPIC,PROBLEM LINK,SOLUTION
+Trie,Construct a trie from scratch,"1. Problem Summary:  
+   The task involves constructing a trie (prefix tree) for efficiently storing and searching strings. The trie should support operations like insert, search, and startsWith (to check if any word in the trie starts with a given prefix).
+
+2. Approach:  
+   A trie is built using a tree-like data structure where each node represents a single character of the keys. The root node is empty. For insertion, start from the root and for each character in the string, move to the corresponding child node or create a new child node if it doesn't exist. Mark the end of a string with a special end-of-word marker. For searching, traverse the trie based on the string's characters. If you can traverse the trie exactly according to the characters of the string and find the end-of-word marker, the string exists in the trie. For startsWith, the process is similar to search but does not require finding the end-of-word marker.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+struct TrieNode {
+    map<char, TrieNode*> children;
+    bool endOfWord;
+
+    TrieNode() : endOfWord(false) {}
+};
+
+class Trie {
+public:
+    TrieNode* root;
+
+    Trie() {
+        root = new TrieNode();
+    }
+
+    void insert(string word) {
+        TrieNode* current = root;
+        for (char ch : word) {
+            if (current->children.find(ch) == current->children.end())
+                current->children[ch] = new TrieNode();
+            current = current->children[ch];
+        }
+        current->endOfWord = true;
+    }
+
+    bool search(string word) {
+        TrieNode* current = root;
+        for (char ch : word) {
+            if (current->children.find(ch) == current->children.end())
+                return false;
+            current = current->children[ch];
+        }
+        return current->endOfWord;
+    }
+
+    bool startsWith(string prefix) {
+        TrieNode* current = root;
+        for (char ch : prefix) {
+            if (current->children.find(ch) == current->children.end())
+                return false;
+            current = current->children[ch];
+        }
+        return true;
+    }
+};
+```
+
+4. Time Complexity and Space Complexity:  
+   The time complexity for insert, search, and startsWith operations is O(L), where L is the length of the word or prefix. The space complexity is O(N * L), where N is the number of keys in trie, as each node might contain a map with entries for each character of the alphabet."
+Trie,Find shortest unique prefix for every word in a given list,"1. Problem Summary:
+   The problem is to find the shortest unique prefix for every word in a given list of words, ensuring that no prefix is a prefix of another word from the list.
+
+2. Approach:
+   To solve this, we can use a Trie (prefix tree). First, insert all the words into the Trie, while counting how many times each node (character in the Trie) is visited during the insertions. This count helps in identifying if the current path (or prefix) is unique. After building the Trie, traverse it to find the shortest unique prefix for each word. Start from the root and move down, choosing the path where the count is exactly one (indicating uniqueness). Stop when you reach a node where the count is one, as this node represents the end of the shortest unique prefix for the word being checked.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+struct TrieNode {
+    map<char, TrieNode*> children;
+    int count = 0;  // to track the number of times a node is visited
+};
+
+void insert(TrieNode* root, const string& word) {
+    TrieNode* node = root;
+    for (char ch : word) {
+        if (!node->children.count(ch)) {
+            node->children[ch] = new TrieNode();
+        }
+        node = node->children[ch];
+        node->count++;
+    }
+}
+
+string findUniquePrefix(TrieNode* root, const string& word) {
+    string prefix = """";
+    TrieNode* node = root;
+    for (char ch : word) {
+        if (node->children[ch]->count == 1) {
+            prefix += ch;
+            break;
+        }
+        prefix += ch;
+        node = node->children[ch];
+    }
+    return prefix;
+}
+
+vector<string> shortestUniquePrefixes(vector<string>& words) {
+    TrieNode* root = new TrieNode();
+    for (const string& word : words) {
+        insert(root, word);
+    }
+
+    vector<string> uniquePrefixes;
+    for (const string& word : words) {
+        uniquePrefixes.push_back(findUniquePrefix(root, word));
+    }
+    return uniquePrefixes;
+}
+```
+
+4. Time Complexity and Space Complexity:
+   The time complexity is O(N*L) and the space complexity is O(N*L), where N is the number of words and L is the average length of the words, assuming a fixed alphabet size."
+Trie,Word Break Problem | (Trie solution),"1. Problem Summary: The Word Break Problem involves determining if a given string can be segmented into space-separated words from a dictionary. A trie is used to store the dictionary for efficient querying.
+
+2. Approach: The solution involves constructing a trie data structure to store all words from the dictionary for efficient prefix matching. Start by inserting all dictionary words into the trie. Then, use dynamic programming to check each substring of the input string. For each position in the string, use the trie to check if the substring starting from this position to any other position forms a valid word in the dictionary. If a valid word is found, mark the end of this word in a boolean array (dp) indicating that the string up to this point can be segmented. The final answer will be determined by the value in dp at the end of the string.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+struct TrieNode {
+    TrieNode* children[26];
+    bool isEndOfWord;
+    
+    TrieNode() {
+        for (int i = 0; i < 26; ++i) children[i] = nullptr;
+        isEndOfWord = false;
+    }
+};
+
+void insert(TrieNode* root, string key) {
+    TrieNode* pCrawl = root;
+    for (int i = 0; i < key.length(); i++) {
+        int index = key[i] - 'a';
+        if (!pCrawl->children[index])
+            pCrawl->children[index] = new TrieNode();
+        pCrawl = pCrawl->children[index];
+    }
+    pCrawl->isEndOfWord = true;
+}
+
+bool wordBreak(string s, vector<string>& wordDict) {
+    TrieNode* root = new TrieNode();
+    for (string word : wordDict)
+        insert(root, word);
+    
+    int n = s.length();
+    vector<bool> dp(n + 1, false);
+    dp[0] = true;
+
+    for (int i = 0; i < n; i++) {
+        if (dp[i]) {
+            TrieNode* pCrawl = root;
+            for (int j = i; j < n; j++) {
+                int index = s[j] - 'a';
+                if (!pCrawl->children[index]) break;
+                pCrawl = pCrawl->children[index];
+                if (pCrawl->isEndOfWord)
+                    dp[j + 1] = true;
+            }
+        }
+    }
+    return dp[n];
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n^2) in the worst case scenario, where n is the length of the input string. The space complexity is O(m*k + n), where m is the total number of words in the dictionary and k is the average length of these words, plus n for the dp array."
+Trie,"Given a sequence of words, print all anagrams together","1. Problem Summary: The problem involves grouping all anagrams from a given list of words. Anagrams are words that can be formed by rearranging the letters of another word.
+
+2. Approach: The optimal way to solve this problem is by using a hash map where each key is a sorted version of the word, and the value is a list of words that are anagrams of each other. Start by iterating over each word in the list, sort the characters of the word to form a key, and then append the original word to the corresponding list in the hash map. Finally, iterate over the hash map to output all groups of anagrams. This approach is intuitive as sorting brings all anagrams under the same key, making it easier to group them.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+void printAnagramsTogether(const vector<string>& words) {
+    unordered_map<string, vector<string>> map;
+    for (const string& word : words) {
+        string sortedWord = word;
+        sort(sortedWord.begin(), sortedWord.end());
+        map[sortedWord].push_back(word);
+    }
+    for (const auto& entry : map) {
+        for (const string& anagram : entry.second) {
+            cout << anagram << "" "";
+        }
+        cout << endl;
+    }
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n * k log k), where n is the number of words and k is the maximum length of a word. Space complexity is O(n * k), accounting for the storage of the words in the hash map."
+Trie,Implement a Phone Directory,"1. Problem Summary: Implement a phone directory that supports efficient insertion and search of contact names. The directory should be able to return suggestions based on a prefix of a contact name.
+
+2. Approach: Use a Trie (prefix tree) to store the contact names, which provides efficient storage and retrieval capabilities. Each node in the Trie represents a character of the contact name and has links to other nodes for the next characters. Insertion involves traversing the Trie from the root, following the path of the contact name's characters, and creating new nodes when necessary. For searching or suggesting contacts based on a prefix, traverse the Trie according to the prefix and then perform a depth-first search (DFS) from the end of the prefix to gather all names that share the same prefix. This approach leverages the hierarchical structure of the Trie to quickly zero in on the relevant subtree and collect suggestions.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+struct TrieNode {
+    map<char, TrieNode*> children;
+    bool isEndOfWord;
+    TrieNode() : isEndOfWord(false) {}
+};
+
+class PhoneDirectory {
+private:
+    TrieNode* root;
+
+    void insert(string word) {
+        TrieNode* current = root;
+        for (char c : word) {
+            if (current->children.find(c) == current->children.end())
+                current->children[c] = new TrieNode();
+            current = current->children[c];
+        }
+        current->isEndOfWord = true;
+    }
+
+    void searchSuggestions(TrieNode* node, string prefix, vector<string>& results) {
+        if (node->isEndOfWord) {
+            results.push_back(prefix);
+        }
+        for (auto child : node->children) {
+            searchSuggestions(child.second, prefix + child.first, results);
+        }
+    }
+
+public:
+    PhoneDirectory() {
+        root = new TrieNode();
+    }
+
+    void addContact(string contact) {
+        insert(contact);
+    }
+
+    vector<string> getContacts(string query) {
+        TrieNode* current = root;
+        vector<string> results;
+        for (char c : query) {
+            if (current->children.find(c) == current->children.end())
+                return results;
+            current = current->children[c];
+        }
+        searchSuggestions(current, query, results);
+        return results;
+    }
+};
+```
+
+4. Time Complexity and Space Complexity: Time complexity for insertion and search operations is O(L), where L is the length of the word or query. Space complexity is O(N * K), where N is the number of contacts and K is the average length of a contact name."
+Trie,Print unique rows in a given boolean matrix,"1. Problem Summary: The problem is to identify and print all unique rows from a given boolean matrix. Each row in the matrix can be treated as a binary string.
+
+2. Approach: A Trie (prefix tree) data structure is well-suited for this task due to its efficient prefix checking capabilities. Begin by initializing an empty Trie. For each row in the matrix, attempt to insert the row into the Trie. If the row is already present, it's a duplicate and can be skipped; otherwise, insert the row into the Trie and print it. This ensures that each unique row is printed exactly once. The Trie nodes can be structured to have two children (representing binary 0 and 1), and a boolean flag that indicates whether a node corresponds to the end of a row in the matrix.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+struct TrieNode {
+    TrieNode* children[2];
+    bool isEndOfRow;
+    TrieNode() {
+        for (int i = 0; i < 2; ++i)
+            children[i] = nullptr;
+        isEndOfRow = false;
+    }
+};
+
+bool insertAndCheckUnique(TrieNode* root, vector<int>& row) {
+    TrieNode* node = root;
+    bool isNewRow = false;
+    for (int value : row) {
+        if (!node->children[value]) {
+            node->children[value] = new TrieNode();
+            isNewRow = true;
+        }
+        node = node->children[value];
+    }
+    if (!node->isEndOfRow) {
+        node->isEndOfRow = true;
+        isNewRow = true;
+    }
+    return isNewRow;
+}
+
+void printUniqueRows(vector<vector<int>>& matrix) {
+    TrieNode* root = new TrieNode();
+    for (vector<int>& row : matrix) {
+        if (insertAndCheckUnique(root, row)) {
+            for (int value : row)
+                cout << value << "" "";
+            cout << endl;
+        }
+    }
+}
+
+int main() {
+    vector<vector<int>> matrix = {{1, 0, 0}, {1, 0, 0}, {0, 1, 0}, {1, 1, 1}};
+    printUniqueRows(matrix);
+    return 0;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(M * N) where M is the number of rows and N is the number of columns, as each row is processed in linear time. The space complexity is O(M * N) in the worst case, when all rows are unique, to store the Trie."

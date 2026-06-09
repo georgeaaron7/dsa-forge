@@ -1,0 +1,807 @@
+TOPIC,PROBLEM LINK,SOLUTION
+BackTracking,Rat in a maze Problem,"1. Problem Summary: In the ""Rat in a Maze"" problem, a rat starts from the top-left corner of a grid and must find a path to the bottom-right corner. The grid cells can either be open (1) or blocked (0).
+
+2. Approach: The solution involves using backtracking, a recursive technique, to explore all possible paths until the destination is reached or all paths are exhausted. Starting from the initial position (0,0), the algorithm moves either right or down if the move leads to a valid and open cell. If a move results in a dead-end (no further moves possible), it backtracks to explore new paths from previous positions. The path is tracked using a solution matrix where the path from the source to the destination is marked. This approach ensures that all potential paths are explored, leveraging recursion for depth-first search traversal of the maze.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+bool isSafe(int x, int y, vector<vector<int>>& maze, vector<vector<int>>& solution) {
+    return (x >= 0 && x < maze.size() && y >= 0 && y < maze[0].size() && maze[x][y] == 1 && solution[x][y] == 0);
+}
+
+bool solveMazeUtil(vector<vector<int>>& maze, int x, int y, vector<vector<int>>& solution) {
+    if (x == maze.size() - 1 && y == maze[0].size() - 1 && maze[x][y] == 1) {
+        solution[x][y] = 1;
+        return true;
+    }
+
+    if (isSafe(x, y, maze, solution)) {
+        solution[x][y] = 1;
+        if (solveMazeUtil(maze, x + 1, y, solution))
+            return true;
+        if (solveMazeUtil(maze, x, y + 1, solution))
+            return true;
+        solution[x][y] = 0; // backtrack
+    }
+    return false;
+}
+
+bool solveMaze(vector<vector<int>>& maze) {
+    vector<vector<int>> solution(maze.size(), vector<int>(maze[0].size(), 0));
+    if (!solveMazeUtil(maze, 0, 0, solution))
+        return false;
+    // Print solution or return it
+    return true;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(2^(n*m)) due to the recursive exploration of every path, and the space complexity is O(n*m) for the solution matrix and the recursion stack."
+BackTracking,Printing all solutions in N-Queen Problem,"1. Problem Summary: The N-Queens problem involves placing N chess queens on an N×N chessboard so that no two queens threaten each other. The challenge is to find all possible configurations.
+
+2. Approach: The solution uses backtracking to explore all possible placements of queens on the board, row by row. Start by placing a queen in a valid position in the first row, then move to the next row. For each row, check for all columns if placing a queen there is safe (i.e., no other queen in the same column, diagonal, or anti-diagonal). If safe, place the queen and move to the next row. If a row is completed, save the configuration and backtrack to explore new possibilities by removing the last placed queen and shifting it to the next valid position. Continue this until all rows are examined. Use three arrays to track columns and two types of diagonals for quick safety checks.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+void solveNQueens(int n) {
+    vector<string> board(n, string(n, '.'));
+    vector<vector<string>> solutions;
+    vector<bool> cols(n, false), diag1(2*n, false), diag2(2*n, false);
+    function<void(int)> backtrack = [&](int row) {
+        if (row == n) {
+            solutions.push_back(board);
+            return;
+        }
+        for (int col = 0; col < n; col++) {
+            if (!cols[col] && !diag1[row + col] && !diag2[row - col + n]) {
+                board[row][col] = 'Q';
+                cols[col] = diag1[row + col] = diag2[row - col + n] = true;
+                backtrack(row + 1);
+                board[row][col] = '.';
+                cols[col] = diag1[row + col] = diag2[row - col + n] = false;
+            }
+        }
+    };
+    backtrack(0);
+    for (auto &solution : solutions) {
+        for (auto &line : solution) cout << line << ""\n"";
+        cout << ""\n"";
+    }
+}
+
+int main() {
+    int n;
+    cin >> n;
+    solveNQueens(n);
+    return 0;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(N!), as we explore each row by potentially placing a queen in every column, and the space complexity is O(N) for storing the state of the board and the recursion stack."
+BackTracking,Word Break Problem using Backtracking,"1. Problem Summary: The Word Break Problem involves determining if a given string can be segmented into space-separated words from a provided dictionary. The challenge is to use all characters of the string exactly once.
+
+2. Approach: The optimal approach uses backtracking to explore all possible ways to segment the string. Start from the beginning of the string and attempt to form substrings. For each substring, check if it exists in the dictionary. If it does, recursively attempt to segment the remaining part of the string. If a valid segmentation is found, return true. Use backtracking to undo the last segmentation and try a different segmentation if the current path does not lead to a solution. This approach helps in visualizing the problem as finding a path through a tree of substring options, where each valid path represents a possible segmentation.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+bool wordBreakHelper(const string &s, int start, unordered_set<string>& dict) {
+    if (start == s.length()) return true;
+    
+    for (int end = start + 1; end <= s.length(); end++) {
+        string word = s.substr(start, end - start);
+        if (dict.find(word) != dict.end() && wordBreakHelper(s, end, dict))
+            return true;
+    }
+    return false;
+}
+
+bool wordBreak(const string &s, vector<string>& wordDict) {
+    unordered_set<string> dict(wordDict.begin(), wordDict.end());
+    return wordBreakHelper(s, 0, dict);
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n^2) in the best case and O(2^n) in the worst case due to the recursive calls, where n is the length of the string. Space complexity is O(n) due to the recursion depth."
+BackTracking,Remove Invalid Parentheses,"1. Problem Summary:
+   The ""Remove Invalid Parentheses"" problem requires removing the minimum number of invalid parentheses (either opening or closing) to make the input string valid. A string is valid if open parentheses are closed by the corresponding close parentheses correctly.
+
+2. Approach:
+   The optimal approach uses backtracking to explore all possibilities by either including or excluding each parenthesis. Begin by determining the number of misplaced opening and closing parentheses. Use a recursive function that, at each step, decides to either keep the current parenthesis or drop it, ensuring not to drop more than the misplaced count. When the end of the string is reached, if the constructed string is valid and all misplaced parentheses are removed, add it to the results. Use a set to avoid duplicate results. This method ensures that all combinations are considered, and only the minimum removals are performed to validate the string.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+void removeInvalidParenthesesHelper(string s, int index, int leftCount, int rightCount, int leftRem, int rightRem, string path, unordered_set<string>& validExpressions) {
+    if (index == s.length()) {
+        if (leftRem == 0 && rightRem == 0) {
+            validExpressions.insert(path);
+        }
+        return;
+    }
+
+    char current = s[index];
+    if ((current == '(' && leftRem > 0) || (current == ')' && rightRem > 0)) {
+        // Recurse by removing the current character
+        removeInvalidParenthesesHelper(s, index + 1, leftCount, rightCount, leftRem - (current == '('), rightRem - (current == ')'), path, validExpressions);
+    }
+
+    if (current != '(' && current != ')') {
+        // Add the character to the path if it's not a parenthesis
+        path += current;
+        removeInvalidParenthesesHelper(s, index + 1, leftCount, rightCount, leftRem, rightRem, path, validExpressions);
+    } else if (current == '(') {
+        // Add '(' to the path and recurse
+        removeInvalidParenthesesHelper(s, index + 1, leftCount + 1, rightCount, leftRem, rightRem, path + current, validExpressions);
+    } else if (current == ')' && leftCount > rightCount) {
+        // Add ')' to the path and recurse
+        removeInvalidParenthesesHelper(s, index + 1, leftCount, rightCount + 1, leftRem, rightRem, path + current, validExpressions);
+    }
+}
+
+vector<string> removeInvalidParentheses(string s) {
+    int leftRem = 0, rightRem = 0;
+    for (char c : s) {
+        if (c == '(') {
+            leftRem++;
+        } else if (c == ')') {
+            if (leftRem > 0) {
+                leftRem--;
+            } else {
+                rightRem++;
+            }
+        }
+    }
+
+    unordered_set<string> validExpressions;
+    removeInvalidParenthesesHelper(s, 0, 0, 0, leftRem, rightRem, """", validExpressions);
+    return vector<string>(validExpressions.begin(), validExpressions.end());
+}
+```
+
+4. Time Complexity and Space Complexity:
+   The time complexity is O(2^n) due to the branching at each step of the recursion, and the space complexity is O(n) due to the recursion depth and path storage."
+BackTracking,Sudoku Solver,"1. Problem Summary:  
+   The Sudoku Solver problem involves filling a 9x9 grid with digits so that each column, each row, and each of the nine 3x3 subgrids that compose the grid contain all of the digits from 1 to 9. The challenge is to complete the grid from a given partially filled configuration.
+
+2. Approach:  
+   The optimal approach to solve the Sudoku puzzle is using backtracking, a depth-first search algorithm. The algorithm attempts to place numbers in the empty cells one by one, checking the constraints of the Sudoku game: no repeated numbers in any row, column, or 3x3 subgrid. If placing a number violates a constraint, the algorithm backtracks, replacing the previous number with another valid choice, and continues. This process is repeated until the entire grid is correctly filled or no solution is found. The key to efficient backtracking in this context is to quickly check the validity of each number placed, using helper functions or data structures.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+bool isValid(vector<vector<char>>& board, int row, int col, char num) {
+    for (int i = 0; i < 9; i++) {
+        if (board[row][i] == num || board[i][col] == num) return false;
+        if (board[3 * (row / 3) + i / 3][3 * (col / 3) + i % 3] == num) return false;
+    }
+    return true;
+}
+
+bool solveSudokuHelper(vector<vector<char>>& board, int row, int col) {
+    if (row == 9) return true;
+    if (col == 9) return solveSudokuHelper(board, row + 1, 0);
+    if (board[row][col] != '.') return solveSudokuHelper(board, row, col + 1);
+
+    for (char num = '1'; num <= '9'; num++) {
+        if (isValid(board, row, col, num)) {
+            board[row][col] = num;
+            if (solveSudokuHelper(board, row, col + 1)) return true;
+            board[row][col] = '.';
+        }
+    }
+    return false;
+}
+
+void solveSudoku(vector<vector<char>>& board) {
+    solveSudokuHelper(board, 0, 0);
+}
+```
+
+4. Time Complexity and Space Complexity:  
+   The time complexity is O(9^(n^2)) in the worst case, where n is the size of the grid (9 for a standard Sudoku), as each empty cell can potentially take any of the 9 values and the algorithm explores all possibilities. The space complexity is O(n^2) due to the recursion stack depth in the worst case."
+BackTracking,m Coloring Problem,"1. Problem Summary: The m Coloring Problem is about determining if it's possible to color the vertices of a graph using at most m colors such that no two adjacent vertices share the same color. This problem is a classic example of a constraint satisfaction problem used in various applications like scheduling and partitioning.
+
+2. Approach: The m Coloring Problem can be solved using a backtracking approach. The algorithm tries to assign colors to each vertex one by one and checks for the validity of the color assignment (i.e., no two adjacent vertices should have the same color). If a valid color assignment is found for a vertex, the algorithm recursively assigns colors to the next vertex. If no valid color can be assigned, the algorithm backtracks by removing the last color assigned and tries the next color. This process continues until all vertices are colored with valid colors, or it is determined that no such coloring is possible.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+bool isSafe(int v, vector<int> graph[], int color[], int c) {
+    for (auto adj : graph[v])
+        if (color[adj] == c)
+            return false;
+    return true;
+}
+
+bool graphColoringUtil(vector<int> graph[], int m, int color[], int v, int V) {
+    if (v == V)
+        return true;
+
+    for (int c = 1; c <= m; c++) {
+        if (isSafe(v, graph, color, c)) {
+            color[v] = c;
+            if (graphColoringUtil(graph, m, color, v + 1, V))
+                return true;
+            color[v] = 0;
+        }
+    }
+    return false;
+}
+
+bool graphColoring(vector<int> graph[], int m, int V) {
+    int *color = new int[V];
+    memset(color, 0, sizeof(int) * V);
+    if (graphColoringUtil(graph, m, color, 0, V))
+        return true;
+    return false;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(m^V), where m is the number of colors and V is the number of vertices, as in the worst case, each vertex might be tried with all m colors. The space complexity is O(V) due to the color array used to store colors of vertices."
+BackTracking,Print all palindromic partitions of a string,"1. Problem Summary: The problem requires generating all possible ways to partition a given string such that every substring in the partition is a palindrome. A palindrome is a string that reads the same forward and backward.
+
+2. Approach: The solution employs a backtracking technique to explore all potential partitions and check if they form palindromic substrings. Starting from the first character, the algorithm recursively tries to extend each possible palindromic substring. If a substring is identified as palindromic, it is added to the current partition set, and the function recurses with the remaining substring. After exploring all possibilities with the current palindromic substring, the algorithm backtracks to explore other potential partitions. This approach ensures all palindromic partitions are found by checking each substring and recursively proceeding with the remainder of the string.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+void printPalindromicPartitions(string s, vector<string>& path, int index) {
+    if (index == s.size()) {
+        for (string p : path) cout << p << "" "";
+        cout << endl;
+        return;
+    }
+
+    for (int i = index; i < s.size(); i++) {
+        if (isPalindrome(s, index, i)) {
+            path.push_back(s.substr(index, i - index + 1));
+            printPalindromicPartitions(s, path, i + 1);
+            path.pop_back();
+        }
+    }
+}
+
+bool isPalindrome(const string& s, int start, int end) {
+    while (start < end) {
+        if (s[start++] != s[end--]) return false;
+    }
+    return true;
+}
+
+int main() {
+    string s = ""aab"";
+    vector<string> path;
+    printPalindromicPartitions(s, path, 0);
+    return 0;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n*2^n) due to checking each substring for palindrome properties and generating partitions, and the space complexity is O(n) for recursive call stack depth and path storage."
+BackTracking,Subset Sum Problem,"1. Problem Summary: The Subset Sum Problem is a classic problem in computer science where given a set of integers and a target sum, the task is to determine if there exists a subset of the given set whose sum equals the target sum.
+
+2. Approach: The optimal approach to solve the Subset Sum Problem is using backtracking, which explores all possible subsets recursively. Starting from an empty subset, we recursively decide to either include or exclude each element. If the current subset's sum matches the target, we return true. If we finish considering all elements without finding such a subset, we return false. This approach is intuitive as it mimics the decision-making process: at each step, decide whether to include an element in the current subset or not, akin to navigating a binary tree.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+bool isSubsetSum(vector<int>& nums, int n, int sum) {
+    if (sum == 0) return true;
+    if (n == 0) return false;
+
+    if (nums[n-1] > sum)
+        return isSubsetSum(nums, n-1, sum);
+
+    return isSubsetSum(nums, n-1, sum) || isSubsetSum(nums, n-1, sum - nums[n-1]);
+}
+
+// Usage
+int main() {
+    vector<int> nums = {3, 34, 4, 12, 5, 2};
+    int sum = 9;
+    int n = nums.size();
+    if (isSubsetSum(nums, n, sum))
+        cout << ""Found a subset with given sum"";
+    else
+        cout << ""No subset with given sum"";
+    return 0;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(2^n) due to the exploration of all subsets, and the space complexity is O(n) due to the recursion stack depth."
+BackTracking,The Knight’s tour problem,"1. Problem Summary: The Knight’s tour problem involves finding a sequence of moves for a knight on a chessboard such that the knight visits every square exactly once. The problem can be solved on any n x n board, although typically it is demonstrated on an 8x8 board.
+
+2. Approach: The optimal approach to solve the Knight's tour problem is by using backtracking, a recursive algorithm that tries to build a solution incrementally, abandoning a path as soon as it determines that this path cannot possibly lead to a complete solution. Begin by placing the knight on any square and attempt to perform a legal move to an unvisited square. Use a heuristic like Warnsdorff's rule to prioritize moves that have the fewest onward moves, which helps in reducing the search space. If a move leads to a situation where no further legal moves are possible and not all squares are visited, backtrack and try the next possible move.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+#define N 8
+
+int solveKTUtil(int x, int y, int movei, int sol[N][N], int xMove[N], int yMove[N]);
+
+// Function to check if i,j are valid indexes for N*N chessboard
+bool isSafe(int x, int y, int sol[N][N]) {
+    return (x >= 0 && x < N && y >= 0 && y < N && sol[x][y] == -1);
+}
+
+// Utility function to solve the Knight Tour problem using Backtracking
+int solveKT() {
+    int sol[N][N];
+
+    // Initialization of solution matrix
+    for (int x = 0; x < N; x++)
+        for (int y = 0; y < N; y++)
+            sol[x][y] = -1;
+
+    // xMove[] and yMove[] define the next move of Knight.
+    // xMove[] is for next value of x coordinate
+    // yMove[] is for next value of y coordinate
+    int xMove[8] = {2, 1, -1, -2, -2, -1, 1, 2};
+    int yMove[8] = {1, 2, 2, 1, -1, -2, -2, -1};
+
+    // Start from 0,0 and explore all tours using solveKTUtil()
+    sol[0][0] = 0; // Start from this position
+
+    if (solveKTUtil(0, 0, 1, sol, xMove, yMove) == 0) {
+        cout << ""Solution does not exist"";
+        return 0;
+    } else {
+        // Print the solution here
+    }
+
+    return 1;
+}
+
+// A recursive utility function to solve Knight Tour problem
+int solveKTUtil(int x, int y, int movei, int sol[N][N], int xMove[N], int yMove[N]) {
+    int k, next_x, next_y;
+    if (movei == N*N)
+        return 1;
+
+    // Try all next moves from the current coordinate x, y
+    for (k = 0; k < 8; k++) {
+        next_x = x + xMove[k];
+        next_y = y + yMove[k];
+        if (isSafe(next_x, next_y, sol)) {
+            sol[next_x][next_y] = movei;
+            if (solveKTUtil(next_x, next_y, movei+1, sol, xMove, yMove) == 1)
+                return 1;
+            else
+                sol[next_x][next_y] = -1; // Backtracking
+        }
+    }
+    return 0;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity of the Knight’s tour problem using backtracking is O(8^(N^2)) since each cell has at most 8 possible moves. The space complexity is O(N^2) due to the storage of the solution matrix and the recursion stack."
+BackTracking,Tug of War,"1. Problem Summary: The ""Tug of War"" problem involves dividing a set of numbers into two groups such that the absolute difference between their sums is minimized. Each group must either have `n/2` elements or `n/2 + 1` elements if `n` is odd.
+
+2. Approach: The problem is approached using backtracking by considering each element and deciding whether to include it in the first group or not, ensuring the sizes of the groups are as required. Start by initializing variables for current index, current elements in the first group, and their sum. Recursively explore both possibilities: adding the current element to the first group or skipping it. If the group sizes are met, calculate the difference in sums and update the minimum difference found. The use of backtracking allows exploring all possible ways to split the set, ensuring the solution is optimal.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+void findMinDifference(vector<int>& arr, int n, int idx, vector<int>& currentSet, int setSum, int totalSum, int& minDiff) {
+    if (currentSet.size() > (n+1)/2) return; // More than half, return
+    if (idx == n) {
+        if (currentSet.size() == n/2 || currentSet.size() == (n+1)/2) {
+            int otherSetSum = totalSum - setSum;
+            minDiff = min(minDiff, abs(setSum - otherSetSum));
+        }
+        return;
+    }
+    // Include current element in the set
+    currentSet.push_back(arr[idx]);
+    findMinDifference(arr, n, idx+1, currentSet, setSum + arr[idx], totalSum, minDiff);
+    // Exclude the current element from the set
+    currentSet.pop_back();
+    findMinDifference(arr, n, idx+1, currentSet, setSum, totalSum, minDiff);
+}
+
+int tugOfWar(vector<int>& arr) {
+    int totalSum = accumulate(arr.begin(), arr.end(), 0);
+    vector<int> currentSet;
+    int minDiff = INT_MAX;
+    findMinDifference(arr, arr.size(), 0, currentSet, 0, totalSum, minDiff);
+    return minDiff;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(2^n) due to the exponential number of subsets generated, and the space complexity is O(n) for recursive stack space."
+BackTracking,Find shortest safe route in a path with landmines,"1. Problem Summary: The problem involves finding the shortest safe route through a grid filled with landmines. Each cell in the grid can either be a landmine (0) or safe (1), and you cannot step on a landmine. The task is to move from the leftmost column to the rightmost column safely.
+
+2. Approach: Use a backtracking approach combined with BFS to explore all possible safe paths from the leftmost to the rightmost column. First, preprocess the grid to mark all cells that are unsafe or indirectly affected by landmines (i.e., adjacent cells in all four directions of a landmine). Starting from each safe cell in the first column, use BFS to explore paths to the last column, marking visited cells to avoid cycles. Utilize a queue to store cells along with their path lengths. For each cell, check all four possible directions (up, down, left, right), and continue if the next cell is safe and unvisited.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<pair<int, int>> directions = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+
+void preprocessGrid(vector<vector<int>>& grid) {
+    int rows = grid.size(), cols = grid[0].size();
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            if (grid[i][j] == 0) {
+                for (auto dir : directions) {
+                    int x = i + dir.first, y = j + dir.second;
+                    if (x >= 0 && x < rows && y >= 0 && y < cols && grid[x][y] == 1)
+                        grid[x][y] = -1;
+                }
+            }
+        }
+    }
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            if (grid[i][j] == -1) grid[i][j] = 0;
+        }
+    }
+}
+
+int findShortestPath(vector<vector<int>>& grid) {
+    preprocessGrid(grid);
+    int rows = grid.size(), cols = grid[0].size();
+    queue<pair<int, int>> q;
+    vector<vector<bool>> visited(rows, vector<bool>(cols, false));
+
+    // Enqueue all safe cells from the first column
+    for (int i = 0; i < rows; i++)
+        if (grid[i][0] == 1) {
+            q.push({i, 0});
+            visited[i][0] = true;
+        }
+
+    int pathLength = 0;
+    while (!q.empty()) {
+        int size = q.size();
+        pathLength++;
+        while (size--) {
+            auto [r, c] = q.front(); q.pop();
+            if (c == cols - 1) return pathLength - 1; // Reached last column
+            for (auto dir : directions) {
+                int nr = r + dir.first, nc = c + dir.second;
+                if (nr >= 0 && nr < rows && nc >= 0 && nc < cols && grid[nr][nc] == 1 && !visited[nr][nc]) {
+                    visited[nr][nc] = true;
+                    q.push({nr, nc});
+                }
+            }
+        }
+    }
+    return -1; // No path found
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(R*C) and the space complexity is also O(R*C), where R is the number of rows and C is the number of columns in the grid."
+BackTracking,Combinational Sum,"1. Problem Summary: 
+   The ""Combinational Sum"" problem involves finding all unique combinations in a given set of candidate numbers that sum to a target number. The same number may be chosen from the candidate set an unlimited number of times.
+
+2. Approach: 
+   Use a backtracking approach to explore all potential combinations. Start by sorting the candidate array to facilitate pruning of branches in the recursion tree. For each element in the candidates, recursively try to build a combination that sums to the target. If the sum of the current combination exceeds the target, stop exploring further. If it matches the target, add it to the result. Backtrack by removing the last added element and try the next possibility. This approach efficiently explores all valid combinations by avoiding unnecessary computations and repeated combinations.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+void findCombinations(int idx, vector<int>& candidates, int target, vector<int>& current, vector<vector<int>>& result) {
+    if (target == 0) {
+        result.push_back(current);
+        return;
+    }
+    for (int i = idx; i < candidates.size(); i++) {
+        if (candidates[i] > target) break; // Pruning the recursion tree
+        current.push_back(candidates[i]);
+        findCombinations(i, candidates, target - candidates[i], current, result); // not i + 1 because we can reuse same elements
+        current.pop_back();
+    }
+}
+
+vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+    vector<vector<int>> result;
+    vector<int> current;
+    sort(candidates.begin(), candidates.end()); // Sort to help with pruning
+    findCombinations(0, candidates, target, current, result);
+    return result;
+}
+```
+
+4. Time Complexity and Space Complexity: 
+   The time complexity is O(2^N) in the worst case, where N is the number of candidates, due to the exponential number of combinations. The space complexity is O(T/M + N), where T is the target value and M is the minimal value among the candidates, representing the maximum depth of the recursion tree."
+BackTracking,Find Maximum number possible by doing at-most K swaps,"1. Problem Summary:
+   The problem is to find the maximum number possible by performing at most K swaps on the digits of a given number. Each swap must involve two digits of the number.
+
+2. Approach:
+   The solution to this problem employs a backtracking approach. Begin by converting the number into a string or list of characters for easy swapping. For each digit, try swapping it with every other digit that follows it, then recursively continue the process with a reduced swap count (K-1). After each swap, if the new number formed is greater than the current maximum, update the maximum. Make sure to backtrack by swapping the digits back to their original positions after each recursive call. This allows exploration of all possible configurations within the allowed number of swaps.
+
+3. Pseudo-code:
+   ```cpp
+   #include <bits/stdc++.h>
+   using namespace std;
+
+   void findMaximumNum(string &str, int k, string &maxNum, int index = 0) {
+       if (k == 0) return;
+
+       char maxDigit = str[index];
+       for (int i = index + 1; i < str.length(); i++) {
+           if (str[i] > maxDigit)
+               maxDigit = str[i];
+       }
+
+       if (maxDigit != str[index])
+           k--;
+
+       for (int i = index; i < str.length(); i++) {
+           if (str[i] == maxDigit) {
+               swap(str[index], str[i]);
+               if (str > maxNum)
+                   maxNum = str;
+               findMaximumNum(str, k, maxNum, index + 1);
+               swap(str[index], str[i]); // backtrack
+           }
+       }
+   }
+
+   string maximumPossibleNumber(string num, int k) {
+       string maxNum = num;
+       findMaximumNum(num, k, maxNum);
+       return maxNum;
+   }
+   ```
+
+4. Time Complexity and Space Complexity:
+   The time complexity is O(n^k) where n is the number of digits in the number, and k is the number of allowed swaps. The space complexity is O(n) due to recursive call stack depth and string manipulations."
+BackTracking,Print all permutations of a string ,"1. Problem Summary:  
+The problem is to generate all possible permutations of a given string. Each permutation is a rearrangement of all characters in the string, where each character must appear exactly once.
+
+2. Approach:  
+The optimal way to solve this problem involves using backtracking. Start by swapping each character with itself and with every character that comes after it, then recursively solve for the substring excluding the current starting character. After the recursive call, swap the characters back to undo the change for the next iteration. This ensures all characters get a chance to be at each position in the string, thus generating all permutations. The intuitive pattern here is to ""choose-explore-unchoose"" for each character position.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+void permute(string &str, int l, int r) {
+    if (l == r) {
+        cout << str << endl;
+    } else {
+        for (int i = l; i <= r; i++) {
+            swap(str[l], str[i]); // choose
+            permute(str, l + 1, r); // explore
+            swap(str[l], str[i]); // unchoose, backtrack
+        }
+    }
+}
+
+int main() {
+    string str = ""ABC"";
+    permute(str, 0, str.length() - 1);
+    return 0;
+}
+```
+
+4. Time Complexity and Space Complexity:  
+The time complexity is O(n * n!), where n is the length of the string, because there are n! permutations and it takes O(n) time to print each. The space complexity is O(n) due to the recursion stack."
+BackTracking,Find if there is a path of more than k length from a source,"1. Problem Summary: The problem is to determine if there exists a path longer than a given length `k` starting from a specified source vertex in a weighted graph. This is not about finding the shortest or the longest path precisely but checking the existence of a path exceeding a certain length.
+
+2. Approach: The solution uses a backtracking approach where we traverse the graph from the source vertex and keep track of the cumulative path length. If at any point, this length exceeds `k`, we return true. We use a visited array to prevent revisiting nodes, which could lead to cycles and incorrect results. If we traverse a node, we mark it as visited and once we backtrack, we mark it unvisited. This approach ensures all potential paths are checked without repetition or getting stuck in cycles. The intuition is akin to depth-first search (DFS), but with an additional check for the path length.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+bool hasPathLongerThanK(int v, vector<pair<int, int>> adj[], int src, int k, vector<bool>& visited) {
+    if (k <= 0) return true;
+    visited[src] = true;
+    for (auto edge : adj[src]) {
+        int u = edge.first;
+        int weight = edge.second;
+        if (!visited[u]) {
+            if (hasPathLongerThanK(v, adj, u, k - weight, visited)) {
+                return true;
+            }
+        }
+    }
+    visited[src] = false;  // Backtrack
+    return false;
+}
+
+bool checkPath(int v, vector<pair<int, int>> adj[], int src, int k) {
+    vector<bool> visited(v, false);
+    return hasPathLongerThanK(v, adj, src, k, visited);
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(V+E) where V is the number of vertices and E is the number of edges, since each vertex and edge is visited at most once. The space complexity is O(V) due to the recursion stack and visited array."
+BackTracking,Longest Possible Route in a Matrix with Hurdles,"1. Problem Summary: 
+   The problem involves finding the longest path from a starting point to a destination in a matrix where certain cells are marked as hurdles, and hence, are not traversable. The movement is allowed in the four primary directions: up, down, left, and right.
+
+2. Approach: 
+   Use a backtracking approach to explore all possible paths from the start to the destination. Start by marking the current cell as visited and recursively try to move in all four possible directions. If moving in a direction leads to the destination, update the maximum path length found so far. After exploring all four directions, backtrack by marking the current cell as unvisited to explore other potential paths starting from previous cells. The challenge is efficiently managing the visited cells and ensuring not to revisit them in the current path, thus avoiding cycles.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+int findLongestPath(vector<vector<int>>& matrix, pair<int, int> src, pair<int, int> dest) {
+    int maxPathLength = 0;
+    int rows = matrix.size();
+    int cols = matrix[0].size();
+    vector<vector<bool>> visited(rows, vector<bool>(cols, false));
+
+    function<void(int, int, int)> dfs = [&](int x, int y, int pathLength) {
+        if (x == dest.first && y == dest.second) {
+            maxPathLength = max(maxPathLength, pathLength);
+            return;
+        }
+
+        // Directions arrays for moving in 4 directions
+        int dRow[] = {-1, 1, 0, 0};
+        int dCol[] = {0, 0, -1, 1};
+
+        visited[x][y] = true;
+
+        for (int i = 0; i < 4; i++) {
+            int adjX = x + dRow[i];
+            int adjY = y + dCol[i];
+
+            if (adjX >= 0 && adjX < rows && adjY >= 0 && adjY < cols && !visited[adjX][adjY] && matrix[adjX][adjY] == 1) {
+                dfs(adjX, adjY, pathLength + 1);
+            }
+        }
+
+        visited[x][y] = false; // Backtrack
+    };
+
+    if (matrix[src.first][src.second] == 1 && matrix[dest.first][dest.second] == 1)
+        dfs(src.first, src.second, 0);
+
+    return maxPathLength;
+}
+```
+
+4. Time Complexity and Space Complexity:
+   The time complexity is O(4^(m*n)), as each cell can potentially lead to four recursive calls, and the space complexity is O(m*n) due to the recursion stack and visited matrix, where m and n are the dimensions of the matrix."
+BackTracking,Print all possible paths from top left to bottom right of a mXn matrix,"1. Problem Summary: The task is to find all possible paths from the top-left corner to the bottom-right corner of an m x n matrix. You can only move either down or right at any point in time.
+
+2. Approach: The problem is inherently recursive as each step towards the destination (bottom-right corner) involves a choice: move right or move down, if possible. We initiate the process from the top-left corner, and at each cell, we recursively explore both possible directions (right and down), appending the current cell to the path. Base cases are when we reach the last row or the last column, where the only choice is to move straight to the end. This recursive backtracking ensures that all paths are explored. Using a helper function, we track the current position in the matrix and the path taken so far. When the bottom-right corner is reached, the current path is stored.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+void explorePaths(vector<vector<int>>& matrix, int i, int j, vector<pair<int, int>>& path, vector<vector<pair<int, int>>>& allPaths) {
+    int m = matrix.size();
+    int n = matrix[0].size();
+
+    // Append current cell to path
+    path.push_back({i, j});
+
+    // If bottom-right corner is reached, add path to allPaths
+    if (i == m - 1 && j == n - 1) {
+        allPaths.push_back(path);
+    } else {
+        // Move right if possible
+        if (j + 1 < n) explorePaths(matrix, i, j + 1, path, allPaths);
+
+        // Move down if possible
+        if (i + 1 < m) explorePaths(matrix, i + 1, j, path, allPaths);
+    }
+
+    // Remove current cell from path before going back (backtracking)
+    path.pop_back();
+}
+
+vector<vector<pair<int, int>>> findAllPaths(vector<vector<int>>& matrix) {
+    vector<vector<pair<int, int>>> allPaths;
+    vector<pair<int, int>> path;
+    explorePaths(matrix, 0, 0, path, allPaths);
+    return allPaths;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(2^(m+n)) due to the branching at each step, and space complexity is O(m+n) for the recursion stack depth and path storage."
+BackTracking,Partition of a set intoK subsets with equal sum,"1. Problem Summary:  
+The problem involves dividing a set of integers into `k` subsets such that each subset has the same sum. It's a decision problem where the goal is to determine if such a partition is possible.
+
+2. Approach:  
+The solution uses backtracking by trying to assign each number in the set to one of the `k` subsets and checking if a valid partition can be formed. First, calculate the target sum each subset must have, which is the total sum of the set divided by `k`. If this division isn't integer, a solution is immediately impossible. Start by sorting the numbers in descending order to help with faster detection of impossible partitions. Use an array to keep track of the current sum of each subset. Recursively try to place each number in one of the subsets, and backtrack if no valid placement is possible. If a number can't fit into any subset given the current state, backtrack and try a different configuration.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+bool canPartition(vector<int>& nums, int k, int index, vector<int>& subsetSums, int target) {
+    if (index == nums.size()) {
+        for (int i = 0; i < k; i++)
+            if (subsetSums[i] != target) return false;
+        return true;
+    }
+
+    for (int i = 0; i < k; i++) {
+        if (subsetSums[i] + nums[index] <= target) {
+            subsetSums[i] += nums[index];
+            if (canPartition(nums, k, index + 1, subsetSums, target)) return true;
+            subsetSums[i] -= nums[index];
+        }
+        if (subsetSums[i] == 0) break; // Optimization: don't place in an empty subset if it failed once
+    }
+    return false;
+}
+
+bool partitionKSubsets(vector<int>& nums, int k) {
+    int totalSum = accumulate(nums.begin(), nums.end(), 0);
+    if (totalSum % k != 0) return false;
+    int target = totalSum / k;
+    vector<int> subsetSums(k, 0);
+    sort(nums.rbegin(), nums.rend()); // sort in descending order
+    return canPartition(nums, k, 0, subsetSums, target);
+}
+```
+4. Time Complexity and Space Complexity:  
+The time complexity is O(k^n) where n is the number of elements in the set, due to the k-way choices for each of n elements. The space complexity is O(n) due to the recursion stack depth and the storage for subset sums."
+BackTracking,Find the K-th Permutation Sequence of first N natural numbers,"1. Problem Summary: 
+   The problem requires finding the k-th permutation sequence of the first N natural numbers. This involves generating the sequence in which the numbers are arranged in lexicographical order and selecting the k-th one from these sequences.
+
+2. Approach: 
+   The optimal approach leverages the properties of permutations and factorials. Every block of permutations of length N starts with the same digit. The total number of such blocks is N!, and each digit leads (N-1)! permutations. Calculate the starting digit of the k-th permutation by dividing (k-1) by (N-1)!. Reduce k by the number of sequences skipped. Remove the used digit from the list and repeat the process for the next digit until all digits are used. This approach directly constructs the k-th permutation without generating all permutations.
+
+3. Pseudo-code:
+   ```cpp
+   #include <bits/stdc++.h>
+   using namespace std;
+
+   string getPermutation(int N, int k) {
+       int factorial = 1;
+       vector<int> numbers;
+       // Precompute factorials and initialize number list
+       for (int i = 1; i <= N; ++i) {
+           factorial *= i;
+           numbers.push_back(i);
+       }
+
+       string result = """";
+       k--; // Convert k from 1-based index to 0-based index for easier calculation
+
+       for (int i = N; i > 0; --i) {
+           factorial /= i;
+           int index = k / factorial;
+           result += to_string(numbers[index]);
+           numbers.erase(numbers.begin() + index);
+           k %= factorial;
+       }
+
+       return result;
+   }
+   ```
+
+4. Time Complexity and Space Complexity: 
+   The time complexity is O(N^2) due to the removal operation from the vector, and the space complexity is O(N) for storing the numbers and the resulting permutation."

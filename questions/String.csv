@@ -1,0 +1,1415 @@
+TOPIC,PROBLEM LINK,SOLUTION
+String,Reverse a String,"1. Problem Summary: The problem requires reversing the given string such that the characters in the string are in the opposite order from their original positions.
+
+2. Approach: The optimal way to reverse a string is to use two pointers, one at the beginning and one at the end of the string. Swap the characters at these pointers and then move them towards each other - the start pointer moving forward and the end pointer moving backward. This process is repeated until the two pointers meet or cross each other. This approach directly manipulates the string in place, making it intuitive as you visually see characters swapping places, which helps in easy remembrance and replication in coding interviews.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+void reverseString(string &s) {
+    int start = 0;
+    int end = s.length() - 1;
+    while (start < end) {
+        swap(s[start], s[end]);
+        start++;
+        end--;
+    }
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n), where n is the length of the string, and the space complexity is O(1) as it modifies the string in place."
+String,Check whether a String is Palindrome or not,"1. Problem Summary: The task is to determine if a given string is a palindrome. A palindrome is a string that reads the same forward and backward, ignoring case, spaces, and punctuation.
+
+2. Approach: The optimal way to check for a palindrome is to use two pointers: one starting at the beginning of the string and the other at the end. Move both pointers toward the center, comparing the characters they point to at each step. If all corresponding characters are the same, then the string is a palindrome. This method is intuitive as it mirrors the definition of a palindrome by checking symmetry directly from the outside in, which is easy to remember and implement.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+bool isPalindrome(string s) {
+    int left = 0, right = s.length() - 1;
+    while (left < right) {
+        if (s[left] != s[right]) {
+            return false;
+        }
+        left++;
+        right--;
+    }
+    return true;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n), where n is the length of the string, as we potentially check each character once. The space complexity is O(1), as no additional space proportional to the input size is used."
+String,Find Duplicate characters in a string,"1. Problem Summary: The task is to identify and return all characters that appear more than once in a given string. This helps in understanding character frequency and repetition in text processing.
+
+2. Approach: Utilize a hash map to count occurrences of each character as you iterate through the string. This method leverages the hash map's O(1) average time complexity for insertions and lookups, making it efficient for counting. After populating the hash map, iterate through the map to collect characters that have a count greater than one. This approach ensures that each character is processed in constant time and the results are gathered efficiently.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+vector<char> findDuplicateCharacters(string s) {
+    unordered_map<char, int> charCount;
+    vector<char> duplicates;
+
+    // Count each character in the string
+    for (char c : s) {
+        charCount[c]++;
+    }
+
+    // Collect characters that appear more than once
+    for (auto& pair : charCount) {
+        if (pair.second > 1) {
+            duplicates.push_back(pair.first);
+        }
+    }
+
+    return duplicates;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the length of the string, due to a single pass through the string and another through the map. Space complexity is O(k), where k is the number of unique characters in the string."
+String,Why strings are immutable in Java?,"1. Problem Summary: 
+   The question explores why strings in Java are designed to be immutable, meaning once a string object is created, its value cannot be changed.
+
+2. Approach: 
+   The immutability of Java strings is not an algorithmic problem but a design choice made for several reasons. First, immutability enhances security as strings often carry sensitive data, and immutable objects are naturally thread-safe, simplifying multi-threaded programming. Additionally, string immutability allows reliable and efficient caching of hash codes, which is beneficial since strings are frequently used as keys in hash tables. Understanding these reasons helps in recognizing the advantages of immutability in system design, particularly in environments where security and performance are crucial.
+
+3. Pseudo-code:
+```cpp
+// Not applicable as this is a conceptual explanation, not an algorithmic problem
+```
+
+4. Time Complexity and Space Complexity: 
+   Not applicable as this is a theoretical discussion on the nature of string immutability in Java."
+String,Write a Code to check whether one string is a rotation of another,"1. Problem Summary: The problem involves determining if one string is a rotation of another string. For instance, if you rotate the string ""waterbottle"" at a certain point, it can produce ""erbottlewat"".
+
+2. Approach: The key insight is to check if the second string (s2) is a substring of the first string (s1) concatenated with itself. This is because any rotation of s1 will appear as a substring in s1+s1. For example, ""waterbottlewaterbottle"" contains ""erbottlewat"". To implement this, concatenate s1 with itself and then use a substring search function (like the one provided by the string class in C++) to check if s2 is a substring of the concatenated result. This approach is intuitive and easy to remember, leveraging the properties of string rotation and substring search.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+bool isRotation(string s1, string s2) {
+    if (s1.length() != s2.length()) return false;
+    string temp = s1 + s1;
+    return (temp.find(s2) != string::npos);
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the length of the string, and the space complexity is O(n) due to the storage of the concatenated string."
+String,Write a Program to check whether a string is a valid shuffle of two strings or not,"1. Problem Summary: 
+   The problem requires checking if a given string `result` can be formed by interleaving the characters of two other strings `s1` and `s2` without changing the relative order of characters within `s1` and `s2`.
+
+2. Approach: 
+   To solve this problem, use a dynamic programming approach where a 2D table `dp` is constructed. `dp[i][j]` will be true if the first `i` characters of `s1` and the first `j` characters of `s2` can form the first `i+j` characters of `result`. Initialize `dp[0][0]` to true since two empty strings can form an empty string. For each character in `result`, check if it matches the current character in `s1` or `s2` and the previous values in the table allow for this match. Continue this process until the entire `result` string is processed. The answer will be in `dp[length of s1][length of s2]`.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+bool isValidShuffle(string s1, string s2, string result) {
+    int m = s1.length(), n = s2.length();
+    if (m + n != result.length()) return false;
+    
+    vector<vector<bool>> dp(m + 1, vector<bool>(n + 1, false));
+    dp[0][0] = true;
+    
+    for (int i = 0; i <= m; ++i) {
+        for (int j = 0; j <= n; ++j) {
+            if (i > 0 && s1[i-1] == result[i+j-1])
+                dp[i][j] = dp[i][j] || dp[i-1][j];
+            if (j > 0 && s2[j-1] == result[i+j-1])
+                dp[i][j] = dp[i][j] || dp[i][j-1];
+        }
+    }
+    
+    return dp[m][n];
+}
+```
+
+4. Time Complexity and Space Complexity: 
+   The time complexity is O(m*n) and the space complexity is also O(m*n), where m and n are the lengths of strings `s1` and `s2`, respectively."
+String,Count and Say problem,"1. Problem Summary:
+   The ""Count and Say"" problem involves generating a sequence where each term is read off from the digits of the previous term, counting the number of digits in groups of the same digit.
+
+2. Approach:
+   To solve the problem, start with the initial term ""1"". For each subsequent term, iterate through the current term, count consecutive identical digits, and append the count followed by the digit to the next term. Use two loops: the outer loop to iterate through terms up to the desired sequence number, and the inner loop to build each term from the previous one. This approach builds intuition by visualizing the process as reading aloud counts of consecutive characters, which helps in remembering and coding during interviews.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+string countAndSay(int n) {
+    if (n == 1) return ""1"";
+    string previous = ""1"";
+    string current;
+
+    for (int i = 2; i <= n; i++) {
+        current = """";
+        int count = 1;
+        for (int j = 1; j < previous.length(); j++) {
+            if (previous[j] == previous[j - 1]) {
+                count++;
+            } else {
+                current += to_string(count) + previous[j - 1];
+                count = 1;
+            }
+        }
+        current += to_string(count) + previous[previous.length() - 1];
+        previous = current;
+    }
+    return current;
+}
+```
+
+4. Time Complexity and Space Complexity:
+   The time complexity is O(n * m) and the space complexity is O(m), where n is the input number and m is the maximum length of the term generated."
+String,Write a program to find the longest Palindrome in a string.[ Longest palindromic Substring],"1. Problem Summary: The problem is to find the longest palindromic substring within a given string. A palindrome reads the same backward as forward, and the goal is to identify the longest contiguous sequence that satisfies this property.
+
+2. Approach: The optimal approach to solve this problem uses the ""expand around center"" technique. This method involves expanding from every possible center of the palindrome, which could be a single character (for odd-length palindromes) or a pair of consecutive characters (for even-length palindromes). For each center, expand outwards and compare characters until the characters are not the same, effectively checking for the longest palindrome centered at that point. This technique avoids the need for additional space required by dynamic programming solutions and is straightforward to implement during an interview.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+string longestPalindrome(string s) {
+    if (s.size() < 2) return s;
+
+    int start = 0, maxLen = 1;
+    auto expandAroundCenter = [&](int left, int right) {
+        while (left >= 0 && right < s.size() && s[left] == s[right]) {
+            left--;
+            right++;
+        }
+        int len = right - left - 1;
+        if (len > maxLen) {
+            maxLen = len;
+            start = left + 1;
+        }
+    };
+
+    for (int i = 0; i < s.size(); i++) {
+        expandAroundCenter(i, i);   // Odd length palindromes
+        expandAroundCenter(i, i + 1); // Even length palindromes
+    }
+
+    return s.substr(start, maxLen);
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n^2), where n is the length of the string, due to the potential expansion around each index. The space complexity is O(1) as only a few variables are used."
+String,Find Longest Recurring Subsequence in String,"1. Problem Summary: The task is to find the length of the longest subsequence in a given string that appears at least twice. The characters in the subsequence do not need to be consecutive, but their order must be maintained.
+
+2. Approach: The problem can be solved using a dynamic programming approach similar to the Longest Common Subsequence (LCS) problem, but with a twist. Instead of comparing two different strings, we compare the string with itself while ensuring that we do not consider the same character twice unless they are at different positions. We create a 2D DP table where `dp[i][j]` represents the length of the longest recurring subsequence between substrings ending at index `i-1` and `j-1`. If characters at these positions are the same and `i` is not equal to `j`, we consider it part of the recurring subsequence. Otherwise, we take the maximum value from either excluding the current character from the first substring or the second substring.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int longestRecurringSubseq(string s) {
+    int n = s.size();
+    vector<vector<int>> dp(n+1, vector<int>(n+1, 0));
+
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= n; j++) {
+            if (s[i-1] == s[j-1] && i != j)
+                dp[i][j] = 1 + dp[i-1][j-1];
+            else
+                dp[i][j] = max(dp[i-1][j], dp[i][j-1]);
+        }
+    }
+    return dp[n][n];
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n^2) and the space complexity is also O(n^2), where n is the length of the string."
+String,Print all Subsequences of a string.,"1. Problem Summary:
+   Subsequences of a string are derived by deleting some or no characters without changing the order of the remaining characters. The task is to print all possible subsequences of a given string.
+
+2. Approach:
+   The optimal way to find all subsequences is by using recursion to explore each character's inclusion and exclusion. Start by considering an empty subsequence and at each step, recursively decide whether to include the current character in the subsequence or not. This binary choice for each character leads to all possible subsequences. Using a helper function can simplify the management of the current subsequence and the index of the next character to consider. This approach naturally fits into a recursive tree structure, where each node represents a state with or without the current character.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+void printSubsequences(string &s, int index, string curr) {
+    if (index == s.length()) { // Base case: end of string
+        cout << curr << endl;
+        return;
+    }
+    // Include the current character
+    printSubsequences(s, index + 1, curr + s[index]);
+    // Exclude the current character
+    printSubsequences(s, index + 1, curr);
+}
+
+int main() {
+    string s;
+    cin >> s;
+    printSubsequences(s, 0, """"); // Start from index 0 with an empty current subsequence
+    return 0;
+}
+```
+
+4. Time Complexity and Space Complexity:
+   The time complexity is O(2^n) due to the binary decision at each of the n characters, and the space complexity is O(n) for the recursion stack depth."
+String,Print all the permutations of the given string,"1. Problem Summary: The task is to generate all possible permutations of a given string. Each permutation is a rearrangement of the characters in the string, where each character must appear exactly as many times as it does in the input string.
+
+2. Approach: The optimal way to approach this problem is by using backtracking. Start by fixing one character at a time and recursively fixing the next characters. Swap each character with itself and with every character that comes after it, then proceed to find permutations of the substring excluding the fixed character. After each recursive call, swap the characters back to restore the original string configuration before the next iteration. This swapping ensures all characters are considered as the starting character of the substring in subsequent recursive calls.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+void permute(string &s, int l, int r) {
+    if (l == r) {
+        cout << s << endl;
+    } else {
+        for (int i = l; i <= r; i++) {
+            swap(s[l], s[i]);       // Swap for the next permutation
+            permute(s, l + 1, r);  // Recurse for the rest of the string
+            swap(s[l], s[i]);       // Swap back to restore the original string
+        }
+    }
+}
+
+void printAllPermutations(string s) {
+    permute(s, 0, s.length() - 1);
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n*n!) where n is the length of the string, due to generating n! permutations and taking O(n) time for each. The space complexity is O(n) due to the depth of the recursion stack."
+String,Split the Binary string into two substring with equal 0’s and 1’s,"1. Problem Summary: Given a binary string, the task is to find the maximum number of splits such that each substring contains an equal number of 0's and 1's. The string only consists of characters '0' and '1'.
+
+2. Approach: Start by iterating through the string while counting the occurrences of '0's and '1's. Whenever the counts of both '0's and '1's are equal at any point in the string, increment a counter. This counter essentially represents a valid split point where the substrings on either side of this point have equal numbers of '0's and '1's. Reset the counts after finding each valid split to look for the next potential split. The approach leverages the idea that balanced substrings can be identified by matching counts of '0's and '1's as we traverse the string.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+int maxSplits(string s) {
+    int count0 = 0, count1 = 0, validSplits = 0;
+    for (char c : s) {
+        if (c == '0') count0++;
+        else count1++;
+        if (count0 == count1) validSplits++;
+    }
+    return validSplits;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n), where n is the length of the string, as we traverse the string once. The space complexity is O(1) since we use a constant amount of extra space."
+String,Word Wrap Problem [VERY IMP].,"1. Problem Summary:  
+   The Word Wrap Problem involves arranging a sequence of words in such a way that they fit within a fixed width per line, minimizing the total cost of the extra spaces left at the end of each line, except the last one.
+
+2. Approach:  
+   The optimal algorithm for the Word Wrap Problem is a dynamic programming solution. We define a cost function that calculates the cost of placing words from i to j on a single line. This cost typically increases as the extra space at the end of the line increases. We maintain a table `dp[]` where `dp[i]` represents the minimum cost of wrapping words from 1 to i. For each word, we consider all possible ways to wrap the words before it and select the one with the minimum cost that does not exceed the line width. This approach builds up the solution by considering all subproblems of wrapping the first k words for k = 1 to n, where n is the total number of words.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+int solveWordWrap(vector<int>& words, int maxWidth) {
+    int n = words.size();
+    vector<int> dp(n, INT_MAX);
+    vector<int> cost(n, 0);
+
+    for (int i = 0; i < n; i++) {
+        int len = -1;
+        for (int j = i; j < n; j++) {
+            len += words[j] + 1;
+            if (len > maxWidth) break;
+            int extra = maxWidth - len;
+            cost[j] = (j == n-1) ? 0 : extra * extra;
+            if (i == 0)
+                dp[j] = min(dp[j], cost[j]);
+            else if (dp[i-1] != INT_MAX)
+                dp[j] = min(dp[j], dp[i-1] + cost[j]);
+        }
+    }
+    return dp[n-1];
+}
+```
+
+4. Time Complexity and Space Complexity:  
+   The time complexity is O(n^2) due to the nested loops for calculating cost, and space complexity is O(n) for storing the dp and cost arrays."
+String,EDIT Distance [Very Imp],"1. Problem Summary:
+   The Edit Distance problem, also known as Levenshtein distance, involves finding the minimum number of operations (insertions, deletions, or substitutions) required to transform one string into another. 
+
+2. Approach:
+   The optimal solution uses dynamic programming. Create a 2D table `dp` where `dp[i][j]` represents the minimum edit distance between the first `i` characters of string `s1` and the first `j` characters of string `s2`. Initialize the first row and column based on the number of operations needed to convert `s1` to an empty string and vice versa. For each character comparison, if characters match (no operation needed), set `dp[i][j]` to `dp[i-1][j-1]`. Otherwise, set `dp[i][j]` to 1 plus the minimum of the three possible preceding operations: delete (`dp[i-1][j]`), insert (`dp[i][j-1]`), or replace (`dp[i-1][j-1]`). This builds up the solution by considering all substrings of both strings.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+int editDistance(string s1, string s2) {
+    int m = s1.length(), n = s2.length();
+    vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
+
+    for (int i = 0; i <= m; i++) {
+        for (int j = 0; j <= n; j++) {
+            if (i == 0) 
+                dp[i][j] = j;  // Filling the first row: all insert operations
+            else if (j == 0)
+                dp[i][j] = i;  // Filling the first column: all delete operations
+            else if (s1[i-1] == s2[j-1])
+                dp[i][j] = dp[i-1][j-1];  // Characters match, no operation needed
+            else
+                dp[i][j] = 1 + min({dp[i-1][j],    // Delete
+                                    dp[i][j-1],    // Insert
+                                    dp[i-1][j-1]}); // Replace
+        }
+    }
+    return dp[m][n];
+}
+```
+
+4. Time Complexity and Space Complexity:
+   The time complexity is O(m*n) and the space complexity is O(m*n), where m and n are the lengths of the two input strings."
+String,Find next greater number with same set of digits. [Very Very IMP],"1. Problem Summary:  
+   The problem involves finding the next greater permutation of numbers formed by the digits of a given number. If no greater permutation is possible, return the smallest permutation.
+
+2. Approach:  
+   Begin by identifying the rightmost digit that is smaller than the digit immediately to its right. This is the first point of action for creating a larger permutation. Next, find the smallest digit on the right side of this identified digit that is larger than the identified digit itself. Swap these two digits. Finally, reverse the sequence of digits to the right of where the first digit was found to get the next smallest lexicographical order. This ensures that we have the smallest permutation larger than the original number. If no such digit is found that is smaller than its right neighbor, simply reverse the entire number to get the smallest permutation.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+string nextGreaterElement(string digits) {
+    int i, n = digits.length();
+    for (i = n - 2; i >= 0; i--) {
+        if (digits[i] < digits[i + 1])
+            break;
+    }
+    if (i == -1) {
+        reverse(digits.begin(), digits.end());
+    } else {
+        int j;
+        for (j = n - 1; j > i; j--) {
+            if (digits[j] > digits[i])
+                break;
+        }
+        swap(digits[i], digits[j]);
+        reverse(digits.begin() + i + 1, digits.end());
+    }
+    return digits;
+}
+```
+
+4. Time Complexity and Space Complexity:  
+   The time complexity is O(n) due to the linear scans and the reversal operation, and the space complexity is O(1) as we are modifying the string in place."
+String,Balanced Parenthesis problem.[Imp],"1. Problem Summary: The Balanced Parenthesis problem requires checking if the given string of parentheses is correctly balanced. A string is balanced if all opening parentheses have a corresponding closing parenthesis in the correct order.
+
+2. Approach: To solve this problem, a stack data structure is used to track opening parentheses. As you iterate through the string, push each opening parenthesis ('(') onto the stack. For each closing parenthesis (')'), check if the stack is not empty and the top of the stack is an opening parenthesis; if so, pop the stack. If these conditions are not met, the string is unbalanced. After processing all characters, if the stack is empty, then the string is balanced; otherwise, it is not. This approach intuitively mimics the nesting of valid parentheses, making it easier to visualize and remember.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+bool isBalanced(string s) {
+    stack<char> stk;
+    for (char c : s) {
+        if (c == '(') {
+            stk.push(c);
+        } else if (c == ')') {
+            if (stk.empty() || stk.top() != '(') {
+                return false;
+            }
+            stk.pop();
+        }
+    }
+    return stk.empty();
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n), where n is the length of the string, as we traverse the string once. The space complexity is O(n) in the worst case, when all characters are opening parentheses."
+String,Word break Problem[ Very Imp],"1. Problem Summary:  
+The Word Break Problem involves determining whether a given string can be segmented into one or more dictionary words. The dictionary is provided as a set of words.
+
+2. Approach:  
+The optimal solution uses dynamic programming. Create a boolean array `dp` where `dp[i]` is true if the substring `s[0..i-1]` can be segmented into dictionary words. Initialize `dp[0]` to true because an empty string can trivially be segmented. For each position `i` from 1 to `n` (length of the string), check every substring `s[j..i-1]` (where `j` ranges from 0 to i-1) to see if it can form a word present in the dictionary and `dp[j]` is true. If such a `j` exists, set `dp[i]` to true. The answer is the value of `dp[n]`.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+bool wordBreak(string s, vector<string>& wordDict) {
+    unordered_set<string> dict(wordDict.begin(), wordDict.end());
+    int n = s.length();
+    vector<bool> dp(n + 1, false);
+    dp[0] = true;
+    
+    for (int i = 1; i <= n; ++i) {
+        for (int j = 0; j < i; ++j) {
+            if (dp[j] && dict.find(s.substr(j, i-j)) != dict.end()) {
+                dp[i] = true;
+                break;
+            }
+        }
+    }
+    return dp[n];
+}
+```
+
+4. Time Complexity and Space Complexity:  
+The time complexity is O(n^2 * m), where `n` is the length of the string and `m` is the average length of the words in the dictionary. The space complexity is O(n) due to the DP array."
+String,Rabin Karp Algo,"1. Problem Summary: The Rabin-Karp Algorithm is used for string matching, efficiently finding all occurrences of a pattern string within a text string by using hashing.
+
+2. Approach: The Rabin-Karp algorithm uses a rolling hash function to hash the pattern and subtexts of the main text of the same length as the pattern. It starts by calculating the hash of the pattern and the first subtext. For each subsequent step, it recalculates the hash in constant time by removing the hash contribution of the old character that is no longer in the window and adding the hash contribution of the new character that enters the window. If the hash of a subtext matches the hash of the pattern, a direct comparison is made to verify the match to avoid false positives due to hash collisions.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+void rabinKarp(string text, string pattern) {
+    int M = pattern.size();
+    int N = text.size();
+    int p = 0; // hash value for pattern
+    int t = 0; // hash value for text
+    int h = 1;
+    int d = 256; // number of characters in the input alphabet
+    int q = 101; // A prime number
+    // The value of h would be ""pow(d, M-1)%q""
+    for (int i = 0; i < M-1; i++)
+        h = (h * d) % q;
+    // Calculate the hash value of pattern and first window of text
+    for (int i = 0; i < M; i++) {
+        p = (d * p + pattern[i]) % q;
+        t = (d * t + text[i]) % q;
+    }
+    // Slide the pattern over text one by one
+    for (int i = 0; i <= N - M; i++) {
+        // Check the hash values of current window of text and pattern
+        if ( p == t ) {
+            // Check for characters one by one
+            bool flag = true;
+            for (int j = 0; j < M; j++) {
+                if (text[i+j] != pattern[j]) {
+                    flag = false;
+                    break;
+                }
+            }
+            if (flag) cout << ""Pattern found at index "" << i << endl;
+        }
+        // Calculate hash value for next window of text
+        if ( i < N-M ) {
+            t = (d*(t - text[i]*h) + text[i+M]) % q;
+            if (t < 0) t = (t + q);
+        }
+    }
+}
+```
+
+4. Time Complexity and Space Complexity: The average and best-case time complexity is O(n+m), while the worst-case time complexity is O(n*m), where n is the length of the text and m is the length of the pattern. The space complexity is O(1)."
+String,KMP Algo,"1. Problem Summary:  
+   The KMP (Knuth-Morris-Pratt) Algorithm is used for searching a substring within a string efficiently. It leverages the information from previous character matches to avoid unnecessary comparisons, thus optimizing the search process.
+
+2. Approach:  
+   The KMP algorithm preprocesses the pattern string to create a partial match table (also known as the ""prefix table"" or ""pi table"") which indicates the longest proper prefix which is also a suffix. During the search, if a mismatch occurs after some matches, the table is used to skip characters in the pattern that are already known to match. This avoids starting the search from scratch every time a mismatch is found. The preprocessing helps in identifying how much to shift the pattern when a mismatch occurs, ensuring that the already matched characters are utilized efficiently.
+
+3. Pseudo-code:
+   ```cpp
+   #include<bits/stdc++.h>
+   using namespace std;
+
+   vector<int> computeLPSArray(string pat) {
+       int M = pat.length();
+       vector<int> lps(M);
+       int len = 0;
+       lps[0] = 0;
+       int i = 1;
+       while (i < M) {
+           if (pat[i] == pat[len]) {
+               len++;
+               lps[i] = len;
+               i++;
+           } else {
+               if (len != 0) {
+                   len = lps[len - 1];
+               } else {
+                   lps[i] = 0;
+                   i++;
+               }
+           }
+       }
+       return lps;
+   }
+
+   void KMPSearch(string pat, string txt) {
+       int M = pat.length();
+       int N = txt.length();
+       vector<int> lps = computeLPSArray(pat);
+       int i = 0; // index for txt[]
+       int j = 0; // index for pat[]
+       while (i < N) {
+           if (pat[j] == txt[i]) {
+               j++;
+               i++;
+           }
+           if (j == M) {
+               cout << ""Found pattern at index "" << i - j << endl;
+               j = lps[j - 1];
+           } else if (i < N && pat[j] != txt[i]) {
+               if (j != 0)
+                   j = lps[j - 1];
+               else
+                   i = i + 1;
+           }
+       }
+   }
+   ```
+
+4. Time Complexity and Space Complexity:  
+   The time complexity of the KMP algorithm is O(N+M), and the space complexity is O(M), where N is the length of the text and M is the length of the pattern."
+String,Convert a Sentence into its equivalent mobile numeric keypad sequence.,"1. Problem Summary: 
+   The task is to convert a given sentence into its corresponding sequence of key presses on a traditional mobile numeric keypad. Each letter on the keypad is associated with a number and may require multiple presses to type a specific letter.
+
+2. Approach:
+   First, map each letter and symbol to its corresponding keypress sequence based on a mobile numeric keypad layout. For instance, 'A', 'B', and 'C' map to '2', '22', and '222' respectively. Iterate through each character of the input string, convert it to lowercase to handle case insensitivity, and use the mapping to convert each character to its numeric sequence. If a space is encountered, it is typically represented by '0'. Ensure consecutive characters that map to the same key are separated by a pause (often represented by a space or a special character, but this depends on specific requirements which may vary).
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+string convertSentenceToKeypadSequence(string sentence) {
+    unordered_map<char, string> charMap = {
+        {'a', ""2""}, {'b', ""22""}, {'c', ""222""},
+        {'d', ""3""}, {'e', ""33""}, {'f', ""333""},
+        {'g', ""4""}, {'h', ""44""}, {'i', ""444""},
+        {'j', ""5""}, {'k', ""55""}, {'l', ""555""},
+        {'m', ""6""}, {'n', ""66""}, {'o', ""666""},
+        {'p', ""7""}, {'q', ""77""}, {'r', ""777""}, {'s', ""7777""},
+        {'t', ""8""}, {'u', ""88""}, {'v', ""888""},
+        {'w', ""9""}, {'x', ""99""}, {'y', ""999""}, {'z', ""9999""},
+        {' ', ""0""}
+    };
+    string result = """";
+    for (char c : sentence) {
+        c = tolower(c);
+        result += charMap[c];
+    }
+    return result;
+}
+```
+
+4. Time Complexity and Space Complexity:
+   The time complexity is O(n), where n is the length of the input string, as each character is processed once. The space complexity is O(1), assuming the space for the map and output string are not counted towards additional space since they scale with input size or are fixed."
+String,Minimum number of bracket reversals needed to make an expression balanced.,"1. Problem Summary:  
+   The problem requires finding the minimum number of reversals to make a string of brackets balanced. A string of brackets is balanced if every opening bracket has a corresponding closing bracket in the correct order.
+
+2. Approach:  
+   First, iterate through the string and use a counter to track the imbalance of opening and closing brackets. For every unmatched opening bracket ('{'), increase the counter, and for every unmatched closing bracket ('}'), decrease the counter. If at the end of this pass the counter is zero, the string is already balanced. If the counter is odd, it's impossible to balance the string with any number of reversals. For an even counter, half of the mismatches are opening brackets needing closure, and the other half are closing brackets needing openings. The minimum reversals needed is half the absolute value of the counter, as each reversal fixes one opening and one closing bracket.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+int minReversals(string expr) {
+    int len = expr.length();
+    if (len % 2 != 0) return -1; // Odd length can't be balanced
+
+    stack<char> s;
+    for (char c : expr) {
+        if (c == '{') {
+            s.push(c);
+        } else { // character is '}'
+            if (!s.empty() && s.top() == '{') {
+                s.pop();
+            } else {
+                s.push(c);
+            }
+        }
+    }
+
+    int openBraces = 0, closeBraces = 0;
+    while (!s.empty()) {
+        if (s.top() == '{') openBraces++;
+        else closeBraces++;
+        s.pop();
+    }
+
+    return (openBraces + 1) / 2 + (closeBraces + 1) / 2;
+}
+```
+
+4. Time Complexity and Space Complexity:  
+   The time complexity is O(n) where n is the length of the string, as we traverse the string once and process each character. The space complexity is O(n) in the worst case when all characters are of the same type and get pushed onto the stack."
+String,Count All Palindromic Subsequence in a given String.,"1. Problem Summary: The problem requires counting all distinct palindromic subsequences in a given string. A subsequence is a sequence that can be derived from another sequence by deleting some or no elements without changing the order of the remaining elements.
+
+2. Approach: The optimal solution involves dynamic programming. We use a 2D table `dp` where `dp[i][j]` represents the count of palindromic subsequences in the substring from index `i` to `j`. If the characters at `i` and `j` are the same, `dp[i][j]` includes all palindromic subsequences between `i+1` and `j-1`, plus the new palindromes formed by the matching characters. If they aren't the same, we combine subsequences from `i+1` to `j` and `i` to `j-1`, subtracting those counted twice (from `i+1` to `j-1`). This approach cleverly builds up the solution by expanding around potential centers of palindromes and using previously computed values for smaller substrings.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+int countPalindromicSubsequences(string s) {
+    int n = s.length();
+    vector<vector<int>> dp(n, vector<int>(n, 0));
+
+    for (int i = 0; i < n; i++)
+        dp[i][i] = 1;  // Single letter palindromes
+
+    for (int length = 2; length <= n; length++) {
+        for (int i = 0; i <= n - length; i++) {
+            int j = i + length - 1;
+
+            if (s[i] == s[j]) {
+                dp[i][j] = dp[i + 1][j] + dp[i][j - 1] + 1;
+            } else {
+                dp[i][j] = dp[i + 1][j] + dp[i][j - 1] - dp[i + 1][j - 1];
+            }
+        }
+    }
+
+    return dp[0][n-1];
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n^2) and the space complexity is also O(n^2), where n is the length of the string. This is due to the use of a 2D dp array and nested loops iterating over substring lengths and start indices."
+String,Count of number of given string in 2D character array,"1. Problem Summary: The problem involves finding the count of occurrences of a given string in a 2D character array. The string can be matched horizontally, vertically, and diagonally in all eight possible directions.
+
+2. Approach: The optimal algorithm involves traversing each cell of the 2D array and using it as a starting point to search for the target string in all eight directions. For each cell, check if the first character matches the first character of the string. If it does, proceed to check in each direction using a helper function that compares characters of the string with the characters in the matrix, moving step by step in the chosen direction. This helper function will return true if the entire string is found starting from the current position in the current direction. Count these successful matches and sum them up for the final answer.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+int searchInDirection(vector<vector<char>>& grid, string word, int x, int y, int dx, int dy) {
+    int n = grid.size(), m = grid[0].size(), l = word.length();
+    for(int i = 0; i < l; i++) {
+        if (x < 0 || x >= n || y < 0 || y >= m || grid[x][y] != word[i])
+            return 0;
+        x += dx;
+        y += dy;
+    }
+    return 1;
+}
+
+int countStrings(vector<vector<char>>& grid, string word) {
+    int n = grid.size(), m = grid[0].size();
+    int count = 0;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            if (grid[i][j] == word[0]) { // potential start
+                count += searchInDirection(grid, word, i, j, 1, 0) +  // right
+                         searchInDirection(grid, word, i, j, -1, 0) + // left
+                         searchInDirection(grid, word, i, j, 0, 1) +  // down
+                         searchInDirection(grid, word, i, j, 0, -1) + // up
+                         searchInDirection(grid, word, i, j, 1, 1) +  // diagonal down-right
+                         searchInDirection(grid, word, i, j, -1, -1) +// diagonal up-left
+                         searchInDirection(grid, word, i, j, 1, -1) + // diagonal down-left
+                         searchInDirection(grid, word, i, j, -1, 1);  // diagonal up-right
+            }
+        }
+    }
+    return count;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(N*M*L*8), where N and M are the dimensions of the grid and L is the length of the string, due to checking each direction for each starting point. The space complexity is O(1), not including the input grid and string."
+String,Search a Word in a 2D Grid of characters.,"1. Problem Summary: The problem involves finding whether a given word exists in a 2D grid of letters. The word can be matched in the grid horizontally, vertically, diagonally, or in the reverse direction of any of these orientations.
+
+2. Approach: The optimal approach uses a Depth First Search (DFS) starting from each cell that matches the first letter of the word. For each starting cell, explore in all 8 possible directions (right, left, up, down, and the four diagonals). Use a recursive function to handle the DFS, checking bounds and ensuring that each character matches the corresponding character in the word. To avoid revisiting the same cell within the same path, mark the cell as visited by modifying the grid temporarily and then restore it back. This approach intuitively mimics how one would manually search for a word in a puzzle by exploring all possible directions from a starting letter.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+bool searchWord(vector<vector<char>>& grid, string word, int x, int y, int index) {
+    if (index == word.size()) return true;
+    if (x < 0 || x >= grid.size() || y < 0 || y >= grid[0].size() || grid[x][y] != word[index]) return false;
+    
+    char temp = grid[x][y];
+    grid[x][y] = '#'; // Mark as visited
+
+    // Directions: right, left, up, down, and four diagonals
+    vector<pair<int, int>> directions = {{0,1}, {0,-1}, {1,0}, {-1,0}, {1,1}, {1,-1}, {-1,1}, {-1,-1}};
+    for (auto& dir : directions) {
+        if (searchWord(grid, word, x + dir.first, y + dir.second, index + 1)) {
+            grid[x][y] = temp;
+            return true;
+        }
+    }
+
+    grid[x][y] = temp; // Restore original value
+    return false;
+}
+
+bool exist(vector<vector<char>>& grid, string word) {
+    for (int i = 0; i < grid.size(); ++i) {
+        for (int j = 0; j < grid[0].size(); ++j) {
+            if (grid[i][j] == word[0] && searchWord(grid, word, i, j, 0))
+                return true;
+        }
+    }
+    return false;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(N*M*8^L) where N and M are the dimensions of the grid and L is the length of the word, due to the 8 possible directions to search for each character. The space complexity is O(L) due to the recursion stack depth which can go up to the length of the word."
+String,Boyer Moore Algorithm for Pattern Searching.,"1. Problem Summary: The Boyer-Moore algorithm is used for pattern searching in strings, primarily focusing on efficiently skipping sections of the text that cannot possibly match the pattern. It combines information about how the pattern aligns with mismatches and the character information in the text to improve search speed.
+
+2. Approach: The Boyer-Moore algorithm uses two heuristics: the Bad Character Rule and the Good Suffix Rule, to skip unnecessary comparisons in the search process. The Bad Character Rule shifts the pattern more than one position by looking at the character in the text that caused the mismatch. If this character is not part of the pattern, the pattern is shifted completely past this character. If it is in the pattern, the pattern is shifted to align this character with its last occurrence in the pattern. The Good Suffix Rule deals with how to shift the pattern when a suffix of the pattern matches but a mismatch occurs just before this suffix. Both rules are used to calculate the maximum shift for each mismatch, and the pattern is shifted by the maximum of these values. This strategic skipping of comparisons drastically speeds up the search.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+void badCharacterHeuristic(string str, int size, int badchar[256]) {
+    fill(badchar, badchar + 256, -1);
+    for (int i = 0; i < size; i++)
+        badchar[(int) str[i]] = i;
+}
+
+void search(string txt, string pat) {
+    int m = pat.size();
+    int n = txt.size();
+    int badchar[256];
+    badCharacterHeuristic(pat, m, badchar);
+
+    int s = 0; // s is the shift of the pattern with respect to text
+    while(s <= (n - m)) {
+        int j = m - 1;
+        while(j >= 0 && pat[j] == txt[s + j])
+            j--;
+        if (j < 0) {
+            cout << ""Pattern occurs at shift = "" << s << endl;
+            s += (s + m < n) ? m - badchar[txt[s + m]] : 1;
+        } else {
+            s += max(1, j - badchar[txt[s + j]]);
+        }
+    }
+}
+```
+
+4. Time Complexity and Space Complexity: The worst-case time complexity is O(n*m), but in practice, it performs much better, especially for large alphabets. The space complexity is O(1) for the bad character table."
+String,Converting Roman Numerals to Decimal,"1. Problem Summary: The task is to convert a string representing a Roman numeral into its corresponding decimal (integer) value. Roman numerals are constructed using combinations of letters such as I, V, X, L, C, D, and M, each representing specific integer values.
+
+2. Approach: The conversion is based on the principle that if a smaller numeral appears before a larger numeral, it should be subtracted from the larger numeral; otherwise, the values are summed. Start by mapping each Roman numeral symbol to its respective integer value. Traverse the string from right to left, adding the integer value of the symbol to a running total whenever the current symbol represents a value greater than or equal to the previous symbol. If the current symbol's value is less than the previous one, subtract its value from the total instead. This approach ensures that all the necessary additions and subtractions are handled correctly as per the rules of Roman numerals.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+int romanToInt(string s) {
+    unordered_map<char, int> values = {
+        {'I', 1}, {'V', 5}, {'X', 10}, {'L', 50},
+        {'C', 100}, {'D', 500}, {'M', 1000}
+    };
+
+    int total = 0;
+    int prev_value = 0;
+    for (int i = s.length() - 1; i >= 0; i--) {
+        int current_value = values[s[i]];
+        if (current_value >= prev_value) {
+            total += current_value;
+        } else {
+            total -= current_value;
+        }
+        prev_value = current_value;
+    }
+    return total;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n), where n is the length of the string, and the space complexity is O(1), not counting the space used to store the input and the map of Roman numeral values."
+String,Longest Common Prefix,"1. Problem Summary: The ""Longest Common Prefix"" problem requires finding the longest prefix string that is common across all strings in a given array. The prefix must be a starting substring for each string in the array.
+
+2. Approach: The optimal way to solve this problem is by using the horizontal scanning method. Start by assuming the first string in the array is the longest common prefix. Then, iterate through each string in the array and update the prefix by comparing it with the current string. For each string, iterate character by character and reduce the length of the assumed prefix until the characters do not match. This process is repeated for every string, and the prefix is shortened as necessary until all strings have been processed or the prefix becomes empty.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+string longestCommonPrefix(vector<string>& strs) {
+    if (strs.empty()) return """";
+    string prefix = strs[0];
+    for (int i = 1; i < strs.size(); i++) {
+        while (strs[i].find(prefix) != 0) {
+            prefix = prefix.substr(0, prefix.length() - 1);
+            if (prefix.empty()) return """";
+        }
+    }
+    return prefix;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(S), where S is the sum of all characters in all strings, and the space complexity is O(1), assuming no extra space is used beyond the input."
+String,Number of flips to make binary string alternate,"1. Problem Summary: The problem is to determine the minimum number of flips required to make a given binary string alternate between '0' and '1' or '1' and '0'.
+
+2. Approach: The key to solving this problem lies in recognizing that there are only two valid alternating patterns for a binary string: starting with '0' or starting with '1'. For each character in the string, compare it against both patterns and count the number of discrepancies. For the pattern starting with '0', even indices should have '0' and odd indices should have '1', and vice versa for the pattern starting with '1'. After iterating through the string and counting discrepancies for both patterns, the result will be the minimum of the two counts. This approach efficiently determines the minimal flips by leveraging the predictable structure of alternating patterns.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int minFlips(string s) {
+    int flipCount0 = 0, flipCount1 = 0;
+    int n = s.length();
+    
+    for (int i = 0; i < n; ++i) {
+        // Check against pattern starting with '0'
+        if (i % 2 == 0) { // Even index
+            if (s[i] != '0') flipCount0++;
+            if (s[i] != '1') flipCount1++;
+        } else { // Odd index
+            if (s[i] != '1') flipCount0++;
+            if (s[i] != '0') flipCount1++;
+        }
+    }
+    
+    return min(flipCount0, flipCount1);
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the length of the string, and the space complexity is O(1) as only a constant amount of extra space is used."
+String,Find the first repeated word in string.,"1. Problem Summary: The task is to identify the first word in a given string that appears more than once. The string will consist of words separated by spaces.
+
+2. Approach: The optimal way to solve this problem is by using a hash set to track words that have been encountered as we iterate through the string. Begin by splitting the string into words. For each word, check if it already exists in the hash set. If it does, this word is the first repeated word, and we can return it. If it doesn't exist in the set, add the word to the set and continue to the next word. This approach ensures that each word is processed only once and in the order they appear.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+string findFirstRepeatedWord(const string &s) {
+    unordered_set<string> seen;
+    stringstream ss(s);
+    string word;
+    while (ss >> word) {
+        if (seen.count(word)) {
+            return word; // Word is repeated, return it
+        }
+        seen.insert(word); // Add word to set
+    }
+    return ""No repeated word""; // No repeated word found
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n), where n is the number of words in the string, and the space complexity is O(m), where m is the number of unique words in the string."
+String,Minimum number of swaps for bracket balancing.,"1. Problem Summary:  
+The problem is to find the minimum number of swaps needed to balance a string of brackets. A string is considered balanced if each opening bracket has a corresponding closing bracket in the correct order.
+
+2. Approach:  
+To solve this problem, track the imbalance of opening and closing brackets while traversing the string. Use two counters: `open` for unbalanced opening brackets and `close` for unbalanced closing brackets. For each character in the string, increment the `open` counter if it's an opening bracket. If it's a closing bracket, check if there's an unmatched opening bracket (`open > 0`); if so, decrement the `open` counter, otherwise increment the `close` counter. Each mismatch represented by the `close` counter will require a swap with an unmatched opening bracket to balance the string. The total number of swaps required will be the sum of all mismatches divided by two, since each swap fixes two mismatches.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+int minSwapsForBalancing(string s) {
+    int open = 0, close = 0;
+    for (char c : s) {
+        if (c == '[') {
+            open++;
+        } else if (c == ']') {
+            if (open > 0) {
+                open--;
+            } else {
+                close++;
+            }
+        }
+    }
+    // Each mismatched pair requires one swap to balance
+    return (close + 1) / 2;
+}
+```
+
+4. Time Complexity and Space Complexity:  
+The time complexity is O(n) where n is the length of the string, and the space complexity is O(1), as we are using a fixed amount of extra space."
+String,Find the longest common subsequence between two strings.,"1. Problem Summary: The problem is to find the longest common subsequence (LCS) between two strings. A subsequence is a sequence that appears in the same relative order, but not necessarily contiguous.
+
+2. Approach: The optimal algorithm to solve the LCS problem is Dynamic Programming. We create a 2D table (dp) where dp[i][j] represents the length of LCS of the first i characters of the first string and the first j characters of the second string. If the characters at position i-1 of the first string and j-1 of the second string are the same, then dp[i][j] = dp[i-1][j-1] + 1; otherwise, dp[i][j] = max(dp[i-1][j], dp[i][j-1]). This approach builds up the solution by solving smaller subproblems and using these solutions to construct solutions to bigger subproblems.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+int longestCommonSubsequence(string text1, string text2) {
+    int m = text1.size();
+    int n = text2.size();
+    vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
+    
+    for (int i = 1; i <= m; i++) {
+        for (int j = 1; j <= n; j++) {
+            if (text1[i-1] == text2[j-1])
+                dp[i][j] = dp[i-1][j-1] + 1;
+            else
+                dp[i][j] = max(dp[i-1][j], dp[i][j-1]);
+        }
+    }
+    return dp[m][n];
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(m*n) and the space complexity is O(m*n), where m and n are the lengths of the two input strings."
+String,Program to generate all possible valid IP addresses from given  string.,"1. Problem Summary: 
+   The problem requires generating all possible valid IPv4 addresses from a given string. A valid IP address consists of four decimal numbers separated by dots, each ranging from 0 to 255, and cannot have leading zeros unless the number itself is zero.
+
+2. Approach: 
+   Use a backtracking algorithm to explore all combinations of splitting the string into four parts. Start by iterating over the first three characters for the first segment (since 255 is the maximum number and has three digits), then recurse to determine the remaining segments. For each segment, check if it forms a valid part of an IP address (0-255, no leading zeros unless the number is '0'). If a segment is valid, proceed with the next segment; otherwise, backtrack. Ensure that exactly four segments are formed by the end of the string. This approach leverages the constraints naturally to limit unnecessary computations.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<string> restoreIpAddresses(string s) {
+    vector<string> result;
+    vector<string> ip;
+    dfs(s, 0, ip, result);
+    return result;
+}
+
+void dfs(string &s, int start, vector<string> &ip, vector<string> &result) {
+    if (ip.size() == 4 && start == s.size()) {
+        result.push_back(ip[0] + '.' + ip[1] + '.' + ip[2] + '.' + ip[3]);
+        return;
+    }
+    if (ip.size() == 4) return;
+    for (int len = 1; len <= 3 && start + len <= s.size(); ++len) {
+        string segment = s.substr(start, len);
+        if ((segment[0] == '0' && segment.size() == 1) || (segment[0] != '0' && stoi(segment) <= 255)) {
+            ip.push_back(segment);
+            dfs(s, start + len, ip, result);
+            ip.pop_back();
+        }
+    }
+}
+
+int main() {
+    string s = ""25525511135"";
+    vector<string> validIPs = restoreIpAddresses(s);
+    for (string ip : validIPs) {
+        cout << ip << endl;
+    }
+    return 0;
+}
+```
+
+4. Time Complexity and Space Complexity: 
+   The time complexity is O(1) since the input length is fixed and we only explore a constant number of possible splits. Space complexity is also O(1) for the same reason, disregarding the space needed for the output."
+String,Write a program tofind the smallest window that contains all characters of string itself.,"1. Problem Summary: The goal is to find the smallest substring in a given string that contains all the unique characters of the string itself. It's a variation of the minimum window substring problem focusing on the characters of the string.
+
+2. Approach: Use the sliding window technique along with a hash map to track the frequency of characters. First, identify all unique characters in the string and store their counts. Use two pointers, `start` and `end`, to represent the current window. Expand the `end` pointer to include new characters until the window has all unique characters. Then, contract the window from the `start` pointer to minimize its size while still containing all unique characters. Update the minimum window size whenever a valid window is found. This approach efficiently finds the smallest window by expanding and contracting the window size dynamically.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+string smallestWindow(string s) {
+    unordered_map<char, int> freqMap;
+    for (char c : s) freqMap[c]++;  // Count each unique character in the string
+    
+    int uniqueChars = freqMap.size();  // Total unique characters
+    int start = 0, end = 0, minLen = INT_MAX, count = 0;
+    int minStart = 0;  // Start index of the minimum window
+    unordered_map<char, int> windowCounts;
+
+    while (end < s.length()) {
+        char endChar = s[end];
+        windowCounts[endChar]++;
+        if (windowCounts[endChar] == freqMap[endChar])
+            count++;
+
+        while (count == uniqueChars) {
+            if (end - start + 1 < minLen) {
+                minLen = end - start + 1;
+                minStart = start;
+            }
+            char startChar = s[start];
+            windowCounts[startChar]--;
+            if (windowCounts[startChar] < freqMap[startChar])
+                count--;
+            start++;
+        }
+        end++;
+    }
+    return minLen == INT_MAX ? """" : s.substr(minStart, minLen);
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(N) where N is the length of the string, as each character is processed at most twice. The space complexity is O(1) since the character set is fixed (typically ASCII)."
+String,Rearrange characters in a string such that no two adjacent are same,"1. Problem Summary: The task is to rearrange the characters in a given string so that no two adjacent characters are the same. If it is not possible to rearrange the string to meet this criterion, the function should indicate so.
+
+2. Approach: The optimal approach uses a max-heap (priority queue) to ensure the most frequent characters are placed first, separated by less frequent ones to avoid adjacency. First, count the frequency of each character and store these in a max-heap sorted by frequency. Then, pull the most frequent character from the heap, append it to the result string, and decrease its count. To ensure no two adjacent characters are the same, store the previous character used temporarily until the next character is appended. If at any point the heap is empty but there is still a character left to append, it indicates that it's not possible to rearrange the string as required.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+string rearrangeString(string s) {
+    vector<int> count(26, 0);
+    for (char c : s) count[c - 'a']++;
+    
+    priority_queue<pair<int, char>> maxHeap;
+    for (int i = 0; i < 26; i++) {
+        if (count[i] > 0)
+            maxHeap.push({count[i], 'a' + i});
+    }
+
+    string result = """";
+    pair<int, char> prev = {-1, '#'};
+    
+    while (!maxHeap.empty()) {
+        auto [freq, ch] = maxHeap.top();
+        maxHeap.pop();
+        result += ch;
+        
+        if (prev.first > 0)
+            maxHeap.push(prev);
+        
+        prev = {freq - 1, ch};
+    }
+
+    if (result.length() != s.length())
+        return ""Not possible"";
+    return result;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n log n) due to the operations on the max-heap, where n is the length of the string. The space complexity is O(n) for storing the count and result."
+String,Minimum characters to be added at front to make string palindrome,"1. Problem Summary: 
+   The task is to determine the minimum number of characters that need to be added to the front of a given string to make it a palindrome. A palindrome reads the same backward as forward.
+
+2. Approach: 
+   The optimal approach leverages the concept of the KMP (Knuth-Morris-Pratt) pattern matching algorithm's prefix function. First, create a new string that combines the original string, a special separator not present in the string, and the reverse of the original string. Compute the prefix function (also known as the longest prefix which is also suffix - LPS array) for this combined string. The value at the last position of this LPS array will tell us the longest palindromic suffix of the combined string, which corresponds to the longest palindromic prefix of the original string. Subtract this length from the original string's length to get the minimum number of characters to add.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+int minCharsToAddToMakePalindrome(string s) {
+    string rev_s = s;
+    reverse(rev_s.begin(), rev_s.end());
+    string combined = s + ""#"" + rev_s;
+    vector<int> lps(combined.size(), 0);
+
+    // Compute the LPS array
+    for (int i = 1; i < combined.size(); i++) {
+        int j = lps[i-1];
+        while (j > 0 && combined[i] != combined[j]) {
+            j = lps[j-1];
+        }
+        if (combined[i] == combined[j]) {
+            j++;
+        }
+        lps[i] = j;
+    }
+
+    return s.size() - lps.back();
+}
+```
+
+4. Time Complexity and Space Complexity: 
+   The time complexity is O(n) where n is the length of the string, due to the linear scan for computing the LPS array. The space complexity is also O(n) for storing the LPS array."
+String,"Given a sequence of words, print all anagrams together","1. Problem Summary: The task requires grouping and printing all words that are anagrams of each other from a given list. Anagrams are words that are formed by rearranging the letters of another word.
+
+2. Approach: The optimal way to solve this problem is by using a hash map where each key is a sorted version of the word, and the value is a list of words that match this sorted key. By sorting each word in the list, you can determine if it's an anagram of another word already processed. This method leverages the property that all anagrams will have the same character sequence when sorted. Once the hash map is populated, each list in the map's values will contain a group of anagrams.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+void printAnagramsTogether(vector<string>& words) {
+    unordered_map<string, vector<string>> map;
+    for (string word : words) {
+        string sortedWord = word;
+        sort(sortedWord.begin(), sortedWord.end());
+        map[sortedWord].push_back(word);
+    }
+    for (auto it : map) {
+        for (string anagram : it.second) {
+            cout << anagram << "" "";
+        }
+        cout << endl;
+    }
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n * k log k), where n is the number of words and k is the maximum length of a word, due to sorting each word. The space complexity is O(n * k), accounting for the storage of all words in the hash map."
+String,Find the smallest window in a string containing all characters of another string,"1. Problem Summary: The task is to find the smallest substring within a given string `s` that contains all the characters of another string `t`. This substring must include every character in `t` including duplicates.
+
+2. Approach: The problem can be efficiently solved using the sliding window technique combined with a hashmap. Start by mapping each character of `t` to its frequency in a hashmap. Use two pointers to represent a window in `s`. Expand the right pointer to include characters until the window has all characters of `t`. Then, contract the window from the left to attempt to minimize its size while still containing all characters of `t`. Update the result whenever a valid smaller window is found. This method ensures that each character of `s` is processed in a linear progression, adjusting the window size dynamically to always check for the smallest valid substring.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+string smallestWindow(string s, string t) {
+    vector<int> freq_t(256, 0), freq_s(256, 0);
+    for (char c : t) {
+        freq_t[c]++;
+    }
+
+    int start = 0, minLen = INT_MAX, start_index = -1;
+    int count = 0; // number of characters matched
+    for (int i = 0; i < s.length(); i++) {
+        freq_s[s[i]]++;
+
+        if (freq_s[s[i]] <= freq_t[s[i]]) {
+            count++;
+        }
+
+        if (count == t.length()) {
+            while (freq_s[s[start]] > freq_t[s[start]]) {
+                freq_s[s[start]]--;
+                start++;
+            }
+
+            int windowLen = i - start + 1;
+            if (windowLen < minLen) {
+                minLen = windowLen;
+                start_index = start;
+            }
+        }
+    }
+
+    if (start_index == -1) return """";
+    return s.substr(start_index, minLen);
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n + m), where n is the length of string `s` and m is the length of string `t`. The space complexity is O(1), as the extra space used does not depend on the input size but only on the character set size (which is constant)."
+String,Recursively remove all adjacent duplicates,"1. Problem Summary: The problem involves removing all consecutive duplicate characters from a string recursively. Each time duplicates are removed, the process needs to be reapplied to the new string until no more adjacent duplicates can be removed.
+
+2. Approach: The optimal approach is to use recursion combined with iteration. Start by iterating through the string and building a new string. If a character is found that is the same as the next character, skip all consecutive duplicates. After the first pass, compare the newly formed string with the original string. If they are different, apply the recursion on the new string. This ensures that any new duplicates formed by the removal process are also eliminated. The use of recursion helps in breaking down the problem into smaller subproblems, making it easier to handle and understand the elimination process.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+string removeDuplicates(string s) {
+    if (s.length() == 0) return s;
+
+    string result = """";
+    int i = 0;
+    while (i < s.length()) {
+        // Check for a run of duplicates
+        int j = i + 1;
+        while (j < s.length() && s[j] == s[i]) {
+            j++;
+        }
+        // If no duplicates directly after i, add s[i] to result
+        if (j == i + 1) result += s[i];
+        i = j; // Move to the next new character
+    }
+
+    // If the result is different from the input, recurse
+    if (result != s) return removeDuplicates(result);
+    return result;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n^2) in the worst case, where n is the length of the string, due to potentially rescanning the string multiple times. The space complexity is O(n) due to the space used for recursive calls and temporary strings."
+String,String matching where one string contains wildcard characters,"1. Problem Summary: The problem involves matching two strings where the first string (pattern) may include wildcard characters. Typically, '?' matches any single character, and '*' matches any sequence of characters (including an empty sequence).
+
+2. Approach: The optimal algorithm to solve this uses dynamic programming. We create a 2D boolean DP table where `dp[i][j]` indicates whether the first `i` characters of the pattern match the first `j` characters of the string. Initialization starts by setting `dp[0][0]` to true (empty pattern matches empty string) and handling the cases where the pattern starts with multiple '*'s. For each character match or '?' wildcard in the pattern, propagate the truth value from `dp[i-1][j-1]`. For '*' in the pattern, the value is true if the pattern matched up to this point or any previous matches extended by the '*' have been true. This approach incrementally builds up to the solution by considering each substring of the pattern and string.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+bool isMatch(string s, string p) {
+    int m = s.length(), n = p.length();
+    vector<vector<bool>> dp(n + 1, vector<bool>(m + 1, false));
+    dp[0][0] = true;
+
+    for (int i = 1; i <= n; ++i) {
+        if (p[i-1] == '*') dp[i][0] = dp[i-1][0];
+    }
+
+    for (int i = 1; i <= n; ++i) {
+        for (int j = 1; j <= m; ++j) {
+            if (p[i-1] == '*') {
+                dp[i][j] = dp[i-1][j] || dp[i][j-1];
+            } else if (p[i-1] == '?' || p[i-1] == s[j-1]) {
+                dp[i][j] = dp[i-1][j-1];
+            }
+        }
+    }
+    return dp[n][m];
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n*m) and the space complexity is O(n*m), where n is the length of the pattern and m is the length of the string."
+String,Function to find Number of customers who could not get a computer,"1. Problem Summary:  
+   The problem involves determining how many customers could not be allocated a computer in a cafe due to all computers being occupied. Each customer is represented by a unique character, and their arrival and departure are denoted by the appearance and re-appearance of the character in a string sequence.
+
+2. Approach:  
+   Utilize a hash map to track the usage state of each customer and a counter to track the number of currently used computers. Iterate over the string: for each character, if it's the first occurrence (customer arrives), check if a computer is available. If yes, allocate and update the hash map; if no, increment the count of turned away customers. If it's a second occurrence (customer leaves), release the computer by updating the hash map and decrementing the used computer count. This approach ensures we only track active customers and efficiently manage the availability of computers.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int countCustomersWithoutComputer(string seq, int n) {
+    unordered_map<char, bool> inUse;
+    int usedComputers = 0, noComputer = 0;
+
+    for (char customer : seq) {
+        if (inUse.find(customer) == inUse.end()) { // Customer arrives
+            if (usedComputers < n) { // Computers available
+                inUse[customer] = true;
+                usedComputers++;
+            } else { // No computers available
+                noComputer++;
+            }
+        } else { // Customer leaves
+            inUse.erase(customer);
+            usedComputers--;
+        }
+    }
+    return noComputer;
+}
+```
+
+4. Time Complexity and Space Complexity:  
+   The time complexity is O(k), where k is the length of the sequence, and the space complexity is O(c), where c is the number of unique customers."
+String,Transform One String to Another using Minimum Number of Given Operation,"1. Problem Summary:
+   The problem involves transforming one string into another using a specified minimum number of operations, where each operation consists of moving a character from one position to another within the string.
+
+2. Approach:
+   To solve this problem, we leverage the concept of finding the longest common subsequence (LCS) between the two strings. The key insight is that the characters in the LCS do not need to be moved. Thus, the minimum number of operations required is the length of the original string minus the length of the LCS. Start by calculating the LCS using dynamic programming, where you build a 2D table to store LCS lengths for all substrings of the two strings. The value at the bottom-right cell of this table will give the length of the LCS. The number of moves required will then be the length of the original string minus this LCS value.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int minOperations(string s1, string s2) {
+    int m = s1.length(), n = s2.length();
+    vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
+
+    // Fill the dp table
+    for (int i = 1; i <= m; i++) {
+        for (int j = 1; j <= n; j++) {
+            if (s1[i-1] == s2[j-1])
+                dp[i][j] = dp[i-1][j-1] + 1;
+            else
+                dp[i][j] = max(dp[i-1][j], dp[i][j-1]);
+        }
+    }
+
+    // The number of operations needed is the length of s1 minus the length of LCS
+    return m - dp[m][n];
+}
+```
+
+4. Time Complexity and Space Complexity:
+   The time complexity is O(m*n) and the space complexity is O(m*n), where m and n are the lengths of the two strings respectively."
+String,Check if two given strings are isomorphic to each other,"1. Problem Summary: The problem is to determine if two strings, `s1` and `s2`, are isomorphic. Two strings are isomorphic if the characters in `s1` can be replaced to get `s2` while preserving the character order.
+
+2. Approach: To solve this problem, we can use two hash maps to track the character mappings from `s1` to `s2` and vice versa. For each character in `s1`, check if there exists a corresponding mapped character in `s2`. If a mapping exists, it should match the current character of `s2`. Similarly, check the reverse mapping from `s2` to `s1`. If at any point the mappings contradict or a character is already mapped differently, the strings are not isomorphic. This approach ensures that each character in one string maps to exactly one character in the other string and vice versa.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+bool areIsomorphic(string s1, string s2) {
+    if (s1.length() != s2.length()) return false;
+
+    unordered_map<char, char> map1;
+    unordered_map<char, char> map2;
+    
+    for (int i = 0; i < s1.length(); ++i) {
+        char c1 = s1[i], c2 = s2[i];
+        
+        if (map1.find(c1) != map1.end()) {
+            if (map1[c1] != c2) return false;
+        } else {
+            map1[c1] = c2;
+        }
+        
+        if (map2.find(c2) != map2.end()) {
+            if (map2[c2] != c1) return false;
+        } else {
+            map2[c2] = c1;
+        }
+    }
+    
+    return true;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the length of the strings, and the space complexity is O(1) since the size of the hash maps is bounded by the size of the character set (fixed size, typically 256 for extended ASCII characters)."
+String,Recursively print all sentences that can be formed from list of word lists,"1. Problem Summary:
+   The problem involves generating all possible sentences by choosing one word from each list in a given list of word lists. Each list contains multiple word choices, and the lists are arranged such that each position in the sentence corresponds to a list of possible words.
+
+2. Approach:
+   Use a recursive backtracking method to explore all combinations of words. Start by iterating through each word in the first list, then recursively do the same for the next list, appending each chosen word to a current sentence string or structure. When the recursion reaches the last list and a word is chosen, a complete sentence is formed. Print this sentence and backtrack to explore new combinations by substituting the next possible word from any of the previous lists.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+void printSentencesRecursive(vector<vector<string>>& lists, int currentList, vector<string>& sentence) {
+    if (currentList == lists.size()) {
+        for (string word : sentence) cout << word << "" "";
+        cout << endl;
+        return;
+    }
+    for (string word : lists[currentList]) {
+        sentence.push_back(word);
+        printSentencesRecursive(lists, currentList + 1, sentence);
+        sentence.pop_back();  // backtrack
+    }
+}
+
+void printAllSentences(vector<vector<string>>& lists) {
+    vector<string> sentence;
+    printSentencesRecursive(lists, 0, sentence);
+}
+
+int main() {
+    vector<vector<string>> wordLists = {{""you"", ""we""}, {""have"", ""are""}, {""sleep"", ""eat"", ""drink""}};
+    printAllSentences(wordLists);
+    return 0;
+}
+```
+
+4. Time Complexity and Space Complexity:
+   The time complexity is O(N^M) where N is the average number of words per list and M is the number of lists, as each word can combine with each word in the other lists. The space complexity is O(M) due to the recursive stack and the sentence construction, where M is the number of lists (depth of recursion)."

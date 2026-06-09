@@ -1,0 +1,1627 @@
+TOPIC,PROBLEM LINK,SOLUTION
+Stacks & Queues, Implement Stack from Scratch,"1. Problem Summary: Implement a stack data structure from scratch. A stack is a linear data structure that follows the Last In First Out (LIFO) principle, where the last element added to the stack is the first one to be removed.
+
+2. Approach: To implement a stack, we'll use dynamic array (like `vector` in C++) to store the elements. The main operations to implement are `push` (add an element to the top), `pop` (remove the top element), and `top` (retrieve the top element without removing it). We'll maintain an index to track the current top of the stack. `push` will add an element at the next available index, `pop` will remove the element at the current top (if the stack is not empty), and `top` will return the element at the current top. Using a vector simplifies dynamic resizing while maintaining the ability to access the top element in constant time.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+class Stack {
+private:
+    vector<int> data;
+
+public:
+    void push(int x) {
+        data.push_back(x);
+    }
+
+    void pop() {
+        if (!data.empty()) {
+            data.pop_back();
+        }
+    }
+
+    int top() {
+        if (!data.empty()) {
+            return data.back();
+        }
+        return -1; // Assuming -1 is returned when stack is empty
+    }
+
+    bool isEmpty() {
+        return data.empty();
+    }
+};
+```
+
+4. Time Complexity and Space Complexity: All operations (`push`, `pop`, `top`, `isEmpty`) have a time complexity of O(1). Space complexity is O(n), where n is the number of elements in the stack."
+Stacks & Queues, Implement Queue from Scratch,"1. Problem Summary: Implement a queue using basic data structures like arrays or linked lists. A queue is a linear data structure that follows the First In First Out (FIFO) principle, where elements are added at one end (rear) and removed from the other end (front).
+
+2. Approach: The optimal way to implement a queue from scratch is using a linked list. With a linked list, you can efficiently add elements at the end and remove elements from the beginning. Initialize two pointers, `front` and `rear`, which point to the first and the last node of the linked list respectively. For enqueue operation (adding elements), create a new node, link it after the current `rear`, and update the `rear` to this new node. For dequeue operation (removing elements), return the data from the `front` node, update the `front` to the next node, and handle the edge case when the queue becomes empty.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+class Node {
+public:
+    int data;
+    Node* next;
+    Node(int data) {
+        this->data = data;
+        this->next = nullptr;
+    }
+};
+
+class Queue {
+private:
+    Node* front;
+    Node* rear;
+public:
+    Queue() {
+        front = nullptr;
+        rear = nullptr;
+    }
+
+    void enqueue(int data) {
+        Node* newNode = new Node(data);
+        if (rear == nullptr) {
+            front = rear = newNode;
+            return;
+        }
+        rear->next = newNode;
+        rear = newNode;
+    }
+
+    int dequeue() {
+        if (front == nullptr) {
+            throw runtime_error(""Queue is empty"");
+        }
+        Node* temp = front;
+        int data = front->data;
+        front = front->next;
+        if (front == nullptr) {
+            rear = nullptr;
+        }
+        delete temp;
+        return data;
+    }
+
+    bool isEmpty() {
+        return front == nullptr;
+    }
+};
+```
+
+4. Time Complexity and Space Complexity: The time complexity for both enqueue and dequeue operations is O(1). The space complexity is O(n), where n is the number of elements in the queue."
+Stacks & Queues,Implement 2 stack in an array,"1. Problem Summary: The task is to implement two stacks within a single array. The goal is to efficiently utilize the space such that both stacks can grow and shrink without causing unnecessary memory usage or overflow unless the entire array space is exhausted.
+
+2. Approach: The array is divided conceptually into two parts from the start and the end, growing towards each other in the middle. Stack1 starts from the beginning of the array and grows towards the end, and Stack2 starts from the end of the array and grows towards the beginning. This approach ensures that space is utilized efficiently as long as there is space in the array; one stack can grow at the expense of the other shrinking. Operations like push and pop for each stack involve checking and updating indices that represent the tops of the stacks. If the indices meet, it indicates that the array is full (when pushing) or empty (when popping from an empty stack).
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+class TwoStacks {
+    int* arr;
+    int size;
+    int top1, top2;
+
+public:
+    TwoStacks(int n) { // Constructor
+        size = n;
+        arr = new int[n];
+        top1 = -1;
+        top2 = n;
+    }
+
+    void push1(int x) {
+        if (top1 < top2 - 1) {
+            top1++;
+            arr[top1] = x;
+        } else {
+            cout << ""Stack Overflow\n"";
+        }
+    }
+
+    void push2(int x) {
+        if (top1 < top2 - 1) {
+            top2--;
+            arr[top2] = x;
+        } else {
+            cout << ""Stack Overflow\n"";
+        }
+    }
+
+    int pop1() {
+        if (top1 >= 0) {
+            int x = arr[top1];
+            top1--;
+            return x;
+        } else {
+            cout << ""Stack Underflow\n"";
+            return -1;
+        }
+    }
+
+    int pop2() {
+        if (top2 < size) {
+            int x = arr[top2];
+            top2++;
+            return x;
+        } else {
+            cout << ""Stack Underflow\n"";
+            return -1;
+        }
+    }
+};
+```
+
+4. Time Complexity and Space Complexity: Both time complexity for operations (push and pop) is O(1), and space complexity is O(n) for the array storage."
+Stacks & Queues,find the middle element of a stack,"1. Problem Summary: The objective is to find the middle element of a stack without using any additional data structures to store the elements. The challenge arises since stacks traditionally allow only top element access.
+
+2. Approach: To efficiently find the middle element of a stack, utilize two pointers technique adapted to stack operations. This involves maintaining two pointers, `slow` and `fast`, where `slow` moves one step (one pop operation) and `fast` moves two steps (two pop operations). By the time `fast` reaches the end of the stack (i.e., it encounters an empty state after pops), `slow` will be at the middle of the stack. This method requires careful handling of the pop operations to ensure the stack's integrity is maintained or restored post-operation if needed.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int findMiddle(stack<int>& stk) {
+    stack<int> temp;
+    int slow = -1;
+    int fast = -1;
+    
+    // Move fast pointer two steps and slow pointer one step
+    while (!stk.empty()) {
+        slow = stk.top(); // Move slow pointer one step
+        stk.pop();
+        temp.push(slow);
+        
+        if (!stk.empty()) {
+            fast = stk.top(); // Move fast pointer one step
+            stk.pop();
+            temp.push(fast);
+        }
+        
+        if (!stk.empty()) {
+            fast = stk.top(); // Move fast pointer second step
+            stk.pop();
+            temp.push(fast);
+        }
+    }
+    
+    // Restore the original stack
+    while (!temp.empty()) {
+        stk.push(temp.top());
+        temp.pop();
+    }
+    
+    return slow; // slow now points to the middle element
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n) as each element is processed up to twice, and the space complexity is O(n) due to the use of an additional stack for temporary storage and restoration."
+Stacks & Queues,"Implement ""N"" stacks in an Array","1. Problem Summary:
+   Implementing ""N"" stacks in a single array involves managing multiple stack operations such as push, pop, and top within one contiguous block of memory, ensuring efficient use of space and minimizing memory waste.
+
+2. Approach:
+   The key to implementing multiple stacks in a single array is to use additional arrays to keep track of top positions and next available indices. Each stack will have a pointer to its top element in the main array. Use a `next` array to find the next available index for each element, and a `freeTop` to point to the start of a free slot in the array. When pushing an element, check if `freeTop` is available, update the `top` of the respective stack, and adjust `freeTop` to the next free position. For popping, update the `top` using the `next` array and adjust `freeTop` to reuse the freed slot.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+class NStacks {
+    int *arr; // Array to store stack elements
+    int *top; // Array to store indices of top elements of stacks
+    int *next; // Array to store next entry in all stacks
+    int n, s;
+    int freeTop; // To store beginning index of free list
+
+public:
+    NStacks(int N, int S) {
+        n = N; // Number of stacks
+        s = S; // Total size of array
+        arr = new int[s];
+        top = new int[n];
+        next = new int[s];
+
+        // Initialize all stacks as empty
+        for (int i = 0; i < n; i++)
+            top[i] = -1;
+
+        // Initialize all spaces as free
+        freeTop = 0;
+        for (int i = 0; i < s-1; i++)
+            next[i] = i + 1;
+        next[s-1] = -1; // -1 is used to indicate end of free list
+    }
+
+    void push(int stackNum, int value) {
+        if (freeTop == -1)
+            throw overflow_error(""Stack Overflow"");
+
+        int i = freeTop; // Store index of first free slot
+        freeTop = next[i]; // Update index of free slot to index of next slot in free list
+        arr[i] = value; // Store new element
+        next[i] = top[stackNum]; // Update next to point to old top
+        top[stackNum] = i; // Update top to point to new top
+    }
+
+    int pop(int stackNum) {
+        if (top[stackNum] == -1)
+            throw underflow_error(""Stack Underflow"");
+
+        int i = top[stackNum]; // Find index of top item in stack number 'stackNum'
+        top[stackNum] = next[i]; // Change top to store next of previous top
+        next[i] = freeTop; // Attach the previous top to the beginning of free list
+        freeTop = i; // Update freeTop to current free position
+        return arr[i]; // Return the popped element
+    }
+};
+
+```
+4. Time Complexity and Space Complexity:
+   The time complexity for push and pop operations is O(1). The space complexity is O(n + s), where n is the number of stacks and s is the size of the array."
+Stacks & Queues,Check the expression has valid or Balanced parenthesis or not.,"1. Problem Summary: The problem is to determine if the given expression has balanced parentheses. This means each opening bracket (such as '(', '{', '[') must have a corresponding closing bracket (such as ')', '}', ']') in the correct order.
+
+2. Approach: The optimal algorithm uses a stack to track opening parentheses. As you iterate through the expression, push any opening bracket onto the stack. When you encounter a closing bracket, check the stack's top element. If the stack is empty or the top does not match the corresponding opening bracket, the expression is unbalanced. If it matches, pop the stack. After processing the entire expression, if the stack is empty, the expression is balanced; otherwise, it is not. This approach intuitively mimics the nesting of expressions in programming and mathematics, making it easier to remember and replicate.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+bool isBalanced(string expr) {
+    stack<char> s;
+    for (char c : expr) {
+        if (c == '(' || c == '{' || c == '[') {
+            s.push(c);
+        } else {
+            if (s.empty()) return false;
+            char top = s.top();
+            if ((c == ')' && top != '(') || (c == '}' && top != '{') || (c == ']' && top != '[')) {
+                return false;
+            }
+            s.pop();
+        }
+    }
+    return s.empty();
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the length of the string, as we traverse the string once. The space complexity is O(n) in the worst case when all characters are opening brackets."
+Stacks & Queues,Reverse a String using Stack,"1. Problem Summary: The task is to reverse a given string using a stack data structure. The challenge involves pushing each character of the string onto a stack and then utilizing the stack's Last In, First Out (LIFO) nature to reverse the string.
+
+2. Approach: To reverse a string using a stack, first create an empty stack. Iterate over each character of the input string and push each character onto the stack. Since stacks operate on a LIFO principle, the last character pushed becomes the first to be popped. After pushing all characters, construct the reversed string by popping each character from the stack until the stack is empty. This method leverages the intrinsic properties of stacks to reverse the sequence of characters naturally.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+string reverseStringUsingStack(string s) {
+    stack<char> stk;
+    // Push all characters of string s to stack
+    for (char c : s) {
+        stk.push(c);
+    }
+
+    string reversed = """";
+    // Pop all elements from stack and form the reversed string
+    while (!stk.empty()) {
+        reversed += stk.top();
+        stk.pop();
+    }
+
+    return reversed;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n) and the space complexity is also O(n), where n is the length of the string."
+Stacks & Queues,Design a Stack that supports getMin() in O(1) time and O(1) extra space.,"1. Problem Summary:  
+   The task is to design a stack that, in addition to standard stack operations, can retrieve the minimum element in constant time (O(1)) without using additional space proportional to the number of elements in the stack.
+
+2. Approach:  
+   The key idea is to store the difference between the new element and the current minimum when pushing onto the stack, rather than storing the actual value. If the new element is smaller than the current minimum, update the minimum. When popping, if the stored value (difference) is negative, it indicates the popped element was the minimum, so adjust the minimum accordingly. This approach cleverly encodes extra information (about potential minimums) directly in the stack using the differences, thus avoiding the use of extra space for tracking minimums.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+class MinStack {
+private:
+    stack<long long> s;
+    long long minElement;
+
+public:
+    MinStack() {}
+
+    void push(int val) {
+        if (s.empty()) {
+            s.push(0);
+            minElement = val;
+        } else {
+            s.push(val - minElement);
+            if (val < minElement) {
+                minElement = val;
+            }
+        }
+    }
+
+    void pop() {
+        if (s.empty()) return;
+        long long top = s.top();
+        s.pop();
+        if (top < 0) {
+            minElement = minElement - top; // Adjust the minimum
+        }
+    }
+
+    int top() {
+        long long top = s.top();
+        if (top > 0) {
+            return minElement + top;
+        } else {
+            return minElement;
+        }
+    }
+
+    int getMin() {
+        return minElement;
+    }
+};
+```
+
+4. Time Complexity and Space Complexity:  
+   All operations (push, pop, top, getMin) run in O(1) time. The space complexity is O(1) extra space, as the stack uses only space necessary for its elements without additional structures for tracking the minimum."
+Stacks & Queues,Find the next Greater element,"1. Problem Summary: 
+   The ""Find the next Greater Element"" problem asks for each element in an array, to find the first greater element on its right. If no such element exists, the result should be -1 for that element.
+
+2. Approach: 
+   Use a stack to keep track of elements for which we have not yet found the next greater element. Traverse the array from right to left. For each element, pop elements from the stack until you find one that is greater or the stack is empty. The top element of the stack after this process is the next greater element for the current element. If the stack is empty, the next greater element is -1. Push the current element onto the stack after processing it. This approach efficiently finds the next greater element by ensuring each element is pushed and popped from the stack at most once.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+vector<int> nextGreaterElement(vector<int>& nums) {
+    int n = nums.size();
+    vector<int> result(n, -1); // Initialize result array with -1
+    stack<int> s; // Stack to store elements
+
+    for (int i = n - 1; i >= 0; --i) {
+        // Remove elements smaller than the current element
+        while (!s.empty() && s.top() <= nums[i]) {
+            s.pop();
+        }
+        // If stack is not empty, top element is next greater element
+        if (!s.empty()) {
+            result[i] = s.top();
+        }
+        // Push current element onto the stack
+        s.push(nums[i]);
+    }
+    return result;
+}
+```
+
+4. Time Complexity and Space Complexity: 
+   The time complexity is O(n) because each element is pushed and popped from the stack at most once. The space complexity is O(n) due to the stack and the result array."
+Stacks & Queues,The celebrity Problem,"1. Problem Summary: In the ""Celebrity Problem,"" you are given a matrix where the element at `[i][j]` is `true` if person `i` knows person `j`. The task is to identify the ""celebrity,"" who is known by everyone but knows no one themselves, among a group of `n` people.
+
+2. Approach: The optimal approach uses a two-pointer technique to narrow down the potential celebrity. Start by initializing two pointers, one at the beginning (`i=0`) and one at the end (`j=n-1`) of the list of people. Compare whether person `i` knows person `j`. If `i` knows `j`, then `i` cannot be the celebrity, so move the pointer to `i+1`; otherwise, `j` cannot be the celebrity, so move the pointer to `j-1`. Continue this until `i` equals `j`, at which point you have a potential celebrity candidate. Verify this candidate by ensuring they are not known by any other person and that they know no other person. This approach intuitively uses elimination to narrow down the possibilities, making it easier to remember and implement.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+int findCelebrity(int n, vector<vector<bool>>& knows) {
+    int i = 0, j = n - 1;
+    while (i < j) {
+        if (knows[i][j])
+            i++;
+        else
+            j--;
+    }
+    // i is the potential celebrity
+    for (int k = 0; k < n; k++) {
+        if (k != i && (knows[i][k] || !knows[k][i]))
+            return -1; // i is not a celebrity
+    }
+    return i; // i is the celebrity
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n) as each person is compared at most twice, and the space complexity is O(1) as no extra space is used beyond variables."
+Stacks & Queues,Arithmetic Expression evaluation,"1. Problem Summary: 
+The task involves evaluating an arithmetic expression that consists of integers and basic operators (like +, -, *, /) possibly including parentheses to denote precedence. The goal is to compute the integer result of the expression.
+
+2. Approach: 
+To evaluate arithmetic expressions, we use two stacks: one for storing operators (`operator_stack`) and another for storing operands (`operand_stack`). As we parse the expression:
+- Push numbers onto `operand_stack`.
+- For operators, if the current operator has a lower or the same precedence as the operator on top of `operator_stack`, pop from both stacks, perform the operation, and push the result back onto `operand_stack`. Then push the current operator onto `operator_stack`.
+- Handle parentheses by pushing '(' onto `operator_stack`, and on encountering ')', pop and evaluate until '(' is encountered.
+This approach ensures operations are performed in the correct order of precedence and associativity.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+int precedence(char op) {
+    if(op == '+'|| op == '-') return 1;
+    if(op == '*'|| op == '/') return 2;
+    return 0;
+}
+
+int applyOp(int a, int b, char op) {
+    switch(op) {
+        case '+': return a + b;
+        case '-': return a - b;
+        case '*': return a * b;
+        case '/': return a / b;
+    }
+    return 0;
+}
+
+int evaluateExpression(string tokens) {
+    stack<int> values;
+    stack<char> ops;
+
+    for(int i = 0; i < tokens.length(); i++) {
+        if(tokens[i] == ' ') continue;
+
+        else if(tokens[i] == '(') {
+            ops.push(tokens[i]);
+        }
+
+        else if(isdigit(tokens[i])) {
+            int val = 0;
+            while(i < tokens.length() && isdigit(tokens[i])) {
+                val = (val*10) + (tokens[i]-'0');
+                i++;
+            }
+            values.push(val);
+            i--;
+        }
+
+        else if(tokens[i] == ')') {
+            while(!ops.empty() && ops.top() != '(') {
+                int val2 = values.top();
+                values.pop();
+                
+                int val1 = values.top();
+                values.pop();
+                
+                char op = ops.top();
+                ops.pop();
+                
+                values.push(applyOp(val1, val2, op));
+            }
+            ops.pop();
+        }
+
+        else {
+            while(!ops.empty() && precedence(ops.top()) >= precedence(tokens[i])) {
+                int val2 = values.top();
+                values.pop();
+                
+                int val1 = values.top();
+                values.pop();
+                
+                char op = ops.top();
+                ops.pop();
+                
+                values.push(applyOp(val1, val2, op));
+            }
+            ops.push(tokens[i]);
+        }
+    }
+
+    while(!ops.empty()) {
+        int val2 = values.top();
+        values.pop();
+        
+        int val1 = values.top();
+        values.pop();
+        
+        char op = ops.top();
+        ops.pop();
+        
+        values.push(applyOp(val1, val2, op));
+    }
+
+    return values.top();
+}
+```
+
+4. Time Complexity and Space Complexity: 
+The time complexity is O(n) where n is the length of the expression, as each character is processed once. Space complexity is also O(n) to store the values and operators in stacks."
+Stacks & Queues,Evaluation of Postfix expression,"1. Problem Summary: 
+   The task is to evaluate a postfix expression (also known as Reverse Polish notation) where operators follow their operands. This format eliminates the need for parentheses to denote operation precedence.
+
+2. Approach: 
+   Use a stack to evaluate the postfix expression. Traverse the expression from left to right; push operands onto the stack. When an operator is encountered, pop the required number of operands from the stack, apply the operator, and push the result back onto the stack. Continue this process until the end of the expression. The final value remaining in the stack is the result of the postfix expression. This approach leverages the stack's LIFO (Last In First Out) property to handle the operands for the operators correctly.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int evaluatePostfix(string expression) {
+    stack<int> stack;
+    for (char c : expression) {
+        if (isdigit(c)) {
+            stack.push(c - '0');  // Convert char to integer
+        } else {
+            int val1 = stack.top(); stack.pop();
+            int val2 = stack.top(); stack.pop();
+            switch(c) {
+                case '+': stack.push(val2 + val1); break;
+                case '-': stack.push(val2 - val1); break;
+                case '*': stack.push(val2 * val1); break;
+                case '/': stack.push(val2 / val1); break;
+            }
+        }
+    }
+    return stack.top();
+}
+```
+
+4. Time Complexity and Space Complexity: 
+   The time complexity is O(n) where n is the length of the expression, as each character is processed once. The space complexity is O(n) in the worst case when all characters are operands and are pushed onto the stack."
+Stacks & Queues,Implement a method to insert an element at its bottom without using any other data structure.,"1. Problem Summary: The task involves inserting an element at the bottom of a stack without utilizing any additional data structures. This requires manipulation of the stack's order temporarily to place the new element at the bottom.
+
+2. Approach: The solution to this problem uses recursion, which effectively utilizes the call stack as a temporary storage to hold elements while the stack is manipulated. First, if the stack is empty, the element is directly pushed onto the stack. Otherwise, the top element of the stack is removed and stored temporarily (using recursion). After reaching the base case (an empty stack), the new element is pushed onto the stack. Then, as the recursion unwinds, each stored element is pushed back on top of the new element, thus maintaining the original order above the newly inserted bottom element. This approach intuitively mimics peeling layers off the stack, placing the new element at the base, and then restoring the layers.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+void insertAtBottom(stack<int>& stk, int element) {
+    if (stk.empty()) {
+        stk.push(element);
+    } else {
+        int topElement = stk.top();
+        stk.pop();
+        insertAtBottom(stk, element);
+        stk.push(topElement);
+    }
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n) and the space complexity is O(n), where n is the number of elements in the stack. This is due to the recursion depth being equal to the size of the stack."
+Stacks & Queues,Reverse a stack using recursion,"1. Problem Summary: The task is to reverse a given stack using only recursion without using any extra stack or data structure for storage. The stack should be reversed in-place.
+
+2. Approach: The solution involves two recursive functions: one to remove all items from the stack and another to insert each item at the bottom of the stack. First, recursively pop all elements from the stack until it's empty. For each element popped, recursively call another function to insert this element at the bottom of the stack. The insertion function places the current element at the bottom by first removing all elements, pushing the current element, and then pushing all removed elements back on top. This approach leverages the call stack of recursion as temporary storage to reverse the original stack.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+void insertAtBottom(stack<int>& st, int element) {
+    if (st.empty()) {
+        st.push(element);
+    } else {
+        int topElement = st.top();
+        st.pop();
+        insertAtBottom(st, element);
+        st.push(topElement);
+    }
+}
+
+void reverseStack(stack<int>& st) {
+    if (!st.empty()) {
+        int top = st.top();
+        st.pop();
+        reverseStack(st);
+        insertAtBottom(st, top);
+    }
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n^2), where n is the number of elements in the stack, due to the nested recursive calls. The space complexity is O(n) due to the recursive stack space used."
+Stacks & Queues,Sort a Stack using recursion,"1. Problem Summary:
+   The problem is to sort a given stack using only recursion, without using any additional data structures like another stack, array, etc. The goal is to sort the stack in such a way that the smallest elements are on top.
+
+2. Approach:
+   The problem can be solved by recursively removing all elements from the stack, and then inserting them back in a sorted order. To achieve this, we first recursively remove all elements. Then, for each element being reinserted, we ensure it is placed in the correct order by again using recursion. If the current top of the stack is greater than the element to be inserted, we remove the top, recursively insert the element, and then push the removed top back on the stack. This ensures that each element is inserted into its correct position in an already sorted stack.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+void sortedInsert(stack<int>& s, int element) {
+    if (s.empty() || element > s.top()) {
+        s.push(element);
+    } else {
+        int top = s.top();
+        s.pop();
+        sortedInsert(s, element);
+        s.push(top);
+    }
+}
+
+void sortStack(stack<int>& s) {
+    if (!s.empty()) {
+        int top = s.top();
+        s.pop();
+        sortStack(s);
+        sortedInsert(s, top);
+    }
+}
+```
+
+4. Time Complexity and Space Complexity:
+   The time complexity is O(n^2) in the worst case, where n is the number of elements in the stack. The space complexity is O(n) due to the recursive stack space."
+Stacks & Queues,Merge Overlapping Intervals,"1. Problem Summary: The ""Merge Overlapping Intervals"" problem involves taking a list of intervals and merging all overlapping intervals to produce a list of mutually exclusive intervals.
+
+2. Approach: 
+   Start by sorting the intervals based on their starting points. This allows you to easily compare the current interval with the previous one to check for overlaps. For each interval in the sorted list, check if it overlaps with the last interval in the merged list (initially empty). If they overlap (i.e., the start of the current interval is less than or equal to the end of the last merged interval), merge them by updating the end of the last merged interval to the maximum of its own end and the end of the current interval. If they do not overlap, simply add the current interval to the merged list. This method leverages sorting to simplify the comparison and merging process, making it intuitive and efficient.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<vector<int>> mergeIntervals(vector<vector<int>>& intervals) {
+    if (intervals.empty()) return {};
+    
+    sort(intervals.begin(), intervals.end());
+    vector<vector<int>> merged;
+    
+    for (auto interval : intervals) {
+        if (merged.empty() || merged.back()[1] < interval[0]) {
+            merged.push_back(interval);
+        } else {
+            merged.back()[1] = max(merged.back()[1], interval[1]);
+        }
+    }
+    
+    return merged;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n log n) due to the sorting step, and the space complexity is O(n) for storing the result."
+Stacks & Queues,Largest rectangular Area in Histogram,"1. Problem Summary:
+   The problem is to find the largest rectangular area possible in a histogram where each bar's width is 1 and the height of the bars is given by an array of integers.
+
+2. Approach:
+   The optimal approach uses a stack to keep track of the bars. Iterate through each bar and use the stack to store indices of the bars in increasing order of their heights. For each bar, if the current bar's height is less than the height of the bar indexed at the top of the stack, it indicates the end of a rectangle with height equal to the height of the bar at the stack's top. Pop the stack, calculate the area with the popped height as the smallest (or minimum height) bar, using the current index and the new top of the stack to determine the width. If the stack is empty, use the current index as the width. Push the current index onto the stack if the current bar is taller than the bar indexed at the top of the stack or if the stack is empty. After processing all bars, clear the remaining bars in the stack similarly, treating the right end of the histogram as the end of these bars.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int largestRectangleArea(vector<int>& heights) {
+    stack<int> s;
+    int maxArea = 0;
+    int n = heights.size();
+    for (int i = 0; i <= n; i++) {
+        int h = (i == n ? 0 : heights[i]);
+        while (!s.empty() && h < heights[s.top()]) {
+            int height = heights[s.top()];
+            s.pop();
+            int width = s.empty() ? i : i - s.top() - 1;
+            maxArea = max(maxArea, height * width);
+        }
+        s.push(i);
+    }
+    return maxArea;
+}
+```
+
+4. Time Complexity and Space Complexity:
+   The time complexity is O(n) and the space complexity is O(n), where n is the number of bars in the histogram."
+Stacks & Queues,Length of the Longest Valid Substring,"1. Problem Summary: The problem is to find the length of the longest valid substring of parentheses. A valid substring is one where each opening parenthesis '(' has a corresponding closing parenthesis ')'.
+
+2. Approach: The optimal approach uses a stack to track indices of characters and a variable to store the length of the longest valid substring. Start by pushing -1 onto the stack to act as a base for later valid substrings. Traverse the string: for each opening bracket '(', push its index onto the stack; for each closing bracket ')', pop the top of the stack. If the stack is empty after the pop, push the current index onto the stack (it acts as a new base). If the stack is not empty, calculate the length of the current valid substring by subtracting the current index with the new top of the stack. Update the maximum length accordingly. This method leverages the stack to efficiently track and calculate lengths of valid substrings by using indices.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+int longestValidParentheses(string s) {
+    int maxLen = 0;
+    stack<int> indexStack;
+    indexStack.push(-1);  // Base for the first valid substring
+
+    for (int i = 0; i < s.length(); i++) {
+        if (s[i] == '(') {
+            indexStack.push(i);
+        } else {
+            indexStack.pop();
+            if (indexStack.empty()) {
+                indexStack.push(i);
+            } else {
+                maxLen = max(maxLen, i - indexStack.top());
+            }
+        }
+    }
+    return maxLen;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n), where n is the length of the string, as we traverse the string once. The space complexity is O(n) in the worst case, due to the stack storage."
+Stacks & Queues,Expression contains redundant bracket or not,"1. Problem Summary:
+   The problem is to determine if an expression has redundant brackets. Redundant brackets are those which do not affect the overall value of the expression (e.g., `(a+b)` is not redundant, but `((a+b))` is).
+
+2. Approach:
+   Use a stack to track characters of the expression. Iterate over the expression: if the current character is not a closing bracket `)`, push it onto the stack. When a closing bracket is encountered, check the elements within the brackets. If there is a single type of character (operator or operand) or no operator between the brackets, it indicates redundancy. Pop elements until an opening bracket `(` is found, and check if any operator was found in the popped elements. If not, the brackets are redundant.
+
+3. Pseudo-code:
+   ```cpp
+   #include <bits/stdc++.h>
+   using namespace std;
+
+   bool hasRedundantBrackets(string expression) {
+       stack<char> s;
+       for (char c : expression) {
+           if (c == ')') {
+               bool hasOperator = false;
+               while (!s.empty() && s.top() != '(') {
+                   if (s.top() == '+' || s.top() == '-' || s.top() == '*' || s.top() == '/')
+                       hasOperator = true;
+                   s.pop();
+               }
+               s.pop(); // pop the '('
+               if (!hasOperator) return true;
+           } else {
+               s.push(c);
+           }
+       }
+       return false;
+   }
+   ```
+
+4. Time Complexity and Space Complexity:
+   The time complexity is O(n), and the space complexity is O(n), where n is the length of the expression."
+Stacks & Queues,Implement Stack using Queue,"1. Problem Summary: The task is to implement a stack data structure using only queue operations. A stack operates on the Last-In-First-Out (LIFO) principle, whereas a queue is First-In-First-Out (FIFO).
+
+2. Approach: To simulate stack behavior using queues, we can use two queues where one queue is used to hold the stack elements and the other is used during the push operation to ensure the LIFO order. For the push operation, the new element is enqueued to the auxiliary queue and all elements of the primary queue are dequeued and enqueued into the auxiliary queue, thus reversing the order. The queues are then swapped. For pop and top operations, simply dequeue from the primary queue, which now holds elements in a LIFO order.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+class StackUsingQueue {
+    queue<int> q1, q2;
+
+public:
+    void push(int x) {
+        q2.push(x); // Push x to q2
+        while (!q1.empty()) { // Move all elements from q1 to q2
+            q2.push(q1.front());
+            q1.pop();
+        }
+        swap(q1, q2); // Swap q1 and q2
+    }
+
+    void pop() {
+        if (!q1.empty()) q1.pop();
+    }
+
+    int top() {
+        return q1.empty() ? -1 : q1.front();
+    }
+
+    bool empty() {
+        return q1.empty();
+    }
+};
+```
+
+4. Time Complexity and Space Complexity: The time complexity for push is O(n), while pop and top are O(1). The space complexity is O(n), where n is the number of elements in the stack."
+Stacks & Queues,Implement Stack using Deque,"1. Problem Summary:  
+The task is to implement a stack data structure using a deque. A stack follows the Last In First Out (LIFO) principle, where the last element added is the first one to be removed.
+
+2. Approach:  
+To implement a stack using a deque, we can utilize the deque's push_back and pop_back operations to mimic the stack's push and pop operations. Since deques allow insertion and deletion at both ends efficiently, using these operations at one end will simulate stack behavior. For the `push` operation, we use `push_back` to add elements to the back of the deque, making it the top of the stack. For the `pop` operation, we use `pop_back` to remove elements from the back. The `top` operation can be implemented using the `back` function which returns the last element, representing the top of the stack. This approach ensures that all stack operations are performed in constant time.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+class Stack {
+    deque<int> dq;
+
+public:
+    void push(int x) {
+        dq.push_back(x);
+    }
+
+    void pop() {
+        if (!dq.empty()) {
+            dq.pop_back();
+        }
+    }
+
+    int top() {
+        if (!dq.empty()) {
+            return dq.back();
+        }
+        return -1; // or throw exception
+    }
+
+    bool isEmpty() {
+        return dq.empty();
+    }
+};
+```
+
+4. Time Complexity and Space Complexity:  
+All operations (push, pop, top, isEmpty) have a time complexity of O(1). The space complexity is O(n), where n is the number of elements in the stack."
+Stacks & Queues,Stack Permutations (Check if an array is stack permutation of other),"1. Problem Summary: The problem requires checking if one array is a stack permutation of another. A stack permutation is possible if elements can be pushed and popped from a stack to transform the sequence from one array to another.
+
+2. Approach: To solve this, simulate the stack operations. Start by pushing elements from the input array onto a stack until the top of the stack matches the current element of the output array. Whenever the top element matches, pop it from the stack. Continue this process until all elements of the input array are processed or until you can no longer match the output array's sequence with stack operations. If at the end of the input array, the stack is empty, then the output array is a valid stack permutation of the input array; otherwise, it is not.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+bool checkStackPermutation(vector<int>& input, vector<int>& output) {
+    stack<int> s;
+    int j = 0; // Index for output array
+
+    for (int i = 0; i < input.size(); ++i) {
+        s.push(input[i]); // Push element to stack
+
+        // Check if stack can be popped to match output
+        while (!s.empty() && s.top() == output[j]) {
+            s.pop();
+            j++; // Move to next element in output array
+        }
+    }
+
+    return s.empty(); // If stack is empty, permutation is possible
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n) and the space complexity is O(n), where n is the number of elements in the input array."
+Stacks & Queues,Implement Queue using Stack  ,"1. Problem Summary:
+   Implement a queue using two stacks. The queue should support standard operations like enqueue, dequeue, and peek efficiently.
+
+2. Approach:
+   Use two stacks, `stackIn` for enqueue operation and `stackOut` for dequeue and peek operations. For enqueue, simply push the element onto `stackIn`. For dequeue and peek, if `stackOut` is empty, transfer all elements from `stackIn` to `stackOut` by popping from `stackIn` and pushing onto `stackOut`, which reverses the order of elements to match queue's FIFO behavior. Then, for dequeue, pop from `stackOut`. For peek, return the top element of `stackOut`. This method ensures that all elements are in the correct order for queue operations by using the two-stack system to reverse order when necessary.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+class QueueUsingStack {
+    stack<int> stackIn, stackOut;
+
+    void transferStackInToOut() {
+        while (!stackIn.empty()) {
+            stackOut.push(stackIn.top());
+            stackIn.pop();
+        }
+    }
+
+public:
+    void enqueue(int x) {
+        stackIn.push(x);
+    }
+
+    int dequeue() {
+        if (stackOut.empty()) {
+            transferStackInToOut();
+        }
+        int x = stackOut.top();
+        stackOut.pop();
+        return x;
+    }
+
+    int peek() {
+        if (stackOut.empty()) {
+            transferStackInToOut();
+        }
+        return stackOut.top();
+    }
+
+    bool empty() {
+        return stackIn.empty() && stackOut.empty();
+    }
+};
+```
+
+4. Time Complexity and Space Complexity:
+   Amortized time complexity for enqueue is O(1), for dequeue and peek is O(1) amortized. Space complexity is O(n), where n is the number of elements in the queue."
+Stacks & Queues,"Implement ""n"" queue in an array","1. Problem Summary: The challenge is to efficiently implement multiple queues (specifically ""n"" queues) using a single array, ensuring optimal use of space and minimizing the overhead of queue operations like enqueue and dequeue.
+
+2. Approach: The optimal way to implement ""n"" queues in a single array is to use a dynamic array allocation technique. Each queue utilizes a front and rear index, along with a next index that points to the next available free slot in the array. We maintain three arrays: one for the actual data, one for the front and rear pointers of each queue, and one for managing free slots. Initially, all slots in the array are free. When enqueueing, update the rear to point to the next free slot, and update the next free slot using the free array. When dequeueing, update the front pointer and free the slot for future use. This method ensures efficient space utilization and constant time complexity for queue operations.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+class NQueue {
+    int *arr; // Array to store queue elements
+    int *front, *rear, *next;
+    int n, k;
+    int freeSpot; // Points to the first free spot in arr
+
+public:
+    NQueue(int n, int k) {
+        this->n = n; // Number of queues
+        this->k = k; // Total number of elements in array
+        arr = new int[k];
+        front = new int[n];
+        rear = new int[n];
+        next = new int[k];
+
+        // Initialize all queues as empty
+        for (int i = 0; i < n; i++)
+            front[i] = rear[i] = -1;
+
+        // Initialize all spaces as free
+        for (int i = 0; i < k - 1; i++)
+            next[i] = i + 1;
+        next[k - 1] = -1; // End of free list
+        freeSpot = 0; // First free spot
+    }
+
+    void enqueue(int data, int qn) {
+        if (freeSpot == -1) { // Overflow check
+            cout << ""Queue Overflow\n"";
+            return;
+        }
+
+        int index = freeSpot; // Get index where to put the element
+        freeSpot = next[index]; // Update free spot
+
+        if (front[qn] == -1) // If queue is empty
+            front[qn] = index;
+        else // Link new element to the last element
+            next[rear[qn]] = index;
+
+        next[index] = -1; // Update next as -1
+        rear[qn] = index; // Update rear
+        arr[index] = data; // Push data
+    }
+
+    int dequeue(int qn) {
+        if (front[qn] == -1) { // Check for underflow
+            cout << ""Queue Underflow\n"";
+            return -1;
+        }
+
+        int index = front[qn]; // Get the front index
+        front[qn] = next[index]; // Update front
+        next[index] = freeSpot; // Add the index to free list
+        freeSpot = index; // Update free spot
+
+        if (front[qn] == -1) // If queue becomes empty
+            rear[qn] = -1;
+
+        return arr[index]; // Return dequeued element
+    }
+};
+
+```
+4. Time Complexity and Space Complexity: The time complexity for each operation (enqueue and dequeue) is O(1), and the space complexity is O(n + k), where n is the number of queues and k is the total number of elements in the array."
+Stacks & Queues,Implement a Circular queue,"1. Problem Summary: Implement a Circular Queue using an array. The circular queue should support operations like enqueue (insert an element), dequeue (remove an element), isEmpty, isFull, front (get the front element), and rear (get the last element).
+
+2. Approach: A circular queue uses an array and two pointers, `front` and `rear`, to manage the elements. Initially, set `front` and `rear` to -1 to indicate an empty queue. For `enqueue`, check if the queue is full; if not, adjust the `rear` pointer circularly using modulo operation and insert the new element. For `dequeue`, check if the queue is empty; if not, retrieve the element at `front` and adjust the `front` pointer similarly. Use modulo to wrap around the array when necessary, which is key to making the queue circular and efficiently utilizing the array space.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+class CircularQueue {
+    vector<int> data;
+    int front, rear, size;
+
+public:
+    CircularQueue(int n) : data(n), front(-1), rear(-1), size(n) {}
+
+    bool enqueue(int value) {
+        if (isFull()) return false;
+        if (isEmpty()) front = 0;
+        rear = (rear + 1) % size;
+        data[rear] = value;
+        return true;
+    }
+
+    bool dequeue() {
+        if (isEmpty()) return false;
+        if (front == rear) front = rear = -1; // Queue becomes empty
+        else front = (front + 1) % size;
+        return true;
+    }
+
+    int Front() {
+        if (isEmpty()) return -1;
+        return data[front];
+    }
+
+    int Rear() {
+        if (isEmpty()) return -1;
+        return data[rear];
+    }
+
+    bool isEmpty() {
+        return front == -1;
+    }
+
+    bool isFull() {
+        return ((rear + 1) % size) == front;
+    }
+};
+```
+
+4. Time Complexity and Space Complexity: Time complexity for all operations (enqueue, dequeue, isEmpty, isFull, front, rear) is O(1). Space complexity is O(n), where n is the capacity of the queue."
+Stacks & Queues,LRU Cache Implementationa,"1. Problem Summary:  
+   The LRU (Least Recently Used) Cache problem involves designing a data structure that supports the operations: accessing an item and adding an item, with the constraint that the cache should not exceed a specified size limit. When the cache is full, the least recently used item should be evicted.
+
+2. Approach:  
+   An optimal way to implement an LRU cache is by using a combination of a hash map and a doubly linked list. The hash map will map keys to pointers to nodes in the doubly linked list, which contains key-value pairs. This allows for constant time complexity for both insertions and deletions. When an item is accessed or added, it is moved to the front (head) of the list to denote that it was recently used. If the cache exceeds its capacity, the item at the back (tail) of the list is removed, as it is the least recently used.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Node {
+    int key, value;
+    Node *prev, *next;
+    Node(int k, int v): key(k), value(v), prev(nullptr), next(nullptr) {}
+};
+
+class LRUCache {
+private:
+    int capacity;
+    unordered_map<int, Node*> cache;
+    Node *head, *tail;
+
+    void addNode(Node* node) {
+        node->next = head->next;
+        node->prev = head;
+        head->next->prev = node;
+        head->next = node;
+    }
+
+    void removeNode(Node* node) {
+        Node* prev = node->prev;
+        Node* next = node->next;
+        prev->next = next;
+        next->prev = prev;
+    }
+
+    void moveToHead(Node* node) {
+        removeNode(node);
+        addNode(node);
+    }
+
+    Node* popTail() {
+        Node* res = tail->prev;
+        removeNode(res);
+        return res;
+    }
+
+public:
+    LRUCache(int capacity): capacity(capacity), head(new Node(0, 0)), tail(new Node(0, 0)) {
+        head->next = tail;
+        tail->prev = head;
+    }
+
+    int get(int key) {
+        if (cache.find(key) == cache.end()) return -1;
+        Node* node = cache[key];
+        moveToHead(node);
+        return node->value;
+    }
+
+    void put(int key, int value) {
+        if (cache.find(key) != cache.end()) {
+            Node* node = cache[key];
+            node->value = value;
+            moveToHead(node);
+        } else {
+            Node* newNode = new Node(key, value);
+            cache[key] = newNode;
+            addNode(newNode);
+            if (cache.size() > capacity) {
+                Node* tail = popTail();
+                cache.erase(tail->key);
+                delete tail;
+            }
+        }
+    }
+};
+```
+
+4. Time Complexity and Space Complexity:  
+   Both time and space complexities are O(1) for access and O(N) for storage, where N is the capacity of the cache."
+Stacks & Queues,Reverse a Queue using recursion,"1. Problem Summary:  
+   The task is to reverse the elements of a given queue using recursion. This problem tests understanding of both queue operations and recursive function calls.
+
+2. Approach:  
+   To reverse a queue recursively, we first dequeue the front element and then recursively call the reverse function on the rest of the queue. After the recursive call, we enqueue the dequeued element at the rear, effectively placing it after all elements that were behind it. This process is repeated until the queue becomes empty, at which point the base case of the recursion is reached. As the recursion unwinds, each element is reinserted at the rear, reversing the order of the elements in the queue.
+
+3. Pseudo-code:  
+   ```cpp
+   #include <bits/stdc++.h>
+   using namespace std;
+
+   void reverseQueue(queue<int> &q) {
+       if (q.empty()) {
+           return; // Base case: if queue is empty, return
+       }
+       int data = q.front(); // Step 1: Dequeue the front element
+       q.pop();
+       reverseQueue(q); // Step 2: Recursively reverse the remaining queue
+       q.push(data); // Step 3: Enqueue the dequeued item at the rear
+   }
+   ```
+
+4. Time Complexity and Space Complexity:  
+   The time complexity is O(n) where n is the number of elements in the queue, as each element is processed exactly once. The space complexity is O(n) due to recursive call stack."
+Stacks & Queues,Reverse the first “K” elements of a queue,"1. Problem Summary:  
+   The problem involves reversing the first ""K"" elements of a queue while leaving the rest of the elements in their original order. The challenge is to achieve this without altering the inherent sequence of the remaining elements.
+
+2. Approach:  
+   To reverse the first ""K"" elements of a queue effectively, utilize a stack due to its LIFO (Last In First Out) nature, which naturally allows reversal. Begin by dequeuing the first ""K"" elements from the front of the queue and pushing them onto a stack. This action reverses the order of these elements. Then, pop elements from the stack and enqueue them back into the queue. For the remaining elements in the queue (those beyond the first ""K""), simply dequeue and immediately enqueue them at the back, effectively rotating the queue until the reversed section is at the front but maintaining their original order. This method ensures that the first ""K"" elements are reversed while the rest remain unchanged.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+void reverseFirstKElements(int K, queue<int> &q) {
+    stack<int> stk;
+    // Step 1: Push first K elements into stack
+    for (int i = 0; i < K; ++i) {
+        stk.push(q.front());
+        q.pop();
+    }
+    // Step 2: Pop from stack back to queue
+    while (!stk.empty()) {
+        q.push(stk.top());
+        stk.pop();
+    }
+    // Step 3: Rotate the rest of the queue elements
+    int size = q.size() - K;
+    for (int i = 0; i < size; ++i) {
+        q.push(q.front());
+        q.pop();
+    }
+}
+```
+
+4. Time Complexity and Space Complexity:  
+   The time complexity is O(n), where n is the number of elements in the queue, as each element is processed individually. The space complexity is O(k), where k is the number of elements to reverse, due to additional storage in the stack."
+Stacks & Queues,Interleave the first half of the queue with second half,"1. Problem Summary:
+   The problem involves rearranging the elements of a given queue such that the first half of the queue is interleaved with the second half. For instance, if the queue contains elements [1, 2, 3, 4, 5, 6], the output should be [1, 4, 2, 5, 3, 6].
+
+2. Approach:
+   To solve this problem, use a stack for its LIFO (Last In, First Out) property and a queue for its FIFO (First In, First Out) property. First, push half of the queue's elements onto a stack. This reverses the order of the first half. Then, dequeue the remaining elements of the queue and interleave them with the elements popped from the stack. Specifically, alternate between dequeuing an element from the original queue (which now contains only the second half) and popping an element from the stack, enqueueing both back to the queue. This approach leverages the reversing characteristic of the stack to achieve the interleaving directly.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+void interleaveQueue(queue<int>& q) {
+    if (q.size() % 2 != 0)
+        return; // the function assumes even number of elements in the queue
+    stack<int> s;
+    int halfSize = q.size() / 2;
+
+    // Step 1: Push first half elements into stack
+    for (int i = 0; i < halfSize; ++i) {
+        s.push(q.front());
+        q.pop();
+    }
+
+    // Step 2: Enqueue back the stack elements
+    while (!s.empty()) {
+        q.push(s.top());
+        s.pop();
+    }
+
+    // Step 3: Move the first half elements to the back of the queue
+    for (int i = 0; i < halfSize; ++i) {
+        q.push(q.front());
+        q.pop();
+    }
+
+    // Step 4: Interleave the elements
+    for (int i = 0; i < halfSize; ++i) {
+        s.push(q.front());
+        q.pop();
+    }
+
+    while (!s.empty()) {
+        q.push(s.top());
+        s.pop();
+        q.push(q.front());
+        q.pop();
+    }
+}
+```
+
+4. Time Complexity and Space Complexity:
+   The time complexity is O(n) and the space complexity is O(n), where n is the number of elements in the queue. This is because we use a stack to store half of the elements and perform a constant number of operations (push and pop) proportional to the number of elements."
+Stacks & Queues,Find the first circular tour that visits all Petrol Pumps,"1. Problem Summary: The problem involves finding the starting petrol pump in a circular route from which a truck can complete the entire circle without exhausting its fuel. Each petrol pump provides a certain amount of petrol and has a distance to the next pump, requiring fuel to travel.
+
+2. Approach: The solution uses a single loop iteration to identify the start point of the circular tour. Begin at the first pump and attempt to traverse the circle, tracking the total petrol and the total distance. If at any point the petrol in the truck becomes less than zero, it indicates that the tour cannot start from the current starting point. Reset the starting point to the next pump and continue. The excess petrol at each unsuccessful starting point is accumulated and if the overall surplus (total petrol minus total distance) is non-negative by the end of the loop, the last reset starting point is the solution.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+int findStartingPoint(vector<int>& petrol, vector<int>& distance) {
+    int start = 0, currentPetrol = 0, totalPetrol = 0, totalDistance = 0;
+
+    for (int i = 0; i < petrol.size(); i++) {
+        totalPetrol += petrol[i];
+        totalDistance += distance[i];
+        currentPetrol += petrol[i] - distance[i];
+
+        if (currentPetrol < 0) {
+            start = i + 1;
+            currentPetrol = 0;
+        }
+    }
+
+    if (totalPetrol >= totalDistance)
+        return start;
+    else
+        return -1;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the number of petrol pumps. The space complexity is O(1) as only a constant amount of extra space is used."
+Stacks & Queues,Minimum time required to rot all oranges,"1. Problem Summary:  
+The problem involves a grid where each cell can either be empty (0), contain a fresh orange (1), or contain a rotten orange (2). The challenge is to determine the minimum number of minutes required for all fresh oranges to become rotten, given that a rotten orange can rot its adjacent (up, down, left, right) fresh oranges each minute.
+
+2. Approach:  
+Use a Breadth-First Search (BFS) approach starting from all initially rotten oranges simultaneously. This is modeled using a queue where each entry contains the coordinates of a rotten orange and the current time. For each rotten orange, you check its four adjacent cells. If an adjacent cell contains a fresh orange, it becomes rotten, and you enqueue it with the incremented time. Continue this process until the queue is empty. Finally, check if any fresh oranges remain; if so, return -1, otherwise return the maximum time encountered during the BFS.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int minTimeToRot(vector<vector<int>>& grid) {
+    int rows = grid.size(), cols = grid[0].size();
+    queue<pair<pair<int, int>, int>> q; // ((row, col), time)
+    int freshOranges = 0, maxTime = 0;
+
+    // Enqueue all initially rotten oranges and count fresh ones
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            if (grid[i][j] == 2)
+                q.push({{i, j}, 0});
+            else if (grid[i][j] == 1)
+                freshOranges++;
+        }
+    }
+
+    // Directions array for adjacent cells
+    vector<pair<int, int>> directions = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+
+    // BFS
+    while (!q.empty()) {
+        auto front = q.front(); q.pop();
+        int r = front.first.first, c = front.first.second, time = front.second;
+        for (auto dir : directions) {
+            int newR = r + dir.first, newC = c + dir.second;
+            if (newR >= 0 && newR < rows && newC >= 0 && newC < cols && grid[newR][newC] == 1) {
+                grid[newR][newC] = 2;
+                freshOranges--;
+                q.push({{newR, newC}, time + 1});
+                maxTime = max(maxTime, time + 1);
+            }
+        }
+    }
+
+    return freshOranges > 0 ? -1 : maxTime;
+}
+```
+
+4. Time Complexity and Space Complexity:  
+The time complexity is O(N*M), where N and M are the dimensions of the grid, since each cell is processed once. The space complexity is O(N*M) in the worst case, due to the queue holding all the rotten oranges."
+Stacks & Queues,Distance of nearest cell having 1 in a binary matrix,"1. Problem Summary: The problem involves finding the minimum distance from each cell in a binary matrix to the nearest cell containing the value 1. The matrix consists of 0s and 1s, where 1 represents a particular condition (like land in a sea of water represented by 0s) and the distance is measured in terms of the number of moves to the nearest cell with 1 using only up, down, left, or right moves.
+
+2. Approach: The optimal solution utilizes a Breadth-First Search (BFS) starting from all cells containing 1 simultaneously. Initially, push all positions of 1s in the queue and set their distance to 0. For each cell that contains 0, set its initial distance to a large number or infinity. As the BFS progresses, update the distance of each neighboring cell if the current cell provides a shorter path. This simultaneous BFS ensures that each cell's distance is computed with respect to the nearest 1, effectively and efficiently spreading out from all initial 1 positions.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<vector<int>> updateMatrix(vector<vector<int>>& matrix) {
+    int rows = matrix.size(), cols = matrix[0].size();
+    vector<vector<int>> dist(rows, vector<int>(cols, INT_MAX));
+    queue<pair<int, int>> q;
+    
+    // Initialize the queue with all '1' positions and set their distance to 0.
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            if (matrix[i][j] == 1) {
+                dist[i][j] = 0;
+                q.push({i, j});
+            }
+        }
+    }
+    
+    // Directions arrays for moving in 4 possible directions
+    vector<int> dirs = {0, 1, 0, -1, 0};
+    
+    // Perform BFS
+    while (!q.empty()) {
+        auto [curRow, curCol] = q.front();
+        q.pop();
+        for (int k = 0; k < 4; ++k) {
+            int newRow = curRow + dirs[k];
+            int newCol = curCol + dirs[k+1];
+            if (newRow >= 0 && newRow < rows && newCol >= 0 && newCol < cols) {
+                if (dist[newRow][newCol] > dist[curRow][curCol] + 1) {
+                    dist[newRow][newCol] = dist[curRow][curCol] + 1;
+                    q.push({newRow, newCol});
+                }
+            }
+        }
+    }
+    return dist;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(R*C) where R is the number of rows and C is the number of columns in the matrix, as each cell is processed once. The space complexity is also O(R*C) due to the queue and distance matrix storage."
+Stacks & Queues,First negative integer in every window of size “k”,"1. Problem Summary:
+   The problem requires finding the first negative integer in every contiguous subarray of size ""k"" from a given array of integers.
+
+2. Approach:
+   Utilize a sliding window approach with the aid of a deque to efficiently track the first negative number in the current window of size ""k"". As you slide the window from left to right across the array, use the deque to store indices of negative numbers, ensuring that the deque always contains indices of negative numbers from the current window only. For each window, if the deque is not empty, the element at the front of the deque is the first negative integer for that window. If the deque is empty, the window contains no negative integers. After processing each window, slide the window one element to the right: remove indices that are out of this window from the front of the deque and add the index of the new element if it is negative.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<int> firstNegativeInWindow(vector<int>& arr, int k) {
+    int n = arr.size();
+    deque<int> dq;
+    vector<int> result;
+
+    for (int i = 0; i < n; i++) {
+        // Remove elements out of this window
+        if (!dq.empty() && dq.front() < i - k + 1) {
+            dq.pop_front();
+        }
+        
+        // Add current element index if it is negative
+        if (arr[i] < 0) {
+            dq.push_back(i);
+        }
+        
+        // Starting to add results from the index when the first full window is formed
+        if (i >= k - 1) {
+            if (!dq.empty()) {
+                result.push_back(arr[dq.front()]);
+            } else {
+                result.push_back(0); // or some indicator that there's no negative number
+            }
+        }
+    }
+    return result;
+}
+```
+
+4. Time Complexity and Space Complexity:
+   The time complexity is O(n) since each element is processed at most twice (once for insertion and once for removal from the deque). The space complexity is O(k) due to the storage of indices in the deque, where k is the window size."
+Stacks & Queues,Check if all levels of two trees are anagrams or not.,"1. Problem Summary: The task is to determine if all corresponding levels of two binary trees are anagrams of each other. This means that for each level in both trees, the nodes at that level should have the same multiset of values, irrespective of their order.
+
+2. Approach: Use breadth-first search (BFS) to traverse each level of both trees simultaneously. For each level, extract the node values into two separate lists (one for each tree). Sort these lists and compare them to check if they are identical. If at any level the lists are not identical, the trees do not have anagrams at all levels. Sorting the lists helps in easy comparison of the multiset of values. Using BFS ensures that we traverse level by level, and sorting ensures that the order of nodes does not affect the comparison.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+bool areLevelsAnagrams(TreeNode* root1, TreeNode* root2) {
+    if (!root1 && !root2) return true;
+    if (!root1 || !root2) return false;
+
+    queue<TreeNode*> q1, q2;
+    q1.push(root1);
+    q2.push(root2);
+
+    while (!q1.empty() && !q2.empty()) {
+        int n1 = q1.size(), n2 = q2.size();
+        if (n1 != n2) return false;
+
+        vector<int> level1, level2;
+        for (int i = 0; i < n1; ++i) {
+            TreeNode* node1 = q1.front(); q1.pop();
+            TreeNode* node2 = q2.front(); q2.pop();
+            level1.push_back(node1->val);
+            level2.push_back(node2->val);
+
+            if (node1->left) q1.push(node1->left);
+            if (node1->right) q1.push(node1->right);
+            if (node2->left) q2.push(node2->left);
+            if (node2->right) q2.push(node2->right);
+        }
+
+        sort(level1.begin(), level1.end());
+        sort(level2.begin(), level2.end());
+        if (level1 != level2) return false;
+    }
+    return true;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(N log N) due to the sorting of levels, where N is the total number of nodes in the larger tree. The space complexity is O(N) to store the nodes in the queue and the lists for each level."
+Stacks & Queues,Sum of minimum and maximum elements of all subarrays of size “k”.,"1. Problem Summary:
+The problem involves finding the sum of the minimum and maximum elements of all subarrays of size ""k"" from a given array. The challenge is to compute this sum efficiently for potentially large arrays and subarray sizes.
+
+2. Approach:
+To solve this problem optimally, utilize two deque data structures to maintain the indices of the minimum and maximum elements for the current window of size ""k"". As you iterate through the array, use the first deque to keep track of indices where the array elements are minimums and the second deque for maximums. For each element, remove indices from the front of the deque that are out of the current window and from the back of the deque if they are not useful (i.e., the current element is better). At each step (once the first window is filled), the front of each deque gives the minimum and maximum of the window, which can be added to the result. This method ensures that each element is processed a limited number of times, making it efficient.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int sumOfMinAndMax(vector<int>& nums, int k) {
+    int n = nums.size();
+    deque<int> minDeque, maxDeque;
+    int sum = 0;
+
+    for (int i = 0; i < n; ++i) {
+        // Remove elements not within the window
+        if (!minDeque.empty() && minDeque.front() == i - k) minDeque.pop_front();
+        if (!maxDeque.empty() && maxDeque.front() == i - k) maxDeque.pop_front();
+
+        // Maintain deques for the current window
+        while (!minDeque.empty() && nums[minDeque.back()] >= nums[i]) minDeque.pop_back();
+        while (!maxDeque.empty() && nums[maxDeque.back()] <= nums[i]) maxDeque.pop_back();
+        
+        minDeque.push_back(i);
+        maxDeque.push_back(i);
+
+        // Calculate sum starting from the first full window
+        if (i >= k - 1) {
+            sum += nums[minDeque.front()] + nums[maxDeque.front()];
+        }
+    }
+
+    return sum;
+}
+```
+
+4. Time Complexity and Space Complexity:
+The time complexity is O(n) because each element is added and removed from the deques at most once. The space complexity is O(k) due to the storage of indices in the deques."
+Stacks & Queues,Minimum sum of squares of character counts in a given string after removing “k” characters.,"1. Problem Summary: The problem involves determining the minimum sum of squares of character counts in a string after removing ""k"" characters. The goal is to strategically remove characters to minimize the sum of the squares of the remaining character frequencies.
+
+2. Approach: To solve this problem, use a greedy algorithm with a max-heap (or priority queue) to efficiently manage and update character frequencies. First, calculate the frequency of each character in the string. Then, insert these frequencies into the max-heap. For each of the ""k"" removals, extract the maximum frequency from the heap, decrement it by one, and reinsert it into the heap if it's still greater than zero. After ""k"" removals, compute the sum of the squares of the remaining frequencies in the heap. This approach ensures that we always reduce the character count that will most decrease the sum of squares, which is the character with the highest frequency.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int minSumSquareAfterKRemovals(string s, int k) {
+    unordered_map<char, int> freq;
+    for (char c : s) {
+        freq[c]++;
+    }
+
+    priority_queue<int> maxHeap;
+    for (auto& p : freq) {
+        maxHeap.push(p.second);
+    }
+
+    while (k-- > 0 && !maxHeap.empty()) {
+        int top = maxHeap.top();
+        maxHeap.pop();
+        top--;
+        if (top > 0) {
+            maxHeap.push(top);
+        }
+    }
+
+    int result = 0;
+    while (!maxHeap.empty()) {
+        int top = maxHeap.top();
+        maxHeap.pop();
+        result += top * top;
+    }
+    return result;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n + k log n) and the space complexity is O(n), where n is the length of the input string."
+Stacks & Queues,Queue based approach or first non-repeating character in a stream.,"1. Problem Summary:
+   The problem requires finding the first non-repeating character at each point in a stream of characters. As new characters are read, the output should be updated to show the current first non-repeating character.
+
+2. Approach:
+   Utilize a queue to keep track of characters and their order in the stream. Use a frequency array (or hashmap) to count occurrences of each character. For each character read from the stream, update its frequency. If its frequency is 1, push it to the queue. Then, check the front of the queue; if the character at the front has a frequency greater than 1 (due to later occurrences), pop it from the queue. Repeat this until the front character has a frequency of 1 or the queue is empty. If the queue is empty, no non-repeating character exists; otherwise, the front character of the queue is the first non-repeating character.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+void findFirstNonRepeating() {
+    queue<char> q;
+    int freq[256] = {0}; // Assuming ASCII charset
+    char stream; // This should be replaced by actual stream reading logic
+
+    while (cin >> stream) { // Simulate reading a stream
+        // Update frequency of the current character
+        freq[stream]++;
+
+        // Push current character to the queue if it's the first occurrence
+        if (freq[stream] == 1) {
+            q.push(stream);
+        }
+
+        // Check the front of the queue and remove characters that are no longer non-repeating
+        while (!q.empty() && freq[q.front()] > 1) {
+            q.pop();
+        }
+
+        // Print the first non-repeating character from the queue
+        if (!q.empty()) {
+            cout << q.front() << "" "";
+        } else {
+            cout << ""-1 ""; // No non-repeating character
+        }
+    }
+}
+```
+
+4. Time Complexity and Space Complexity:
+   The time complexity is O(n) where n is the number of characters in the stream, as each character is processed once. The space complexity is O(1) since the size of the frequency array is constant and the queue size depends only on the number of unique characters."
+Stacks & Queues,Next Smaller Element,"1. Problem Summary: Given an array, for each element, find the next smaller element present in the array. If no smaller element exists for an element, return -1 for that element. The result should be an array of integers representing the next smaller element for each index.
+
+2. Approach: Utilize a stack to keep track of indices of the elements for which the next smaller element has not been found yet. Traverse the array from left to right. For each element, while the stack is not empty and the current element is less than the element at the index stored at the top of the stack, pop the index from the stack and update the result for that index with the current element. Push the current index onto the stack after processing. This approach ensures each element is pushed and popped from the stack exactly once, making it efficient.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<int> nextSmallerElement(vector<int>& nums) {
+    int n = nums.size();
+    vector<int> result(n, -1); // initialize result array with -1
+    stack<int> s; // stack to store indices
+
+    for (int i = 0; i < n; i++) {
+        while (!s.empty() && nums[s.top()] > nums[i]) {
+            result[s.top()] = nums[i];
+            s.pop();
+        }
+        s.push(i);
+    }
+    return result;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n) and the space complexity is O(n), where n is the number of elements in the input array. Each element is pushed and popped from the stack exactly once."

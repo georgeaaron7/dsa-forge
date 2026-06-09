@@ -1,0 +1,1585 @@
+TOPIC,PROBLEM LINK,SOLUTION
+LinkedList,Write a Program to reverse the Linked List. (Both Iterative and recursive),"1. Problem Summary: The task is to reverse a singly linked list. This can be done using an iterative method or a recursive method, where the order of the nodes in the list is reversed.
+
+2. Approach: In the iterative approach, you initialize three pointers: previous (`prev`), current (`curr`), and next (`next`). Start with `prev` as `NULL` and `curr` as the head of the list. Traverse the list and in each iteration, temporarily store the next node, flip the `curr` node's next pointer to point to `prev`, and advance `prev` and `curr` pointers one step forward. For the recursive approach, the function will call itself for the rest of the list, then adjust the pointers similarly by making the next node of the current node point to the current node itself, effectively reversing their links.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+    Node(int x) : data(x), next(NULL) {}
+};
+
+// Iterative approach
+Node* reverseListIterative(Node* head) {
+    Node* prev = NULL;
+    Node* curr = head;
+    Node* next = NULL;
+    while (curr != NULL) {
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    }
+    return prev;
+}
+
+// Recursive approach
+Node* reverseListRecursive(Node* head) {
+    if (head == NULL || head->next == NULL) return head;
+    Node* rest = reverseListRecursive(head->next);
+    head->next->next = head;
+    head->next = NULL;
+    return rest;
+}
+```
+
+4. Time Complexity and Space Complexity: Both iterative and recursive methods have a time complexity of O(n), where n is the number of nodes in the list. The iterative method has a space complexity of O(1), while the recursive method has a space complexity of O(n) due to the stack space used by recursive calls."
+LinkedList,Reverse a Linked List in group of Given Size. [Very Imp],"1. Problem Summary: The problem requires reversing every consecutive sub-list of a linked list of length `k`. If the number of nodes in the last group is less than `k`, they are left as is.
+
+2. Approach: The optimal approach involves using a recursive or iterative method to reverse every block of `k` nodes in the linked list. First, traverse the list to count nodes and check if there are at least `k` nodes to reverse. If yes, reverse the first `k` nodes. Then recursively or iteratively proceed to the next segment of the list. The key is to manage pointers for the current node, previous node, and the next node effectively to detach and reverse segments, then reconnect them properly.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+Node* reverseKGroup(Node* head, int k) {
+    Node *current = head, *next = nullptr, *prev = nullptr;
+    int count = 0;
+
+    // Check if there are at least k nodes left in the linked list
+    Node* temp = head;
+    for (int i = 0; i < k; ++i) {
+        if (!temp) return head;  // Less than k nodes, no need to reverse
+        temp = temp->next;
+    }
+
+    // Reverse first k nodes
+    while (current != nullptr && count < k) {
+        next = current->next;
+        current->next = prev;
+        prev = current;
+        current = next;
+        count++;
+    }
+
+    // Now next points to (k+1)th node, recursively reverse the remaining list
+    if (next != nullptr) {
+        head->next = reverseKGroup(next, k);
+    }
+
+    // prev is now the new head of the input list
+    return prev;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n), where n is the number of nodes in the linked list, as each node is processed once. The space complexity is O(n/k) due to recursive stack space, which can be O(1) if an iterative approach is used."
+LinkedList,Write a program to Detect loop in a linked list.,"1. Problem Summary: The task is to determine if a linked list has a cycle, which occurs when a node’s next pointer points to a previous node in the list, thus forming a loop.
+
+2. Approach: The optimal algorithm to detect a loop in a linked list is Floyd’s Cycle-Finding Algorithm (also known as the tortoise and the hare algorithm). This approach uses two pointers, slow and fast, which move at different speeds. The slow pointer moves one step at a time, while the fast pointer moves two steps at a time. If there is a loop, the fast pointer will eventually meet the slow pointer inside the loop. If the fast pointer reaches the end of the list (null), there is no loop. This method is intuitive as it simulates a race track scenario where a faster runner (fast pointer) will eventually meet the slower runner (slow pointer) again if the track is circular (loop).
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+bool hasCycle(ListNode *head) {
+    if (head == nullptr) return false;
+    
+    ListNode *slow = head;
+    ListNode *fast = head->next;
+    
+    while (fast != nullptr && fast->next != nullptr) {
+        if (slow == fast) {
+            return true; // Cycle detected
+        }
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    
+    return false; // No cycle
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the number of nodes in the linked list, and the space complexity is O(1) since no extra space is used beyond the two pointers."
+LinkedList,Write a program to Delete loop in a linked list.,"1. Problem Summary: The task is to detect and remove any loop present in a singly linked list. A loop in a linked list occurs when a node's next pointer points to a previous node in the list, causing an infinite cycle.
+
+2. Approach: The optimal approach uses Floyd's Cycle Detection algorithm, also known as the tortoise and the hare algorithm, to first detect the loop. Two pointers, slow and fast (moving at one step and two steps at a time, respectively), are used. When these two pointers meet, a loop is confirmed. To remove the loop, keep one pointer where they met and move the other pointer to the head of the list. Then, move both pointers at the same pace; they will meet at the loop starting node. To remove the loop, find the last node of the loop and set its next pointer to null.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+class Node {
+public:
+    int data;
+    Node* next;
+    Node(int val) : data(val), next(nullptr) {}
+};
+
+void removeLoop(Node* head) {
+    Node *slow = head, *fast = head;
+    // Detect loop using Floyd's cycle-finding algorithm
+    while (fast != nullptr && fast->next != nullptr) {
+        slow = slow->next;
+        fast = fast->next->next;
+        if (slow == fast) { // Loop detected
+            slow = head;
+            while (slow->next != fast->next) {
+                slow = slow->next;
+                fast = fast->next;
+            }
+            // `fast` is now at the last node of the loop
+            fast->next = nullptr; // Remove loop
+            return;
+        }
+    }
+}
+
+// Utility function to add node at the end of the list
+void appendNode(Node*& head, int val) {
+    Node* newNode = new Node(val);
+    if (head == nullptr) {
+        head = newNode;
+    } else {
+        Node* temp = head;
+        while (temp->next != nullptr) {
+            temp = temp->next;
+        }
+        temp->next = newNode;
+    }
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(N) where N is the number of nodes in the linked list, as each node is visited at most twice. The space complexity is O(1) since no additional space proportional to the input size is used."
+LinkedList,Find the starting point of the loop. ,"1. Problem Summary: The problem is to detect and return the starting node of a loop in a linked list where the list may contain a cycle, meaning some nodes are revisited.
+
+2. Approach: The optimal algorithm uses Floyd’s Cycle-Finding Algorithm which involves two pointers, often called `slow` and `fast`. Both pointers start at the head of the list. The `fast` pointer moves two steps at a time, and the `slow` pointer moves one step at a time. If there is a loop, they will meet inside the loop. Once they meet, reset one pointer to the head of the list and keep the other at the meeting point, then move both one step at a time. The node where they meet again is the start of the loop. This method leverages the mathematical insight that the distance from the head to the start of the loop equals the distance from the meeting point to the start of the loop, when traversed one step at a time.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+Node* findStartOfLoop(Node* head) {
+    Node *slow = head, *fast = head;
+    bool hasCycle = false;
+
+    // Detect cycle using two-pointer technique
+    while (fast != nullptr && fast->next != nullptr) {
+        slow = slow->next;
+        fast = fast->next->next;
+        if (slow == fast) {
+            hasCycle = true;
+            break;
+        }
+    }
+
+    // Find the start of the loop
+    if (hasCycle) {
+        slow = head;
+        while (slow != fast) {
+            slow = slow->next;
+            fast = fast->next;
+        }
+        return slow; // Both pointers meet at the start of the loop
+    }
+    return nullptr; // No loop found
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n) and the space complexity is O(1), where n is the number of nodes in the linked list."
+LinkedList,Remove Duplicates in a sorted Linked List.,"1. Problem Summary: In this problem, we are given a sorted linked list, and we need to remove all duplicate numbers such that each element appears only once.
+
+2. Approach: Utilize a single traversal of the linked list to detect and remove duplicates. Start by creating a pointer, `current`, which initially points to the head of the list. As you iterate through the list, compare the value of `current` with the value of `current->next`. If they are the same, it means there's a duplicate; update `current->next` to skip the duplicate node, effectively removing it. If they are different, simply move the `current` pointer forward. This approach ensures that you only keep the first occurrence of each element and remove the subsequent duplicates.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode() : val(0), next(nullptr) {}
+    ListNode(int x) : val(x), next(nullptr) {}
+    ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
+
+void removeDuplicatesFromSortedList(ListNode* head) {
+    ListNode* current = head;
+    while (current != nullptr && current->next != nullptr) {
+        if (current->val == current->next->val) {
+            ListNode* temp = current->next;
+            current->next = temp->next;
+            delete temp;
+        } else {
+            current = current->next;
+        }
+    }
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n), where n is the number of nodes in the list, as we traverse the list once. The space complexity is O(1) since no additional space is used apart from temporary pointers."
+LinkedList,Remove Duplicates in a Un-sorted Linked List.,"1. Problem Summary: The task is to remove duplicate values from an unsorted linked list. Each node in the linked list contains a single data value and a reference to the next node.
+
+2. Approach: The optimal way to remove duplicates from an unsorted linked list is to traverse the list while keeping track of the values seen using a hash set. For each node, check if its value exists in the hash set. If it does, adjust the links to skip the current node, effectively removing it from the list. If it doesn't, add the node's value to the set and proceed. This method ensures each value only appears once in the linked list, and nodes are only visited once, making it efficient.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+void removeDuplicates(Node* head) {
+    if (head == nullptr) return;
+
+    unordered_set<int> seen;
+    Node* current = head;
+    Node* prev = nullptr;
+
+    while (current != nullptr) {
+        if (seen.find(current->data) != seen.end()) {
+            prev->next = current->next; // Skip the current node
+        } else {
+            seen.insert(current->data);
+            prev = current;
+        }
+        current = current->next;
+    }
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the number of nodes in the list, as each node is processed once. The space complexity is O(n) due to the storage required for the hash set."
+LinkedList,Write a Program to Move the last element to Front in a Linked List.,"1. Problem Summary:
+   The task is to modify a given singly linked list by moving its last element to the front. This operation should adjust the pointers accordingly without creating a new list.
+
+2. Approach:
+   Start by checking if the linked list is empty or has only one node; if either condition is true, return the list as is. Otherwise, traverse the list to find the second last node using a pointer. This pointer helps in identifying the last node and modifying the next pointers without needing extra space. Set the next of the second last node to null to remove the last node from the end, then point the next of the last node to the head of the list, and finally update the head of the list to this last node. This approach efficiently repositions the last node with minimal pointer operations.
+
+3. Pseudo-code:
+   ```cpp
+   #include <bits/stdc++.h>
+   using namespace std;
+
+   struct Node {
+       int data;
+       Node* next;
+       Node(int x) : data(x), next(nullptr) {}
+   };
+
+   void moveLastToFront(Node** head) {
+       if (*head == nullptr || (*head)->next == nullptr) return; // No need to move if list is empty or has one node
+
+       Node* secondLast = nullptr;
+       Node* last = *head;
+
+       // Find the second last node
+       while (last->next != nullptr) {
+           secondLast = last;
+           last = last->next;
+       }
+
+       // Relink nodes
+       secondLast->next = nullptr; // Break the link of second last with last
+       last->next = *head;         // Link last node with the head of the list
+       *head = last;               // Make last node the new head
+   }
+   ```
+
+4. Time Complexity and Space Complexity:
+   The time complexity is O(n), where n is the number of nodes, as it involves a single traversal of the list. The space complexity is O(1) since no additional space is used beyond pointers."
+LinkedList,Add “1” to a number represented as a Linked List.,"1. Problem Summary:  
+   The problem involves adding one to a number that is represented as a linked list, where each node contains a single digit. The digits are stored in reverse order, meaning the least significant digit is at the head of the list.
+
+2. Approach:  
+   Begin by reversing the linked list so that the least significant digit becomes the last node, simplifying the addition process. Traverse the reversed list, starting from the head, and add one to the first node. Propagate any carry forward by continuing to add it to the next node until there are no carries left or you reach the end of the list. If there is a carry left when the end of the list is reached, append a new node with the carry. Finally, reverse the list again to restore the original order but updated with the addition.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+Node* reverseLinkedList(Node* head) {
+    Node *prev = nullptr, *current = head, *next = nullptr;
+    while (current != nullptr) {
+        next = current->next;
+        current->next = prev;
+        prev = current;
+        current = next;
+    }
+    return prev;
+}
+
+Node* addOneToLinkedList(Node* head) {
+    head = reverseLinkedList(head);
+    Node* current = head;
+    int carry = 1; // Initial carry is 1 because we are adding 1
+    while (current != nullptr && carry > 0) {
+        current->data += carry;
+        carry = current->data / 10;
+        current->data %= 10;
+        if (current->next == nullptr && carry > 0) {
+            current->next = new Node{carry, nullptr};
+            carry = 0;
+        }
+        current = current->next;
+    }
+    return reverseLinkedList(head);
+}
+```
+
+4. Time Complexity and Space Complexity:  
+   The time complexity is O(n) where n is the number of nodes in the linked list, as we potentially traverse the list up to three times (twice for reversing and once for adding). The space complexity is O(1) since we use a constant amount of extra space."
+LinkedList,Add two numbers represented by linked lists.,"1. Problem Summary: Given two numbers represented by two linked lists, where each node contains a single digit, the task is to add these two numbers and return the sum as a linked list. The digits are stored in reverse order, meaning the 1's digit is at the head of the list.
+
+2. Approach: Start by initializing a dummy node which will eventually be the head of the resulting linked list and a pointer `current` to track the current node for result insertion. Use a variable `carry` to keep track of any overflow between digits. Iterate through both linked lists simultaneously, adding corresponding digits along with the `carry` from the previous step. If a list is exhausted, continue with the remaining digits of the other list. After the loop, check if there's any remaining `carry` and add it as a new node. This approach ensures that we handle different lengths of lists and possible carry over the largest digit.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode(int x) : val(x), next(NULL) {}
+};
+
+ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+    ListNode dummy(0);
+    ListNode* current = &dummy;
+    int carry = 0;
+    
+    while (l1 != NULL || l2 != NULL || carry != 0) {
+        int sum = carry;
+        if (l1 != NULL) {
+            sum += l1->val;
+            l1 = l1->next;
+        }
+        if (l2 != NULL) {
+            sum += l2->val;
+            l2 = l2->next;
+        }
+        carry = sum / 10;
+        current->next = new ListNode(sum % 10);
+        current = current->next;
+    }
+    
+    return dummy.next;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(max(n, m)) where n and m are the lengths of the two linked lists. The space complexity is O(max(n, m)) for the new list."
+LinkedList,Intersection of two Sorted Linked List.,"1. Problem Summary: The problem involves finding the intersection of two sorted linked lists. This means identifying and returning a new list containing only the elements that are present in both input lists without duplicates.
+
+2. Approach: Start by initializing two pointers, one for each list. Traverse both lists simultaneously using a while loop. If the elements pointed by both pointers are the same, add the element to the result list and move both pointers forward. If the element in the first list is smaller, move its pointer forward to try and find a matching element. Do the same for the second list if its element is smaller. Continue this process until the end of either list is reached. This approach leverages the sorted order of the lists to efficiently find common elements without needing extra space for hash tables or similar structures.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+Node* findIntersection(Node* head1, Node* head2) {
+    Node* result = nullptr;
+    Node** tail = &result;
+
+    while (head1 != nullptr && head2 != nullptr) {
+        if (head1->data == head2->data) {
+            *tail = new Node{head1->data, nullptr};
+            tail = &((*tail)->next);
+            head1 = head1->next;
+            head2 = head2->next;
+        } else if (head1->data < head2->data) {
+            head1 = head1->next;
+        } else {
+            head2 = head2->next;
+        }
+    }
+    return result;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n + m), where n and m are the lengths of the two linked lists. The space complexity is O(min(n, m)) for storing the intersection elements."
+LinkedList,Intersection Point of two Linked Lists.,"1. Problem Summary:
+   The problem involves finding the intersection point of two singly linked lists. The intersection is defined as the point where the two lists meet, which can be identified by the same node reference (not value).
+
+2. Approach:
+   To find the intersection point efficiently, use two pointers, one for each list. Start both pointers at the head of their respective lists. Traverse through the lists; when a pointer reaches the end of a list, redirect it to the beginning of the other list. Continue this process until the two pointers meet. If there is an intersection, the pointers will meet at the intersection node due to the equalization of the paths they travel. If no intersection exists, both pointers will eventually be null at the same time, indicating the end of traversal without intersection.
+
+3. Pseudo-code:
+   ```cpp
+   #include <bits/stdc++.h>
+   using namespace std;
+
+   struct ListNode {
+       int val;
+       ListNode *next;
+       ListNode(int x) : val(x), next(NULL) {}
+   };
+
+   ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+       ListNode *ptr1 = headA;
+       ListNode *ptr2 = headB;
+
+       while (ptr1 != ptr2) {
+           ptr1 = ptr1 ? ptr1->next : headB;
+           ptr2 = ptr2 ? ptr2->next : headA;
+       }
+
+       return ptr1; // This can be either the intersection node or NULL
+   }
+   ```
+
+4. Time Complexity and Space Complexity:
+   The time complexity is O(m+n), where m and n are the lengths of the two lists. The space complexity is O(1), as no additional space is used."
+LinkedList,Merge Sort For Linked lists.[Very Important],"1. Problem Summary: Merge sort for linked lists involves sorting a linked list using the merge sort algorithm, which is a divide-and-conquer approach. The algorithm splits the list into halves, recursively sorts each half, and then merges the sorted halves.
+
+2. Approach: The merge sort algorithm for linked lists starts by finding the middle of the list, which can be done using the slow and fast pointer technique (where the slow pointer moves one step and the fast pointer moves two steps). Once the list is split into two halves, the merge sort function is recursively called on each half. After the two halves are sorted, a merge function is used to combine these two sorted halves into a single sorted list. This merge function compares the heads of the two lists, picking the smaller value each time to construct the new sorted list, until all elements are merged.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+Node* findMiddle(Node* head) {
+    Node *slow = head, *fast = head->next;
+    while (fast && fast->next) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    return slow;
+}
+
+Node* merge(Node* left, Node* right) {
+    Node dummy;
+    Node* tail = &dummy;
+    while (left && right) {
+        if (left->data < right->data) {
+            tail->next = left;
+            left = left->next;
+        } else {
+            tail->next = right;
+            right = right->next;
+        }
+        tail = tail->next;
+    }
+    tail->next = (left) ? left : right;
+    return dummy.next;
+}
+
+Node* mergeSort(Node* head) {
+    if (!head || !head->next) return head;
+    Node* middle = findMiddle(head);
+    Node* nextOfMiddle = middle->next;
+    middle->next = nullptr;
+    Node* left = mergeSort(head);
+    Node* right = mergeSort(nextOfMiddle);
+    return merge(left, right);
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity of merge sort for linked lists is O(n log n), and the space complexity is O(log n) due to the recursive stack space used."
+LinkedList,Quicksort for Linked Lists.[Very Important],"1. Problem Summary: The task is to sort a linked list using a quicksort algorithm. Unlike arrays, linked lists have different memory allocation and access patterns, which requires adapting the quicksort algorithm specifically for linked lists.
+
+2. Approach: Quicksort for linked lists involves selecting a pivot and partitioning the list into two sub-lists: one with elements less than the pivot and another with elements greater than or equal to the pivot. Recursively apply quicksort to these sub-lists. The key challenge is efficiently partitioning the list and updating links without extra space. Choose the rightmost element as the pivot for simplicity, and use two pointers approach to create the two sub-lists. After partitioning, recursively sort the sub-lists and link them properly to form the sorted linked list.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+Node* getTail(Node* cur) {
+    while (cur != nullptr && cur->next != nullptr)
+        cur = cur->next;
+    return cur;
+}
+
+Node* partition(Node* head, Node* end, Node newHead, Node newEnd) {
+    Node* pivot = end;
+    Node* prev = nullptr, *cur = head, *tail = pivot;
+
+    while (cur != pivot) {
+        if (cur->data < pivot->data) {
+            if ((*newHead) == nullptr)
+                (*newHead) = cur;
+            prev = cur;
+            cur = cur->next;
+        } else {
+            if (prev)
+                prev->next = cur->next;
+            Node* tmp = cur->next;
+            cur->next = nullptr;
+            tail->next = cur;
+            tail = cur;
+            cur = tmp;
+        }
+    }
+
+    if ((*newHead) == nullptr)
+        (*newHead) = pivot;
+
+    (*newEnd) = tail;
+
+    return pivot;
+}
+
+Node* quickSortRecur(Node* head, Node* end) {
+    if (!head || head == end)
+        return head;
+
+    Node *newHead = nullptr, *newEnd = nullptr;
+    Node* pivot = partition(head, end, &newHead, &newEnd);
+
+    if (newHead != pivot) {
+        Node* tmp = newHead;
+        while (tmp->next != pivot)
+            tmp = tmp->next;
+        tmp->next = nullptr;
+
+        newHead = quickSortRecur(newHead, tmp);
+
+        tmp = getTail(newHead);
+        tmp->next = pivot;
+    }
+
+    pivot->next = quickSortRecur(pivot->next, newEnd);
+
+    return newHead;
+}
+
+Node* quickSort(Node* head) {
+    Node* tail = getTail(head);
+    return quickSortRecur(head, tail);
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n log n) on average and O(n^2) in the worst case when the list is already sorted or reverse sorted. Space complexity is O(log n) due to recursion stack space in average case and O(n) in the worst case."
+LinkedList,Find the middle Element of a linked list.,"1. Problem Summary: The task is to find the middle element of a singly linked list. If the list has an even number of elements, the second of the two middle elements is considered the middle.
+
+2. Approach: The optimal way to find the middle element of a linked list is to use the two-pointer technique, often referred to as the ""Tortoise and Hare"" approach. Initialize two pointers, `slow` and `fast`, at the head of the linked list. Move the `fast` pointer two steps for every one step the `slow` pointer takes. When the `fast` pointer reaches the end of the list, the `slow` pointer will be at the middle. This method efficiently locates the middle element without needing to know the size of the list beforehand.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode(int x) : val(x), next(NULL) {}
+};
+
+ListNode* findMiddle(ListNode* head) {
+    ListNode *slow = head, *fast = head;
+    while (fast != NULL && fast->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    return slow;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the number of elements in the linked list, and the space complexity is O(1) as we are using a constant amount of space."
+LinkedList,Check if a linked list is a circular linked list.,"1. Problem Summary: The task is to determine whether a given linked list is circular, meaning the last node points back to some previous node in the list, rather than ending with a null pointer.
+
+2. Approach: The most efficient way to detect if a linked list is circular is by using the Floyd’s Cycle-Finding Algorithm, also known as the tortoise and the hare algorithm. This involves using two pointers, `slow` and `fast`, which move through the list at different speeds (`slow` moves one step at a time and `fast` moves two steps at a time). If the linked list has a cycle, the `fast` pointer will eventually meet the `slow` pointer, proving the existence of a cycle. If `fast` reaches the end of the list (`fast` or `fast->next` becomes null), the list is not circular.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+bool isCircularLinkedList(Node* head) {
+    if (head == NULL) return false;
+
+    Node* slow = head;
+    Node* fast = head;
+
+    while (fast != NULL && fast->next != NULL) {
+        slow = slow->next;          // move slow by 1 step
+        fast = fast->next->next;    // move fast by 2 steps
+
+        if (slow == fast) {
+            return true;            // cycle detected
+        }
+    }
+
+    return false;                   // no cycle found
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n), where n is the number of nodes in the list, and the space complexity is O(1) as it uses only two pointers regardless of the size of the input list."
+LinkedList,Split a Circular linked list into two halves.,"1. Problem Summary: The task involves splitting a circular linked list into two equal halves. If the list has an odd number of nodes, the extra node should go to the first half.
+
+2. Approach: To split a circular linked list, first determine its length by traversing from the head until you encounter the head again. Use two pointers, `slow` and `fast`, for finding the middle of the list: move `slow` by one step and `fast` by two steps. When `fast` completes the loop or is at the last node, `slow` will be at the middle. To split, adjust the `next` pointers of the nodes at the end of the first half and the second half to point to their respective starts, forming two separate circular linked lists.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+void splitList(Node* head, Node head1_ref, Node head2_ref) {
+    if (head == NULL) return;
+    
+    Node *slow = head;
+    Node *fast = head;
+    
+    // Using fast and slow pointer to find middle
+    while (fast->next != head && fast->next->next != head) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    // If even number of nodes, move fast to the last node
+    if (fast->next->next == head) {
+        fast = fast->next;
+    }
+
+    // Set the head of the first half
+    *head1_ref = head;
+
+    // Set the head of the second half
+    if (head->next != head) {
+        *head2_ref = slow->next;
+    }
+
+    // Make the second half a circular linked list
+    fast->next = slow->next;
+    
+    // Make the first half a circular linked list
+    slow->next = head;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the number of nodes in the list, as we traverse the list once. The space complexity is O(1) as we only use a few extra pointers."
+LinkedList,Write a Program to check whether the Singly Linked list is a palindrome or not.,"1. Problem Summary:
+   The task is to determine whether a given singly linked list is a palindrome. A list is considered a palindrome if it reads the same forwards and backwards.
+
+2. Approach:
+   The optimal approach involves finding the middle of the linked list, reversing the second half, and then comparing the first half with the reversed second half. First, use the fast and slow pointer technique to locate the middle of the linked list. Once the middle is found, reverse the second half of the list. After reversal, compare the nodes of the first half with the nodes of the reversed second half. If all corresponding nodes are equal, the list is a palindrome. Finally, restore the list by reversing the second half again if needed.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode(int x) : val(x), next(NULL) {}
+};
+
+bool isPalindrome(ListNode* head) {
+    if (head == NULL || head->next == NULL) return true;
+
+    // Find the end of the first half and reverse the second half.
+    ListNode *slow = head, *fast = head, *prev = NULL, *temp;
+    while (fast != NULL && fast->next != NULL) {
+        fast = fast->next->next;
+        slow = slow->next;
+    }
+
+    // Reverse the second half
+    while (slow != NULL) {
+        temp = slow->next;
+        slow->next = prev;
+        prev = slow;
+        slow = temp;
+    }
+
+    // Check palindrome
+    ListNode* left = head;
+    ListNode* right = prev;
+    while (right != NULL) {
+        if (left->val != right->val) return false;
+        left = left->next;
+        right = right->next;
+    }
+
+    return true;
+}
+```
+
+4. Time Complexity and Space Complexity:
+   The time complexity is O(n) since each node is visited at most twice, and the space complexity is O(1) as we are only using a fixed amount of extra space."
+LinkedList,Deletion from a Circular Linked List.,"1. Problem Summary: 
+   Deletion from a Circular Linked List involves removing a specified node from a list where the last node points back to the first node, forming a circle. This operation needs careful handling of pointers to maintain the circular nature of the list.
+
+2. Approach: 
+   To delete a node from a circular linked list, you first need to find the node to be deleted. Traverse the list starting from the head until you find the target node. Special cases include deleting the head node or a node in between. If deleting the head, you need to set the head to the next node and adjust the last node's next pointer. For other nodes, link the previous node's next pointer to the target node's next pointer. Care must be taken to update pointers correctly to not break the circular structure.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+void deleteNode(Node** head, int key) {
+    if (*head == nullptr) return; // Empty list, nothing to delete
+
+    Node* curr = *head, *prev = nullptr;
+    while (curr->data != key) { // Find the node with the given key
+        if (curr->next == *head) return; // Node not found
+        prev = curr;
+        curr = curr->next;
+    }
+
+    if (curr->next == curr) { // Only one node in the list
+        *head = nullptr;
+    } else {
+        if (curr == *head) { // Delete the head node
+            *head = curr->next;
+        }
+        prev->next = curr->next; // Bypass the current node
+    }
+    delete curr; // Free the memory of the deleted node
+}
+
+void printList(Node* head) {
+    if (head == nullptr) return;
+    Node* temp = head;
+    do {
+        cout << temp->data << "" "";
+        temp = temp->next;
+    } while (temp != head);
+    cout << endl;
+}
+```
+4. Time Complexity and Space Complexity: 
+   The time complexity is O(n), where n is the number of nodes in the list, as we may need to traverse the entire list. The space complexity is O(1), as no additional space is required beyond temporary variables."
+LinkedList,Reverse a Doubly Linked list.,"1. Problem Summary: The task is to reverse a doubly linked list, where each node contains pointers to both the previous and next nodes. The goal is to invert the direction of the list so that the head becomes the tail and vice versa.
+
+2. Approach: To reverse a doubly linked list, traverse the list from head to tail. For each node, swap its `next` and `prev` pointers. After swapping these pointers for all nodes, reset the head of the list to what was previously the tail node. This approach leverages the bidirectional nature of the doubly linked list, allowing the reversal process to be straightforward and intuitive. Remembering the swapping of `next` and `prev` pointers is key and forms the crux of the algorithm.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+    Node* prev;
+};
+
+Node* reverseDoublyLinkedList(Node* head) {
+    Node* current = head;
+    Node* temp = NULL;
+
+    while (current != NULL) {
+        // Swap the next and prev pointers
+        temp = current->prev;
+        current->prev = current->next;
+        current->next = temp;
+        
+        // Move to the next node in the original list
+        current = current->prev;
+    }
+
+    // Reset head to the new front of the list
+    if (temp != NULL)
+        head = temp->prev;
+
+    return head;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n), where n is the number of nodes in the list, as we traverse the list once. The space complexity is O(1) since we only use a few extra variables for the reversal process."
+LinkedList,Find pairs with a given sum in a DLL.,"1. Problem Summary:
+   The problem is to find all pairs of elements in a doubly linked list (DLL) that sum up to a given value. The list is unsorted and may contain duplicates.
+
+2. Approach:
+   To solve this efficiently, utilize a two-pointer technique. Initialize two pointers, one (`left`) at the start and the other (`right`) at the end of the DLL. Iterate through the list by comparing the sum of the values at these pointers to the target sum. If the sum is less than the target, move the `left` pointer to the right (to increase the sum). If the sum is more than the target, move the `right` pointer to the left (to decrease the sum). Continue this until the `left` pointer is less than the `right` pointer. This method efficiently finds all pairs without needing extra space for a hash table and handles the sorted nature of pointers inherently.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+    Node* prev;
+};
+
+void findPairsWithSum(Node* head, int target) {
+    Node* left = head;
+    Node* right = head;
+    while (right->next != nullptr) { // Move right pointer to the end of the DLL
+        right = right->next;
+    }
+
+    while (left != right && right->next != left) { // Ensure pointers do not cross
+        int currentSum = left->data + right->data;
+        if (currentSum == target) {
+            cout << ""("" << left->data << "", "" << right->data << "")"" << endl;
+            left = left->next; // Move towards each other
+            right = right->prev;
+        } else if (currentSum < target) {
+            left = left->next; // Move left pointer to the right
+        } else {
+            right = right->prev; // Move right pointer to the left
+        }
+    }
+}
+```
+
+4. Time Complexity and Space Complexity:
+   The time complexity is O(n) as each element is visited at most twice, and the space complexity is O(1) since no additional space is used beyond the two pointers."
+LinkedList,Count triplets in a sorted DLL whose sum is equal to given value “X”.,"1. Problem Summary: 
+   The task is to find the number of triplets in a given sorted doubly linked list (DLL) that add up to a specified sum ""X"". Each triplet consists of three different nodes from the list.
+
+2. Approach: 
+   Utilize a combination of a fixed pointer and the two-pointer technique. Start by fixing one node at a time and use two pointers to find pairs in the remaining part of the list that sum up to ""X"" minus the value of the fixed node. For each node in the DLL, consider it as the first element of the triplet, then search for two other elements in the remaining list with a sum that equals ""X"" minus the fixed node's value. Move the left pointer rightward if the sum is less than the required value and the right pointer leftward if the sum is more. This approach efficiently searches for the required pairs without needing to check all possible combinations.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int countTriplets(Node* head, int X) {
+    int count = 0;
+    if (!head) return count;
+    Node* current, *first, *last;
+
+    // For each node in the DLL
+    for (current = head; current != nullptr; current = current->next) {
+        first = current->next;
+        last = head;
+        while (last->next != nullptr) last = last->next; // Move to end of DLL
+
+        // Two-pointer approach
+        while (first != last && last->next != first) {
+            int sum = current->data + first->data + last->data;
+            if (sum == X) {
+                count++;
+                first = first->next;
+                last = last->prev;
+            } else if (sum < X) {
+                first = first->next;
+            } else {
+                last = last->prev;
+            }
+        }
+    }
+    return count;
+}
+```
+
+4. Time Complexity and Space Complexity: 
+   The time complexity is O(n^2), where n is the number of nodes in the DLL, as the outer loop runs linearly through the list and the inner two-pointer approach potentially iterates through the rest of the list. The space complexity is O(1) since no additional space is used proportional to the input size."
+LinkedList,Sort a “k”sorted Doubly Linked list.[Very IMP],"1. Problem Summary: The problem involves sorting a ""k""-sorted doubly linked list where each element is at most k positions away from its target position in the sorted order. The goal is to achieve a fully sorted list.
+
+2. Approach: The optimal way to sort a ""k""-sorted doubly linked list is by using a min-heap. First, traverse the linked list and insert the first 'k+1' elements into the heap. The heap helps in always getting the smallest element in O(log k) time. Then, for each subsequent element in the list, extract the minimum from the heap, add it back to the linked list, and insert the next element from the list into the heap. Continue this process until the heap is empty. This method ensures that the linked list is sorted as we are always inserting the smallest element found in the heap back into the list, maintaining the order.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+    Node* prev;
+    Node(int val): data(val), next(nullptr), prev(nullptr) {}
+};
+
+void sortKSortedDoublyLinkedList(Node* head, int k) {
+    if (head == nullptr) return;
+
+    priority_queue<int, vector<int>, greater<int>> minHeap;
+    Node* node = head;
+    Node* newHead = nullptr;
+    Node* last = nullptr;
+
+    // Insert first k+1 items to min heap
+    for (int i = 0; node != nullptr && i <= k; ++i) {
+        minHeap.push(node->data);
+        node = node->next;
+    }
+
+    // Process the remaining elements
+    while (!minHeap.empty()) {
+        if (newHead == nullptr) {
+            newHead = last = new Node(minHeap.top());
+        } else {
+            last->next = new Node(minHeap.top());
+            last->next->prev = last;
+            last = last->next;
+        }
+        minHeap.pop();
+        
+        if (node != nullptr) {
+            minHeap.push(node->data);
+            node = node->next;
+        }
+    }
+
+    // Update original head pointer
+    head = newHead;
+}
+
+// Usage example (not part of the function)
+int main() {
+    Node* head = new Node(3);
+    head->next = new Node(2);
+    head->next->prev = head;
+    head->next->next = new Node(4);
+    head->next->next->prev = head->next;
+    sortKSortedDoublyLinkedList(head, 2);
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n log k) due to the operations on the min-heap, and the space complexity is O(k) for storing elements in the heap."
+LinkedList,Rotate DoublyLinked list by N nodes.,"1. Problem Summary: The task is to rotate a doubly linked list clockwise by N nodes. Rotating means shifting the nodes such that after rotation, the Nth node from the end becomes the new head of the list.
+
+2. Approach: To rotate the list, first, determine the length of the doubly linked list. Compute the effective rotations needed by taking `N % length` to handle cases where N is greater than the length. Identify the new head by traversing the list up to the `length - N` node. Adjust the previous and next pointers of relevant nodes to re-link the list into its new rotated form. This approach leverages the properties of the doubly linked list, allowing efficient re-linking without additional storage, making it intuitive and easy to remember.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+struct Node {
+    int data;
+    Node *next, *prev;
+};
+
+void rotate(Node **head, int N) {
+    if (N == 0 || *head == NULL) return;
+
+    // Compute the size of the list
+    Node *current = *head;
+    int length = 1;
+    while (current->next != NULL) {
+        current = current->next;
+        length++;
+    }
+
+    // N may be greater than length of linked list
+    N = N % length;
+    if (N == 0) return;
+
+    // Find the (length-N)th node
+    current = *head;
+    for (int i = 1; i < length - N; i++) {
+        current = current->next;
+    }
+
+    // Adjust pointers
+    Node *new_head = current->next;
+    current->next->prev = NULL;
+    current->next = NULL;
+    Node *last = new_head;
+    while (last->next != NULL) {
+        last = last->next;
+    }
+    last->next = *head;
+    (*head)->prev = last;
+    *head = new_head;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the number of nodes in the list, and the space complexity is O(1) as no extra space is used."
+LinkedList,Rotate a Doubly Linked list in group of Given Size.[Very IMP],"1. Problem Summary:
+   The problem involves rotating a doubly linked list in groups of a specified size. If the size of the group exceeds the remaining nodes, those nodes are rotated within themselves.
+
+2. Approach:
+   To solve this problem, one can use a recursive approach where each group of nodes is reversed and then the process is repeated for the next group. Start by reversing the first 'k' nodes in the list, then recursively call the function for the remaining list. Once the remaining list is processed, reattach the reversed part to the returned head of the recursively processed list. Care must be taken to handle cases where the number of nodes is less than 'k' and to properly adjust the previous and next pointers of the nodes to maintain the doubly linked list properties.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Node {
+    int data;
+    Node *next, *prev;
+};
+
+Node* rotateInGroup(Node* head, int k) {
+    if (!head) return NULL;
+    Node *current = head;
+    Node *next = NULL;
+    Node *newHead = NULL;
+    int count = 0;
+
+    // Reverse first k nodes of the doubly linked list
+    while (current != NULL && count < k) {
+        next = current->next;
+        current->next = newHead;
+        if (newHead != NULL) newHead->prev = current;
+        newHead = current;
+        current = next;
+        count++;
+    }
+
+    // Recursively process the rest of the list and attach it back
+    if (next != NULL) {
+        head->next = rotateInGroup(next, k);
+        if (head->next)
+            head->next->prev = head;
+    }
+
+    return newHead;
+}
+```
+
+4. Time Complexity and Space Complexity:
+   The time complexity of this algorithm is O(n) as each node is processed once. The space complexity is O(1) for iterative and O(n/k) for recursive (due to recursion stack) where 'k' is the group size."
+LinkedList,Can we reverse a linked list in less than O(n) ?,"1. Problem Summary: The task is to reverse a singly linked list. The challenge is to determine if this can be achieved in less than O(n) time complexity, where n is the number of nodes in the linked list.
+
+2. Approach: Reversing a linked list requires changing the direction of the `next` pointers of all nodes. Starting with a `NULL` pointer for the reversed list's end, iterate through each node of the original list, and at each step, detach the node and reattach it at the beginning of the new reversed list. This method ensures each node is visited and rearranged exactly once, making it intuitive that the process cannot be faster than O(n) as each node needs individual processing. Remembering this approach is facilitated by visualizing the movement of each node from its original position to a new position at the head of a forming reversed list.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+Node* reverseLinkedList(Node* head) {
+    Node* prev = NULL;
+    Node* current = head;
+    Node* next = NULL;
+    while (current != NULL) {
+        next = current->next; // Save next node
+        current->next = prev; // Reverse current node's pointer
+        prev = current;       // Move pointers one position ahead
+        current = next;
+    }
+    head = prev;
+    return head;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n) as each node is processed exactly once. The space complexity is O(1) as only a few extra pointers are used."
+LinkedList,Why Quicksort is preferred for. Arrays and Merge Sort for LinkedLists ?,"1. Problem Summary:
+   Quicksort is generally preferred for arrays due to its efficient in-place sorting with a good average case performance, while Merge Sort is favored for LinkedLists because of its ability to sort data structures that do not provide random access efficiently.
+
+2. Approach:
+   Quicksort partitions an array around a pivot element, sorting elements around the pivot, and recursively applying the same strategy to the sub-arrays. This in-place sorting makes it memory efficient for arrays. Conversely, Merge Sort divides a LinkedList into halves, sorts each half, and merges them. This method benefits LinkedLists as it does not require random access, and splitting and merging are more straightforward due to the inherent properties of linked nodes. The merge operations are naturally efficient in linked structures, avoiding the additional memory overhead seen in arrays.
+
+3. Pseudo-code:
+```cpp
+// Quicksort for Array
+void quickSort(vector<int>& arr, int low, int high) {
+    if (low < high) {
+        int pi = partition(arr, low, high);
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
+    }
+}
+
+int partition(vector<int>& arr, int low, int high) {
+    int pivot = arr[high];
+    int i = (low - 1);
+    for (int j = low; j <= high - 1; j++) {
+        if (arr[j] < pivot) {
+            i++;
+            swap(arr[i], arr[j]);
+        }
+    }
+    swap(arr[i + 1], arr[high]);
+    return (i + 1);
+}
+
+// Merge Sort for LinkedList
+void mergeSort(Node** headRef) {
+    Node* head = *headRef;
+    Node* a;
+    Node* b;
+    if ((head == NULL) || (head->next == NULL)) {
+        return;
+    }
+    frontBackSplit(head, &a, &b);
+    mergeSort(&a);
+    mergeSort(&b);
+    *headRef = sortedMerge(a, b);
+}
+
+Node* sortedMerge(Node* a, Node* b) {
+    Node* result = NULL;
+    if (a == NULL)
+        return b;
+    else if (b == NULL)
+        return a;
+    if (a->data <= b->data) {
+        result = a;
+        result->next = sortedMerge(a->next, b);
+    } else {
+        result = b;
+        result->next = sortedMerge(a, b->next);
+    }
+    return result;
+}
+```
+
+4. Time Complexity and Space Complexity:
+   Quicksort has a time complexity of O(n log n) on average but can degrade to O(n^2) in the worst case; it uses O(log n) space due to recursion. Merge Sort consistently runs in O(n log n) time for both arrays and LinkedLists, but uses O(n) space in arrays and O(log n) space in LinkedLists due to different memory allocation needs."
+LinkedList,Flatten a Linked List,"1. Problem Summary: The ""Flatten a Linked List"" problem involves taking a linked list where each node contains a next pointer and a child pointer (which may point to another linked list), and flattening it into a single list with all nodes following the order given by next and child pointers.
+
+2. Approach: The optimal way to flatten the linked list is to use a depth-first search (DFS) approach, where you recursively flatten the child linked lists first, then append them to the main list. Start from the head of the linked list, and for each node, if it has a child, recursively flatten this child list, then merge the child list into the main list right after the current node and adjust the next pointers accordingly. Continue this process until all nodes are visited. This approach ensures that all child lists are flattened and appended in the correct order.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+    Node* child;
+};
+
+Node* flattenList(Node* head) {
+    if (!head) return head;
+    
+    Node* current = head;
+    while (current != nullptr) {
+        if (current->child) {
+            Node* childList = flattenList(current->child);
+            Node* nextNode = current->next;
+            current->next = childList;
+            Node* tail = childList;
+            while (tail->next != nullptr) {
+                tail = tail->next;
+            }
+            tail->next = nextNode;
+            current->child = nullptr; // Unlink the child pointer
+        }
+        current = current->next;
+    }
+    return head;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n), where n is the total number of nodes in the list, since each node is processed once. The space complexity is O(1) if we ignore the recursion stack, otherwise O(d) where d is the depth of the list."
+LinkedList,"Sort a LL of 0's, 1's and 2's","1. Problem Summary: The problem involves sorting a singly linked list that contains only the integers 0, 1, and 2. The goal is to sort the list such that all zeros are at the beginning, followed by all ones, and then all twos.
+
+2. Approach: The optimal algorithm is based on the Dutch National Flag problem by Edsger Dijkstra. Instead of sorting directly, count the occurrences of 0s, 1s, and 2s as you traverse the linked list once. Then, traverse the list again, updating nodes to 0 until you've exhausted your count of 0s, then set nodes to 1 until all 1s are placed, and finally set remaining nodes to 2. This approach avoids the complications of swapping node values and works directly with setting values, making it easier to implement and remember.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+void sortLinkedList(Node* head) {
+    int count[3] = {0, 0, 0}; // Initialize count of 0s, 1s, and 2s
+    Node* ptr = head;
+
+    // First pass: count the numbers
+    while (ptr != nullptr) {
+        count[ptr->data]++;
+        ptr = ptr->next;
+    }
+
+    // Second pass: overwrite the data based on counts
+    ptr = head;
+    int i = 0;
+    while (ptr != nullptr) {
+        if (count[i] == 0) i++;
+        else {
+            ptr->data = i;
+            count[i]--;
+            ptr = ptr->next;
+        }
+    }
+}
+
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n) as the list is traversed twice, and the space complexity is O(1) since we use only a constant amount of extra space."
+LinkedList,Clone a linked list with next and random pointer,"1. Problem Summary: The problem involves cloning a linked list where each node has two pointers: `next`, pointing to the next node in the sequence, and `random`, which points to any node in the list or null. The goal is to create a deep copy of the list with all the intricate random connections accurately replicated.
+
+2. Approach: The optimal approach uses a three-step technique to clone the list without requiring extra space for a hashmap. First, interweave the original list with cloned nodes, placing each clone immediately after its original. Second, assign the random pointers for the cloned nodes by using the original nodes' random pointers. Finally, restore the original list and separate out the cloned nodes. This method leverages the original list structure to avoid the need for additional data structures for mapping nodes, making it intuitive and easy to remember and replicate.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+struct Node {
+    int val;
+    Node* next;
+    Node* random;
+    Node(int x) : val(x), next(NULL), random(NULL) {}
+};
+
+Node* cloneLinkedList(Node* head) {
+    if (!head) return NULL;
+    
+    // Step 1: Create interleaved cloned nodes
+    Node* curr = head;
+    while (curr) {
+        Node* clone = new Node(curr->val);
+        clone->next = curr->next;
+        curr->next = clone;
+        curr = clone->next;
+    }
+    
+    // Step 2: Assign random pointers to the cloned nodes
+    curr = head;
+    while (curr) {
+        if (curr->random)
+            curr->next->random = curr->random->next;
+        curr = curr->next->next;
+    }
+    
+    // Step 3: Separate the cloned list from the original list
+    curr = head;
+    Node* cloneHead = head->next;
+    Node* copy = cloneHead;
+    while (curr) {
+        curr->next = curr->next->next;
+        if (copy->next)
+            copy->next = copy->next->next;
+        curr = curr->next;
+        copy = copy->next;
+    }
+    
+    return cloneHead;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n) as each node is visited a constant number of times. The space complexity is O(1) since no extra space proportional to the input size is used."
+LinkedList,Merge K sorted Linked list,"1. Problem Summary: The problem involves merging k sorted linked lists into a single sorted linked list. Each linked list is sorted in non-decreasing order, and the challenge is to efficiently combine all these lists into one sorted list.
+
+2. Approach: The optimal algorithm to solve this problem utilizes a min-heap (or priority queue) to keep track of the smallest elements from each list. Start by pushing the head of each linked list into the min-heap. The heap helps in retrieving the smallest element efficiently. In each iteration, extract the smallest element from the heap, add it to the result list, and if this element has a next node in its list, push that node into the heap. Continue this process until the heap is empty. This approach ensures that each insertion and removal from the heap is logarithmic with respect to the number of lists, and every element is processed.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode(int x) : val(x), next(NULL) {}
+};
+
+struct compare {
+    bool operator()(ListNode* l1, ListNode* l2) {
+        return l1->val > l2->val;
+    }
+};
+
+ListNode* mergeKLists(vector<ListNode*>& lists) {
+    priority_queue<ListNode*, vector<ListNode*>, compare> heap;
+    for (ListNode* list : lists) {
+        if (list) heap.push(list);
+    }
+
+    ListNode* dummy = new ListNode(0);
+    ListNode* tail = dummy;
+
+    while (!heap.empty()) {
+        tail->next = heap.top();
+        heap.pop();
+        tail = tail->next;
+
+        if (tail->next) heap.push(tail->next);
+    }
+
+    return dummy->next;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(N log k), where N is the total number of nodes and k is the number of lists, and the space complexity is O(k) for the heap storage."
+LinkedList,Multiply 2 no. represented by LL,"1. Problem Summary: The problem involves multiplying two numbers where each number is represented as a linked list. Each node in the linked list represents a single digit, and the digits are stored in reverse order, i.e., the least significant digit comes first.
+
+2. Approach: Start by reversing both linked lists to facilitate easier multiplication as the least significant digits are at the head of the lists. Use two nested loops to multiply each digit of the first number by each digit of the second number, similar to the ""grade school"" method of multiplication. Store intermediate results in an array where the index represents the power of 10 (position of the digit). After computing the products, handle carry over for each position in the result array. Finally, convert the result array back into a linked list.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode(int x) : val(x), next(NULL) {}
+};
+
+ListNode* multiplyTwoLists(ListNode* l1, ListNode* l2) {
+    // Reverse both lists
+    l1 = reverseList(l1);
+    l2 = reverseList(l2);
+
+    // Prepare to collect results
+    vector<int> result(200, 0); // assuming maximum 100 digits per number
+
+    // Multiply each digit
+    ListNode *i = l1;
+    int pos1 = 0;
+    while (i != NULL) {
+        ListNode *j = l2;
+        int pos2 = pos1;
+        while (j != NULL) {
+            result[pos2] += i->val * j->val;
+            j = j->next;
+            pos2++;
+        }
+        i = i->next;
+        pos1++;
+    }
+
+    // Handle carry
+    int carry = 0;
+    for (int k = 0; k < result.size(); k++) {
+        result[k] += carry;
+        carry = result[k] / 10;
+        result[k] %= 10;
+    }
+
+    // Convert result to linked list
+    ListNode dummy(0);
+    ListNode *current = &dummy;
+    for (int num : result) {
+        if (dummy.next == NULL && num == 0) continue; // skip leading zeros
+        current->next = new ListNode(num);
+        current = current->next;
+    }
+
+    return dummy.next ? dummy.next : new ListNode(0);
+}
+
+ListNode* reverseList(ListNode* head) {
+    ListNode *prev = NULL, *current = head, *next = NULL;
+    while (current != NULL) {
+        next = current->next;
+        current->next = prev;
+        prev = current;
+        current = next;
+    }
+    return prev;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(m*n) and the space complexity is O(m+n), where m and n are the lengths of the two linked lists."
+LinkedList,Delete nodes which have a greater value on right side,"1. Problem Summary:  
+   The task is to modify a given singly linked list by removing all nodes that have a greater value node to their right. After processing, every node in the list should either be the greatest in the list or have only smaller values to its right.
+
+2. Approach:  
+   The optimal way to solve this problem is by reversing the linked list, then iterating through it while keeping track of the maximum value seen so far. If a node's value is less than the maximum, delete the node. Otherwise, update the maximum and continue. This approach ensures that we only keep nodes that are greater than all nodes to their right in the original list. Finally, reverse the list again to restore the original order but with the required nodes deleted. This method leverages the simple operations of list traversal and node deletion, making it intuitive and straightforward to implement.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+Node* reverse(Node* head) {
+    Node *prev = nullptr, *current = head, *next = nullptr;
+    while (current != nullptr) {
+        next = current->next;
+        current->next = prev;
+        prev = current;
+        current = next;
+    }
+    return prev;
+}
+
+void deleteGreaterNodes(Node*& head) {
+    head = reverse(head);
+    Node *current = head, *maxNode = head;
+    while (current != nullptr && current->next != nullptr) {
+        if (current->next->data < maxNode->data) {
+            Node* temp = current->next;
+            current->next = temp->next;
+            delete temp;
+        } else {
+            current = current->next;
+            maxNode = current;
+        }
+    }
+    head = reverse(head);
+}
+```
+
+4. Time Complexity and Space Complexity:  
+   The time complexity is O(n) as each node is visited a constant number of times. The space complexity is O(1) since no additional space proportional to the input size is used."
+LinkedList,Segregate even and odd nodes in a Linked List,"1. Problem Summary: 
+The task is to rearrange the nodes in a singly linked list such that all the even-valued nodes precede the odd-valued nodes. The relative order among even and odd nodes should be preserved.
+
+2. Approach:
+The optimal way to solve this problem is by using four pointers: `evenStart`, `evenEnd`, `oddStart`, and `oddEnd`. Initially, all are set to null. Traverse the linked list from the head to the end. For each node, check if it contains an even value. If it does, add it to the end of the even list (using `evenEnd`). If the node contains an odd value, add it to the end of the odd list (using `oddEnd`). At the end of the traversal, connect the `evenEnd` to the `oddStart` to link the even and odd lists. This approach ensures that the original relative order among even and odd nodes is maintained without requiring additional space for new nodes.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+void segregateEvenOdd(Node** head) {
+    Node *evenStart = nullptr, *evenEnd = nullptr;
+    Node *oddStart = nullptr, *oddEnd = nullptr;
+    
+    Node* current = *head;
+    while (current != nullptr) {
+        int value = current->data;
+        if (value % 2 == 0) { // Node is even
+            if (evenStart == nullptr) {
+                evenStart = current;
+                evenEnd = evenStart;
+            } else {
+                evenEnd->next = current;
+                evenEnd = evenEnd->next;
+            }
+        } else { // Node is odd
+            if (oddStart == nullptr) {
+                oddStart = current;
+                oddEnd = oddStart;
+            } else {
+                oddEnd->next = current;
+                oddEnd = oddEnd->next;
+            }
+        }
+        current = current->next;
+    }
+    
+    if (evenStart == nullptr || oddStart == nullptr) {
+        return;
+    }
+    
+    evenEnd->next = oddStart;
+    oddEnd->next = nullptr;
+    *head = evenStart;
+}
+
+```
+
+4. Time Complexity and Space Complexity:
+The time complexity is O(n), where n is the number of nodes in the linked list, as we traverse the list once. The space complexity is O(1) as we only use a fixed number of pointers regardless of the input size."
+LinkedList,Program for n’th node from the end of a Linked List,"1. Problem Summary: The goal is to find the n-th node from the end of a singly linked list. This is a common problem in data structures where you need to access elements from the end without knowing the length of the list beforehand.
+
+2. Approach: The optimal approach to solve this problem is to use the two-pointer technique, specifically the ""fast and slow"" pointer method. Initially, both pointers, `fast` and `slow`, are set at the head of the list. First, advance the `fast` pointer by `n` nodes. Then, move both `fast` and `slow` pointers simultaneously until the `fast` pointer reaches the end of the list. At this point, the `slow` pointer will be at the desired n-th node from the end. This approach intuitively uses the distance between the two pointers to count down from the end of the list, making it easy to remember and implement.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+Node* nthFromEnd(Node* head, int n) {
+    Node *fast = head, *slow = head;
+    for (int i = 0; i < n; i++) {
+        if (fast == nullptr) return nullptr; // n is larger than the number of nodes
+        fast = fast->next;
+    }
+    while (fast != nullptr) {
+        fast = fast->next;
+        slow = slow->next;
+    }
+    return slow;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(L) where L is the length of the linked list, and the space complexity is O(1) as it uses a constant amount of space."
+LinkedList,Find the first non-repeating character from a stream of characters,"1. Problem Summary: 
+   The problem focuses on identifying the first non-repeating character at any moment from a continuous stream of characters. As characters are read one by one, the solution should efficiently update and return the first unique character seen so far.
+
+2. Approach: 
+   Use a combination of a queue and a hash map to track characters and their repetition status. The hash map stores characters as keys and their repetition status as values. For every new character read from the stream, update the hash map. If a character appears for the first time, mark it in the map and enqueue it. If it's a repeated character, update its status in the map. For determining the first non-repeating character, dequeue elements until you find one that is marked as non-repeated in the hash map. This queue helps in maintaining the order of characters as they appear.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+void findFirstNonRepeating() {
+    queue<char> q;
+    unordered_map<char, int> charCount;
+
+    char stream[] = ""stream_of_characters_here""; // Example stream
+    for (char ch : stream) {
+        // Increment the count of the character in the hash map
+        charCount[ch]++;
+
+        // If it's the first occurrence, push to queue
+        if (charCount[ch] == 1) {
+            q.push(ch);
+        }
+
+        // Check the front of the queue for the first non-repeating character
+        while (!q.empty() && charCount[q.front()] > 1) {
+            q.pop();
+        }
+
+        // Output the first non-repeating character from the stream
+        if (!q.empty()) {
+            cout << ""First non-repeating character: "" << q.front() << endl;
+        } else {
+            cout << ""No non-repeating character found."" << endl;
+        }
+    }
+}
+```
+
+4. Time Complexity and Space Complexity: 
+   The time complexity is O(N) where N is the length of the stream, as each character is processed once. The space complexity is O(1), considering the input character set (e.g., ASCII) is fixed and limited."

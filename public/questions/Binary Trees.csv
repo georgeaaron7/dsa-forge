@@ -1,0 +1,1351 @@
+TOPIC,PROBLEM LINK,SOLUTION
+Binary Trees,level order traversal,"1. Problem Summary: Level order traversal of a binary tree involves visiting all the nodes at each depth level from left to right before moving on to nodes at the next depth level. This is also known as Breadth-First Search (BFS) traversal for trees.
+
+2. Approach: The optimal method to achieve level order traversal is by using a queue. Start by pushing the root node into the queue. While the queue is not empty, remove the front node, record its value, and then push its left and right children (if they exist) into the queue in that order. This ensures that nodes are visited level by level and from left to right within each level. The use of the queue is crucial as it naturally follows the FIFO (First In First Out) principle required for level order traversal.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<vector<int>> levelOrderTraversal(TreeNode* root) {
+    vector<vector<int>> result;
+    if (root == nullptr) return result;
+    
+    queue<TreeNode*> q;
+    q.push(root);
+    
+    while (!q.empty()) {
+        int levelSize = q.size();
+        vector<int> currentLevel;
+        
+        for (int i = 0; i < levelSize; ++i) {
+            TreeNode* node = q.front();
+            q.pop();
+            currentLevel.push_back(node->val);
+            if (node->left != nullptr) q.push(node->left);
+            if (node->right != nullptr) q.push(node->right);
+        }
+        
+        result.push_back(currentLevel);
+    }
+    
+    return result;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n), where n is the number of nodes in the tree, since each node is processed exactly once. The space complexity is O(m), where m is the maximum number of nodes at any level in the tree, which is required for the queue."
+Binary Trees,Reverse Level Order traversal,"1. Problem Summary: Reverse Level Order traversal of a binary tree involves traversing the tree from the bottom level to the top level, and from left to right within each level. The output is a list of node values in this specific order.
+
+2. Approach: The optimal way to achieve Reverse Level Order traversal is by using a queue for level order traversal and a stack to reverse the order. Start by pushing the root node into the queue. For each node processed, push its children (first right, then left to maintain left-to-right order in final output) into the queue. Simultaneously, push the node's value into a stack. This ensures that the lowermost nodes' values are on top of the stack. After processing all nodes, pop values from the stack to get them in bottom-up order.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+vector<int> reverseLevelOrderTraversal(TreeNode* root) {
+    vector<int> result;
+    if (!root) return result;
+    
+    queue<TreeNode*> q;
+    stack<int> s;
+    q.push(root);
+    
+    while (!q.empty()) {
+        TreeNode* current = q.front();
+        q.pop();
+        s.push(current->val);
+        
+        if (current->right) 
+            q.push(current->right);
+        if (current->left) 
+            q.push(current->left);
+    }
+    
+    while (!s.empty()) {
+        result.push_back(s.top());
+        s.pop();
+    }
+    
+    return result;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(N) where N is the number of nodes in the tree, as each node is processed exactly once. The space complexity is also O(N) due to the usage of a queue and a stack, both of which can hold at most N elements in the worst case."
+Binary Trees,Height of a tree,"1. Problem Summary: The height of a binary tree is defined as the maximum depth from the root node to the furthest leaf node. The problem involves determining this height for a given binary tree.
+
+2. Approach: To find the height of a binary tree, we can use a recursive approach. Starting from the root, recursively determine the height of the left and right subtrees. The height of the tree rooted at any node will be one more than the maximum height of its left and right subtrees. This approach leverages the divide-and-conquer strategy by breaking the problem down into smaller subproblems (i.e., heights of subtrees) and combining their results. The recursion naturally follows the tree structure, making it intuitive and easy to remember.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
+};
+
+int height(Node* node) {
+    if (node == NULL)
+        return 0; // Base case: the height of an empty tree is 0
+    int leftHeight = height(node->left); // Recursively find the height of the left subtree
+    int rightHeight = height(node->right); // Recursively find the height of the right subtree
+    return 1 + max(leftHeight, rightHeight); // The height of the tree is the max of the heights of its subtrees plus one
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n), where n is the number of nodes in the tree, as each node is visited once. The space complexity is O(h), where h is the height of the tree, due to the recursion stack."
+Binary Trees,Diameter of a tree,"1. Problem Summary: The diameter of a binary tree is the length of the longest path between any two nodes in the tree. This path may or may not pass through the root.
+
+2. Approach: Calculate the height of the tree recursively while keeping track of the maximum diameter found so far. For each node, the potential diameter is the sum of the heights of its left and right subtrees. Update the maximum diameter at each node. The height of a node is calculated as 1 plus the maximum height of its left or right subtree. This approach ensures that each node is visited once and both height and maximum path calculations are done in the same traversal, optimizing the process.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+struct TreeNode {
+    int val;
+    TreeNode *left, *right;
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+};
+
+int diameterOfBinaryTree(TreeNode* root) {
+    int maxDiameter = 0;
+
+    function<int(TreeNode*)> depth = [&](TreeNode* node) {
+        if (!node) return 0;
+        int leftHeight = depth(node->left);
+        int rightHeight = depth(node->right);
+        maxDiameter = max(maxDiameter, leftHeight + rightHeight);
+        return 1 + max(leftHeight, rightHeight);
+    };
+
+    depth(root);
+    return maxDiameter;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n), where n is the number of nodes in the tree, since each node is visited once. The space complexity is O(h), where h is the height of the tree, due to recursive stack space."
+Binary Trees,Mirror of a tree,"1. Problem Summary: 
+   The ""Mirror of a tree"" problem involves creating a mirror image of a binary tree such that the structure of the tree is flipped around its central axis. In simpler terms, all left children become right children and vice versa throughout the entire tree.
+
+2. Approach: 
+   To mirror a binary tree, we recursively swap the left and right children of every node in the tree. Start from the root and swap its children, then recursively apply the same procedure to the left child (which after swapping becomes the right child) and the right child (which becomes the left child). This recursive approach ensures that each subtree is mirrored. The process is intuitive as it mimics the physical action of flipping or mirroring an image, where elements on the left move to the right and vice versa.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+};
+
+void mirrorTree(TreeNode* root) {
+    if (root == nullptr) return;
+
+    // Swap the left and right children
+    swap(root->left, root->right);
+
+    // Recursively mirror the subtrees
+    mirrorTree(root->left);
+    mirrorTree(root->right);
+}
+```
+
+4. Time Complexity and Space Complexity: 
+   The time complexity is O(n), where n is the number of nodes in the tree, as each node is visited once. The space complexity is O(h), where h is the height of the tree, due to the recursive stack space used."
+Binary Trees,Inorder Traversal of a tree both using recursion and Iteration,"1. Problem Summary: 
+Inorder traversal of a binary tree involves visiting the nodes in a left-root-right sequence. This problem can be solved using both recursive and iterative methods.
+
+2. Approach: 
+For the recursive approach, the function calls itself to traverse the left subtree, then processes the current node, and finally calls itself to traverse the right subtree. This is a natural and straightforward method following the definition of inorder traversal. For the iterative approach, a stack is used to simulate the recursion. Start by pushing all left children of the root into the stack until there are no more left children. Then, pop a node from the stack, process it, and if it has a right child, repeat the process starting from this right child. This method effectively mimics the recursive stack behavior using an explicit stack data structure.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+// Recursive approach
+void inorderRecursive(TreeNode* root, vector<int>& result) {
+    if (root == nullptr) return;
+    inorderRecursive(root->left, result);
+    result.push_back(root->val);
+    inorderRecursive(root->right, result);
+}
+
+// Iterative approach
+vector<int> inorderIterative(TreeNode* root) {
+    vector<int> result;
+    stack<TreeNode*> stk;
+    TreeNode* current = root;
+    
+    while (current != nullptr || !stk.empty()) {
+        while (current != nullptr) {
+            stk.push(current);
+            current = current->left;
+        }
+        current = stk.top(); stk.pop();
+        result.push_back(current->val);
+        current = current->right;
+    }
+    return result;
+}
+```
+
+4. Time Complexity and Space Complexity: 
+Both recursive and iterative approaches have a time complexity of O(n), where n is the number of nodes in the tree. The space complexity is also O(n) in the worst case due to the depth of the recursion stack or the size of the iterative stack, respectively."
+Binary Trees,Preorder Traversal of a tree both using recursion and Iteration,"1. Problem Summary: Preorder traversal of a binary tree involves visiting the root node first, followed by the recursive traversal of the left subtree, and then the right subtree. The challenge is to implement this traversal both recursively and using an iterative approach.
+
+2. Approach: 
+   - Recursive Approach: Begin at the root and process it (e.g., print/store the value). Recursively apply the same procedure first to the left child and then to the right child. This approach directly follows the definition of preorder traversal.
+   - Iterative Approach: Use a stack to simulate the recursion. Start by pushing the root node onto the stack. While the stack is not empty, pop the top node, process it, and push its right child followed by its left child onto the stack (right child first to ensure the left child is processed first as the stack is LIFO).
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+struct TreeNode {
+    int val;
+    TreeNode *left, *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+
+// Recursive Preorder Traversal
+void preorderTraversalRecursive(TreeNode* root) {
+    if (root == NULL) return;
+    cout << root->val << "" "";
+    preorderTraversalRecursive(root->left);
+    preorderTraversalRecursive(root->right);
+}
+
+// Iterative Preorder Traversal
+void preorderTraversalIterative(TreeNode* root) {
+    if (root == NULL) return;
+    stack<TreeNode*> stk;
+    stk.push(root);
+    while (!stk.empty()) {
+        TreeNode* node = stk.top();
+        stk.pop();
+        cout << node->val << "" "";
+        if (node->right) stk.push(node->right);
+        if (node->left) stk.push(node->left);
+    }
+}
+```
+
+4. Time Complexity and Space Complexity: Both recursive and iterative approaches have a time complexity of O(n), where n is the number of nodes in the tree. The space complexity is also O(n) due to the use of the system stack for recursion or an explicit stack for the iterative approach."
+Binary Trees,Postorder Traversal of a tree both using recursion and Iteration,"1. Problem Summary: 
+   The task is to perform a postorder traversal on a binary tree, where each node is visited in the order of left child, right child, and then the node itself. This traversal should be implemented using both recursive and iterative methods.
+
+2. Approach:
+   For the recursive approach, the function recursively calls itself first on the left child, then on the right child, and finally processes the current node. For the iterative approach, use two stacks. Push the root to the first stack. Pop from the first stack, and push the node to the second stack, then push its left and then right children to the first stack. Continue until the first stack is empty. The second stack will have the nodes in postorder when popped. This method leverages the LIFO property of stacks to reverse the order of processing nodes.
+
+3. Pseudo-code:
+   ```cpp
+   #include <bits/stdc++.h>
+   using namespace std;
+
+   struct TreeNode {
+       int val;
+       TreeNode *left, *right;
+       TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+   };
+
+   // Recursive approach
+   void postorderTraversalRecursive(TreeNode* root, vector<int>& result) {
+       if (root == nullptr) return;
+       postorderTraversalRecursive(root->left, result);
+       postorderTraversalRecursive(root->right, result);
+       result.push_back(root->val);
+   }
+
+   // Iterative approach
+   vector<int> postorderTraversalIterative(TreeNode* root) {
+       if (root == nullptr) return {};
+       vector<int> result;
+       stack<TreeNode*> s1, s2;
+       s1.push(root);
+       while (!s1.empty()) {
+           TreeNode* node = s1.top(); s1.pop();
+           s2.push(node);
+           if (node->left) s1.push(node->left);
+           if (node->right) s1.push(node->right);
+       }
+       while (!s2.empty()) {
+           result.push_back(s2.top()->val);
+           s2.pop();
+       }
+       return result;
+   }
+   ```
+
+4. Time Complexity and Space Complexity:
+   Both recursive and iterative approaches have a time complexity of O(n), where n is the number of nodes in the tree. The space complexity is also O(n) due to the use of system stack in recursion and explicit stacks in the iterative method."
+Binary Trees,Left View of a tree,"1. Problem Summary:
+   The ""Left View of a Tree"" problem involves printing or returning the nodes visible when a binary tree is viewed from the left side. This view captures the first node visible at each level when traversed from top to bottom.
+
+2. Approach:
+   The optimal way to solve this problem is by using a level-order traversal (Breadth-First Search) with the help of a queue. Start by pushing the root node into the queue. For each level, the number of elements in the queue corresponds to the number of nodes at that level. Process each level by dequeuing all nodes of the current level and enqueueing all children of these nodes. The first node dequeued at each level is part of the left view. This approach ensures that you always process the leftmost node of each level first, capturing the left view effectively.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<int> leftView(TreeNode* root) {
+    vector<int> result;
+    if (root == NULL) return result;
+
+    queue<TreeNode*> q;
+    q.push(root);
+
+    while (!q.empty()) {
+        int levelSize = q.size();
+        for (int i = 0; i < levelSize; ++i) {
+            TreeNode* node = q.front();
+            q.pop();
+            if (i == 0) result.push_back(node->val); // Add the first node of each level to the result
+            if (node->left != NULL) q.push(node->left);
+            if (node->right != NULL) q.push(node->right);
+        }
+    }
+    return result;
+}
+```
+
+4. Time Complexity and Space Complexity:
+   The time complexity is O(N), where N is the number of nodes in the tree, since each node is processed exactly once. The space complexity is O(W), where W is the maximum width of the tree, reflecting the maximum size of the queue."
+Binary Trees,Right View of Tree,"1. Problem Summary:
+   The ""Right View of Tree"" problem involves finding the list of nodes visible when the tree is viewed from the right side. This view captures one node per level, specifically the rightmost node at each depth of the tree.
+
+2. Approach:
+   To solve the problem, utilize a breadth-first search (BFS) with a queue. Start by pushing the root into the queue. For each level of the tree, determine the number of nodes (i.e., `levelSize`), and iterate through these nodes. For each node processed, check if it's the last node in the current level (`i == levelSize - 1`); if so, this is the rightmost node, and you add it to your result list. Continue to enqueue the left and right children of the current node to the queue if they exist. This approach ensures that you process nodes level by level, capturing the rightmost node of each level.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<int> rightSideView(TreeNode* root) {
+    vector<int> result;
+    if (!root) return result;
+
+    queue<TreeNode*> q;
+    q.push(root);
+
+    while (!q.empty()) {
+        int levelSize = q.size();
+        for (int i = 0; i < levelSize; ++i) {
+            TreeNode* node = q.front();
+            q.pop();
+            if (i == levelSize - 1) {
+                result.push_back(node->val);
+            }
+            if (node->left) q.push(node->left);
+            if (node->right) q.push(node->right);
+        }
+    }
+    return result;
+}
+```
+
+4. Time Complexity and Space Complexity:
+   The time complexity is O(N) as each node is processed exactly once, where N is the number of nodes in the tree. The space complexity is O(D) to hold the queue, where D is the diameter of the tree."
+Binary Trees,Top View of a tree,"1. Problem Summary:
+   The ""Top View of a Tree"" problem involves printing the nodes visible when a binary tree is viewed from the top. Each node's horizontal distance from the root is considered, and for each horizontal distance, only the first node encountered is part of the top view.
+
+2. Approach:
+   Utilize a level-order traversal (BFS) with a queue to explore each node while tracking its horizontal distance from the root using a hash map. Begin with the root node at distance 0. For each node processed, check if its distance has been recorded in the map; if not, it's part of the top view. Store the node value in the map against its horizontal distance. For each node, enqueue its left child with distance decremented by one and its right child with distance incremented by one. Finally, extract values from the map sorted by key to get the top view.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
+    Node(int x) : data(x), left(NULL), right(NULL) {}
+};
+
+vector<int> topView(Node* root) {
+    if (!root) return {};
+    map<int, int> topNodes;
+    queue<pair<Node*, int>> q;
+    q.push({root, 0});
+    
+    while (!q.empty()) {
+        pair<Node*, int> temp = q.front();
+        q.pop();
+        Node* frontNode = temp.first;
+        int hd = temp.second;
+        
+        if (topNodes.count(hd) == 0) // Check if hd is not already present in map
+            topNodes[hd] = frontNode->data;
+        
+        if (frontNode->left)
+            q.push({frontNode->left, hd - 1});
+        if (frontNode->right)
+            q.push({frontNode->right, hd + 1});
+    }
+    
+    vector<int> ans;
+    for (auto it : topNodes)
+        ans.push_back(it.second);
+    return ans;
+}
+```
+
+4. Time Complexity and Space Complexity:
+   The time complexity is O(N log N) due to the operations on the map, and the space complexity is O(N) for storing nodes in the queue and map, where N is the number of nodes in the tree."
+Binary Trees,Bottom View of a tree,"1. Problem Summary: The ""Bottom View of a Tree"" problem involves visualizing the bottommost nodes of a binary tree when viewed from the bottom. The goal is to report these nodes from left to right as they would appear from this perspective.
+
+2. Approach: To solve this problem, use a combination of breadth-first traversal (BFS) and a mapping from horizontal distances to tree nodes. Each node in the tree is associated with a horizontal distance from the root, where left children have a distance of `parent's distance - 1` and right children have `parent's distance + 1`. Utilize a queue for BFS to explore nodes level by level, and a map to store the most recent node at each horizontal distance (thus representing the bottom view). As you traverse the tree, update the map with the current node at its corresponding horizontal distance. After traversal, extract values from the map in order of increasing horizontal distance to get the bottom view.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
+    Node(int val) : data(val), left(nullptr), right(nullptr) {}
+};
+
+vector<int> bottomView(Node* root) {
+    if (!root) return {};
+    map<int, int> distanceNodeMap;
+    queue<pair<Node*, int>> q;  // Node and its horizontal distance
+    q.push({root, 0});
+    
+    while (!q.empty()) {
+        auto [node, dist] = q.front();
+        q.pop();
+        // Update the map with the current node at its horizontal distance
+        distanceNodeMap[dist] = node->data;
+        
+        if (node->left) q.push({node->left, dist - 1});
+        if (node->right) q.push({node->right, dist + 1});
+    }
+    
+    vector<int> result;
+    for (auto it : distanceNodeMap) {
+        result.push_back(it.second);
+    }
+    return result;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(N) where N is the number of nodes, as each node is processed exactly once. The space complexity is also O(N) to hold the queue and the map, in the worst case scenario."
+Binary Trees,Zig-Zag traversal of a binary tree,"1. Problem Summary:  
+The Zig-Zag traversal of a binary tree involves visiting nodes level by level but alternating between left-to-right and right-to-left order for each level. This results in a zig-zag pattern of node visits.
+
+2. Approach:  
+To achieve a zig-zag traversal, use two stacks. The first stack (`currentLevel`) is used for traversing the current level, and the second stack (`nextLevel`) is used to prepare for the next level. Start by pushing the root node into `currentLevel`. For each node processed, push its children to `nextLevel` in an order determined by the current direction of traversal (left-to-right or right-to-left). Once `currentLevel` is empty, swap it with `nextLevel` and reverse the traversal direction. This alternating mechanism between the two stacks and the direction ensures the zig-zag pattern. This approach intuitively mimics a wave-like or zig-zag motion through the use of stack reversal and level-wise processing.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<int> zigzagTraversal(TreeNode* root) {
+    if (!root) return {};
+
+    vector<int> result;
+    stack<TreeNode*> currentLevel, nextLevel;
+    bool leftToRight = true;
+
+    currentLevel.push(root);
+
+    while (!currentLevel.empty()) {
+        TreeNode* node = currentLevel.top();
+        currentLevel.pop();
+        result.push_back(node->val);
+
+        if (leftToRight) {
+            if (node->left) nextLevel.push(node->left);
+            if (node->right) nextLevel.push(node->right);
+        } else {
+            if (node->right) nextLevel.push(node->right);
+            if (node->left) nextLevel.push(node->left);
+        }
+
+        if (currentLevel.empty()) {
+            swap(currentLevel, nextLevel);
+            leftToRight = !leftToRight;
+        }
+    }
+    return result;
+}
+```
+
+4. Time Complexity and Space Complexity:  
+The time complexity is O(n) where n is the number of nodes in the binary tree, as each node is processed exactly once. The space complexity is O(n) in the worst case, due to storage of nodes in the stacks."
+Binary Trees,Check if a tree is balanced or not,"1. Problem Summary: Determine if a binary tree is balanced. A binary tree is considered balanced if, for every node, the height difference between its left and right subtrees is no more than one.
+
+2. Approach: The optimal algorithm involves a depth-first search (DFS) that computes the height of each subtree while simultaneously checking for balance at each node. By calculating the height from the leaf nodes upwards, we can determine the balance condition at each step without revisiting nodes multiple times. If at any node the height difference between its left and right subtree exceeds one, the function will immediately return an error code (commonly `-1`). This approach avoids unnecessary computations and early exits if the tree is found unbalanced.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int checkHeight(TreeNode* root) {
+    if (root == nullptr) return 0; // Base case: the height of an empty tree is 0
+
+    int leftHeight = checkHeight(root->left);
+    if (leftHeight == -1) return -1; // Left subtree is not balanced
+
+    int rightHeight = checkHeight(root->right);
+    if (rightHeight == -1) return -1; // Right subtree is not balanced
+
+    if (abs(leftHeight - rightHeight) > 1) return -1; // Current node is not balanced
+
+    return max(leftHeight, rightHeight) + 1; // Return the height of the tree rooted at this node
+}
+
+bool isBalanced(TreeNode* root) {
+    return checkHeight(root) != -1;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n), where n is the number of nodes in the tree, as each node is visited once. The space complexity is O(h), where h is the height of the tree, due to the recursion stack."
+Binary Trees,Diagnol Traversal of a Binary tree,"1. Problem Summary: In the ""Diagonal Traversal of a Binary Tree"" problem, we are required to traverse a binary tree diagonally. Each diagonal contains all nodes that have the same difference between their levels and horizontal distances from the root.
+
+2. Approach: The optimal way to solve this problem is by using a breadth-first search (BFS) with a queue. Nodes are pushed into the queue with an associated diagonal number, which is incremented when moving left and kept the same when moving right. This helps in grouping nodes that are on the same diagonal. Start with the root node at diagonal 0. For each node processed, insert its right child into the queue (same diagonal) and its left child (increment diagonal by 1). This ensures all nodes on the same diagonal are processed continuously. Keep track of nodes under each diagonal using a map, and once the traversal is complete, extract the diagonals from the map for the final result.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<vector<int>> diagonalTraversal(TreeNode* root) {
+    map<int, vector<int>> diagMap;
+    queue<pair<TreeNode*, int>> q;
+    vector<vector<int>> result;
+
+    if (!root) return result;
+    q.push({root, 0});
+
+    while (!q.empty()) {
+        auto node = q.front().first;
+        int d = q.front().second;
+        q.pop();
+
+        while (node != NULL) {
+            diagMap[d].push_back(node->val);
+            if (node->left) q.push({node->left, d + 1});
+            node = node->right;
+        }
+    }
+
+    for (auto it : diagMap) {
+        result.push_back(it.second);
+    }
+
+    return result;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(N) as each node is processed once, and the space complexity is also O(N) to store the nodes' values in the map and queue."
+Binary Trees,Boundary traversal of a Binary tree,"1. Problem Summary:  
+The Boundary Traversal of a Binary Tree involves traversing and printing the nodes that form the boundary of the tree. This includes the left boundary (excluding the leaf nodes), the leaf nodes, and the right boundary (excluding the leaf nodes, traversed from bottom to top).
+
+2. Approach:  
+To solve this, break the problem into three main parts: traversing the left boundary (excluding leaves), collecting all leaf nodes, and traversing the right boundary in reverse (excluding leaves). Start by identifying and printing the left boundary nodes from the root downwards, stopping before leaf nodes. Then, use a separate function to recursively collect and print all leaf nodes from left to right. Finally, collect right boundary nodes using recursion but print them from bottom to top, which can be achieved by storing them first (e.g., in a stack) before printing.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+struct Node {
+    int data;
+    Node *left, *right;
+};
+
+void printLeftBoundary(Node* node) {
+    if (node == nullptr || (node->left == nullptr && node->right == nullptr)) return;
+    cout << node->data << "" "";
+    if (node->left) printLeftBoundary(node->left);
+    else printLeftBoundary(node->right);
+}
+
+void printLeafNodes(Node* node) {
+    if (node == nullptr) return;
+    if (node->left == nullptr && node->right == nullptr) {
+        cout << node->data << "" "";
+        return;
+    }
+    printLeafNodes(node->left);
+    printLeafNodes(node->right);
+}
+
+void printRightBoundary(Node* node) {
+    if (node == nullptr || (node->left == nullptr && node->right == nullptr)) return;
+    if (node->right) printRightBoundary(node->right);
+    else printRightBoundary(node->left);
+    cout << node->data << "" "";
+}
+
+void printBoundary(Node* root) {
+    if (root == nullptr) return;
+    cout << root->data << "" ""; // print root node
+    printLeftBoundary(root->left);
+    printLeafNodes(root->left);
+    printLeafNodes(root->right);
+    printRightBoundary(root->right);
+}
+
+int main() {
+    // Construct tree and call printBoundary(root)
+}
+```
+
+4. Time Complexity and Space Complexity:  
+The time complexity is O(n) as each node is visited at most twice. The space complexity is O(h) where h is the height of the tree, due to the recursion stack."
+Binary Trees,Construct Binary Tree from String with Bracket Representation,"1. Problem Summary:
+   The problem involves constructing a binary tree from a string representation where nodes are defined by integers and their subtrees are enclosed in parentheses. Each node can optionally have two children, represented by two sequences of parentheses.
+
+2. Approach:
+   The solution uses a recursive strategy to parse integers and their corresponding subtrees from the string. Starting from the beginning of the string, extract the current node's value. If a parenthesis follows the value, recursively construct the left subtree until a corresponding closing parenthesis is found or another subtree starts, indicating the start of the right subtree. Continue this process recursively to handle the right subtree. Utilize a pointer or index to track the current position in the string across recursive calls, ensuring that each subtree is correctly associated with its parent node. This approach naturally follows the structure of the string and builds the tree by directly mapping the string representation to the tree structure.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+TreeNode* constructTree(string s) {
+    int index = 0;
+    return buildTree(s, index);
+}
+
+TreeNode* buildTree(const string& s, int& index) {
+    if (index >= s.size()) return nullptr;
+
+    // Parse the integer node value
+    bool negative = false;
+    if (s[index] == '-') {
+        negative = true;
+        index++;
+    }
+    int num = 0;
+    while (index < s.size() && isdigit(s[index])) {
+        num = num * 10 + (s[index] - '0');
+        index++;
+    }
+    if (negative) num = -num;
+
+    TreeNode* node = new TreeNode(num);
+
+    // Check for left subtree
+    if (index < s.size() && s[index] == '(') {
+        index++; // Skip '('
+        node->left = buildTree(s, index);
+        index++; // Skip ')'
+    }
+
+    // Check for right subtree
+    if (index < s.size() && s[index] == '(') {
+        index++; // Skip '('
+        node->right = buildTree(s, index);
+        index++; // Skip ')'
+    }
+
+    return node;
+}
+```
+
+4. Time Complexity and Space Complexity:
+   The time complexity is O(n) as each character is processed once, and the space complexity is O(h) where h is the height of the tree, due to recursive stack space."
+Binary Trees,Convert Binary tree into Doubly Linked List,"1. Problem Summary: The task is to convert a given binary tree into a doubly linked list (DLL) such that the elements are in the same order as an in-order traversal of the binary tree. Each node's left pointer should act as the previous link and the right pointer as the next link in the DLL.
+
+2. Approach: The conversion can be efficiently done via an in-order traversal using recursion. During the traversal, maintain a previous node pointer (`prev`) to link the current node's left to `prev` and `prev`'s right to the current node, effectively inserting the current node at the end of the already formed DLL. Start with a null `prev`, and update it as you traverse. After visiting all nodes, the head of the DLL is the leftmost node of the binary tree, which can be identified by moving left from any node until the end.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Node {
+    int data;
+    Node *left, *right;
+};
+
+Node* binaryTreeToDoublyLinkedList(Node* root) {
+    Node *prev = nullptr, *head = nullptr;
+    
+    // Helper function to perform in-order traversal and link nodes
+    function<void(Node*)> inorder = [&](Node* node) {
+        if (!node) return;
+        inorder(node->left);
+        
+        if (prev) {
+            prev->right = node;
+            node->left = prev;
+        } else {
+            head = node;  // Initialize head during the first element visit
+        }
+        prev = node;
+        
+        inorder(node->right);
+    };
+    
+    inorder(root);
+    return head;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the number of nodes in the binary tree, as each node is visited exactly once. The space complexity is O(h) due to the recursion stack, where h is the height of the tree."
+Binary Trees,Convert Binary tree into Sum tree,"1. Problem Summary: The problem requires transforming a given binary tree into a sum tree where each node's value is updated to be the sum of the values of its left and right subtree nodes, not including its original value.
+
+2. Approach: The optimal approach involves a recursive post-order traversal of the tree. In a post-order traversal, we first process the left and right children and then the node itself. This ensures that the subtree values are computed before the node's value is updated. During each recursive call, compute the sum of the node's left and right subtrees, update the node's value to this sum, and return the sum of the node's original value and its updated value to the parent node. This way, each node is effectively transformed based on its descendants before contributing to its parent's value.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
+};
+
+int toSumTree(Node* node) {
+    if (node == NULL) return 0;
+
+    int old_val = node->data;
+
+    int left_sum = toSumTree(node->left);
+    int right_sum = toSumTree(node->right);
+
+    node->data = left_sum + right_sum;
+
+    return node->data + old_val;
+}
+
+void convertToSumTree(Node *root) {
+    toSumTree(root);
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n), where n is the number of nodes in the binary tree, as each node is visited once. The space complexity is O(h), where h is the height of the tree, due to the recursion stack."
+Binary Trees,Construct Binary tree from Inorder and preorder traversal,"1. Problem Summary: 
+   The problem involves reconstructing a binary tree from given preorder and inorder traversal arrays. The preorder array provides the root-node-first order, while the inorder array offers a left-root-right sequence.
+
+2. Approach: 
+   The root of the binary tree can always be identified as the first element in the preorder array. Using this root, split the inorder array into left and right subtrees. Recursively apply this method: for each root found in the preorder, identify the corresponding left and right subtrees in the inorder array until the entire tree is reconstructed. Use a hashmap to store the indices of elements in the inorder array for quick splitting. Start by processing the root from the preorder, then recursively construct the left subtree followed by the right subtree using the segments identified in the inorder array.
+
+3. Pseudo-code:
+   ```cpp
+   #include <bits/stdc++.h>
+   using namespace std;
+
+   struct TreeNode {
+       int val;
+       TreeNode *left;
+       TreeNode *right;
+       TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+   };
+
+   TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+       unordered_map<int, int> inMap;
+       for (int i = 0; i < inorder.size(); i++) {
+           inMap[inorder[i]] = i;
+       }
+       return build(preorder, 0, preorder.size() - 1, inorder, 0, inorder.size() - 1, inMap);
+   }
+
+   TreeNode* build(vector<int>& preorder, int preStart, int preEnd, vector<int>& inorder, int inStart, int inEnd, unordered_map<int, int>& inMap) {
+       if (preStart > preEnd || inStart > inEnd) return NULL;
+       TreeNode* root = new TreeNode(preorder[preStart]);
+       int inRoot = inMap[root->val];
+       int numsLeft = inRoot - inStart;
+
+       root->left = build(preorder, preStart + 1, preStart + numsLeft, inorder, inStart, inRoot - 1, inMap);
+       root->right = build(preorder, preStart + numsLeft + 1, preEnd, inorder, inRoot + 1, inEnd, inMap);
+       return root;
+   }
+   ```
+
+4. Time Complexity and Space Complexity:
+   The time complexity is O(n) due to the hashmap lookup speeding up the splitting process, and space complexity is O(n) for storing the hashmap and recursive stack."
+Binary Trees,Find minimum swaps required to convert a Binary tree into BST,"1. Problem Summary: The task is to determine the minimum number of swaps needed to convert a given binary tree into a binary search tree (BST). The nodes of the binary tree have unique values.
+
+2. Approach: The key to solving this problem is recognizing that the in-order traversal of a BST is a sorted array of values. First, perform an in-order traversal of the binary tree to get the elements in a list. This list is then sorted to find the target order of values. The next step involves counting the minimum number of swaps required to sort the initial list, which can be done using the cycle decomposition method for permutation sorting. Each cycle can be sorted with a number of swaps equal to the size of the cycle minus one.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+void inorderTraversal(TreeNode* root, vector<int>& nodes) {
+    if (root == nullptr) return;
+    inorderTraversal(root->left, nodes);
+    nodes.push_back(root->val);
+    inorderTraversal(root->right, nodes);
+}
+
+int minSwapsToSort(vector<int> arr) {
+    int n = arr.size();
+    vector<pair<int, int>> valueWithIndices(n);
+    for (int i = 0; i < n; i++) {
+        valueWithIndices[i] = {arr[i], i};
+    }
+    sort(valueWithIndices.begin(), valueWithIndices.end());
+    vector<bool> visited(n, false);
+    int swaps = 0;
+    for (int i = 0; i < n; i++) {
+        if (visited[i] || valueWithIndices[i].second == i)
+            continue;
+        int cycle_size = 0;
+        int j = i;
+        while (!visited[j]) {
+            visited[j] = true;
+            j = valueWithIndices[j].second;
+            cycle_size++;
+        }
+        if (cycle_size > 0)
+            swaps += (cycle_size - 1);
+    }
+    return swaps;
+}
+
+int minSwapsToConvertBTtoBST(TreeNode* root) {
+    vector<int> nodes;
+    inorderTraversal(root, nodes);
+    return minSwapsToSort(nodes);
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n log n) due to sorting, and the space complexity is O(n) for storing the tree values and auxiliary data structures."
+Binary Trees,Check if Binary tree is Sum tree or not,"1. Problem Summary: The problem is to determine if a given binary tree is a ""Sum Tree"". A Sum Tree is a binary tree where the value of each node is equal to the sum of the values of its left and right child nodes, recursively. The leaves are considered to have a sum of 0.
+
+2. Approach: To check if a binary tree is a Sum Tree, we recursively calculate the sum of nodes for each subtree and compare it with the node's value. For each node, verify that the node's value equals the sum of its left and right children's total values unless the node is a leaf. The recursion returns the sum of the node's value and its children's values, facilitating the comparison at the parent node level. This recursive approach ensures that every subtree complies with the Sum Tree property, thereby confirming the property for the entire tree.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
+};
+
+bool isSumTree(Node* node, int& sum) {
+    if (node == nullptr) {
+        sum = 0;
+        return true;
+    }
+    if (node->left == nullptr && node->right == nullptr) {
+        sum = node->data;
+        return true;
+    }
+    int ls = 0, rs = 0;
+    if (isSumTree(node->left, ls) && isSumTree(node->right, rs) && node->data == ls + rs) {
+        sum = node->data + ls + rs;
+        return true;
+    }
+    return false;
+}
+
+bool checkSumTree(Node* root) {
+    int sum = 0;
+    return isSumTree(root, sum);
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the number of nodes, as each node is visited once. The space complexity is O(h) where h is the height of the tree, due to the recursion stack."
+Binary Trees,Check if all leaf nodes are at same level or not,"1. Problem Summary: 
+   The problem is to determine if all leaf nodes in a binary tree are at the same level. A leaf node is a node with no children, and this check should verify the uniform depth of all such nodes across the tree.
+
+2. Approach: 
+   The optimal approach involves a depth-first traversal (DFS) of the tree. As we traverse, we keep track of the depth of the current node. The first time we encounter a leaf node, we record its depth. For every subsequent leaf node encountered, we compare its depth to the recorded depth. If all depths match, the leaves are at the same level; otherwise, they are not. This method leverages the stack nature of recursion for DFS, making it intuitive to follow and ensuring that all nodes are checked efficiently.
+
+3. Pseudo-code:
+   ```cpp
+   #include <bits/stdc++.h>
+   using namespace std;
+
+   struct TreeNode {
+       int val;
+       TreeNode *left, *right;
+       TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+   };
+
+   bool checkLeavesLevel(TreeNode* root, int level, int& leafLevel) {
+       if (!root) return true;
+       if (!root->left && !root->right) { // Check if it's a leaf
+           if (leafLevel == -1) {
+               leafLevel = level; // First leaf level
+               return true;
+           }
+           return level == leafLevel; // Compare levels
+       }
+       return checkLeavesLevel(root->left, level + 1, leafLevel) && 
+              checkLeavesLevel(root->right, level + 1, leafLevel);
+   }
+
+   bool areAllLeavesAtSameLevel(TreeNode* root) {
+       int leafLevel = -1;
+       return checkLeavesLevel(root, 0, leafLevel);
+   }
+   ```
+
+4. Time Complexity and Space Complexity: 
+   The time complexity is O(n), where n is the number of nodes in the tree, as each node is visited once. The space complexity is O(h), where h is the height of the tree, due to the recursion stack."
+Binary Trees,Check if a Binary Tree contains duplicate subtrees of size 2 or more [ IMP ],"1. Problem Summary: The problem requires checking if a binary tree contains duplicate subtrees of size 2 or more. A subtree size of 2 means it includes at least the node itself and one child.
+
+2. Approach: The optimal approach involves using a post-order traversal to serialize each subtree and store its structure in a hash map. During traversal, construct a unique string representation for each subtree (e.g., using in-order serialization format like `node_value(left_subtree)(right_subtree)`). For each node, check if its serialized form exists in the hash map. If it does and the subtree size is 2 or more, return true. Otherwise, add the serialized form to the hash map and continue. This method leverages hashing to efficiently track and compare subtree structures.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+bool findDuplicateSubtrees(TreeNode* root, unordered_map<string, int>& subtreeMap) {
+    if (!root) return false;
+
+    string serial = to_string(root->val);
+    if (root->left) serial += ""("" + serialize(root->left, subtreeMap) + "")"";
+    if (root->right) serial += ""("" + serialize(root->right, subtreeMap) + "")"";
+
+    if (subtreeMap[serial]++ == 1 && (root->left || root->right))
+        return true;
+    
+    return findDuplicateSubtrees(root->left, subtreeMap) || findDuplicateSubtrees(root->right, subtreeMap);
+}
+
+bool hasDuplicateSubtree(TreeNode* root) {
+    unordered_map<string, int> subtreeMap;
+    return findDuplicateSubtrees(root, subtreeMap);
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(N) where N is the number of nodes in the tree, as each node is visited once. The space complexity is also O(N) to store the hash map of subtree serializations."
+Binary Trees,Check if 2 trees are mirror or not,"1. Problem Summary: 
+   The problem involves determining whether two binary trees are mirror images of each other. This means that one tree is the reflection of the other about an imaginary axis passing through their root.
+
+2. Approach: 
+   To check if two trees are mirror images, we compare their roots and then recursively check the following: the left subtree of the first tree with the right subtree of the second tree, and the right subtree of the first tree with the left subtree of the second tree. If at any point, the values of the nodes being compared do not match, or if one subtree is empty where the other is not, the trees are not mirrors. This recursive approach intuitively follows the definition of mirror trees, ensuring that corresponding branches on opposite sides are identical in structure and value.
+
+3. Pseudo-code:
+   ```cpp
+   #include <bits/stdc++.h>
+   using namespace std;
+
+   struct TreeNode {
+       int val;
+       TreeNode *left, *right;
+       TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+   };
+
+   bool isMirror(TreeNode* t1, TreeNode* t2) {
+       if (t1 == nullptr && t2 == nullptr) return true;
+       if (t1 == nullptr || t2 == nullptr) return false;
+       return (t1->val == t2->val) 
+           && isMirror(t1->left, t2->right)
+           && isMirror(t1->right, t2->left);
+   }
+
+   bool areTreesMirror(TreeNode* root1, TreeNode* root2) {
+       return isMirror(root1, root2);
+   }
+   ```
+
+4. Time Complexity and Space Complexity: 
+   The time complexity is O(n), where n is the number of nodes in the smaller of the two trees since each node is visited once. The space complexity is O(h), where h is the height of the tree, due to the recursion stack."
+Binary Trees,Sum of Nodes on the Longest path from root to leaf node ,"1. Problem Summary: The problem requires finding the sum of all nodes' values on the longest path from the root to any leaf in a binary tree. If multiple paths have the same maximum length, choose the path with the greatest sum.
+
+2. Approach: The solution involves a depth-first search (DFS) to traverse the tree while keeping track of the current path length and the sum of node values along this path. We use recursion to explore each node's children. At each node, we update the path length and path sum. If a leaf node is reached, we compare the current path's length with the maximum length found so far. If it's longer, we update the maximum length and the maximum sum. If it's equal in length but has a higher sum, we also update the maximum sum. This approach ensures that by the time we've visited all nodes, we have the sum of the longest path.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+struct TreeNode {
+    int val;
+    TreeNode *left, *right;
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+};
+
+void findMaxSum(TreeNode* node, int currentSum, int currentLength, int& maxSum, int& maxLength) {
+    if (!node) return;
+    currentSum += node->val;
+    currentLength++;
+    if (!node->left && !node->right) { // Check if it's a leaf node
+        if (currentLength > maxLength) {
+            maxLength = currentLength;
+            maxSum = currentSum;
+        } else if (currentLength == maxLength) {
+            maxSum = max(maxSum, currentSum);
+        }
+    }
+    findMaxSum(node->left, currentSum, currentLength, maxSum, maxLength);
+    findMaxSum(node->right, currentSum, currentLength, maxSum, maxLength);
+}
+
+int sumOfLongestPath(TreeNode* root) {
+    if (!root) return 0;
+    int maxSum = 0, maxLength = 0;
+    findMaxSum(root, 0, 0, maxSum, maxLength);
+    return maxSum;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n), where n is the number of nodes in the tree, since we visit each node once. The space complexity is O(h), where h is the height of the tree, due to the recursion stack during the depth-first search."
+Binary Trees,Check if given graph is tree or not.  [ IMP ],"1. Problem Summary: The problem is to determine if a given undirected graph is a tree. A graph qualifies as a tree if it is connected, acyclic, and has exactly \( n-1 \) edges for \( n \) vertices.
+
+2. Approach: To verify if a graph is a tree, we can use Depth First Search (DFS) or Breadth First Search (BFS) to check for cycles and ensure all nodes are connected. Start DFS or BFS from any node and mark nodes as visited. If during traversal you encounter a node that has been visited before and is not the parent of the current node, a cycle exists. After traversal, if any node remains unvisited, the graph isn't connected. Additionally, confirm if the graph has exactly \( n-1 \) edges.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+bool isTree(vector<int> adj[], int n) {
+    vector<bool> visited(n, false);
+    if (hasCycle(0, -1, visited, adj)) return false; // Check for cycle
+    for (bool v : visited) 
+        if (!v) return false; // Check if all nodes are visited
+    return true;
+}
+
+bool hasCycle(int node, int parent, vector<bool> &visited, vector<int> adj[]) {
+    visited[node] = true;
+    for (int neighbor : adj[node]) {
+        if (!visited[neighbor]) {
+            if (hasCycle(neighbor, node, visited, adj)) return true;
+        } else if (neighbor != parent) {
+            return true; // Cycle found
+        }
+    }
+    return false;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is \( O(V + E) \) where \( V \) is the number of vertices and \( E \) is the number of edges. The space complexity is \( O(V) \) due to the storage of visited nodes and recursion stack."
+Binary Trees,Find Largest subtree sum in a tree,"1. Problem Summary: The problem involves finding the largest sum of all nodes' values in any subtree of a given binary tree. A subtree includes any node and all of its descendants.
+
+2. Approach: The optimal approach to solve this problem is to use a post-order traversal (left-right-root) of the tree. During the traversal, calculate the sum of nodes for each subtree and simultaneously keep track of the maximum subtree sum encountered. This approach leverages recursion to explore each node and its children, compute the sum of the subtree rooted at that node, and update the maximum sum if the current subtree's sum is greater than the previously recorded maximum.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+struct TreeNode {
+    int val;
+    TreeNode *left, *right;
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+};
+
+int findLargestSubtreeSum(TreeNode* root, int &maxSum) {
+    if (root == nullptr) return 0;
+    int leftSum = findLargestSubtreeSum(root->left, maxSum);
+    int rightSum = findLargestSubtreeSum(root->right, maxSum);
+    int currentSum = root->val + leftSum + rightSum;
+    maxSum = max(maxSum, currentSum);
+    return currentSum;
+}
+
+int largestSubtreeSum(TreeNode* root) {
+    int maxSum = INT_MIN;
+    findLargestSubtreeSum(root, maxSum);
+    return maxSum;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the number of nodes in the tree, as each node is visited once. The space complexity is O(h) where h is the height of the tree, due to the recursion stack."
+Binary Trees,Maximum Sum of nodes in Binary tree such that no two are adjacent ,"1. Problem Summary:  
+   The problem requires finding the maximum sum of nodes in a binary tree such that no two adjacent nodes (direct parent-child relationship) are included in the sum.
+
+2. Approach:  
+   This problem can be efficiently solved using a post-order traversal with dynamic programming. For each node, calculate two values: the maximum sum including the node (`incl`) and the maximum sum excluding the node (`excl`). For each child, `incl` of the current node will add up `excl` of the child (since including current node means we cannot include its children), and `excl` of the current node will be the max of `incl` or `excl` of its children (giving flexibility to either include or exclude each child). This approach avoids recomputation by storing results for each subtree as it is processed, ensuring each node is only processed once.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
+};
+
+pair<int, int> maxSumHelper(Node* node) {
+    if (node == nullptr)
+        return {0, 0};
+    
+    pair<int, int> left = maxSumHelper(node->left);
+    pair<int, int> right = maxSumHelper(node->right);
+    
+    int incl = node->data + left.second + right.second;
+    int excl = max(left.first, left.second) + max(right.first, right.second);
+    
+    return {incl, excl};
+}
+
+int maxSum(Node* root) {
+    pair<int, int> result = maxSumHelper(root);
+    return max(result.first, result.second);
+}
+```
+
+4. Time Complexity and Space Complexity:  
+   The time complexity is O(n) where n is the number of nodes in the binary tree, as each node is processed once. The space complexity is O(h) due to recursion stack, where h is the height of the tree."
+Binary Trees,"Print all ""K"" Sum paths in a Binary tree","1. Problem Summary: The problem involves finding all paths in a binary tree that sum up to a given value ""K"". The paths can start and end at any node along the path from root to leaf, not necessarily beginning at the root or ending at a leaf.
+
+2. Approach: Utilize a depth-first search (DFS) to explore all paths. As you traverse, maintain a running sum and use a hash map to store the frequency of each prefix sum. For each node, calculate the current prefix sum. Check if there's a prefix sum equal to `current prefix sum - K` which would imply a valid path ending at the current node. After processing a node, backtrack by removing its contribution to the prefix sum and updating the hash map. This approach ensures that all potential paths are checked efficiently by leveraging the prefix sum concept, which is often used in subarray sum problems.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
+    Node(int x) : data(x), left(nullptr), right(nullptr) {}
+};
+
+void findKSumPathsUtil(Node* root, vector<int>& path, int K) {
+    if (!root) return;
+
+    // Add current node to the path
+    path.push_back(root->data);
+
+    // Check for paths with sum K
+    int sum = 0;
+    for (int i = path.size() - 1; i >= 0; i--) {
+        sum += path[i];
+        if (sum == K) {
+            // Print path from i to current node
+            for (int j = i; j < path.size(); j++)
+                cout << path[j] << "" "";
+            cout << endl;
+        }
+    }
+
+    // Explore deeper into the tree
+    findKSumPathsUtil(root->left, path, K);
+    findKSumPathsUtil(root->right, path, K);
+
+    // Backtrack: remove the current node from the path
+    path.pop_back();
+}
+
+void findKSumPaths(Node* root, int K) {
+    vector<int> path;
+    findKSumPathsUtil(root, path, K);
+}
+
+int main() {
+    // Example usage
+    Node* root = new Node(1);
+    root->left = new Node(3);
+    root->right = new Node(-1);
+    root->left->left = new Node(2);
+    root->left->right = new Node(1);
+    root->right->left = new Node(4);
+    root->right->right = new Node(5);
+    root->left->right->left = new Node(1);
+    int K = 5;
+    findKSumPaths(root, K);
+    return 0;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(N^2) in the worst case, where N is the number of nodes, due to the need to check each path sum for every node. The space complexity is O(N) due to the recursion stack and path storage."
+Binary Trees,Find LCA in a Binary tree,"1. Problem Summary: The problem is to find the Lowest Common Ancestor (LCA) of two given nodes in a binary tree. The LCA is the deepest node that is an ancestor of both given nodes.
+
+2. Approach: The optimal approach uses a recursive traversal of the binary tree. Starting from the root, recursively search for the nodes in the left and right subtrees. If one of the nodes matches the current node, return it as a potential LCA. If both left and right subtree calls return non-null values, it indicates that the current node is the LCA, as one node exists in the left subtree and the other in the right. If only one of the subtree calls returns a non-null, propagate this node upwards as a potential ancestor. This approach intuitively follows the path from root to the nodes, marking potential ancestors and confirming the LCA when paths from two nodes intersect.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+struct TreeNode {
+    int val;
+    TreeNode *left, *right;
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+};
+
+TreeNode* findLCA(TreeNode* root, TreeNode* p, TreeNode* q) {
+    if (!root || root == p || root == q) return root;
+    
+    TreeNode* left = findLCA(root->left, p, q);
+    TreeNode* right = findLCA(root->right, p, q);
+    
+    if (left && right) return root;
+    return left ? left : right;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the number of nodes in the tree, as it potentially visits every node. The space complexity is O(h) where h is the height of the tree, due to the recursion stack."
+Binary Trees,Find distance between 2 nodes in a Binary tree,"1. Problem Summary: The problem involves finding the shortest distance between two given nodes in a binary tree. This distance is measured in terms of the number of edges in the shortest path connecting the two nodes.
+
+2. Approach: To find the distance between two nodes in a binary tree, we first determine the lowest common ancestor (LCA) of the two nodes, which is the deepest node that has both target nodes as descendants (one in its left subtree and the other in its right subtree, or one of them can also be the LCA itself). From the LCA, calculate the distance to each target node by traversing the tree and counting edges, then sum these distances. This approach leverages the properties of the LCA to efficiently compute distances, making it easier to remember and code during an interview.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+struct TreeNode {
+    int val;
+    TreeNode *left, *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+
+TreeNode* findLCA(TreeNode* root, int n1, int n2) {
+    if (!root) return NULL;
+    if (root->val == n1 || root->val == n2) return root;
+    
+    TreeNode* left = findLCA(root->left, n1, n2);
+    TreeNode* right = findLCA(root->right, n1, n2);
+
+    if (left && right) return root;
+    return left ? left : right;
+}
+
+int findDistanceFromLCA(TreeNode* root, int val, int distance) {
+    if (!root) return -1;
+    if (root->val == val) return distance;
+
+    int left = findDistanceFromLCA(root->left, val, distance + 1);
+    if (left != -1) return left;
+    
+    return findDistanceFromLCA(root->right, val, distance + 1);
+}
+
+int findDistance(TreeNode* root, int n1, int n2) {
+    TreeNode* lca = findLCA(root, n1, n2);
+    int d1 = findDistanceFromLCA(lca, n1, 0);
+    int d2 = findDistanceFromLCA(lca, n2, 0);
+    return d1 + d2;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(N) where N is the number of nodes in the tree, as we potentially traverse the entire tree. The space complexity is O(H) due to the recursion stack, where H is the height of the tree."
+Binary Trees,Kth Ancestor of node in a Binary tree,"1. Problem Summary: 
+   The problem involves finding the k-th ancestor of a given node in a binary tree. Given a node and an integer k, the task is to return the k-th ancestor node of the specified node, where the k-th ancestor is defined as the node k steps up the tree from the given node.
+
+2. Approach: 
+   An efficient way to solve this problem is by using depth-first search (DFS) to preprocess the tree and store ancestors for each node up to a certain depth. During the DFS traversal, maintain an array `ancestor[node][j]` where `ancestor[node][0]` is the parent of the node, and `ancestor[node][j]` is the 2^j-th ancestor of the node. This allows us to jump back in powers of two, efficiently reaching the k-th ancestor. For finding the k-th ancestor, decompose k into powers of 2 and use the precomputed ancestors to jump back accordingly.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+void dfs(vector<int> adj[], int node, int parent, vector<vector<int>>& ancestor) {
+    ancestor[node][0] = parent;
+    for (int i = 1; i < ancestor[node].size(); i++) {
+        if (ancestor[node][i-1] != -1)
+            ancestor[node][i] = ancestor[ancestor[node][i-1]][i-1];
+        else
+            ancestor[node][i] = -1;
+    }
+    for (int child : adj[node]) {
+        if (child != parent)
+            dfs(adj, child, node, ancestor);
+    }
+}
+
+int findKthAncestor(vector<vector<int>>& ancestor, int node, int k) {
+    for (int i = 0; i < ancestor[node].size(); i++) {
+        if (k & (1 << i)) {
+            node = ancestor[node][i];
+            if (node == -1) break;
+        }
+    }
+    return node;
+}
+
+// Usage example inside a function:
+// Assume adj is the adjacency list of the tree, n is number of nodes, root is the root node
+// vector<vector<int>> ancestor(n, vector<int>(log2(n) + 1, -1));
+// dfs(adj, root, -1, ancestor);
+// int result = findKthAncestor(ancestor, node, k);
+```
+
+4. Time Complexity and Space Complexity: 
+   The time complexity for preprocessing using DFS is O(N log N), where N is the number of nodes. The space complexity is also O(N log N) due to storing ancestors up to log N levels for each node. Querying the k-th ancestor after preprocessing is done in O(log k)."
+Binary Trees,Find all Duplicate subtrees in a Binary tree [ IMP ],"1. Problem Summary: The problem requires identifying all subtrees within a given binary tree that appear more than once. A subtree is considered a duplicate if there is another subtree in the binary tree that has the same structure and node values.
+
+2. Approach: The optimal way to solve this problem is by using a depth-first search (DFS) to serialize each subtree as a string and store these strings in a hash map to count their occurrences. During the traversal, each node's subtree is serialized into a string representation (like pre-order traversal) that includes node values and structure. If the serialized form of a subtree is already in the hash map and it's the first time it is repeated, add the root node of this subtree to the result list. This serialization helps in easily comparing the structure and values of different subtrees.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+unordered_map<string, int> subtreeMap;
+vector<TreeNode*> duplicates;
+
+string serializeAndFind(TreeNode* root) {
+    if (!root) return ""#"";
+    string serial = to_string(root->val) + "","" + serializeAndFind(root->left) + "","" + serializeAndFind(root->right);
+    if (subtreeMap[serial] == 1) duplicates.push_back(root);
+    subtreeMap[serial]++;
+    return serial;
+}
+
+vector<TreeNode*> findDuplicateSubtrees(TreeNode* root) {
+    serializeAndFind(root);
+    return duplicates;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(N^2) in the worst case due to the serialization of N nodes, and space complexity is O(N) for storing serialized strings and recursion."
+Binary Trees,Tree Isomorphism Problem,"1. Problem Summary: The Tree Isomorphism Problem involves determining if two given binary trees are isomorphic. Two trees are isomorphic if one of them can be transformed into the other by swapping left and right children of some of the nodes.
+
+2. Approach: To solve the Tree Isomorphism Problem, we can use a recursive approach. The base case is when both nodes being compared are null, in which case they are trivially isomorphic. If one node is null and the other is not, they aren't isomorphic. For non-null nodes, check if the data of the nodes are the same. Then, recursively check two conditions: normal children alignment (left with left, right with right) and swapped children alignment (left with right, right with left). The trees are isomorphic if either of these recursive checks return true. This approach intuitively checks all possible alignments by exploring each branch.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
+};
+
+bool isIsomorphic(Node* n1, Node* n2) {
+    if (n1 == nullptr && n2 == nullptr)
+        return true;
+    if (n1 == nullptr || n2 == nullptr)
+        return false;
+    if (n1->data != n2->data)
+        return false;
+
+    bool normal = isIsomorphic(n1->left, n2->left) && isIsomorphic(n1->right, n2->right);
+    bool swapped = isIsomorphic(n1->left, n2->right) && isIsomorphic(n1->right, n2->left);
+
+    return normal || swapped;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the number of nodes in the tree, since each node is visited once. The space complexity is O(h) where h is the height of the tree, due to the recursion stack."

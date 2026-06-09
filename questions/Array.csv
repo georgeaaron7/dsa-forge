@@ -1,0 +1,1154 @@
+TOPIC,PROBLEM LINK,SOLUTION
+Array,Reverse the array,"1. Problem Summary: The task is to reverse the elements of a given array. This means transforming the array so that the first element becomes the last, the second element becomes the second to last, and so on, effectively reversing the order of all elements.
+
+2. Approach: The optimal way to reverse an array is to use two-pointer technique. Initialize two pointers, one at the start (`begin`) and one at the end (`end`) of the array. Swap the elements at these pointers, then move the `begin` pointer one step forward and the `end` pointer one step backward. Continue this process until the `begin` pointer is greater than or equal to the `end` pointer. This method efficiently reverses the array in-place, minimizing the need for extra space and additional operations. The swapping directly alters the array, making it easy to remember and implement during coding interviews.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+void reverseArray(vector<int>& arr) {
+    int begin = 0;
+    int end = arr.size() - 1;
+    while (begin < end) {
+        swap(arr[begin], arr[end]);
+        begin++;
+        end--;
+    }
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the number of elements in the array, as each element is visited once. The space complexity is O(1), as the reversal is done in place without using extra space."
+Array,Find the maximum and minimum element in an array,"1. Problem Summary: The task is to find both the maximum and minimum elements in a given array of integers. This is a fundamental problem that tests basic array traversal and comparison operations.
+
+2. Approach: The optimal way to solve this problem is by using a single traversal of the array. Start by initializing two variables, `maxElement` and `minElement`, to the first element of the array. As you iterate through the array, compare each element with `maxElement` and `minElement`. If an element is greater than `maxElement`, update `maxElement`. Similarly, if an element is less than `minElement`, update `minElement`. This approach ensures that each element is compared only once with the current maximum and minimum, making it highly efficient.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+pair<int, int> findMaxMin(vector<int>& arr) {
+    if (arr.empty()) return {-1, -1}; // Handle empty array case
+
+    int maxElement = arr[0];
+    int minElement = arr[0];
+    for (int i = 1; i < arr.size(); i++) {
+        if (arr[i] > maxElement) {
+            maxElement = arr[i];
+        }
+        if (arr[i] < minElement) {
+            minElement = arr[i];
+        }
+    }
+    return {maxElement, minElement};
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the number of elements in the array, as each element is visited once. The space complexity is O(1) since only a constant amount of extra space is used."
+Array,"Find the ""Kth"" max and min element of an array ","1. Problem Summary: The task is to find the Kth smallest and Kth largest elements in an unsorted array. This is a common problem that tests understanding of array sorting and element retrieval.
+
+2. Approach: The optimal approach to find the Kth smallest and Kth largest elements involves sorting the array first and then directly accessing the elements. After sorting, the Kth smallest element is at the (K-1)th index, and the Kth largest element is at the (n-K)th index, where n is the number of elements in the array. This method leverages the efficiency of modern sorting algorithms and provides a direct way to access the desired elements without additional computations.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+pair<int, int> findKthElements(vector<int>& arr, int K) {
+    sort(arr.begin(), arr.end()); // Sort the array
+    int n = arr.size();
+    int kthMin = arr[K-1]; // Kth smallest element
+    int kthMax = arr[n-K]; // Kth largest element
+    return {kthMin, kthMax};
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n log n) due to the sorting step, and the space complexity is O(1) if in-place sorting is used."
+Array,"Given an array which consists of only 0, 1 and 2. Sort the array without using any sorting algo","1. Problem Summary: The task is to sort an array that contains only the integers 0, 1, and 2. The challenge is to do this sorting without using any conventional sorting algorithm, ensuring an efficient solution.
+
+2. Approach: The optimal algorithm for this problem is known as the Dutch National Flag algorithm, proposed by Edsger Dijkstra. The algorithm segregates the array into three sections corresponding to 0s, 1s, and 2s, using three pointers: `low`, `mid`, and `high`. Initially, `low` and `mid` are set to the start of the array, and `high` is set to the end. Traverse the array with the `mid` pointer: if the element at `mid` is 0, swap it with the element at `low` and increment both `low` and `mid`. If it's 1, just increment `mid`. If it's 2, swap it with the element at `high` and decrement `high`, without moving `mid`. This way, the algorithm efficiently groups all 0s to the beginning, 1s in the middle, and 2s to the end.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+void sortColors(vector<int>& nums) {
+    int low = 0, mid = 0, high = nums.size() - 1;
+    while (mid <= high) {
+        switch(nums[mid]) {
+            case 0:
+                swap(nums[low++], nums[mid++]);
+                break;
+            case 1:
+                mid++;
+                break;
+            case 2:
+                swap(nums[mid], nums[high--]);
+                break;
+        }
+    }
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n) as each element is processed once. The space complexity is O(1) as the sorting is done in place without using extra space."
+Array,Move all the negative elements to one side of the array ,"1. Problem Summary: The task is to rearrange the elements in an array such that all negative numbers are moved to one side of the array. The order of positive elements and negative elements does not need to be maintained.
+
+2. Approach: A two-pointer technique can be effectively used to solve this problem. Initialize two pointers, `left` starting from the beginning of the array and `right` from the end. Move `left` forward until you find a positive number and `right` backward until you find a negative number, then swap these elements. This process is repeated until `left` is greater than `right`. This approach intuitively separates negatives and positives by direct comparison and swapping, making it easy to remember and implement.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+void moveNegativesToOneSide(vector<int>& arr) {
+    int left = 0, right = arr.size() - 1;
+    while (left <= right) {
+        if (arr[left] < 0) {
+            left++;
+        } else if (arr[right] >= 0) {
+            right--;
+        } else {
+            swap(arr[left], arr[right]);
+            left++;
+            right--;
+        }
+    }
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the number of elements in the array, and the space complexity is O(1), as no additional data structures are used."
+Array,Find the Union and Intersection of the two sorted arrays.,"1. Problem Summary: 
+   The task is to find the union and intersection of two sorted arrays. The union contains all unique elements from both arrays, while the intersection includes elements that are present in both arrays.
+
+2. Approach: 
+   Utilize two pointers to traverse both arrays simultaneously. For the union, compare elements at both pointers; add the smaller element to the result and move the respective pointer. If elements are equal, add one to the result and move both pointers. For the intersection, only add the element to the result if the elements at both pointers are equal, then move both pointers. This approach leverages the sorted nature of the arrays, allowing efficient comparison and insertion without needing additional sorting.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+vector<int> findUnion(int arr1[], int arr2[], int n, int m) {
+    vector<int> unionResult;
+    int i = 0, j = 0;
+    while (i < n && j < m) {
+        if (arr1[i] < arr2[j]) {
+            if (unionResult.empty() || unionResult.back() != arr1[i])
+                unionResult.push_back(arr1[i]);
+            i++;
+        } else if (arr1[i] > arr2[j]) {
+            if (unionResult.empty() || unionResult.back() != arr2[j])
+                unionResult.push_back(arr2[j]);
+            j++;
+        } else {
+            if (unionResult.empty() || unionResult.back() != arr1[i])
+                unionResult.push_back(arr1[i]);
+            i++;
+            j++;
+        }
+    }
+    while (i < n) {
+        if (unionResult.empty() || unionResult.back() != arr1[i])
+            unionResult.push_back(arr1[i]);
+        i++;
+    }
+    while (j < m) {
+        if (unionResult.empty() || unionResult.back() != arr2[j])
+            unionResult.push_back(arr2[j]);
+        j++;
+    }
+    return unionResult;
+}
+
+vector<int> findIntersection(int arr1[], int arr2[], int n, int m) {
+    vector<int> intersectionResult;
+    int i = 0, j = 0;
+    while (i < n && j < m) {
+        if (arr1[i] < arr2[j])
+            i++;
+        else if (arr1[i] > arr2[j])
+            j++;
+        else {
+            if (intersectionResult.empty() || intersectionResult.back() != arr1[i])
+                intersectionResult.push_back(arr1[i]);
+            i++;
+            j++;
+        }
+    }
+    return intersectionResult;
+}
+```
+
+4. Time Complexity and Space Complexity: 
+   The time complexity is O(n + m) where n and m are the lengths of the two arrays, as each array is traversed at most once. The space complexity is O(n + m) for storing the results."
+Array,Write a program to cyclically rotate an array by one.,"1. Problem Summary: The task is to cyclically rotate the elements of an array to the right by one position, such that the last element moves to the first position in the array, and all other elements shift one position to the right.
+
+2. Approach: The optimal way to approach this problem is to first store the last element of the array, as it will be moved to the first position. Then, iterate through the array from the end to the beginning, shifting each element one position to the right. Finally, place the stored last element into the first position of the array. This approach is intuitive as it mimics the action of taking the last piece of a puzzle out and then sliding all other pieces rightward, before placing the removed piece into the new gap at the beginning.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+void cyclicRotateByOne(vector<int>& arr) {
+    int n = arr.size();
+    if (n == 0) return; // Handle empty array case
+    int lastElement = arr[n - 1]; // Store the last element
+    for (int i = n - 1; i > 0; i--) {
+        arr[i] = arr[i - 1]; // Shift elements to the right
+    }
+    arr[0] = lastElement; // Place the last element at the first position
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n) as we traverse through the array once, and the space complexity is O(1) since no additional space is used apart from a few variables."
+Array,find Largest sum contiguous Subarray [V. IMP],"1. Problem Summary:  
+The task is to find the maximum sum of a contiguous subarray within a given one-dimensional integer array. This is a classic problem to demonstrate the use of dynamic programming for optimization.
+
+2. Approach:  
+The optimal algorithm for this problem is Kadane’s Algorithm. It involves initializing two variables, `current_sum` and `max_sum`, to the first element of the array. As you iterate through the array starting from the second element, update `current_sum` to be the maximum of the current array element and the sum of `current_sum` with this element. This step decides whether to start a new subarray or to continue the current subarray. Then, update `max_sum` to be the maximum of itself and `current_sum`. This process effectively builds up the solution by considering each element's contribution to the maximum sum and deciding at each step whether to start fresh or build on the existing sum.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+int maxSubArraySum(vector<int>& nums) {
+    int n = nums.size();
+    int max_sum = nums[0];
+    int current_sum = nums[0];
+
+    for (int i = 1; i < n; i++) {
+        current_sum = max(nums[i], current_sum + nums[i]);
+        max_sum = max(max_sum, current_sum);
+    }
+    return max_sum;
+}
+```
+
+4. Time Complexity and Space Complexity:  
+The time complexity is O(n) where n is the number of elements in the array, as it processes each element exactly once. The space complexity is O(1), as it uses a constant amount of extra space."
+Array,Minimise the maximum difference between heights [V.IMP],"1. Problem Summary: The problem is to adjust the heights of the given array of towers, either by increasing or decreasing each tower's height by a fixed amount `k`, and then find the minimum possible difference between the tallest and shortest tower heights after the adjustment.
+
+2. Approach: First, sort the array of tower heights. The maximum difference without any adjustments is between the first and last elements of the sorted array. For each tower, consider increasing the height of shorter towers (those before and including the middle) by `k` and decreasing the height of taller towers (those after the middle) by `k`. At each step, calculate the potential maximum and minimum heights that could result from these adjustments and update the minimum difference accordingly. This approach leverages the sorted order to systematically test the effect of adjustments on the range of heights.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int minimizeMaxDiff(vector<int>& heights, int k) {
+    sort(heights.begin(), heights.end());
+    int n = heights.size();
+    int maxDiff = heights[n-1] - heights[0];
+
+    for (int i = 0; i < n - 1; i++) {
+        int maxH = max(heights[n-1] - k, heights[i] + k);
+        int minH = min(heights[0] + k, heights[i+1] - k);
+        maxDiff = min(maxDiff, maxH - minH);
+    }
+    return maxDiff;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n log n) due to sorting, and the space complexity is O(1) as no additional significant space is used beyond input modifications."
+Array,Minimum no. of Jumps to reach end of an array,"1. Problem Summary: The problem is to find the minimum number of jumps required to reach the end of a given array of integers, where each element represents the maximum jump length from that position.
+
+2. Approach: Use a greedy algorithm to solve this problem efficiently. Start from the first element and maintain variables for the current maximum reach, the steps possible within the current reach, and the count of jumps taken. Traverse the array, and for each element, update the maximum reach. If the current index reaches the end of the steps allowed by the previous jump, increment the jump count and update the steps to the maximum reach. This approach ensures that each step is optimized to extend the reach as far as possible before making another jump.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+int minJumps(vector<int>& arr) {
+    int n = arr.size();
+    if (n <= 1) return 0;
+    if (arr[0] == 0) return -1;
+
+    int maxReach = arr[0];
+    int step = arr[0];
+    int jump = 1;
+
+    for (int i = 1; i < n; i++) {
+        if (i == n - 1) return jump;
+        maxReach = max(maxReach, i + arr[i]);
+        step--;
+        if (step == 0) {
+            if (i >= maxReach) return -1;
+            jump++;
+            step = maxReach - i;
+        }
+    }
+    return -1;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n) as each element is processed once. The space complexity is O(1) as no additional space proportional to the input size is used."
+Array,find duplicate in an array of N+1 Integers,"1. Problem Summary: The task is to find a duplicate number in an array containing `n+1` integers, where each integer is between `1` and `n` inclusive. The presence of `n+1` integers ensures at least one duplicate exists.
+
+2. Approach: The optimal approach to solve this problem is using the Floyd's Tortoise and Hare (Cycle Detection) algorithm. This technique leverages a two-pointer method to detect a cycle within the sequence formed by the array values treated as pointers. Initially, set both a slow pointer (`tortoise`) and a fast pointer (`hare`) at the start of the array. Move `tortoise` one step and `hare` two steps at a time. The first meeting point of these pointers will confirm the cycle. To find the entry point of the cycle, which is the duplicate number, reset one pointer to the start and move both pointers one step at a time; their next meeting point is the duplicate.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+int findDuplicate(vector<int>& nums) {
+    int tortoise = nums[0];
+    int hare = nums[0];
+    
+    // Phase 1: Finding the intersection point in the cycle
+    do {
+        tortoise = nums[tortoise];
+        hare = nums[nums[hare]];
+    } while (tortoise != hare);
+    
+    // Phase 2: Finding the entrance to the cycle
+    tortoise = nums[0];
+    while (tortoise != hare) {
+        tortoise = nums[tortoise];
+        hare = nums[hare];
+    }
+    
+    return hare; // or tortoise, as both are the same at the meeting point
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n) due to the traversal through the array, and the space complexity is O(1) as it uses only constant extra space."
+Array,Merge 2 sorted arrays without using Extra space.,"1. Problem Summary: The task is to merge two sorted arrays into the first array when the first array has enough space to accommodate elements of both arrays. This must be done in-place without using any additional space.
+
+2. Approach: Start by positioning two pointers at the ends of the two arrays (not counting the extra space in the first array). Compare the elements at these pointers, and place the larger element at the end of the first array, moving the pointer in the first array backward to fill the array from the end. This ensures that the largest elements are placed at the end of the merged array first, avoiding overwriting smaller elements that have not yet been compared. Continue this process until all elements from the second array are placed into the first array. This approach leverages the existing sorted order and the extra space in the first array effectively.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+void mergeSortedArrays(int arr1[], int n, int arr2[], int m) {
+    int i = n - 1; // last index of non-extra space in arr1
+    int j = m - 1; // last index in arr2
+    int k = n + m - 1; // last index of arr1 including extra space
+
+    while (j >= 0) {
+        if (i >= 0 && arr1[i] > arr2[j]) {
+            arr1[k--] = arr1[i--];
+        } else {
+            arr1[k--] = arr2[j--];
+        }
+    }
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n + m) where n and m are the sizes of the two arrays respectively. The space complexity is O(1) since no extra space is used beyond the given arrays."
+Array,Kadane's Algo [V.V.V.V.V IMP],"1. Problem Summary: The problem requires finding the maximum sum of a contiguous subarray within a one-dimensional integer array. This is commonly known as the ""Maximum Subarray Problem.""
+
+2. Approach: Kadane's algorithm is an efficient way to solve this problem by iterating through the array and maintaining two variables: `current_sum` and `max_sum`. Start `current_sum` at 0 and `max_sum` with the value of the first element or zero (if implementing strictly positive subarray sums). For each element in the array, add it to `current_sum`. If `current_sum` becomes negative, reset it to zero (if considering only positive sums) or keep it if considering negative values as well. Update `max_sum` if `current_sum` exceeds `max_sum`. This approach leverages the idea that a maximum subarray will never start with a negative sum.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+int maxSubarraySum(vector<int>& nums) {
+    int current_sum = 0;
+    int max_sum = INT_MIN; // Use INT_MIN to handle cases where all numbers are negative.
+    for (int num : nums) {
+        current_sum += num;
+        if (current_sum > max_sum) {
+            max_sum = current_sum;
+        }
+        if (current_sum < 0) {
+            current_sum = 0;
+        }
+    }
+    return max_sum;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n) as it requires a single pass through the array, and the space complexity is O(1) as it uses only a constant amount of extra space."
+Array,Merge Intervals,"1. Problem Summary: Given a collection of intervals, merge all overlapping intervals and return an array of the non-overlapping intervals that cover all the intervals in the input.
+
+2. Approach: The optimal way to tackle the merge intervals problem is to first sort the intervals based on their start times. Once sorted, iterate through the sorted intervals and merge them if they overlap. Overlapping is determined if the start of the current interval is less than or equal to the end of the last merged interval. If they overlap, merge them by updating the end of the last merged interval to be the maximum of the ends of the overlapping intervals. If they don't overlap, simply add the current interval to the result list.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+vector<vector<int>> mergeIntervals(vector<vector<int>>& intervals) {
+    if (intervals.size() <= 1) return intervals;
+
+    // Sort intervals based on the starting time
+    sort(intervals.begin(), intervals.end(), [](const vector<int>& a, const vector<int>& b) {
+        return a[0] < b[0];
+    });
+
+    vector<vector<int>> merged;
+    merged.push_back(intervals[0]); // Add the first interval
+
+    for (int i = 1; i < intervals.size(); ++i) {
+        // If the current interval overlaps with the last interval in merged
+        if (intervals[i][0] <= merged.back()[1]) {
+            // Merge the current interval with the last one in merged
+            merged.back()[1] = max(merged.back()[1], intervals[i][1]);
+        } else {
+            // No overlap, add the current interval to merged
+            merged.push_back(intervals[i]);
+        }
+    }
+
+    return merged;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n log n) due to the sorting step, and the space complexity is O(n) for storing the result."
+Array,Next Permutation,"1. Problem Summary: The ""Next Permutation"" problem requires finding the next lexicographical permutation of a given array of numbers. If no such permutation exists (i.e., the array is sorted in descending order), the array should be rearranged as the lowest possible order (ascending).
+
+2. Approach: Start by identifying the rightmost pair of successive elements (a[k], a[k+1]), where a[k] < a[k+1]. If no such pair exists, the entire array is in descending order, and reversing it gives the smallest permutation. If such a pair is found, find the largest index l greater than k such that a[k] < a[l]. Swap elements a[k] and a[l], then reverse the sequence from a[k+1] to the end to get the next permutation. This approach exploits the properties of lexicographical ordering by making the smallest necessary change to increase the order.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+void nextPermutation(vector<int>& nums) {
+    int n = nums.size(), k, l;
+    for (k = n - 2; k >= 0; k--) {
+        if (nums[k] < nums[k + 1]) {
+            break;
+        }
+    }
+    if (k < 0) {
+        reverse(nums.begin(), nums.end());
+    } else {
+        for (l = n - 1; l > k; l--) {
+            if (nums[l] > nums[k]) {
+                break;
+            }
+        }
+        swap(nums[k], nums[l]);
+        reverse(nums.begin() + k + 1, nums.end());
+    }
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n) and the space complexity is O(1), where n is the length of the input array. This is because the algorithm makes a single pass through the array and performs a constant number of operations on the array elements."
+Array,Count Inversion,"1. Problem Summary:  
+   In the ""Count Inversion"" problem, you are required to count the number of inversions in an array where an inversion is a pair of indices \(i, j\) such that \(i < j\) and \(arr[i] > arr[j]\).
+
+2. Approach:  
+   The optimal way to solve the count inversion problem is by using a modified Merge Sort. The standard Merge Sort algorithm can be adapted to count inversions during the merge step. Every time you choose an element from the right half that is smaller than an element from the left half, it indicates that there are several inversions, as elements in the left half are greater than the chosen element and are ahead of it in the original array. By counting these occurrences during the merge process, you can efficiently count all inversions. This approach leverages the divide and conquer strategy, splitting the array and then merging while counting inversions.
+
+3. Pseudo-code:
+   ```cpp
+   #include <bits/stdc++.h>
+   using namespace std;
+
+   int mergeAndCount(vector<int>& arr, int l, int m, int r) {
+       int n1 = m - l + 1;
+       int n2 = r - m;
+       vector<int> left(n1), right(n2);
+       for (int i = 0; i < n1; i++)
+           left[i] = arr[l + i];
+       for (int j = 0; j < n2; j++)
+           right[j] = arr[m + 1 + j];
+
+       int i = 0, j = 0, k = l, inv_count = 0;
+       while (i < n1 && j < n2) {
+           if (left[i] <= right[j]) {
+               arr[k++] = left[i++];
+           } else {
+               arr[k++] = right[j++];
+               inv_count += (n1 - i);  // All remaining elements in left[] are greater than right[j]
+           }
+       }
+       while (i < n1) {
+           arr[k++] = left[i++];
+       }
+       while (j < n2) {
+           arr[k++] = right[j++];
+       }
+       return inv_count;
+   }
+
+   int mergeSortAndCount(vector<int>& arr, int l, int r) {
+       int inv_count = 0;
+       if (l < r) {
+           int m = l + (r - l) / 2;
+           inv_count += mergeSortAndCount(arr, l, m);
+           inv_count += mergeSortAndCount(arr, m + 1, r);
+           inv_count += mergeAndCount(arr, l, m, r);
+       }
+       return inv_count;
+   }
+   ```
+
+4. Time Complexity and Space Complexity:  
+   The time complexity of the algorithm is \(O(n \log n)\), and the space complexity is \(O(n)\) due to the use of temporary arrays in the merge step."
+Array,Best time to buy and Sell stock,"1. Problem Summary: In the ""Best Time to Buy and Sell Stock"" problem, you are given an array where each element represents the stock price on a given day. You need to find the maximum profit you can achieve by buying on one day and selling on a later day.
+
+2. Approach: The optimal approach to solve this problem is to use a single pass through the array while maintaining two variables: `minPrice` to track the lowest stock price encountered so far, and `maxProfit` to track the maximum profit that can be achieved. As you iterate through the stock prices, update `minPrice` if the current price is lower than `minPrice`. For each price, calculate the potential profit by subtracting `minPrice` from the current price and update `maxProfit` if this potential profit is higher than the current `maxProfit`. This approach efficiently finds the maximum profit with minimal computation by leveraging the sequential nature of buying and selling stocks.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int maxProfit(vector<int>& prices) {
+    int minPrice = INT_MAX;
+    int maxProfit = 0;
+    for (int price : prices) {
+        if (price < minPrice) {
+            minPrice = price;
+        } else if (price - minPrice > maxProfit) {
+            maxProfit = price - minPrice;
+        }
+    }
+    return maxProfit;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n) as it involves a single pass through the array, and the space complexity is O(1) since only a few variables are used."
+Array,find all pairs on integer array whose sum is equal to given number,"1. Problem Summary: The problem requires finding all unique pairs of elements in an integer array that sum up to a specified target number.
+
+2. Approach: Use a hashmap to track the complement of each element (target - current element) as you iterate through the array. For each element, check if its complement exists in the hashmap. If it does, you have found a pair that sums up to the target. Add this pair to the result and continue. This approach ensures that each pair is counted only once. The use of a hashmap allows for efficient lookups and avoids the need for a nested loop, making the solution more scalable.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<pair<int, int>> findPairsWithSum(vector<int>& nums, int target) {
+    unordered_map<int, int> complements;
+    vector<pair<int, int>> result;
+
+    for (int num : nums) {
+        int complement = target - num;
+        if (complements.count(complement)) {
+            result.push_back({complement, num});
+        }
+        complements[num] = complement;
+    }
+    return result;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the number of elements in the array, and the space complexity is also O(n) due to the storage required for the hashmap."
+Array,find common elements In 3 sorted arrays,"1. Problem Summary: The task is to find common elements that appear in three sorted arrays. The arrays are non-decreasing order and may contain duplicates.
+
+2. Approach: The optimal way to solve this problem is by using three pointers, each initialized to the start of the three arrays. Incrementally compare the elements at these pointers. If they match, it's a common element; record it and move all pointers forward. If they don't match, advance the pointer pointing to the smallest element. This approach ensures each array is traversed only once, efficiently finding all common elements by exploiting the sorted property of the arrays.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+vector<int> findCommonElements(vector<int>& arr1, vector<int>& arr2, vector<int>& arr3) {
+    int i = 0, j = 0, k = 0;
+    vector<int> result;
+    while (i < arr1.size() && j < arr2.size() && k < arr3.size()) {
+        if (arr1[i] == arr2[j] && arr2[j] == arr3[k]) {
+            result.push_back(arr1[i]);
+            i++; j++; k++;
+        } else if (arr1[i] < arr2[j]) {
+            i++;
+        } else if (arr2[j] < arr3[k]) {
+            j++;
+        } else {
+            k++;
+        }
+    }
+    return result;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n1 + n2 + n3), where n1, n2, and n3 are the lengths of the three arrays. The space complexity is O(min(n1, n2, n3)) for storing the common elements."
+Array,Rearrange the array in alternating positive and negative items with O(1) extra space,"1. Problem Summary: The task is to rearrange a given array such that positive and negative numbers are placed alternately. If there are extra positive or negative numbers, they should be appended at the end of the array. The rearrangement must be done in-place with O(1) extra space.
+
+2. Approach: The optimal solution involves first partitioning the array so that all negative numbers are at the beginning and all positive numbers follow. This can be achieved using a modified partition process similar to the one used in quicksort. After partitioning, swap the elements to alternate negative and positive positions. Start with a pointer at the beginning of the array for negative numbers and another pointer where the positive segment starts. Swap elements to ensure alternation and move pointers accordingly. This method ensures that the structure of alternating positives and negatives forms without using additional space.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+void rearrange(int arr[], int n) {
+    int i = -1, j = 0;
+    // Partition negative and positive numbers
+    while (j < n) {
+        if (arr[j] < 0) {
+            i++;
+            swap(arr[i], arr[j]);
+        }
+        j++;
+    }
+    
+    // i now points to the last negative number
+    int neg = 0, pos = i + 1;
+    // Swap elements to alternate negatives and positives
+    while (neg < pos && pos < n && arr[neg] < 0) {
+        swap(arr[neg], arr[pos]);
+        neg += 2;
+        pos++;
+    }
+}
+
+int main() {
+    int arr[] = {-1, 2, -3, 4, -5, 6, -7, 8};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    rearrange(arr, n);
+    for (int i = 0; i < n; i++)
+        cout << arr[i] << "" "";
+    return 0;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n) as each element is processed in linear passes. The space complexity is O(1) since the rearrangement is done in-place without using extra space."
+Array,Find if there is any subarray with sum equal to 0,"1. Problem Summary: The task is to determine if there exists any subarray within a given array of integers that sums up to zero. A subarray is a contiguous part of the array.
+
+2. Approach: The optimal approach involves using a hash map to keep track of cumulative sums of elements as we iterate through the array. We initialize the sum to zero and start iterating. For each element, we update the cumulative sum. If the cumulative sum has been seen before in the hash map or if it is zero, it indicates that there is a subarray (from the previous index of this sum to the current index) whose elements sum up to zero. If not, we store this cumulative sum in the hash map with its corresponding index. This approach leverages the fact that if the cumulative sum up to two different indices is the same, the sum of the elements between these indices must be zero.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+bool hasSubarrayWithZeroSum(vector<int>& nums) {
+    unordered_map<int, int> sumIndexMap;
+    int cumulativeSum = 0;
+    sumIndexMap[0] = -1; // To handle the case when subarray starts from index 0
+
+    for (int i = 0; i < nums.size(); i++) {
+        cumulativeSum += nums[i];
+        if (sumIndexMap.find(cumulativeSum) != sumIndexMap.end()) {
+            return true;
+        }
+        sumIndexMap[cumulativeSum] = i;
+    }
+    return false;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n) and the space complexity is O(n), where n is the number of elements in the array. This is because we traverse the array once and store cumulative sums in the hash map."
+Array,Find factorial of a large number,"1. Problem Summary: The problem is to compute the factorial of a large number that doesn't fit in standard data types like `int` or `long`. Factorials grow very fast, making it impractical to store results in these types for larger numbers.
+
+2. Approach: The optimal algorithm uses an array to store individual digits of the factorial result. Start by initializing the array with the first factorial value, 1. For each number from 2 up to n, multiply each digit of the current result stored in the array by this number, adjusting for carry-over as you would in manual multiplication. Keep track of the size of the resultant number (number of digits). This approach simulates the manual multiplication process to handle large numbers that exceed typical data type limits.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+void factorial(int n) {
+    vector<int> result(10000, 0); // Assuming 10000 is enough to hold all digits
+    result[0] = 1; // Initialize result
+    int result_size = 1; // Current size of the number stored in result
+
+    for (int x = 2; x <= n; x++) {
+        int carry = 0; // Initialize carry
+        for (int i = 0; i < result_size; i++) {
+            int prod = result[i] * x + carry;
+            result[i] = prod % 10; // Store last digit of prod in result
+            carry = prod / 10; // Rest is carry
+        }
+        while (carry) { // Put carry in result
+            result[result_size] = carry % 10;
+            carry = carry / 10;
+            result_size++;
+        }
+    }
+
+    for (int i = result_size - 1; i >= 0; i--) // Print result in reverse
+        cout << result[i];
+    cout << endl;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n^2) due to the nested loops for each multiplication, and space complexity is O(n) for storing the digits of the factorial."
+Array,find maximum product subarray ,"1. Problem Summary: 
+   The problem is to find the maximum product of a contiguous subarray within a given one-dimensional integer array. This subarray can include negative numbers, which can affect the product significantly.
+
+2. Approach:
+   The optimal solution uses a dynamic programming approach to keep track of both the maximum and minimum product up to the current element. The key insight is that a negative number can turn a minimum product into a maximum product with the next negative number in the sequence. For each element in the array, calculate the maximum product by considering the current element, the product of the current element and the maximum product up to the previous element, and the product of the current element and the minimum product up to the previous element. Update the global maximum product accordingly. Reset the local maximum and minimum products at each step based on these calculations.
+
+3. Pseudo-code:
+   ```cpp
+   #include <bits/stdc++.h>
+   using namespace std;
+
+   int maxProduct(vector<int>& nums) {
+       if (nums.empty()) return 0;
+       int maxProd = nums[0], minProd = nums[0], result = nums[0];
+       for (int i = 1; i < nums.size(); i++) {
+           int temp = maxProd;
+           maxProd = max(max(maxProd * nums[i], minProd * nums[i]), nums[i]);
+           minProd = min(min(temp * nums[i], minProd * nums[i]), nums[i]);
+           result = max(result, maxProd);
+       }
+       return result;
+   }
+   ```
+
+4. Time Complexity and Space Complexity:
+   The time complexity is O(n) where n is the number of elements in the array, since we traverse the array once. The space complexity is O(1), as we only use a constant amount of extra space."
+Array,Find longest coinsecutive subsequence,"1. Problem Summary: 
+   The problem is to find the length of the longest consecutive elements sequence in an unsorted array. The sequence does not need to be contiguous in the array but should be consecutive in terms of values.
+
+2. Approach: 
+   The optimal approach involves using a hash set to first store all the elements of the array. This facilitates constant time complexity for element lookup. For each element in the array, check if it is the starting point of a sequence (i.e., there is no element with value `element-1` in the set). If it is, iterate using a while loop to count how many consecutive elements starting from this element are present in the set. This way, each element is part of at most one sequence count, ensuring linear time complexity. This approach avoids the need to sort the array and directly jumps to potential sequence starts, making it both intuitive and efficient.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int findLongestConsecutive(vector<int>& nums) {
+    unordered_set<int> num_set(nums.begin(), nums.end());
+    int longestStreak = 0;
+
+    for (int num : nums) {
+        if (!num_set.count(num - 1)) { // check if it's the start of a sequence
+            int currentNum = num;
+            int currentStreak = 1;
+
+            while (num_set.count(currentNum + 1)) {
+                currentNum += 1;
+                currentStreak += 1;
+            }
+
+            longestStreak = max(longestStreak, currentStreak);
+        }
+    }
+    return longestStreak;
+}
+```
+
+4. Time Complexity and Space Complexity: 
+   The time complexity is O(n) due to the single traversal and constant-time set operations, and the space complexity is O(n) for storing the elements in the set."
+Array,"Given an array of size n and a number k, fin all elements that appear more than "" n/k "" times.","1. Problem Summary: 
+   The task is to identify all elements in an array that appear more than n/k times, where n is the size of the array and k is a given integer.
+
+2. Approach: 
+   The optimal approach utilizes the Boyer-Moore Voting Algorithm extension for finding all elements that appear more than n/k times. This problem can be approached by maintaining a list of potential candidates with their counts, ensuring the number of candidates does not exceed k-1. For each element in the array, either increase the count of a candidate, reduce the count, or replace a candidate when its count hits zero. After processing the array, validate each candidate by counting its occurrences in the array to ensure it appears more than n/k times. This method avoids the need for sorting or additional data structures that would increase time complexity.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+void findElements(vector<int>& arr, int k) {
+    int n = arr.size();
+    unordered_map<int, int> freq;
+
+    // Phase 1: Find candidates
+    for (int num : arr) {
+        if (freq.count(num)) {
+            freq[num]++;
+        } else if (freq.size() < k - 1) {
+            freq[num] = 1;
+        } else {
+            vector<int> keysToRemove;
+            for (auto& [key, count] : freq) {
+                count--;
+                if (count == 0) keysToRemove.push_back(key);
+            }
+            for (int key : keysToRemove) {
+                freq.erase(key);
+            }
+        }
+    }
+
+    // Phase 2: Verify candidates
+    unordered_map<int, int> actualFreq;
+    for (int num : arr) {
+        if (freq.find(num) != freq.end()) {
+            actualFreq[num]++;
+        }
+    }
+
+    for (auto& [num, count] : actualFreq) {
+        if (count > n / k) {
+            cout << num << "" "";
+        }
+    }
+}
+
+int main() {
+    vector<int> arr = {4, 5, 6, 7, 8, 4, 4};
+    int k = 3;
+    findElements(arr, k);
+    return 0;
+}
+```
+
+4. Time Complexity and Space Complexity:
+   The time complexity is O(n) and the space complexity is O(k), which is efficient given the constraints."
+Array,Maximum profit by buying and selling a share atmost twice,"1. Problem Summary: The problem is to find the maximum profit that can be earned by buying and selling a stock at most twice on different days. The constraint is that a new transaction can only start after the previous one is completed (sell before you buy again).
+
+2. Approach: The optimal algorithm involves tracking four variables: the maximum profit after the first buy (`first_buy`), the maximum profit after the first sell (`first_sell`), the maximum profit after the second buy (`second_buy`), and the maximum profit after the second sell (`second_sell`). Initialize `first_buy` and `second_buy` to a very small number (to simulate buying stock at a high negative cost, meaning no stock bought yet) and `first_sell` and `second_sell` to zero. Traverse through the list of stock prices, updating these four variables sequentially: update `first_buy` to maximize a previous first buy or the negative of the current price, `first_sell` to maximize the previous first sell or the sum of the current price and `first_buy`, and similarly for `second_buy` and `second_sell`. This approach captures the best profits possible at each transaction stage as you iterate through the stock prices.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+int maxProfit(vector<int>& prices) {
+    int first_buy = INT_MIN, second_buy = INT_MIN;
+    int first_sell = 0, second_sell = 0;
+
+    for (int price : prices) {
+        first_buy = max(first_buy, -price);
+        first_sell = max(first_sell, first_buy + price);
+        second_buy = max(second_buy, first_sell - price);
+        second_sell = max(second_sell, second_buy + price);
+    }
+    return second_sell;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the number of days (stock prices), and the space complexity is O(1), as only a constant amount of extra space is used."
+Array,Find whether an array is a subset of another array,"1. Problem Summary: 
+   The problem is to determine if one array (let's call it `A`) is a subset of another array (`B`). This means every element in `A` must also appear in `B`.
+
+2. Approach:
+   The most efficient way to solve this problem is by using a hash table (or hash map). First, store all elements of the larger array `B` in a hash map, tracking the count of each element. Then, iterate through the smaller array `A` and for each element check if it exists in the hash map. If any element of `A` is not found in the hash map or the count is insufficient, `A` is not a subset of `B`. This method leverages the fast lookup capabilities of hash maps, making it efficient for this problem.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+bool isSubset(vector<int>& A, vector<int>& B) {
+    unordered_map<int, int> countMap;
+    // Store all elements of B in a hash map with their counts
+    for (int num : B) {
+        countMap[num]++;
+    }
+    // Check each element in A
+    for (int num : A) {
+        if (countMap.find(num) == countMap.end() || countMap[num] == 0) {
+            return false; // Element not found or count exhausted
+        }
+        countMap[num]--; // Decrement count of the element
+    }
+    return true;
+}
+```
+
+4. Time Complexity and Space Complexity: 
+   The time complexity is O(n + m), where n is the size of array `B` and m is the size of array `A`. The space complexity is O(n) due to the storage of elements of `B` in the hash map."
+Array,Find the triplet that sum to a given value,"1. Problem Summary: Given an array of integers and a target sum, the task is to find three distinct elements in the array whose sum equals the target sum.
+
+2. Approach: The optimal solution involves sorting the array first, which allows the use of a two-pointer technique to efficiently find the triplet. After sorting, iterate through the array using a loop. For each element at index `i`, set two pointers: one starting just after `i` (`left = i + 1`) and another at the end of the array (`right = n - 1`). Move the `left` pointer rightward (increasing) and the `right` pointer leftward (decreasing) to find if a triplet sums to the target. If the sum of the triplet is less than the target, move the `left` pointer to the right to increase the sum. If the sum is more, move the `right` pointer to the left. This algorithm efficiently narrows down the possible triplets.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<vector<int>> findTriplets(vector<int>& arr, int target) {
+    sort(arr.begin(), arr.end());
+    vector<vector<int>> result;
+    int n = arr.size();
+    for (int i = 0; i < n - 2; i++) {
+        if (i > 0 && arr[i] == arr[i - 1]) continue; // Skip duplicate elements
+        int left = i + 1, right = n - 1;
+        while (left < right) {
+            int sum = arr[i] + arr[left] + arr[right];
+            if (sum == target) {
+                result.push_back({arr[i], arr[left], arr[right]});
+                while (left < right && arr[left] == arr[left + 1]) left++; // Skip duplicates
+                while (left < right && arr[right] == arr[right - 1]) right--; // Skip duplicates
+                left++;
+                right--;
+            } else if (sum < target) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+    }
+    return result;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n^2) due to the two nested loops after sorting, and the space complexity is O(1) if the output space is not considered; otherwise, it depends on the number of triplets found."
+Array,Trapping Rain water problem,"1. Problem Summary: In the Trapping Rain Water problem, you are given an array representing an elevation map where the width of each bar is 1. The task is to compute how much water it can trap after raining.
+
+2. Approach: The optimal way to solve this problem involves using two pointers and two arrays (or dynamically updating maximums) to track the maximum heights from both the left and the right of each bar. Start by creating two arrays, `left_max` and `right_max`, where each index `i` contains the maximum height from the start up to `i` and from the end to `i`, respectively. The trapped water at each bar is the minimum of `left_max[i]` and `right_max[i]` minus the height of the bar itself if this value is positive. To optimize space, instead of using two arrays, you can use two pointers moving from both ends towards the center, updating the maximum heights on-the-fly and calculating the trapped water directly.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+int trap(vector<int>& height) {
+    int n = height.size();
+    if (n == 0) return 0;
+    int left = 0, right = n - 1;
+    int left_max = height[left], right_max = height[right];
+    int result = 0;
+
+    while (left < right) {
+        if (height[left] < height[right]) {
+            left++;
+            left_max = max(left_max, height[left]);
+            result += left_max - height[left];
+        } else {
+            right--;
+            right_max = max(right_max, height[right]);
+            result += right_max - height[right];
+        }
+    }
+    return result;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the number of bars in the elevation map. The space complexity is O(1) since we are using a constant amount of additional space."
+Array,Chocolate Distribution problem,"1. Problem Summary: The Chocolate Distribution problem involves finding the minimum difference between the maximum and minimum chocolates given to students from a packet of chocolates, where each packet contains a different number of chocolates. The task is to distribute these packets among a given number of students such that the difference in chocolates between any two students is minimized.
+
+2. Approach: The optimal approach is to first sort the array of chocolates. Once sorted, you iterate over the array with a sliding window of size equal to the number of students. In each iteration, calculate the difference between the chocolates in the first and last packet of the current window. The minimum of all these differences will be the answer. Sorting ensures that packets with a closer number of chocolates are considered together, making it intuitive to find the smallest range.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+int findMinDiff(vector<int> &arr, int n, int m) {
+    if (m > n) return -1; // More students than packets
+    sort(arr.begin(), arr.end()); // Sort the array of chocolates
+    int min_diff = INT_MAX;
+
+    for (int i = 0; i + m - 1 < n; i++) {
+        int diff = arr[i + m - 1] - arr[i];
+        if (diff < min_diff) {
+            min_diff = diff;
+        }
+    }
+    return min_diff;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n log n) due to the sorting step, and the space complexity is O(1) as no additional space is used beyond input storage."
+Array,Smallest Subarray with sum greater than a given value,"1. Problem Summary: The problem requires finding the length of the smallest contiguous subarray whose sum is greater than a given value `x`. The input is an array of positive integers.
+
+2. Approach: The optimal algorithm to solve this problem is the sliding window technique. Initialize two pointers, `start` and `end`, at the beginning of the array and a variable `sum` to keep track of the sum of the current subarray. Expand the window by moving `end` and update the sum until it becomes greater than `x`. Then, attempt to shrink the window from the left by moving the `start` pointer and updating the sum, checking each time if the sum remains greater than `x`. Keep track of the minimum length of such subarrays. This approach ensures that each element is processed at most twice (once for expanding and once for shrinking the window), leading to an efficient solution.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+int smallestSubWithSum(vector<int>& arr, int x) {
+    int n = arr.size();
+    int minLength = INT_MAX;
+    int start = 0, end = 0;
+    int sum = 0;
+
+    while (end < n) {
+        // Expand the window by including more elements until sum > x
+        while (sum <= x && end < n) {
+            sum += arr[end++];
+        }
+
+        // Shrink the window from the start to find minimum length
+        while (sum > x && start < n) {
+            minLength = min(minLength, end - start);
+            sum -= arr[start++];
+        }
+    }
+
+    return (minLength == INT_MAX) ? 0 : minLength;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the number of elements in the array, as each element is processed at most twice. The space complexity is O(1), as only a few extra variables are needed."
+Array,Three way partitioning of an array around a given value,"1. Problem Summary:  
+   The task is to partition an array into three parts such that elements less than a given value are on one side, elements equal to the value are in the middle, and elements greater than the value are on the other side.
+
+2. Approach:  
+   The Dutch National Flag algorithm, proposed by Edsger Dijkstra, is an optimal approach to solve this problem. The idea is to maintain three pointers: `low`, `mid`, and `high`. Initialize `low` and `mid` to the beginning of the array and `high` to the end. Traverse the array using the `mid` pointer: if the element at `mid` is less than the pivot, swap it with the element at `low` and increment both `low` and `mid`. If the element is equal to the pivot, just increment `mid`. If the element is greater than the pivot, swap it with the element at `high` and decrement `high`. Continue this process until `mid` exceeds `high`.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+void threeWayPartition(vector<int>& arr, int lowVal, int highVal) {
+    int n = arr.size();
+    int low = 0, mid = 0, high = n - 1;
+
+    while (mid <= high) {
+        if (arr[mid] < lowVal) {
+            swap(arr[low], arr[mid]);
+            low++;
+            mid++;
+        } else if (arr[mid] > highVal) {
+            swap(arr[mid], arr[high]);
+            high--;
+        } else {
+            mid++;
+        }
+    }
+}
+```
+
+4. Time Complexity and Space Complexity:  
+   The time complexity is O(n) as each element is processed at most twice. The space complexity is O(1) as the partitioning is done in-place."
+Array,Minimum swaps required bring elements less equal K together,"1. Problem Summary: The problem requires determining the minimum number of adjacent swaps needed to group all elements less than or equal to a given value `K` together in an array.
+
+2. Approach: First, count the number of elements `<= K` in the array, denoted as `countK`. This count defines the window size. Use a sliding window approach to find the window of size `countK` that already contains the maximum number of elements `<= K`, as this minimizes the swaps needed. Slide the window across the array while counting how many elements `<= K` are outside this window for each position. The minimum of these counts during the sliding window traversal gives the answer. This method leverages the fixed window size to efficiently compute swaps by updating the count incrementally as the window slides.
+
+3. Pseudo-code:
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+int minSwaps(vector<int>& arr, int K) {
+    int countK = 0, n = arr.size();
+    for (int i = 0; i < n; i++)
+        if (arr[i] <= K)
+            countK++;
+
+    int bad = 0;
+    for (int i = 0; i < countK; i++)
+        if (arr[i] > K)
+            bad++;
+
+    int minSwaps = bad;
+    for (int i = 0, j = countK; j < n; i++, j++) {
+        if (arr[i] > K)
+            bad--;
+        if (arr[j] > K)
+            bad++;
+        minSwaps = min(minSwaps, bad);
+    }
+    return minSwaps;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n) where n is the length of the array, and the space complexity is O(1) as only a few extra variables are used."
+Array,Minimum no. of operations required to make an array palindrome,"1. Problem Summary: The problem is to find the minimum number of operations required to convert a given array into a palindrome. An operation is defined as replacing any element with any other element.
+
+2. Approach: The optimal approach involves using two pointers, one at the start and one at the end of the array. Compare the elements at these pointers; if they are the same, move both pointers towards the center. If they differ, increment the operation count and move the pointers such that the larger of the two values is effectively replaced by the smaller one, ensuring that fewer changes are needed in subsequent steps. Continue this process until the pointers meet or cross. This approach leverages the symmetry of palindromes to minimize the number of changes by always aligning the most significant discrepancies first.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int minOperationsToPalindrome(vector<int>& arr) {
+    int i = 0;
+    int j = arr.size() - 1;
+    int operations = 0;
+
+    while (i < j) {
+        if (arr[i] == arr[j]) {
+            i++;
+            j--;
+        } else {
+            operations++;
+            if (arr[i] < arr[j]) {
+                i++;
+            } else {
+                j--;
+            }
+        }
+    }
+    return operations;
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(n), where n is the length of the array, as each element is considered at most once. The space complexity is O(1), as no additional space is used beyond the input."
+Array,Median of 2 sorted arrays of equal size,"1. Problem Summary: The task is to find the median of two sorted arrays of the same size. The median is the middle value in an ordered integer list, and if the list length is even, it is the average of the two middle numbers.
+
+2. Approach: The optimal solution uses a binary search algorithm. Start by identifying the smaller of the two arrays to minimize the search space. Use binary search on this array to find a partition that divides both arrays into two halves such that all elements in the left half are less than or equal to all elements in the right half. Adjust the partition using binary search criteria: if the maximum element on the left side of one array is greater than the minimum on the right side of the other array, adjust the partition. The median is then either the maximum of the left sides if the combined length is odd, or the average of the maximum of the left sides and the minimum of the right sides if even. This approach efficiently narrows down the potential candidates for the median by leveraging the properties of sorted arrays.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+    if (nums1.size() > nums2.size()) swap(nums1, nums2);
+
+    int n1 = nums1.size();
+    int n2 = nums2.size();
+    int low = 0, high = n1;
+
+    while (low <= high) {
+        int partitionX = (low + high) / 2;
+        int partitionY = (n1 + n2 + 1) / 2 - partitionX;
+
+        int maxLeftX = (partitionX == 0) ? INT_MIN : nums1[partitionX - 1];
+        int minRightX = (partitionX == n1) ? INT_MAX : nums1[partitionX];
+
+        int maxLeftY = (partitionY == 0) ? INT_MIN : nums2[partitionY - 1];
+        int minRightY = (partitionY == n2) ? INT_MAX : nums2[partitionY];
+
+        if (maxLeftX <= minRightY && maxLeftY <= minRightX) {
+            if ((n1 + n2) % 2 == 0)
+                return (max(maxLeftX, maxLeftY) + min(minRightX, minRightY)) / 2.0;
+            else
+                return max(maxLeftX, maxLeftY);
+        } else if (maxLeftX > minRightY) {
+            high = partitionX - 1;
+        } else {
+            low = partitionX + 1;
+        }
+    }
+    throw invalid_argument(""Input arrays are not correct."");
+}
+```
+
+4. Time Complexity and Space Complexity: The time complexity is O(log(min(n1, n2))) where n1 and n2 are the sizes of the two arrays, and the space complexity is O(1)."
+Array,Median of 2 sorted arrays of different size,"1. Problem Summary: 
+The problem is to find the median of two sorted arrays of different sizes. The median is the middle value in an odd-length combined array or the average of the two middle values in an even-length combined array.
+
+2. Approach: 
+The optimal approach involves binary search. First, identify the smaller array to minimize the search space. Use binary search on this smaller array to find the correct partition point, such that the elements on the left are less than or equal to the elements on the right in the combined array of both input arrays. The goal is to adjust the partition until the maximum element on the left side of the combined array is less than or equal to the minimum element on the right side. This ensures that the elements on the left half (including both arrays) are less than those on the right half, effectively finding the median. This approach avoids merging the arrays, thus optimizing the operation.
+
+3. Pseudo-code:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+    if (nums2.size() < nums1.size()) return findMedianSortedArrays(nums2, nums1);
+    
+    int x = nums1.size();
+    int y = nums2.size();
+    int low = 0, high = x;
+    
+    while (low <= high) {
+        int partitionX = (low + high) / 2;
+        int partitionY = (x + y + 1) / 2 - partitionX;
+        
+        int maxX = (partitionX == 0) ? INT_MIN : nums1[partitionX - 1];
+        int maxY = (partitionY == 0) ? INT_MIN : nums2[partitionY - 1];
+        
+        int minX = (partitionX == x) ? INT_MAX : nums1[partitionX];
+        int minY = (partitionY == y) ? INT_MAX : nums2[partitionY];
+        
+        if (maxX <= minY && maxY <= minX) {
+            if ((x + y) % 2 == 0)
+                return (double)(max(maxX, maxY) + min(minX, minY)) / 2;
+            else
+                return (double)max(maxX, maxY);
+        } else if (maxX > minY) {
+            high = partitionX - 1;
+        } else {
+            low = partitionX + 1;
+        }
+    }
+    
+    throw ""No solution"";
+}
+```
+
+4. Time Complexity and Space Complexity: 
+The time complexity is O(log(min(n, m))) where n and m are the lengths of the two input arrays, respectively. The space complexity is O(1)."
