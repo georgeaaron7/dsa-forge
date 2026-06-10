@@ -107,10 +107,10 @@ export default function App() {
   }, [user]);
 
   useEffect(() => {
-    if (user) {
+    if (user?.id) {
       initialize();
     }
-  }, [user, initialize]);
+  }, [user?.id, initialize]);
 
   // ─── Navigation ─────────────────────────────────────────
   const handleNavigate = (view: ViewName, mode?: StudyMode, topicId?: string) => {
