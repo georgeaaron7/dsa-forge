@@ -129,7 +129,7 @@ export async function getAllMastery(): Promise<MasteryRecord[]> {
 
 export async function getMastery(problemId: string): Promise<MasteryRecord | undefined> {
   const userId = await getUserId();
-  const { data } = await supabase.from('problem_mastery').select('data').eq('user_id', userId).eq('problem_id', problemId).single();
+  const { data } = await supabase.from('problem_mastery').select('data').eq('user_id', userId).eq('problem_id', problemId).maybeSingle();
   return data?.data as MasteryRecord | undefined;
 }
 
@@ -180,7 +180,7 @@ const defaultStats: UserStats = {
 export async function getStats(): Promise<UserStats> {
   try {
     const userId = await getUserId();
-    const { data } = await supabase.from('user_stats').select('data').eq('user_id', userId).single();
+    const { data } = await supabase.from('user_stats').select('data').eq('user_id', userId).maybeSingle();
     if (data?.data) return data.data as UserStats;
   } catch (err) {
     // If not found or auth fails during initialization, return defaults
